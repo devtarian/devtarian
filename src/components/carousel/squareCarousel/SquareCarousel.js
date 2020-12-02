@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import ViewAll from '../VeiwAll';
 
 const SquareCarousel = () => {
   return (
@@ -17,12 +18,7 @@ const SquareCarousel = () => {
           </CarouselItem>
         ))}
       </ul>
-      <ViewAll>
-        <a href="">
-          <span>더 보기</span>
-          <i>></i>
-        </a>
-      </ViewAll>
+      <ViewAll />
     </SquareCarouselSection>
   );
 };
@@ -77,16 +73,6 @@ const CarouselItem = styled.li`
 
   &:hover .cover {
     opacity: 0.75;
-  }
-`;
-
-const ViewAll = styled.div`
-  position: absolute;
-  top: 10px;
-  right: 0;
-
-  i {
-    margin-left: 0.25rem;
   }
 `;
 
