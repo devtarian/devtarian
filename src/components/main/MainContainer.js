@@ -28,6 +28,7 @@ const MainWrap = styled.div`
 
 const DUMMY_LIST = [
   {
+    id: 0,
     user: {
       thumbNail: 'http://placehold.it/40x40.png?text=A',
       name: 'Harry',
@@ -44,6 +45,7 @@ const DUMMY_LIST = [
     },
   },
   {
+    id: 1,
     user: {
       thumbNail: 'http://placehold.it/40x40.png?text=A',
       name: 'Harry',
@@ -60,6 +62,7 @@ const DUMMY_LIST = [
     },
   },
   {
+    id: 2,
     user: {
       thumbNail: 'http://placehold.it/40x40.png?text=A',
       name: 'Harry',
@@ -76,6 +79,7 @@ const DUMMY_LIST = [
     },
   },
   {
+    id: 3,
     user: {
       thumbNail: 'http://placehold.it/40x40.png?text=A',
       name: 'Harry',
@@ -95,6 +99,7 @@ const DUMMY_LIST = [
 
 const DUMMY_REVIEWS = [
   {
+    id: 0,
     user: {
       thumbNail: 'http://placehold.it/40x40.png?text=A',
       name: 'Harry',
@@ -111,6 +116,7 @@ const DUMMY_REVIEWS = [
     },
   },
   {
+    id: 1,
     user: {
       thumbNail: 'http://placehold.it/40x40.png?text=A',
       name: 'Harry',
@@ -127,6 +133,7 @@ const DUMMY_REVIEWS = [
     },
   },
   {
+    id: 2,
     user: {
       thumbNail: 'http://placehold.it/40x40.png?text=A',
       name: 'Harry',

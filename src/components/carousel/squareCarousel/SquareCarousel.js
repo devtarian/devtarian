@@ -7,7 +7,7 @@ const SquareCarousel = () => {
       <h2>비건 편의점</h2>
       <ul>
         {DUMMY_PROD.map((li) => (
-          <CarouselItem>
+          <CarouselItem key={li.id}>
             <img src={li.src} alt="" />
             <div className="cover">
               <div className="itemInfo">
@@ -78,6 +78,7 @@ const CarouselItem = styled.li`
 
 const DUMMY_PROD = [
   {
+    id: 0,
     src: 'http://placehold.it/300x300.png?text=A',
     category: '과자',
     product: '로투스',
@@ -85,6 +86,7 @@ const DUMMY_PROD = [
     price: 3000,
   },
   {
+    id: 1,
     src: 'http://placehold.it/300x300.png?text=A',
     category: '과자',
     product: '로투스',
@@ -92,6 +94,7 @@ const DUMMY_PROD = [
     price: 3000,
   },
   {
+    id: 2,
     src: 'http://placehold.it/300x300.png?text=A',
     category: '과자',
     product: '로투스',
@@ -99,6 +102,7 @@ const DUMMY_PROD = [
     price: 3000,
   },
   {
+    id: 3,
     src: 'http://placehold.it/300x300.png?text=A',
     category: '과자',
     product: '로투스',

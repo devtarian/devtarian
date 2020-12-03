@@ -9,7 +9,7 @@ const ReviewCarousel = ({ carouselInfo }) => {
       <h2>새로운 리뷰</h2>
       <ul>
         {carouselInfo.map((info) => (
-          <CarouselItem>
+          <CarouselItem key={info.id}>
             <Profile userInfo={info.user} />
             <ItemInfo itemInfo={info.review} width={365} height={235} webkitLineClamp={2} />
           </CarouselItem>

@@ -8,7 +8,7 @@ const Carousel = ({ carouselInfo }) => {
       <h2>근처의 비건 식당</h2>
       <ul>
         {carouselInfo.map((li) => (
-          <CarouselItem>
+          <CarouselItem key={li.id}>
             <ItemInfo itemInfo={li.review} width={270} height={175} webkitLineClamp={3} />
           </CarouselItem>
         ))}
