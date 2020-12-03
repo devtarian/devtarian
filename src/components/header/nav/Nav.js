@@ -1,7 +1,19 @@
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import SearchModal from '../SearchModal';
 
 const Nav = () => {
+  const [show, setShow] = useState(false);
+
+  const onToggleShow = (isShow) => {
+    setShow(isShow);
+  };
+
+  const handleSearchNavClick = (e) => {
+    e.preventDefault();
+    onToggleShow(true);
+  };
+
   return (
     <NavContainer>
       <Navi>
@@ -15,11 +27,11 @@ const Nav = () => {
             <span>비건 편의점</span>
           </a>
         </li>
-        <li className="navItem">
+        <li className="navItem" onClick={handleSearchNavClick}>
           <a className="navLink" href="">
             <span>검색</span>
           </a>
-          <SearchModal />
+          {show && <SearchModal onToggleShow={onToggleShow} />}
         </li>
       </Navi>
     </NavContainer>

@@ -24,6 +24,7 @@ const RecentKeyword = () => {
     </RecentKeywordWrap>
   );
 };
+export default RecentKeyword;
 
 const RecentKeywordWrap = styled.div`
   z-index: 0;
@@ -31,19 +32,25 @@ const RecentKeywordWrap = styled.div`
   left: 0;
   right: 0;
   padding: 15px 50px 20px 20px;
+  border-radius: 4px;
+  border: 1px solid #ededed;
   background-color: #fff;
   opacity: 0.85;
 
   strong {
     display: block;
-    font-size: 17px;
     padding-bottom: 5px;
+    font-size: 17px;
   }
 
   a {
     display: block;
     padding: 0.2rem 0;
+
+    &:hover {
+      transition: all 0.2s ease;
+      color: green;
+      font-weight: bolder;
+    }
   }
 `;
-
-export default RecentKeyword;

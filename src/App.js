@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <SearchContainer paddingTop="180px" background={BackGroundImg} box-shadow="none" />
+      <SearchContainer positionTop="180px" background={BackGroundImg} box-shadow="none" />
       <MainContainer />
     </div>
   );

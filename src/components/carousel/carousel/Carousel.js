@@ -3,7 +3,6 @@ import ItemInfo from '../ItemInfo';
 import ViewAll from '../VeiwAll';
 
 const Carousel = ({ carouselInfo }) => {
-  console.log(carouselInfo);
   return (
     <CarouselSection>
       <h2>근처의 비건 식당</h2>

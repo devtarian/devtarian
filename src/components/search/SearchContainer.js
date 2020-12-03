@@ -1,13 +1,29 @@
+import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import SearchForm from './SearchForm';
 import RecentKeyword from './RecentKeyword';
 
-const SearchContainer = ({ paddingTop, background }) => {
+const SearchContainer = ({ positionTop, background }) => {
+  const [show, setShow] = useState(false);
+  const refInput = useRef();
+
+  const handleOutSideClick = (e) => {
+    // click한 target이 input일 때 show state 변경
+    setShow(() => (e.target.className === 'sc-gsTCUz QHgmm' ? true : false));
+  };
+
+  useEffect(() => {
+    window.addEventListener('click', handleOutSideClick);
+    return () => {
+      window.removeEventListener('click', handleOutSideClick);
+    };
+  }, []);
+
   return (
     <SearchWrap background={background}>
-      <SearchInnerWrap paddingTop={paddingTop}>
-        <SearchForm />
-        <RecentKeyword />
+      <SearchInnerWrap positionTop={positionTop}>
+        <SearchForm ref={refInput} />
+        {show && <RecentKeyword />}
       </SearchInnerWrap>
     </SearchWrap>
   );
@@ -24,8 +40,8 @@ const SearchWrap = styled.div`
 
 const SearchInnerWrap = styled.div`
   position: relative;
+  top: ${(props) => props.positionTop};
   width: 876px;
   max-height: 239px;
   margin: 0 auto;
-  padding-top: ${(props) => props.paddingTop};
 `;

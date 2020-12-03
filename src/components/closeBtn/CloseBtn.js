@@ -1,8 +1,14 @@
 import styled from 'styled-components';
 
-const CloseBtn = () => {
+const CloseBtn = ({ onToggleShow }) => {
+  const handleCloseBtnClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    onToggleShow(false);
+  };
+
   return (
-    <CloseBtnWrap>
+    <CloseBtnWrap onClick={handleCloseBtnClick}>
       <i>x</i>
     </CloseBtnWrap>
   );

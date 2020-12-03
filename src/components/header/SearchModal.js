@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import SearchContainer from '../search/SearchContainer';
 import CloseBtn from '../closeBtn/CloseBtn';
 
-const SearchModal = () => {
+const SearchModal = ({ onToggleShow }) => {
   return (
     <SearchModalSection>
       <SearchCategory>
@@ -16,8 +16,8 @@ const SearchModal = () => {
           <a href="">제품</a>
         </li>
       </SearchCategory>
-      <SearchContainer paddingTop="80px" background="none" />
-      <CloseBtn />
+      <SearchContainer positionTop="80px" background="none" />
+      <CloseBtn onToggleShow={onToggleShow} />
     </SearchModalSection>
   );
 };
@@ -25,7 +25,6 @@ const SearchModal = () => {
 export default SearchModal;
 
 const SearchModalSection = styled.section`
-  visibility: hidden;
   z-index: 10;
   background: #fff;
   position: fixed;
@@ -33,7 +32,6 @@ const SearchModalSection = styled.section`
   bottom: 0;
   left: 0;
   right: 0;
-  opacity: 0;
 `;
 
 const SearchCategory = styled.ul`
@@ -49,5 +47,11 @@ const SearchCategory = styled.ul`
   }
   a {
     padding: 8px 11px;
+
+    &:hover {
+      transition: all 0.2s ease;
+      color: green;
+      font-weight: bolder;
+    }
   }
 `;
