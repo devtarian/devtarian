@@ -1,11 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import SearchForm from './SearchForm';
 import RecentKeyword from './RecentKeyword';
 
 const SearchContainer = ({ positionTop, background }) => {
   const [show, setShow] = useState(false);
-  const refInput = useRef();
 
   const handleOutSideClick = (e) => {
     // click한 target이 input일 때 show state 변경
@@ -22,7 +21,7 @@ const SearchContainer = ({ positionTop, background }) => {
   return (
     <SearchWrap background={background}>
       <SearchInnerWrap positionTop={positionTop}>
-        <SearchForm ref={refInput} />
+        <SearchForm />
         {show && <RecentKeyword />}
       </SearchInnerWrap>
     </SearchWrap>

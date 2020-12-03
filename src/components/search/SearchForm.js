@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-const SearchForm = ({ ref }) => {
+const SearchForm = () => {
   return (
-    <SearchFormWrap ref={ref}>
+    <SearchFormWrap>
       <SearchInput placeholder="근처의 채식 식당을 찾아보세요!"></SearchInput>
       <SearchButton>검색</SearchButton>
     </SearchFormWrap>
