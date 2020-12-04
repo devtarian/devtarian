@@ -1,6 +1,6 @@
 import Header from './components/header/Header';
-import SearchContainer from './components/search/SearchContainer';
-import MainContainer from './components/main/MainContainer';
+import Search from './components/search/Search';
+import Main from './components/main/Main';
 import BackGroundImg from './components/search/images/pexels-ready-made-3850607.jpg';
 import './App.css';
 
@@ -8,8 +8,8 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <SearchContainer positionTop="180px" background={BackGroundImg} box-shadow="none" />
-      <MainContainer />
+      <Search posTop="180px" bg={BackGroundImg} />
+      <Main />
     </div>
   );
 }

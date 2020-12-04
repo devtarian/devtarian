@@ -1,17 +1,32 @@
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
-const SearchForm = () => {
+const SearchForm = ({ onAddRecentKeywords }) => {
+  const [value, setValue] = useState('');
+
+  const handleInputChange = (e) => {
+    setValue(e.target.value);
+  };
+
+  const handleInputSubmit = (e) => {
+    e.preventDefault();
+    onAddRecentKeywords(value);
+  };
+
   return (
-    <SearchFormWrap>
-      <SearchInput placeholder="근처의 채식 식당을 찾아보세요!"></SearchInput>
-      <SearchButton>검색</SearchButton>
-    </SearchFormWrap>
+    <Wrap onSubmit={handleInputSubmit}>
+      <SearchInput
+        placeholder="근처의 채식 식당을 찾아보세요!"
+        value={value}
+        onChange={handleInputChange}></SearchInput>
+      <SearchButton type="submit">검색</SearchButton>
+    </Wrap>
   );
 };
 
 export default SearchForm;
 
-const SearchFormWrap = styled.div`
+const Wrap = styled.form`
   position: relative;
   height: 50px;
 `;

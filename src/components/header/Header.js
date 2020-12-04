@@ -3,18 +3,18 @@ import Nav from './nav/Nav';
 
 const Header = () => {
   return (
-    <HeaderContainer>
+    <Wrap>
       <Logo>
         <a href="">Devtarian</a>
       </Logo>
       <Nav />
-    </HeaderContainer>
+    </Wrap>
   );
 };
 
 export default Header;
 
-const HeaderContainer = styled.header`
+const Wrap = styled.header`
   height: 58px;
   padding: 15px 65px 0 25px;
 `;

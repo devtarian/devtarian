@@ -2,18 +2,18 @@ import styled from 'styled-components';
 
 const ViewAll = () => {
   return (
-    <ViewAllWrap>
+    <Wrap>
       <a href="">
         <span>더 보기</span>
         <i>></i>
       </a>
-    </ViewAllWrap>
+    </Wrap>
   );
 };
 
 export default ViewAll;
 
-const ViewAllWrap = styled.div`
+const Wrap = styled.div`
   position: absolute;
   top: 10px;
   right: 0;

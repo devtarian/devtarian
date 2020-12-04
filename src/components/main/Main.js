@@ -4,21 +4,21 @@ import SquareCarousel from '../carousel/squareCarousel/SquareCarousel';
 import ReviewCarousel from '../carousel/reviewCarousel/ReviewCarousel';
 import Footer from '../footer/Footer';
 
-const MainContainer = () => {
+const Main = () => {
   return (
-    <MainWrap>
+    <Wrap>
       <Carousel carouselInfo={DUMMY_LIST} />
       <Carousel carouselInfo={DUMMY_LIST} />
       <SquareCarousel />
       <ReviewCarousel carouselInfo={DUMMY_REVIEWS} />
       <Footer />
-    </MainWrap>
+    </Wrap>
   );
 };
 
-export default MainContainer;
+export default Main;
 
-const MainWrap = styled.div`
+const Wrap = styled.div`
   overflow: hidden;
   width: 1200px;
   height: 100%;

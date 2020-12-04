@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const Footer = () => {
   return (
-    <FooterWrap>
+    <Wrap>
       <ul>
         <li className="linkItem">
           <a href="https://github.com/daayooung">
@@ -18,11 +18,11 @@ const Footer = () => {
       <p>
         <a href="https://github.com/devtarian">copyright @ https://github.com/devtarian</a>
       </p>
-    </FooterWrap>
+    </Wrap>
   );
 };
 
-const FooterWrap = styled.section`
+const Wrap = styled.section`
   width: 100%;
 
   ul {

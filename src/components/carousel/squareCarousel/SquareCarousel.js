@@ -3,7 +3,7 @@ import ViewAll from '../VeiwAll';
 
 const SquareCarousel = () => {
   return (
-    <SquareCarouselSection>
+    <Wrap>
       <h2>비건 편의점</h2>
       <ul>
         {DUMMY_PROD.map((li) => (
@@ -19,13 +19,13 @@ const SquareCarousel = () => {
         ))}
       </ul>
       <ViewAll />
-    </SquareCarouselSection>
+    </Wrap>
   );
 };
 
 export default SquareCarousel;
 
-const SquareCarouselSection = styled.section`
+const Wrap = styled.section`
   overflow: hidden;
   position: relative;
 

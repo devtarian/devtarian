@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import SearchContainer from '../search/SearchContainer';
+import Search from '../search/Search';
 import CloseBtn from '../closeBtn/CloseBtn';
 
 const SearchModal = ({ onToggleShow }) => {
   return (
-    <SearchModalSection>
+    <Wrap>
       <SearchCategory>
         <li>
           <a href="">전체</a>
@@ -16,15 +16,15 @@ const SearchModal = ({ onToggleShow }) => {
           <a href="">제품</a>
         </li>
       </SearchCategory>
-      <SearchContainer positionTop="80px" background="none" />
+      <Search posTop="80px" bg="none" />
       <CloseBtn onToggleShow={onToggleShow} />
-    </SearchModalSection>
+    </Wrap>
   );
 };
 
 export default SearchModal;
 
-const SearchModalSection = styled.section`
+const Wrap = styled.section`
   z-index: 10;
   background: #fff;
   position: fixed;

@@ -4,7 +4,7 @@ const Profile = ({ userInfo }) => {
   const { thumbNail, name, timeCreated } = userInfo;
   return (
     <>
-      <ProfileWrap>
+      <Wrap>
         <img src={thumbNail} alt="" />
         <div className="info">
           <strong>
@@ -12,14 +12,14 @@ const Profile = ({ userInfo }) => {
           </strong>
           <span>{timeCreated}</span>
         </div>
-      </ProfileWrap>
+      </Wrap>
     </>
   );
 };
 
 export default Profile;
 
-const ProfileWrap = styled.div`
+const Wrap = styled.div`
   overflow: auto;
   margin: 0.5rem 0;
   img {

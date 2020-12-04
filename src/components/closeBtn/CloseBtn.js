@@ -8,15 +8,15 @@ const CloseBtn = ({ onToggleShow }) => {
   };
 
   return (
-    <CloseBtnWrap onClick={handleCloseBtnClick}>
+    <Wrap onClick={handleCloseBtnClick}>
       <i>x</i>
-    </CloseBtnWrap>
+    </Wrap>
   );
 };
 
 export default CloseBtn;
 
-const CloseBtnWrap = styled.button`
+const Wrap = styled.button`
   position: fixed;
   top: 10px;
   right: 20px;

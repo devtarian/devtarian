@@ -15,7 +15,7 @@ const Nav = () => {
   };
 
   return (
-    <NavContainer>
+    <Wrap>
       <Navi>
         <li className="navItem">
           <a className="navLink" href="">
@@ -34,13 +34,13 @@ const Nav = () => {
           {show && <SearchModal onToggleShow={onToggleShow} />}
         </li>
       </Navi>
-    </NavContainer>
+    </Wrap>
   );
 };
 
 export default Nav;
 
-const NavContainer = styled.nav`
+const Wrap = styled.nav`
   position: relative;
   top: -10px;
   float: right;

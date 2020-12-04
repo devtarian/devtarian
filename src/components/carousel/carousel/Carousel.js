@@ -4,7 +4,7 @@ import ViewAll from '../VeiwAll';
 
 const Carousel = ({ carouselInfo }) => {
   return (
-    <CarouselSection>
+    <Wrap>
       <h2>근처의 비건 식당</h2>
       <ul>
         {carouselInfo.map((li) => (
@@ -14,13 +14,13 @@ const Carousel = ({ carouselInfo }) => {
         ))}
       </ul>
       <ViewAll />
-    </CarouselSection>
+    </Wrap>
   );
 };
 
 export default Carousel;
 
-const CarouselSection = styled.section`
+const Wrap = styled.section`
   overflow: hidden;
   position: relative;
 

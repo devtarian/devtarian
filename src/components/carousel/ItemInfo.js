@@ -3,8 +3,8 @@ import styled from 'styled-components';
 const ItemInfo = ({ itemInfo, width, height, webkitLineClamp }) => {
   const { src, type, storeName, region, starRating, contents } = itemInfo;
   return (
-    <ItemInfoWrap webkitLineClamp={webkitLineClamp}>
-      <ItemImg>
+    <Wrap webkitLineClamp={webkitLineClamp}>
+      <ItemImg width={width} height={height}>
         <img src={src} alt="" />
         <div className="cover"></div>
       </ItemImg>
@@ -15,13 +15,13 @@ const ItemInfo = ({ itemInfo, width, height, webkitLineClamp }) => {
       <strong className="region">{region}</strong>
       <span className="starRating">{starRating}</span>
       <p>{contents}</p>
-    </ItemInfoWrap>
+    </Wrap>
   );
 };
 
 export default ItemInfo;
 
-const ItemInfoWrap = styled.div`
+const Wrap = styled.div`
   .vegOptions {
     float: left;
     width: 20px;

@@ -1,10 +1,11 @@
+import React from 'react';
 import styled from 'styled-components';
 
 const RecentKeyword = () => {
   return (
-    <RecentKeywordWrap>
+    <Wrap>
       <strong>최근 검색어</strong>
-      <ul>
+      <KeywordList>
         <li>
           <a href="">서울</a>
         </li>
@@ -20,18 +21,18 @@ const RecentKeyword = () => {
         <li>
           <a href="">한남</a>
         </li>
-      </ul>
-    </RecentKeywordWrap>
+      </KeywordList>
+    </Wrap>
   );
 };
 export default RecentKeyword;
 
-const RecentKeywordWrap = styled.div`
+const Wrap = styled.div`
   z-index: 0;
   position: absolute;
   left: 0;
   right: 0;
-  padding: 15px 50px 20px 20px;
+  padding: 17px 50px 18px 20px;
   border-radius: 4px;
   border: 1px solid #ededed;
   background-color: #fff;
@@ -42,7 +43,9 @@ const RecentKeywordWrap = styled.div`
     padding-bottom: 5px;
     font-size: 17px;
   }
+`;
 
+const KeywordList = styled.ul`
   a {
     display: block;
     padding: 0.2rem 0;

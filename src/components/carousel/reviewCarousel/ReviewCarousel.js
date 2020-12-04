@@ -5,7 +5,7 @@ import ViewAll from '../VeiwAll';
 
 const ReviewCarousel = ({ carouselInfo }) => {
   return (
-    <ReviewCarouselSection>
+    <Wrap>
       <h2>새로운 리뷰</h2>
       <ul>
         {carouselInfo.map((info) => (
@@ -16,13 +16,13 @@ const ReviewCarousel = ({ carouselInfo }) => {
         ))}
       </ul>
       <ViewAll />
-    </ReviewCarouselSection>
+    </Wrap>
   );
 };
 
 export default ReviewCarousel;
 
-const ReviewCarouselSection = styled.section`
+const Wrap = styled.section`
   overflow: hidden;
   position: relative;
 

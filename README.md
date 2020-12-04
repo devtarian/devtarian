@@ -1,70 +1,156 @@
-# Getting Started with Create React App
+#### `2020-12-04 (금)`
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<br/>
 
-## Available Scripts
+# Main
 
-In the project directory, you can run:
+> src > index.js
 
-### `yarn start`
+## index.js
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+`<GlobalStyles/>`에서 reset CSS 적용
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+<br/>
+<hr/>
+<br/>
 
-### `yarn test`
+> src > App.js
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## App.js
 
-### `yarn build`
+#### Q ) styled component props를 내려주고 있는데, styled.css``로 처리?
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```js
+<Search positionTop="180px" background={BackGroundImg} box-shadow="none" />
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+A )
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- 지금처럼 해도 무방. 항목 늘어나거나 theme로 관리가 필요시 객체로 묶어 styled.css로 적용.
+- background -> bg 이런식으로 명명하면 css props라는 것도 한 눈에 알 수 있고 좋을 듯.
 
-### `yarn eject`
+<br/>
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### Q ) component명: --container
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+A ) 폴더를 components, containers로 state 관리 여부에 따라 나누는 경우가 있으나, 나의 경우 componets 폴더만 사용할 것이기 때문에 component 명에서 --container를 제외한다.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+<br/>
+<hr/>
+<br/>
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+> src > components
 
-## Learn More
+## components
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### Q ) component명 고민 : container 역할의 component
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- component : -- container
+- styled- component : --wrap
 
-### Code Splitting
+```js
+const Header = () => {
+  return (
+    <HeaderWrap>
+      <Logo>
+        <a href="">Devtarian</a>
+      </Logo>
+      <Nav />
+    </HeaderWrap>
+  );
+};
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+A ) 어차피 각 component 안에서만 사용하는 component 이므로 `<HeaderWrap>`이 아닌 `<Wrap>`으로 통일해도 무방
 
-### Analyzing the Bundle Size
+<br/>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+> src > components > search > SearchModal.js
 
-### Making a Progressive Web App
+### SearchModal
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+#### Q ) NAV component 활용할까, 말까
 
-### Advanced Configuration
+A ) 디자인이 다르므로 분리해도 무방
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```js
+  <li>
+    <a href="">전체</a>
+  </li>
+  <li>
+    <a href="">식당</a>
+  </li>
+  <li>
+    <a href="">제품</a>
+  </li>
+```
 
-### Deployment
+<br/>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+#### Q ) component화 고민 : `<SearchCategory>` 를 styled component 로 만드는게 적정할까.
 
-### `yarn build` fails to minify
+```js
+const SearchModal = ({ onToggleShow }) => {
+  return (
+    <SearchModalSection>
+      <SearchCategory>
+        <li>
+          <a href="">전체</a>
+        </li>
+        <li>
+          <a href="">식당</a>
+        </li>
+        <li>
+          <a href="">제품</a>
+        </li>
+      </SearchCategory>
+      <SearchContainer positionTop="80px" background="none" />
+      <CloseBtn onToggleShow={onToggleShow} />
+    </SearchModalSection>
+  );
+};
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+A ) 취향차이. 상위 tag에서 위와 같이 search와 관련된 네이밍을 했다면 component로 만들지 않아도 됐을 듯. 나는 후에 상위 tag들을 `<Wrap>`으로 통일할 것이기 때문에 `<SearchCategory>`로 놔두는 것이 좋을 듯 하다.
+
+<br/>
+
+> src > components > search
+
+### search
+
+<br/>
+
+> SearchContainer.js
+
+#### Q ) recentkeywords 하나 만드는데 state 두개가 필요한가?
+
+A ) 아뇨!
+
+<br/>
+
+#### Q ) keyword가 localstorage에 한 템포씩 느리게 저장된다. facebook 때도 겪었던 문제.
+
+A )
+
+<br/>
+
+> src > components > carousel
+
+#### Q ) component 명 고민 : `<ItemImg>`
+
+A ) o
+
+<br/>
+
+> src > components > carousel > reviewCarousel
+
+#### Q ) `<Profile>` 을 이 폴더에서 관리하는 것이 적정한가
+
+A ) o
+
+<br/>
+
+#### Q ) `<itemInfo>`로 `<Carousel>`과 중복되는 코드 관리
+
+A ) o
