@@ -3,47 +3,39 @@ import styled from 'styled-components';
 import SearchForm from './SearchForm';
 import RecentKeyword from './RecentKeyword';
 
-const SearchContainer = ({ posTop, bg }) => {
+const Search = ({ posTop, bg, recentKeywords, onAddRecentKeywords }) => {
   const [show, setShow] = useState(false);
+  const [value, setValue] = useState('');
 
-  const [keywords, setKeywords] = useState([]);
-  const [recentKeywords, setRecentKeywords] = useState([]);
-
-  console.log(localStorage.getItem('recentKeywords'));
-  useEffect(() => {
-    localStorage.setItem('recentKeywords', recentKeywords);
-  }, [recentKeywords]);
-
-  const handleOutSideClick = (e) => {
+  const handleShowRecentKeywords = (e) => {
     // click한 target이 input일 때 show state 변경
-    setShow(() => (e.target.className === 'sc-gsTCUz QHgmm' ? true : false));
+    setShow(() =>
+      e.target.className === 'sc-gsTCUz QHgmm' || e.target.className === 'sc-dlfnbm JMAaF' ? true : false
+    );
   };
 
-  const handleAddRecentKeywords = (keyword) => {
-    if (!keywords.includes(keyword)) {
-      setKeywords([keyword, ...keywords]);
-    }
-    setRecentKeywords(keywords.slice(0, 5));
+  const handleInputChange = (inputValue) => {
+    setValue(inputValue);
   };
 
   useEffect(() => {
-    window.addEventListener('click', handleOutSideClick);
+    window.addEventListener('click', handleShowRecentKeywords);
     return () => {
-      window.removeEventListener('click', handleOutSideClick);
+      window.removeEventListener('click', handleShowRecentKeywords);
     };
   }, []);
 
   return (
     <Wrap bg={bg}>
       <InnerWrap posTop={posTop}>
-        <SearchForm onAddRecentKeywords={handleAddRecentKeywords} />
-        {show && <RecentKeyword />}
+        <SearchForm value={value} onInputChange={handleInputChange} onAddRecentKeywords={onAddRecentKeywords} />
+        {show && <RecentKeyword recentKeywords={recentKeywords} />}
       </InnerWrap>
     </Wrap>
   );
 };
 
-export default SearchContainer;
+export default Search;
 
 const Wrap = styled.div`
   height: 434px;

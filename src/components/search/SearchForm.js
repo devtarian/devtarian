@@ -1,16 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
-const SearchForm = ({ onAddRecentKeywords }) => {
-  const [value, setValue] = useState('');
-
+const SearchForm = ({ value, onInputChange, onAddRecentKeywords }) => {
   const handleInputChange = (e) => {
-    setValue(e.target.value);
+    onInputChange(e.target.value);
   };
 
   const handleInputSubmit = (e) => {
     e.preventDefault();
     onAddRecentKeywords(value);
+    onInputChange('');
   };
 
   return (

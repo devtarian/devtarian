@@ -2,11 +2,11 @@
 
 <br/>
 
-# Main
+# [ Main ]
 
 > src > index.js
 
-## index.js
+## [ index.js ]
 
 `<GlobalStyles/>`에서 reset CSS 적용
 
@@ -16,7 +16,7 @@
 
 > src > App.js
 
-## App.js
+## [ App.js ]
 
 #### Q ) styled component props를 내려주고 있는데, styled.css``로 처리?
 
@@ -28,6 +28,7 @@ A )
 
 - 지금처럼 해도 무방. 항목 늘어나거나 theme로 관리가 필요시 객체로 묶어 styled.css로 적용.
 - background -> bg 이런식으로 명명하면 css props라는 것도 한 눈에 알 수 있고 좋을 듯.
+- default값 설정
 
 <br/>
 
@@ -41,7 +42,7 @@ A ) 폴더를 components, containers로 state 관리 여부에 따라 나누는 
 
 > src > components
 
-## components
+## [ components ]
 
 #### Q ) component명 고민 : container 역할의 component
 
@@ -67,7 +68,7 @@ A ) 어차피 각 component 안에서만 사용하는 component 이므로 `<Head
 
 > src > components > search > SearchModal.js
 
-### SearchModal
+### [ SearchModal ]
 
 #### Q ) NAV component 활용할까, 말까
 
@@ -117,7 +118,7 @@ A ) 취향차이. 상위 tag에서 위와 같이 search와 관련된 네이밍�
 
 > src > components > search
 
-### search
+### [ Search ]
 
 <br/>
 
@@ -136,6 +137,8 @@ A )
 <br/>
 
 > src > components > carousel
+
+### [ Carousel ]
 
 #### Q ) component 명 고민 : `<ItemImg>`
 

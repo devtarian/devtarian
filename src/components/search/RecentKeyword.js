@@ -1,26 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const RecentKeyword = () => {
+const RecentKeyword = ({ recentKeywords }) => {
   return (
     <Wrap>
       <strong>최근 검색어</strong>
       <KeywordList>
-        <li>
-          <a href="">서울</a>
-        </li>
-        <li>
-          <a href="">종로</a>
-        </li>
-        <li>
-          <a href="">연남</a>
-        </li>
-        <li>
-          <a href="">서울숲</a>
-        </li>
-        <li>
-          <a href="">한남</a>
-        </li>
+        {recentKeywords?.map((keyword) => (
+          <li key={keyword}>
+            <a href="">{keyword}</a>
+          </li>
+        ))}
       </KeywordList>
     </Wrap>
   );

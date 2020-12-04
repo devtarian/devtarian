@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import Search from '../search/Search';
 import CloseBtn from '../closeBtn/CloseBtn';
 
-const SearchModal = ({ onToggleShow }) => {
+const SearchModal = ({ recentKeywords, onAddRecentKeywords, onToggleShow }) => {
   return (
     <Wrap>
       <SearchCategory>
@@ -16,7 +16,7 @@ const SearchModal = ({ onToggleShow }) => {
           <a href="">제품</a>
         </li>
       </SearchCategory>
-      <Search posTop="80px" bg="none" />
+      <Search posTop="80px" bg="none" recentKeywords={recentKeywords} onAddRecentKeywords={onAddRecentKeywords} />
       <CloseBtn onToggleShow={onToggleShow} />
     </Wrap>
   );

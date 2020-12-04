@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import SearchModal from '../SearchModal';
 
-const Nav = () => {
+const Nav = ({ recentKeywords, onAddRecentKeywords }) => {
   const [show, setShow] = useState(false);
 
   const onToggleShow = (isShow) => {
@@ -31,7 +31,13 @@ const Nav = () => {
           <a className="navLink" href="">
             <span>검색</span>
           </a>
-          {show && <SearchModal onToggleShow={onToggleShow} />}
+          {show && (
+            <SearchModal
+              recentKeywords={recentKeywords}
+              onAddRecentKeywords={onAddRecentKeywords}
+              onToggleShow={onToggleShow}
+            />
+          )}
         </li>
       </Navi>
     </Wrap>
