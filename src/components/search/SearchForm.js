@@ -6,19 +6,21 @@ const SearchForm = ({ value, onInputChange, onAddRecentKeywords }) => {
     onInputChange(e.target.value);
   };
 
-  const handleInputSubmit = (e) => {
+  const handleInputClick = (e) => {
     e.preventDefault();
     onAddRecentKeywords(value);
     onInputChange('');
   };
 
   return (
-    <Wrap onSubmit={handleInputSubmit}>
+    <Wrap>
       <SearchInput
         placeholder="근처의 채식 식당을 찾아보세요!"
         value={value}
         onChange={handleInputChange}></SearchInput>
-      <SearchButton type="submit">검색</SearchButton>
+      <SearchButton type="submit" onClick={handleInputClick}>
+        검색
+      </SearchButton>
     </Wrap>
   );
 };

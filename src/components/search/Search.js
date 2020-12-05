@@ -2,10 +2,20 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import SearchForm from './SearchForm';
 import RecentKeyword from './RecentKeyword';
+import { loadRecentKeywords, saveRecentKeywords } from '../../Service/recentKeywordService';
 
-const Search = ({ posTop, bg, recentKeywords, onAddRecentKeywords }) => {
+const Search = ({ posTop, bg }) => {
   const [show, setShow] = useState(false);
   const [value, setValue] = useState('');
+  const [recentKeywords, setRecentKeywords] = useState(loadRecentKeywords() || []);
+  useEffect(() => {
+    saveRecentKeywords(recentKeywords);
+  }, [recentKeywords]);
+
+  const onAddRecentKeywords = (keyword) => {
+    if (recentKeywords?.includes(keyword)) return;
+    setRecentKeywords([keyword, ...recentKeywords].slice(0, 5));
+  };
 
   const handleShowRecentKeywords = (e) => {
     // click한 target이 input일 때 show state 변경
