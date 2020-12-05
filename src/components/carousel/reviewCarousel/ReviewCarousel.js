@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import Profile from './Profile';
 import ItemInfo from '../ItemInfo';
+import CarouselBtn, { CarouselBtnWrap } from '../CarouselBtn';
 import ViewAll from '../VeiwAll';
 
 const ReviewCarousel = ({ carouselInfo }) => {
@@ -15,6 +16,7 @@ const ReviewCarousel = ({ carouselInfo }) => {
           </CarouselItem>
         ))}
       </ul>
+      <CarouselBtn />
       <ViewAll />
     </Wrap>
   );
@@ -23,12 +25,21 @@ const ReviewCarousel = ({ carouselInfo }) => {
 export default ReviewCarousel;
 
 const Wrap = styled.section`
-  overflow: hidden;
   position: relative;
 
   h2 {
     margin-bottom: 40px;
     font-size: 30px;
+  }
+  &::after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+
+  ${CarouselBtnWrap} {
+    top: 56px;
+    height: 235px;
   }
 `;
 

@@ -63,6 +63,7 @@ const ItemImg = styled.div`
   }
 
   .cover {
+    z-index: 100;
     position: absolute;
     top: 0;
     width: 100%;

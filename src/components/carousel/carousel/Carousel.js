@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import ItemInfo from '../ItemInfo';
+import CarouselBtn from '../CarouselBtn';
 import ViewAll from '../VeiwAll';
 
 const Carousel = ({ carouselInfo }) => {
@@ -13,6 +14,7 @@ const Carousel = ({ carouselInfo }) => {
           </CarouselItem>
         ))}
       </ul>
+      <CarouselBtn />
       <ViewAll />
     </Wrap>
   );
@@ -21,12 +23,16 @@ const Carousel = ({ carouselInfo }) => {
 export default Carousel;
 
 const Wrap = styled.section`
-  overflow: hidden;
   position: relative;
 
   h2 {
     margin-bottom: 40px;
     font-size: 30px;
+  }
+  &::after {
+    content: '';
+    display: block;
+    clear: both;
   }
 `;
 

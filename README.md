@@ -135,12 +135,41 @@ const SearchModal = ({ onToggleShow }) => {
 > SearchContainer.js
 
 - Q ) recentkeywords 하나 만드는데 state 두개가 필요한가?
-- A ) 아뇨!
+- A ) setRecentKeywords 안에서 slice까지 한 번에 처리
+
+```js
+const [recentKeywords, setRecentKeywords] = useState(loadRecentKeywords() || []);
+
+const onAddRecentKeywords = (keyword) => {
+  if (recentKeywords?.includes(keyword)) return;
+  setRecentKeywords([keyword, ...recentKeywords].slice(0, 5));
+```
 
 <br/>
 
-- Q ) keyword가 localstorage에 한 템포씩 느리게 저장된다. facebook 때도 겪었던 문제.
-- A )
+- Q ) keyword가 localstorage에 한 템포씩 느리게 저장된다. facebook App 때도 겪었던 문제.
+- A ) useEffect 안에서 localStorage에 recentKeywords state를 저장하고, recentKeywords state의 기본값을 localStorage에서 불러온 'recentKeywords' 값으로 설정해 해결
+
+```js
+...
+
+import { loadRecentKeywords, saveRecentKeywords } from '../../Service/recentKeywordService';
+
+const Search = ({ posTop, bg }) => {
+  const [recentKeywords, setRecentKeywords] = useState(loadRecentKeywords() || []);
+
+  useEffect(() => {
+    saveRecentKeywords(recentKeywords);
+  }, [recentKeywords]);
+
+  const onAddRecentKeywords = (keyword) => {
+    if (recentKeywords?.includes(keyword)) return;
+    setRecentKeywords([keyword, ...recentKeywords].slice(0, 5));
+  };
+
+...
+
+```
 
 <br/>
 
@@ -175,6 +204,8 @@ const SearchModal = ({ onToggleShow }) => {
 
 <br/>
 
+# 1
+
 > src > cmponents > search > SearchForm.js
 
 <br/>
@@ -182,20 +213,18 @@ const SearchModal = ({ onToggleShow }) => {
 - Q ) search form이 두 개인데, 한 곳의 value만 제출이 된다.
 - A ) page 하나에서 form 제출은 한 곳에서만 일어나므로, onSubmit -> onClick으로 이벤트를 변경한다.
 
-ASIS
+#### ASIS
 
 ```js
 <Wrap onSubmit={handleInputSubmit}>
   <SearchInput placeholder="근처의 채식 식당을 찾아보세요!" value={value} onChange={handleInputChange}></SearchInput>
-  <SearchButton type="submit" }>
-    검색
-  </SearchButton>
+  <SearchButton type="submit">검색</SearchButton>
 </Wrap>
 ```
 
 <br/>
 
-TOBE
+#### TOBE
 
 ```js
 <Wrap>
@@ -204,4 +233,93 @@ TOBE
     검색
   </SearchButton>
 </Wrap>
+```
+
+<br/>
+
+# 2
+
+> src > components > carousel > CarouselBtn.js  
+> src > components > carousel > reviewCarousel > ReviewCarousel.js
+
+<br/>
+
+- Q ) thumbnail의 크기가 각기 다른 Carousel, SquareCarousel, ReviewCarousel에 CarouselBtn을 어떻게 적용할까
+- A ) module화 시켜 각 component에 import. 특정 부모 컴포넌트에서 자식 컴포넌트에게 특정한 스타일 속성을 부여할 수 있는 Nesting을 이용하였다.
+
+<br/>
+
+#### CarouselBtn
+
+```js
+import React from 'react';
+import styled from 'styled-components';
+
+const CarouselBtn = () => {
+  return (
+    <CarouselBtnWrap>
+      <button className="prev">
+        <span>&lt;</span>
+      </button>
+      <button className="next">
+        <span>&gt;</span>
+      </button>
+    </CarouselBtnWrap>
+  );
+};
+
+export default CarouselBtn;
+
+export const CarouselBtnWrap = styled.div`
+  position: relative;
+  top: 7px;
+  height: 177px;
+
+  button {
+    position: absolute;
+    top: 43%;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    box-shadow: 0 2px 2px 3px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    font-size: 20px;
+    color: #ccc;
+  }
+  .prev {
+    z-index: 110;
+    left: -4px;
+  }
+  .next {
+    z-index: 110;
+    right: -4px;
+  }
+`;
+```
+
+<br/>
+
+#### ReviewCarousel
+
+```js
+import CarouselBtn, { CarouselBtnWrap } from '../CarouselBtn';
+
+const Wrap = styled.section`
+  position: relative;
+
+  h2 {
+    margin-bottom: 40px;
+    font-size: 30px;
+  }
+  &::after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+
+  ${CarouselBtnWrap} {
+    top: 56px;
+    height: 235px;
+  }
+`;
 ```

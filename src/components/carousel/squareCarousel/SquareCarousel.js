@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import CarouselBtn, { CarouselBtnWrap } from '../CarouselBtn';
 import ViewAll from '../VeiwAll';
 
 const SquareCarousel = () => {
@@ -18,6 +19,7 @@ const SquareCarousel = () => {
           </CarouselItem>
         ))}
       </ul>
+      <CarouselBtn />
       <ViewAll />
     </Wrap>
   );
@@ -26,12 +28,21 @@ const SquareCarousel = () => {
 export default SquareCarousel;
 
 const Wrap = styled.section`
-  overflow: hidden;
   position: relative;
 
   h2 {
     margin-bottom: 40px;
     font-size: 30px;
+  }
+  &::after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+
+  ${CarouselBtnWrap} {
+    top: 0px;
+    height: 301px;
   }
 `;
 
@@ -49,6 +60,7 @@ const CarouselItem = styled.li`
   }
 
   .cover {
+    z-index: 100;
     position: absolute;
     top: 0;
     width: 270px;
