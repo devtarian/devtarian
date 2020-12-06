@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const CarouselBtn = (props) => {
-  const { currentIndex, leftPosition, liClientWidth, liSideMargin, onCarouselBtnClick } = props;
+const CarouselBtn = ({ value, onCarouselBtnClick }) => {
+  const { currentIndex, leftPosition, liClientWidth, liSideMargin } = value;
+
   const HandleCarouselBtnClick = (e) => {
     const liLRMargin = liSideMargin * 2;
 
@@ -29,7 +30,7 @@ const CarouselBtn = (props) => {
   );
 };
 
-export default CarouselBtn;
+export default React.memo(CarouselBtn);
 
 export const CarouselBtnWrap = styled.div`
   position: relative;

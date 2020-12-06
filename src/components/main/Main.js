@@ -4,7 +4,7 @@ import SquareCarousel from '../carousel/squareCarousel/SquareCarousel';
 import ReviewCarousel from '../carousel/reviewCarousel/ReviewCarousel';
 import Footer from '../footer/Footer';
 
-const Main = () => {
+const Contents = () => {
   return (
     <Wrap>
       <Carousel carouselInfo={DUMMY_LIST} />
@@ -16,7 +16,7 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default Contents;
 
 const Wrap = styled.div`
   overflow: hidden;

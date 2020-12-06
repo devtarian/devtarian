@@ -1,51 +1,25 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import ItemInfo from '../ItemInfo';
 import CarouselBtn from '../CarouselBtn';
 import ViewAll from '../VeiwAll';
+import useCarousel from '../../../hooks/useCarousel';
 
 const Carousel = ({ carouselInfo }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [leftPosition, setLeftPosition] = useState(0);
-  const [liClientWidth, setLiClientWidth] = useState(288);
-  const liSideMargin = 9;
-  const [liLength, setLiLength] = useState(5);
-  const refCarouselUl = useRef();
-  const refCarouselLi = useRef();
-
-  useEffect(() => {
-    setLiClientWidth(refCarouselLi.current?.clientWidth);
-    setLiLength(refCarouselUl.current?.childElementCount);
-  }, []);
-
-  const onCarouselBtnClick = (newIndex, newLeftPosition) => {
-    setCurrentIndex(newIndex);
-    setLeftPosition(newLeftPosition);
-  };
+  const { value, onCarouselBtnClick } = useCarousel();
+  const { refCarouselUl, refCarouselLi } = value;
 
   return (
     <Wrap>
       <h2>근처의 비건 식당</h2>
-      <CarouselUl
-        ref={refCarouselUl}
-        leftPosition={leftPosition}
-        liClientWidth={liClientWidth}
-        liLength={liLength}
-        liSideMargin={liSideMargin}>
+      <CarouselUl ref={refCarouselUl} value={value}>
         {carouselInfo.map((li) => (
           <li key={li.id} ref={refCarouselLi}>
             <ItemInfo itemInfo={li.review} width={270} height={175} webkitLineClamp={3} />
           </li>
         ))}
       </CarouselUl>
-      <CarouselBtn
-        currentIndex={currentIndex}
-        leftPosition={leftPosition}
-        liClientWidth={liClientWidth}
-        liSideMargin={liSideMargin}
-        liLength={liLength}
-        onCarouselBtnClick={onCarouselBtnClick}
-      />
+      <CarouselBtn value={value} onCarouselBtnClick={onCarouselBtnClick} />
       <ViewAll />
     </Wrap>
   );
@@ -66,14 +40,14 @@ const Wrap = styled.section`
 `;
 
 const CarouselUl = styled.ul`
-  width: ${(props) => (props.liClientWidth + props.liSideMargin * 2) * props.liLength}px;
+  width: ${(props) => (props.value.liClientWidth + props.value.liSideMargin * 2) * props.value.liLength}px;
   position: absolute;
-  left: ${(props) => props.leftPosition}px;
+  left: ${(props) => props.value.leftPosition}px;
   transition: all 0.3s ease;
 
   li {
     float: left;
     width: 270px;
-    margin: 0 ${(props) => props.liSideMargin}px 40px;
+    margin: 0 ${(props) => props.value.liSideMargin}px 40px;
   }
 `;
