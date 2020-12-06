@@ -19,15 +19,11 @@ const CarouselBtn = (props) => {
 
   return (
     <CarouselBtnWrap>
-      <button>
-        <span className="prev" onClick={HandleCarouselBtnClick}>
-          &lt;
-        </span>
+      <button className="prev" onClick={HandleCarouselBtnClick}>
+        <span>&lt;</span>
       </button>
-      <button>
-        <span className="next" onClick={HandleCarouselBtnClick}>
-          &gt;
-        </span>
+      <button className="next" onClick={HandleCarouselBtnClick}>
+        <span>&gt;</span>
       </button>
     </CarouselBtnWrap>
   );
@@ -38,8 +34,7 @@ export default CarouselBtn;
 export const CarouselBtnWrap = styled.div`
   position: relative;
   height: 177px;
-
-  span {
+  button {
     position: absolute;
     top: 43%;
     width: 30px;
@@ -57,5 +52,8 @@ export const CarouselBtnWrap = styled.div`
   .next {
     z-index: 110;
     right: 3px;
+  }
+  span {
+    pointer-events: none;
   }
 `;
