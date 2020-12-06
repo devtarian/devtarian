@@ -1,14 +1,33 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const CarouselBtn = () => {
+const CarouselBtn = (props) => {
+  const { currentIndex, leftPosition, liClientWidth, liSideMargin, onCarouselBtnClick } = props;
+  const HandleCarouselBtnClick = (e) => {
+    const liLRMargin = liSideMargin * 2;
+
+    if (e.target.classList.contains('prev')) {
+      if (currentIndex === 0) return;
+      onCarouselBtnClick(currentIndex - 1, leftPosition + liLRMargin + liClientWidth);
+    }
+
+    if (e.target.classList.contains('next')) {
+      if (currentIndex === 7) return;
+      onCarouselBtnClick(currentIndex + 1, leftPosition - liLRMargin - liClientWidth);
+    }
+  };
+
   return (
     <CarouselBtnWrap>
-      <button className="prev">
-        <span>&lt;</span>
+      <button>
+        <span className="prev" onClick={HandleCarouselBtnClick}>
+          &lt;
+        </span>
       </button>
-      <button className="next">
-        <span>&gt;</span>
+      <button>
+        <span className="next" onClick={HandleCarouselBtnClick}>
+          &gt;
+        </span>
       </button>
     </CarouselBtnWrap>
   );
@@ -18,10 +37,9 @@ export default CarouselBtn;
 
 export const CarouselBtnWrap = styled.div`
   position: relative;
-  top: 7px;
   height: 177px;
 
-  button {
+  span {
     position: absolute;
     top: 43%;
     width: 30px;
@@ -34,10 +52,10 @@ export const CarouselBtnWrap = styled.div`
   }
   .prev {
     z-index: 110;
-    left: -4px;
+    left: 3px;
   }
   .next {
     z-index: 110;
-    right: -4px;
+    right: 3px;
   }
 `;

@@ -13,7 +13,7 @@ li {
 }
 
 img {
-  vertical-align: top;
+vertical-align: top;
 }
 
 a {

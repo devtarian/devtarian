@@ -4,8 +4,8 @@ const ItemInfo = ({ itemInfo, width, height, webkitLineClamp }) => {
   const { src, type, storeName, region, starRating, contents } = itemInfo;
   return (
     <Wrap webkitLineClamp={webkitLineClamp}>
-      <ItemImg width={width} height={height}>
-        <img src={src} alt="" />
+      <ItemImg>
+        <img src={src} alt="" width={width} height={height} />
         <div className="cover"></div>
       </ItemImg>
       <i className="vegOptions">{type}</i>
@@ -54,12 +54,12 @@ const Wrap = styled.div`
 
 const ItemImg = styled.div`
   position: relative;
-  margin: 0.5rem 0;
+  margin-bottom: 10px;
 
   img {
-    border-radius: 10px;
     width: ${(props) => props.width};
     height: ${(props) => props.height};
+    border-radius: 10px;
   }
 
   .cover {
