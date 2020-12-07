@@ -17,7 +17,7 @@ const Section = () => {
 
 export default Section;
 
-const Wrap = styled.div`
+const Wrap = styled.section`
   overflow: hidden;
   width: 1200px;
   height: 100%;
