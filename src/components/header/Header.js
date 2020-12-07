@@ -15,8 +15,16 @@ const Header = ({ recentKeywords, onAddRecentKeywords }) => {
 export default Header;
 
 const Wrap = styled.header`
+  z-index: 10000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   height: 58px;
   padding: 15px 65px 0 25px;
+  -webkit-box-shadow: 0 3px 5px rgba(57, 63, 72, 0.25);
+  box-shadow: 0 3px 5px rgba(57, 63, 72, 0.25);
+  background-color: #fff;
 `;
 
 const Logo = styled.h1`
