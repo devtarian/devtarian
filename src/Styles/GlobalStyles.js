@@ -5,7 +5,6 @@ const GlobalStyles = createGlobalStyle`
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-size: 100%;
 }
 
 li {
@@ -25,7 +24,7 @@ button {
   cursor: pointer;
 }
 
-button, input {
+button, input, textarea {
   border: none;
   background-color: transparent;
   outline: 0;
