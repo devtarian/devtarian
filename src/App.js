@@ -1,16 +1,18 @@
 import React from 'react';
-import Header from './components/header/Header';
-import Search from './components/search/Search';
-import Main from './components/main/Main';
-import BackGroundImg from './components/search/images/pexels-ready-made-3850607.jpg';
+import { BrowserRouter, Switch } from 'react-router-dom';
+import { DefaultLayout, PublicLayout } from './layouts';
+import Main from './pages/main/Main';
+
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <Header />
-      <Search posTop="180px" bg={BackGroundImg} />
-      <Main />
+      <BrowserRouter>
+        <Switch>
+          <DefaultLayout path="/" component={Main} />
+        </Switch>
+      </BrowserRouter>
     </div>
   );
 }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import SearchForm from './SearchForm';
 import RecentKeyword from './RecentKeyword';
-import { loadRecentKeywords, saveRecentKeywords } from '../../Service/recentKeywordService';
+import { loadRecentKeywords, saveRecentKeywords } from '../../service/recentKeywordService';
 
 const Search = ({ posTop, bg }) => {
   const [show, setShow] = useState(false);

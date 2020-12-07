@@ -1,22 +1,21 @@
+import React from 'react';
 import styled from 'styled-components';
-import Carousel from '../carousel/carousel/Carousel';
-import SquareCarousel from '../carousel/squareCarousel/SquareCarousel';
-import ReviewCarousel from '../carousel/reviewCarousel/ReviewCarousel';
-import Footer from '../footer/Footer';
+import Carousel from '../../../components/carousel/carousel/Carousel';
+import SquareCarousel from '../../../components/carousel/squareCarousel/SquareCarousel';
+import ReviewCarousel from '../../../components/carousel/reviewCarousel/ReviewCarousel';
 
-const Contents = () => {
+const Section = () => {
   return (
     <Wrap>
       <Carousel carouselInfo={DUMMY_LIST} />
       <Carousel carouselInfo={DUMMY_LIST} />
       <SquareCarousel />
       <ReviewCarousel carouselInfo={DUMMY_REVIEWS} />
-      <Footer />
     </Wrap>
   );
 };
 
-export default Contents;
+export default Section;
 
 const Wrap = styled.div`
   overflow: hidden;
