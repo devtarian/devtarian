@@ -1,9 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import BgImg from './images/pexels-karolina-grabowska-4197908.jpg';
 
 const ReviewForm = () => {
+  const [previewImgs, setRreviewImgs] = useState([]);
+  const handleImageUpload = (e) => {
+    const files = e.target.files;
+    let fileURLs = [];
+    let file;
+    let filesLength = files.length > 5 ? 5 : files.length;
+    for (let i = 0; i < filesLength; i++) {
+      file = files[i];
+
+      let reader = new FileReader();
+      reader.onload = () => {
+        fileURLs[i] = reader.result;
+        setRreviewImgs([...fileURLs]);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
   return (
-    <Wrap>
+    <Wrap bg={BgImg}>
       <h2>피드 쓰기</h2>
       <form>
         <Categoty>
@@ -13,13 +31,18 @@ const ReviewForm = () => {
         </Categoty>
         <UploadImg>
           <label>사진 선택 0/5</label>
-          <input type="file" accept="image/*" multiple></input>
+          <input type="file" accept="image/*" multiple onChange={handleImageUpload} />
           <ul className="imgPreview">
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
+            <li className="imgContainer"></li>
+            <li className="imgContainer"></li>
+            <li className="imgContainer"></li>
+            <li className="imgContainer"></li>
+            <li className="imgContainer"></li>
+            {previewImgs?.map((img, index) => (
+              <li className="prevImg" key={img}>
+                <img src={img} alt="" index={index + 1} />
+              </li>
+            ))}
           </ul>
         </UploadImg>
         <VegLevel>
@@ -47,13 +70,15 @@ const ReviewForm = () => {
         </VegLevel>
         <Title>
           <label>제목</label>
-          <input></input>
+          <input placeholder="제목을 입력하세요."></input>
         </Title>
         <Contents>
           <label>내용</label>
-          <textarea></textarea>
+          <textarea placeholder="내용을 입력하세요."></textarea>
         </Contents>
-        <button className="submitBtn">피드 쓰기</button>
+        <SubmitBtn>
+          <button className="submitBtn">피드 쓰기</button>
+        </SubmitBtn>
       </form>
     </Wrap>
   );
@@ -62,48 +87,57 @@ const ReviewForm = () => {
 export default ReviewForm;
 
 const Wrap = styled.section`
+  position: relative;
   width: 1000px;
   height: 100%;
   margin: 0 auto 40px;
   padding: 3rem 1.5rem 0;
-  /* background-color: rgba(0, 0, 0, 0.1); */
+
   h2 {
     margin: 1rem 0.5rem 1.5rem;
     font-size: 1.8rem;
   }
   form {
+    position: relative;
     padding: 1rem 2rem 2rem;
     border-radius: 10px;
     border: 1px solid #999;
-  }
-  div {
-    margin-top: 2rem;
-  }
-  label {
-    display: block;
-    margin-bottom: 1rem;
-    font-size: 1.125rem;
-    font-weight: bolder;
-  }
+    -webkit-box-shadow: 0 3px 5px rgba(57, 63, 72, 0.15);
+    box-shadow: 0 2px 5px rgba(57, 63, 72, 0.15);
+    background-color: rgba(255, 255, 255, 0.95);
 
-  .submitBtn {
-    width: 100%;
-    margin-top: 2rem;
-    padding: 0.65rem 0.75rem;
-    border-radius: 4px;
-    border: 1px solid #999;
-    background-color: green;
+    * {
+      z-index: 1;
+    }
+    div {
+      margin-top: 2rem;
+    }
+    label {
+      display: block;
+      margin-bottom: 1rem;
+      font-size: 1.125rem;
+      font-weight: bolder;
+    }
+    &:before {
+      z-index: -1;
+      content: '';
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-image: url(${(props) => props.bg});
+      background-size: cover;
+    }
   }
 `;
 
 const Categoty = styled.div`
-  /* background-color: rgba(0, 0, 0, 0.1); */
   input + input {
     margin-left: 1rem;
   }
 `;
 const VegLevel = styled.div`
-  /* background-color: rgba(0, 0, 0, 0.1); */
   button {
     padding: 0.5rem 0.75rem;
     border-radius: 4px;
@@ -119,8 +153,8 @@ const VegLevel = styled.div`
   }
 `;
 const UploadImg = styled.div`
-  /* background-color: rgba(0, 0, 0, 0.1); */
   .imgPreview {
+    position: relative;
     width: 100%;
     margin-top: 1rem;
     &:after {
@@ -129,21 +163,28 @@ const UploadImg = styled.div`
       clear: both;
     }
 
-    li {
+    .imgContainer {
+      border: 1px solid #999;
+    }
+    li,
+    .prevImg img {
       float: left;
       width: 150px;
       height: 150px;
       border-radius: 4px;
-      border: 1px solid #999;
     }
     li + li {
       margin-left: 0.5rem;
     }
+    .prevImg img {
+      position: absolute;
+      top: 0;
+      left: ${(props) => props.index}px;
+      margin-left: -7px;
+    }
   }
 `;
 const Title = styled.div`
-  /* background-color: rgba(0, 0, 0, 0.1); */
-
   input {
     width: 100%;
     padding: 10px;
@@ -152,13 +193,30 @@ const Title = styled.div`
   }
 `;
 const Contents = styled.div`
-  /* background-color: rgba(0, 0, 0, 0.1); */
-
   textarea {
     width: 100%;
     padding: 10px;
     min-height: 500px;
     border-radius: 4px;
     border: 1px solid #999;
+  }
+`;
+const SubmitBtn = styled.div`
+  width: 33.3333%;
+  margin: 0 auto;
+  margin-top: 2rem;
+
+  border-radius: 4px;
+  border: 1px solid #999;
+  background-color: green;
+  text-align: center;
+
+  button {
+    width: 100%;
+    height: 100%;
+    padding: 0.65rem 0.75rem;
+    color: #fff;
+    -webkit-box-shadow: 0 3px 5px rgba(57, 63, 72, 0.25);
+    box-shadow: 0 3px 5px rgba(57, 63, 72, 0.25);
   }
 `;
