@@ -2,8 +2,19 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import BgImg from './images/pexels-karolina-grabowska-4197908.jpg';
 
+const initReview = {
+  category: '',
+  previewImgs: [],
+  vegLevel: '',
+  title: '',
+  contents: '',
+};
+
 const ReviewForm = () => {
+  const [review, setReview] = useState(initReview);
   const [previewImgs, setRreviewImgs] = useState([]);
+  const { title, contents } = review;
+
   const handleImageUpload = (e) => {
     const files = e.target.files;
     let fileURLs = [];
@@ -20,19 +31,36 @@ const ReviewForm = () => {
       reader.readAsDataURL(file);
     }
   };
+
+  const handleReviewChange = (e) => {
+    const { name, value } = e.target;
+    setReview({
+      ...review,
+      previewImgs,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    console.log(review);
+    e.preventDefault();
+    setRreviewImgs([]);
+    setReview(initReview);
+  };
+
   return (
     <Wrap bg={BgImg}>
       <h2>피드 쓰기</h2>
       <form>
         <Categoty>
           <label>카테고리</label>
-          <input type="radio" name="category" /> 가게
-          <input type="radio" name="category" /> 제품
+          <input type="radio" name="category" value="stroe" onChange={handleReviewChange} /> 가게
+          <input type="radio" name="category" value="product" onChange={handleReviewChange} /> 제품
         </Categoty>
         <UploadImg>
-          <label>사진 선택 0/5</label>
+          <label>사진 선택 {previewImgs.length}/5</label>
           <input type="file" accept="image/*" multiple onChange={handleImageUpload} />
-          <ul className="imgPreview">
+          <ul className="previewImgs">
             <li className="imgContainer"></li>
             <li className="imgContainer"></li>
             <li className="imgContainer"></li>
@@ -40,44 +68,35 @@ const ReviewForm = () => {
             <li className="imgContainer"></li>
             {previewImgs?.map((img, index) => (
               <li className="prevImg" key={img}>
-                <img src={img} alt="" index={index + 1} />
+                <img src={img} alt="" index={index} />
               </li>
             ))}
           </ul>
         </UploadImg>
         <VegLevel>
           <label>채식 단계</label>
-          <button>
-            <i></i>
-            <span>비건</span>
-          </button>
-          <button>
-            <i></i>
-            <span>락토</span>
-          </button>
-          <button>
-            <i></i>
-            <span>오보</span>
-          </button>
-          <button>
-            <i></i>
-            <span>락토 오보</span>
-          </button>
-          <button>
-            <i></i>
-            <span>페스코</span>
-          </button>
+          <input type="button" name="vegLevel" value="비건" onClick={handleReviewChange} />
+          <input type="button" name="vegLevel" value="락토" onClick={handleReviewChange} />
+          <input type="button" name="vegLevel" value="오보" onClick={handleReviewChange} />
+          <input type="button" name="vegLevel" value="락토오보" onClick={handleReviewChange} />
+          <input type="button" name="vegLevel" value="페스코" onClick={handleReviewChange} />
         </VegLevel>
         <Title>
           <label>제목</label>
-          <input placeholder="제목을 입력하세요."></input>
+          <input name="title" value={title} placeholder="제목을 입력하세요." onChange={handleReviewChange}></input>
         </Title>
         <Contents>
           <label>내용</label>
-          <textarea placeholder="내용을 입력하세요."></textarea>
+          <textarea
+            name="contents"
+            value={contents}
+            placeholder="내용을 입력하세요."
+            onChange={handleReviewChange}></textarea>
         </Contents>
         <SubmitBtn>
-          <button className="submitBtn">피드 쓰기</button>
+          <button type="submit" className="submitBtn" onClick={handleSubmit}>
+            피드 쓰기
+          </button>
         </SubmitBtn>
       </form>
     </Wrap>
@@ -138,7 +157,7 @@ const Categoty = styled.div`
   }
 `;
 const VegLevel = styled.div`
-  button {
+  input {
     padding: 0.5rem 0.75rem;
     border-radius: 4px;
     border: 1px solid #999;
@@ -148,20 +167,17 @@ const VegLevel = styled.div`
       background-color: green;
     }
   }
-  button + button {
+  input + input {
     margin-left: 0.5rem;
   }
 `;
 const UploadImg = styled.div`
-  .imgPreview {
+  .previewImgs {
     position: relative;
     width: 100%;
+    height: 150px;
     margin-top: 1rem;
-    &:after {
-      content: '';
-      display: block;
-      clear: both;
-    }
+    overflow: hidden;
 
     .imgContainer {
       border: 1px solid #999;
