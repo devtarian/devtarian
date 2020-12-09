@@ -40,7 +40,7 @@ const Wrap = styled.div`
     }
 
     .imgContainer {
-      border: 1px solid #999;
+      border: 1px solid ${(props) => props.theme.gray[1]};
     }
     li,
     .prevImg img {

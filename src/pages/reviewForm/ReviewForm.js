@@ -101,10 +101,11 @@ const Wrap = styled.section`
     position: relative;
     padding: 1rem 2rem 2rem;
     border-radius: 10px;
-    border: 1px solid #999;
-    -webkit-box-shadow: 0 3px 5px rgba(57, 63, 72, 0.15);
-    box-shadow: 0 2px 5px rgba(57, 63, 72, 0.15);
-    background-color: rgba(255, 255, 255, 0.95);
+    border: 1px solid ${(props) => props.theme.gray[1]};
+    -webkit-box-shadow: 0 3px 5px ${(props) => props.theme.gray[0]};
+    box-shadow: 0 2px 5px ${(props) => props.theme.gray[0]};
+
+    background-color: ${(props) => props.theme.background[0]};
 
     * {
       z-index: 1;

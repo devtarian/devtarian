@@ -36,7 +36,7 @@ const Wrap = styled.div`
       height: 100%;
       margin-top: -7px;
       padding: 7px;
-      color: #2e7d32;
+      color: ${(props) => props.theme.green[1]};
     }
     span {
       float: right;

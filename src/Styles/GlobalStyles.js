@@ -16,7 +16,7 @@ vertical-align: top;
 }
 
 a {
-color: #000;
+color: ${(props) => props.theme.color[0]};
 text-decoration: none;
 }
 

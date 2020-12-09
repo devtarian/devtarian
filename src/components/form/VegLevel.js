@@ -36,18 +36,18 @@ export default VegLevel;
 
 const Wrap = styled.div`
   .active {
-    background-color: green;
-    color: #fff;
+    background-color: ${(props) => props.theme.green[1]};
+    color: ${(props) => props.theme.background[0]};
     transition: none;
   }
   input {
     padding: 0.5rem 0.75rem;
     border-radius: 4px;
-    border: 1px solid #999;
+    border: 1px solid ${(props) => props.theme.gray[1]};
     transition: all 0.3s ease;
 
     &:hover {
-      background-color: green;
+      background-color: ${(props) => props.theme.green[1]};
     }
   }
   input + input {

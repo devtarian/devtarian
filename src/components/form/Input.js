@@ -17,6 +17,6 @@ const Wrap = styled.div`
     width: 100%;
     padding: 10px;
     border-radius: 4px;
-    border: 1px solid #999;
+    border: 1px solid ${(props) => props.theme.gray[1]};
   }
 `;

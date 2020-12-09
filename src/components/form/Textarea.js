@@ -18,6 +18,6 @@ const Wrap = styled.div`
     padding: 10px;
     min-height: 500px;
     border-radius: 4px;
-    border: 1px solid #999;
+    border: 1px solid ${(props) => props.theme.gray[1]};
   }
 `;
