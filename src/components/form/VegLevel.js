@@ -48,6 +48,7 @@ const Wrap = styled.div`
 
     &:hover {
       background-color: ${(props) => props.theme.green[1]};
+      color: ${(props) => props.theme.background[0]};
     }
   }
   input + input {

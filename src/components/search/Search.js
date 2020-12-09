@@ -8,6 +8,7 @@ const Search = ({ posTop, bg }) => {
   const [show, setShow] = useState(false);
   const [value, setValue] = useState('');
   const [recentKeywords, setRecentKeywords] = useState(loadRecentKeywords() || []);
+
   useEffect(() => {
     saveRecentKeywords(recentKeywords);
   }, [recentKeywords]);
@@ -18,10 +19,7 @@ const Search = ({ posTop, bg }) => {
   };
 
   const handleShowRecentKeywords = (e) => {
-    // click한 target이 input일 때 show state 변경
-    setShow(() =>
-      e.target.className === 'sc-gsTCUz QHgmm' || e.target.className === 'sc-dlfnbm JMAaF' ? true : false
-    );
+    setShow(() => (e.target.dataset.show === 'show' ? true : false));
   };
 
   const handleInputChange = (inputValue) => {
