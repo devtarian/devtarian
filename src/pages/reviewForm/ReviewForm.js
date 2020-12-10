@@ -10,7 +10,8 @@ import BgImg from './images/pexels-karolina-grabowska-4197908.jpg';
 
 const initReview = {
   category: 'store',
-  previewImgs: [],
+  imgFiles: [],
+  imgFileURLs: [],
   vegLevel: '',
   title: '',
   contents: '',
@@ -18,11 +19,10 @@ const initReview = {
 
 const ReviewForm = () => {
   const [review, setReview] = useState(initReview);
-  const [previewImgs, setRreviewImgs] = useState([]);
   const [activedBtn, setActivedBtn] = useState('');
-  const { title, contents } = review;
+  const { imgFiles, imgFileURLs, title, contents } = review;
   const onImageUpload = (e) => {
-    let files = e?.target.files;
+    let files = e.target.files;
     if (files.length > 5) {
       alert('최대 5장까지 선택해주세요 : )');
       return;
@@ -36,11 +36,11 @@ const ReviewForm = () => {
       let reader = new FileReader();
       reader.onload = () => {
         fileURLs[i] = reader.result;
-        // setReview({
-        //   ...review,
-        //   previewImgs: [...fileURLs],
-        // });
-        setRreviewImgs([...fileURLs]);
+        setReview({
+          ...review,
+          imgFiles: [...files],
+          imgFileURLs: [...fileURLs],
+        });
       };
       reader.readAsDataURL(file);
     }
@@ -54,7 +54,7 @@ const ReviewForm = () => {
     const { name, value } = e.target;
     setReview({
       ...review,
-      previewImgs,
+      imgFileURLs,
       [name]: value,
     });
   };
@@ -62,7 +62,6 @@ const ReviewForm = () => {
   const handleSubmit = (e) => {
     console.log(review);
     e.preventDefault();
-    setRreviewImgs([]);
     setActivedBtn('');
     setReview(initReview);
   };
@@ -72,7 +71,7 @@ const ReviewForm = () => {
       <h2>피드 쓰기</h2>
       <form>
         <Category review={review} onReviewChange={onReviewChange} />
-        <UploadImg previewImgs={previewImgs} onImageUpload={onImageUpload} />
+        <UploadImg name="imgFiles" value={imgFiles} imgFileURLs={imgFileURLs} onImageUpload={onImageUpload} />
         <VegLevel activedBtn={activedBtn} onReviewChange={onReviewChange} onVegLevelClick={onVegLevelClick} />
         <Input label="제목" name="title" value={title} placeholder="제목을 입력하세요." onChange={onReviewChange} />
         <Textarea name="contents" value={contents} placeholder="내용을 입력하세요." onChange={onReviewChange} />
