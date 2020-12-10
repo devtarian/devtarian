@@ -22,10 +22,8 @@ const ReviewForm = () => {
   const [activedBtn, setActivedBtn] = useState('');
   const { title, contents } = review;
   const onImageUpload = (e) => {
-    const files = e.target.files;
+    let files = e?.target.files;
     if (files.length > 5) {
-      console.log(e.target);
-      e.target.value = '';
       alert('최대 5장까지 선택해주세요 : )');
       return;
     }
