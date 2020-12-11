@@ -7,7 +7,7 @@ const Category = ({ review, onReviewChange }) => {
   };
 
   return (
-    <Wrap>
+    <Wrap className="wrap">
       <label>카테고리</label>
       <input
         type="radio"

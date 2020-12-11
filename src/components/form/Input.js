@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const Input = ({ label, name, value, placeholder, onChange }) => {
   return (
-    <Wrap>
+    <Wrap className="wrap">
       <label>{label}</label>
       <input name={name} value={value} placeholder={placeholder} onChange={onChange}></input>
     </Wrap>

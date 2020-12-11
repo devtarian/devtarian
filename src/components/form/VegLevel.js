@@ -13,7 +13,7 @@ const VegLevel = ({ activedBtn, onReviewChange, onVegLevelClick }) => {
   };
 
   return (
-    <Wrap>
+    <Wrap className="wrap">
       <label>채식 단계</label>
       {vegLevels.map((level) => (
         <input

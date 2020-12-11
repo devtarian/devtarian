@@ -68,7 +68,6 @@ const Wrap = styled.div`
     height: 150px;
     margin-top: 1rem;
     overflow: hidden;
-
     .imgContainer {
       border: 1px solid ${(props) => props.theme.gray[1]};
     }

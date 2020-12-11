@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const Textarea = ({ label, name, value, placeholder, onChange }) => {
   return (
-    <Wrap>
+    <Wrap className="wrap">
       <label>{label}</label>
       <textarea name={name} value={value} placeholder={placeholder} onChange={onChange}></textarea>
     </Wrap>

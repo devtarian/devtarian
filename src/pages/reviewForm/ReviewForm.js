@@ -89,7 +89,6 @@ const Wrap = styled.section`
   height: 100%;
   margin: 0 auto 40px;
   padding: 3rem 1.5rem 0;
-
   h2 {
     margin: 1rem 0.5rem 1.5rem;
     font-size: 1.8rem;
@@ -101,9 +100,7 @@ const Wrap = styled.section`
     border: 1px solid ${(props) => props.theme.gray[1]};
     -webkit-box-shadow: 0 3px 5px ${(props) => props.theme.gray[0]};
     box-shadow: 0 2px 5px ${(props) => props.theme.gray[0]};
-
     background-color: ${(props) => props.theme.background[0]};
-
     * {
       z-index: 1;
     }

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const SubmitBtn = ({ value, onClick }) => {
   return (
-    <Wrap>
+    <Wrap className="wrap">
       <button type="submit" className="submitBtn" onClick={onClick}>
         {value}
       </button>
