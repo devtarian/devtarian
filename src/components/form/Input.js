@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Input = ({ label, name, value, placeholder, onChange }) => {
+const Input = ({ label, name, value, placeholder, onReviewChange }) => {
   return (
     <Wrap className="wrap">
       <label>{label}</label>
-      <input name={name} value={value} placeholder={placeholder} onChange={onChange}></input>
+      <input name={name} value={value} placeholder={placeholder} onChange={onReviewChange}></input>
     </Wrap>
   );
 };

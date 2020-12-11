@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Category = ({ review, onReviewChange }) => {
+const Category = ({ name, review, onReviewChange }) => {
   const handleReviewChange = (e) => {
     onReviewChange(e);
   };
@@ -11,7 +11,7 @@ const Category = ({ review, onReviewChange }) => {
       <label>카테고리</label>
       <input
         type="radio"
-        name="category"
+        name={name}
         value="store"
         checked={review.category === 'store'}
         onChange={handleReviewChange}
@@ -19,7 +19,7 @@ const Category = ({ review, onReviewChange }) => {
       가게
       <input
         type="radio"
-        name="category"
+        name={name}
         value="product"
         checked={review.category === 'product'}
         onChange={handleReviewChange}

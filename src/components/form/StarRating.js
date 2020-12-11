@@ -16,7 +16,7 @@ const ratedTextMap = {
   5.0: '최고에요!',
 };
 
-const StarRating = () => {
+const StarRating = ({ name, onReviewChange }) => {
   const [fetchedRate, setFetchedRate] = useState(0.0);
   const [rate, setRate] = useState(0);
   const starsWidth = 150;
@@ -34,16 +34,17 @@ const StarRating = () => {
     setRate(fetchedRate || 0);
   };
 
-  const handleClick = async () => {
+  const handleClick = (e) => {
     setFetchedRate(rate);
+    onReviewChange(e);
   };
 
   const Star = ({ isRated }) => {
-    return <li className={`${isRated ? 'starRated' : 'star'}`}></li>;
+    return <li className={`${isRated ? 'starRated' : 'star'}`} name={name} value={rate}></li>;
   };
 
   return (
-    <Wrap rate={rate} className="wrap" starsW={starsWidth} oneStarW={oneStarWidth} svg={svg}>
+    <Wrap className="wrap" rate={rate} starsW={starsWidth} oneStarW={oneStarWidth} svg={svg}>
       <h3>별점</h3>
       <div className="innerWrap">
         <ul className="stars" onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} onClick={handleClick}>

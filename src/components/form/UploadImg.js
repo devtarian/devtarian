@@ -2,18 +2,18 @@ import React, { useRef } from 'react';
 import styled from 'styled-components';
 
 const UploadImg = ({ name, imgFileURLs, onImageUpload }) => {
-  const refHiddenFileInput = useRef();
+  const refHiddenInput = useRef();
 
   const handleUploadBtnClick = (e) => {
     e.preventDefault();
-    refHiddenFileInput?.current.click();
+    refHiddenInput?.current.click();
   };
 
   const handleImageUpload = (e) => {
     onImageUpload(e);
   };
   return (
-    <Wrap>
+    <Wrap className="wrap">
       <label>사진 선택 {imgFileURLs.length}/5</label>
       <input
         className="fileInput"
@@ -23,21 +23,14 @@ const UploadImg = ({ name, imgFileURLs, onImageUpload }) => {
         accept="image/*"
         multiple
         onChange={handleImageUpload}
-        ref={refHiddenFileInput}
+        ref={refHiddenInput}
       />
       <button className="uploadBtn" onClick={handleUploadBtnClick}>
         사진 추가
       </button>
       <ul className="previewImgs">
-        <li className="imgContainer"></li>
-        <li className="imgContainer"></li>
-        <li className="imgContainer"></li>
-        <li className="imgContainer"></li>
-        <li className="imgContainer"></li>
-        {imgFileURLs?.map((img, index) => (
-          <li className="prevImg" key={img + index}>
-            <img src={img} alt="" index={index} />
-          </li>
+        {[...new Array(5)].map((_, index) => (
+          <ImgContainer key={index} src={imgFileURLs.length && imgFileURLs[index]} />
         ))}
       </ul>
     </Wrap>
@@ -68,24 +61,19 @@ const Wrap = styled.div`
     height: 150px;
     margin-top: 1rem;
     overflow: hidden;
-    .imgContainer {
-      border: 1px solid ${(props) => props.theme.gray[1]};
-    }
-    li,
-    .prevImg img {
-      float: left;
-      width: 150px;
-      height: 150px;
-      border-radius: 4px;
-    }
+
     li + li {
       margin-left: 0.5rem;
     }
-    .prevImg img {
-      position: absolute;
-      top: 0;
-      left: ${(props) => props.index}px;
-      margin-left: -7px;
-    }
   }
+`;
+
+const ImgContainer = styled.li`
+  float: left;
+  width: 150px;
+  height: 150px;
+  border: 1px solid ${(props) => props.theme.gray[1]};
+  border-radius: 4px;
+  background: ${(props) => (props.src ? `url(${props.src})` : props.theme.background[1])};
+  background-size: cover;
 `;

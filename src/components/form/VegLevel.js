@@ -4,11 +4,8 @@ import styled from 'styled-components';
 const vegLevels = ['비건', '락토', '오보', '락토오보', '페스코'];
 
 const VegLevel = ({ activedBtn, onReviewChange, onVegLevelClick }) => {
-  const handleReviewChange = (e) => {
+  const handleBtnClick = (e) => {
     onReviewChange(e);
-  };
-
-  const handleVegLevelClick = (e) => {
     onVegLevelClick(e.target.value);
   };
 
@@ -22,10 +19,7 @@ const VegLevel = ({ activedBtn, onReviewChange, onVegLevelClick }) => {
           className={activedBtn === level ? 'active' : ''}
           name="vegLevel"
           value={level}
-          onClick={(e) => {
-            handleReviewChange(e);
-            handleVegLevelClick(e);
-          }}
+          onClick={handleBtnClick}
         />
       ))}
     </Wrap>
