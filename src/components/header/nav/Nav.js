@@ -69,7 +69,7 @@ const Navi = styled.ul`
       bottom: -17px;
       width: 0px;
       height: 4px;
-      background-color: green;
+      background-color: ${(props) => props.theme.green[1]};
       transition: all 0.2s ease-in;
     }
     &:hover span:after {

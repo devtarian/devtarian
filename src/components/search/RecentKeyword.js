@@ -24,8 +24,8 @@ const Wrap = styled.div`
   right: 0;
   padding: 17px 50px 18px 20px;
   border-radius: 4px;
-  border: 1px solid #ededed;
-  background-color: #fff;
+  border: 1px solid ${(props) => props.theme.gray[1]};
+  background-color: ${(props) => props.theme.background[0]};
   opacity: 0.85;
 
   strong {
@@ -42,7 +42,7 @@ const KeywordList = styled.ul`
 
     &:hover {
       transition: all 0.2s ease;
-      color: green;
+      color: ${(props) => props.theme.green[1]};
       font-weight: bolder;
     }
   }

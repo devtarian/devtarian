@@ -33,12 +33,12 @@ const Wrap = styled.div`
     float: left;
     margin-left: 0.25rem;
     font-size: 18px;
-    color: #2e7d32;
+    color: ${(props) => props.theme.green[1]};
   }
   .region {
     display: block;
     width: 100%;
-    color: #777;
+    color: ${(props) => props.theme.color[1]};
   }
   .starRating {
     width: 100%;
@@ -69,12 +69,12 @@ const ItemImg = styled.div`
     width: 100%;
     height: 100%;
     border-radius: 10px;
-    background-color: #2e7d32;
+    background-color: ${(props) => props.theme.green[1]};
     opacity: 0;
     transition: all 0.3s ease-in-out;
   }
 
   &:hover .cover {
-    opacity: 0.75;
+    opacity: 0.8;
   }
 `;

@@ -4,8 +4,6 @@ import { DefaultLayout, PublicLayout } from './layouts';
 import Main from './pages/main/Main';
 import ReviewForm from './pages/reviewForm/ReviewForm';
 
-import './App.css';
-
 function App() {
   return (
     <div className="App">

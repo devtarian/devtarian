@@ -17,8 +17,9 @@ const SearchForm = ({ value, onInputChange, onAddRecentKeywords }) => {
       <SearchInput
         placeholder="근처의 채식 식당을 찾아보세요!"
         value={value}
+        data-show="show"
         onChange={handleInputChange}></SearchInput>
-      <SearchButton type="submit" onClick={handleInputClick}>
+      <SearchButton type="submit" data-show="show" onClick={handleInputClick}>
         검색
       </SearchButton>
     </Wrap>
@@ -40,8 +41,8 @@ const SearchInput = styled.input`
   padding: 14px 10px;
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
-  background-color: #fff;
-  border: 1px solid #ededed;
+  background-color: ${(props) => props.theme.background[0]};
+  border: 1px solid ${(props) => props.theme.gray[1]};
 `;
 
 const SearchButton = styled.button`
@@ -50,9 +51,9 @@ const SearchButton = styled.button`
   right: 0;
   float: right;
   width: 50px;
-  height: 100%;
+  height: 103%;
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
-  background-color: green;
-  border: 1px solid green;
+  background-color: ${(props) => props.theme.green[1]};
+  color: ${(props) => props.theme.background[0]};
 `;

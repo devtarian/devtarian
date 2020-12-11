@@ -17,6 +17,4 @@ const PublicLayout = ({ component: Component, ...rest }) => {
 
 export default PublicLayout;
 
-const Wrap = styled.div`
-  border: 1px solid #000;
-`;
+const Wrap = styled.div``;

@@ -70,7 +70,7 @@ const CarouselUl = styled.ul`
       width: 270px;
       height: 300px;
       border-radius: 10px;
-      background-color: #2e7d32;
+      background-color: ${(props) => props.theme.green[1]};
       opacity: 0;
       transition: all 0.3s ease-in-out;
 
@@ -86,7 +86,7 @@ const CarouselUl = styled.ul`
       }
     }
     &:hover .cover {
-      opacity: 0.75;
+      opacity: 0.8;
     }
   }
 `;
