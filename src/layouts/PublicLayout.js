@@ -1,16 +1,63 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Route } from 'react-router-dom';
 import styled from 'styled-components';
+import { validate } from '../utils/helepr';
 import { SubmitBtnWrap } from '../components/form/SubmitBtn';
 import bgImg from './images/pexels-ready-made-3850624.jpg';
 
-const PublicLayout = ({ component: Component, ...rest }) => {
+const initUserValues = {
+  userName: '',
+  email: '',
+  password: '',
+  passwordCheck: '',
+  avatar: '',
+};
+
+const PublicLayout = ({ component: Component, user, ...rest }) => {
+  const [userValues, setUserValues] = useState(initUserValues);
+  const [errors, setErrors] = useState({
+    email: true,
+    password: true,
+    passwordCheck: true,
+  });
+
+  const handleUserValuesChange = (e) => {
+    const { name, value } = e.target;
+    const isTrue = validate(name, value, userValues);
+
+    setErrors((prevState) => ({
+      ...prevState,
+      [name]: isTrue,
+    }));
+
+    if (name === 'avatar') {
+      const fileReader = new FileReader();
+      const file = e.target.files[0];
+      if (!file.type.includes('image')) {
+        e.prventDefault();
+        e.target.value = '';
+        throw new Error('이미지 파일만 올려주세요 : )');
+      }
+      fileReader.onload = ({ target }) => {
+        setUserValues((prevState) => ({
+          ...prevState,
+          [name]: target.result,
+        }));
+      };
+    } else {
+      setUserValues((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
+    }
+  };
+
   return (
     <Route
       {...rest}
       render={(props) => (
         <Wrap bg={bgImg}>
-          <Component {...props} />
+          <Component {...props} userValues={userValues} errors={errors} onUserValuesChange={handleUserValuesChange} />
         </Wrap>
       )}
     />
@@ -44,17 +91,6 @@ const Wrap = styled.section`
     box-shadow: 0 2px 3px ${(props) => props.theme.gray[1]};
     background: rgba(255, 255, 255, 0.85);
 
-    .signForm {
-      opacity: 0.5;
-    }
-    label {
-      font-size: 0;
-    }
-    input {
-      width: 100%;
-      margin-bottom: 2.3rem;
-      border-bottom: 1px solid ${(props) => props.theme.gray[1]};
-    }
     ${SubmitBtnWrap} {
       width: 50%;
       margin-top: 1rem;

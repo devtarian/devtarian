@@ -1,21 +1,41 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import SignInput from '../SignInput';
 import SubmitBtn from '../../components/form/SubmitBtn';
 
-const Login = () => {
+const Login = ({ userValues, errors, onUserValuesChange, history }) => {
+  const handleLoginSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      history.push('/');
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+
   return (
     <Wrap>
-      <form className="signForm">
+      <form className="signForm" onSubmit={handleLoginSubmit}>
         <h2>로그인</h2>
-        <div>
-          <label>이메일</label>
-          <input placeholder="이메일"></input>
-        </div>
-        <div>
-          <label>비밀번호</label>
-          <input placeholder="비밀번호"></input>
-        </div>
+        <SignInput
+          type="emai"
+          placeholder="이메일"
+          name="email"
+          value={userValues.email}
+          onUserValuesChange={onUserValuesChange}
+          errors={errors}
+          required
+        />
+        <SignInput
+          type="password"
+          placeholder="비밀번호"
+          name="password"
+          value={userValues.password}
+          onUserValuesChange={onUserValuesChange}
+          erors={errors}
+          required
+        />
         <SubmitBtn value="로그인">로그인</SubmitBtn>
         <div className="linkTo">
           <Link to="#">비밀번호를 잊으셨나요?</Link>
