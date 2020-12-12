@@ -57,7 +57,13 @@ const PublicLayout = ({ component: Component, user, ...rest }) => {
       {...rest}
       render={(props) => (
         <Wrap bg={bgImg}>
-          <Component {...props} userValues={userValues} errors={errors} onUserValuesChange={onUserValuesChange} />
+          <Component
+            {...props}
+            user={user}
+            userValues={userValues}
+            errors={errors}
+            onUserValuesChange={onUserValuesChange}
+          />
         </Wrap>
       )}
     />

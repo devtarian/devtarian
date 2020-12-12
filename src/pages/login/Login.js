@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import SignInput from '../SignInput';
 import SubmitBtn from '../../components/form/SubmitBtn';
 
-const Login = ({ userValues, errors, onUserValuesChange, history }) => {
+const Login = ({ user, userValues, errors, onUserValuesChange, history }) => {
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     try {
