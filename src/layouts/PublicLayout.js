@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Route } from 'react-router-dom';
 import styled from 'styled-components';
-import { validate } from '../utils/helepr';
+import { validate } from '../utils/helper';
 import { SubmitBtnWrap } from '../components/form/SubmitBtn';
 import bgImg from './images/pexels-ready-made-3850624.jpg';
 
@@ -21,7 +21,7 @@ const PublicLayout = ({ component: Component, user, ...rest }) => {
     passwordCheck: true,
   });
 
-  const handleUserValuesChange = (e) => {
+  const onUserValuesChange = (e) => {
     const { name, value } = e.target;
     const isTrue = validate(name, value, userValues);
 
@@ -57,7 +57,7 @@ const PublicLayout = ({ component: Component, user, ...rest }) => {
       {...rest}
       render={(props) => (
         <Wrap bg={bgImg}>
-          <Component {...props} userValues={userValues} errors={errors} onUserValuesChange={handleUserValuesChange} />
+          <Component {...props} userValues={userValues} errors={errors} onUserValuesChange={onUserValuesChange} />
         </Wrap>
       )}
     />
