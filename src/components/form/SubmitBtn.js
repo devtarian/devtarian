@@ -3,17 +3,17 @@ import styled from 'styled-components';
 
 const SubmitBtn = ({ value, onSubmit }) => {
   return (
-    <Wrap className="wrap">
+    <SubmitBtnWrap className="wrap">
       <button type="submit" className="submitBtn" onClick={onSubmit}>
         {value}
       </button>
-    </Wrap>
+    </SubmitBtnWrap>
   );
 };
 
 export default SubmitBtn;
 
-const Wrap = styled.div`
+export const SubmitBtnWrap = styled.div`
   width: 33.3333%;
   margin: 0 auto;
   margin-top: 2rem;
