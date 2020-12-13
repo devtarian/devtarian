@@ -6,12 +6,16 @@ import UploadProfileImg from './UploadProfileImg';
 import SignInput from '../../components/form/SignInput';
 import SubmitBtn from '../../components/form/SubmitBtn';
 
-const SignUp = ({ user, userValues, errors, onUserValuesChange, history }) => {
+const SignUp = ({ user, userValues, errors, onProfileUpload, onUserValuesChange, history }) => {
   return (
     <div className="wrap">
       <form className="signForm" onSubmit={onUserValuesChange}>
         <h2>회원가입</h2>
-        <UploadProfileImg userValues={userValues} onUserValuesChange={onUserValuesChange} />
+        <UploadProfileImg
+          userValues={userValues}
+          onProfileUpload={onProfileUpload}
+          onUserValuesChange={onUserValuesChange}
+        />
         <SignInput
           type="text"
           placeholder="이름"

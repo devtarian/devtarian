@@ -11,6 +11,7 @@ const initUserValues = {
   password: '',
   passwordCheck: '',
   avatar: '',
+  avatarURL: '',
 };
 
 const PublicLayout = ({ component: Component, user, ...rest }) => {
@@ -21,8 +22,22 @@ const PublicLayout = ({ component: Component, user, ...rest }) => {
     passwordCheck: true,
   });
 
+  const onProfileUpload = (e) => {
+    let file = e.target.files[0];
+    let fileURLs = URL.createObjectURL(file);
+
+    if (!file.type.includes('image')) {
+      e.preventDefault();
+      e.target.value = '';
+      throw new Error('이미지 파일만 올려주세요 : )');
+    } else {
+      setUserValues({ ...userValues, avatar: file, avatarURL: fileURLs });
+    }
+  };
+
   const onUserValuesChange = (e) => {
-    console.log(e.target);
+    // console.log(e.target);
+    e.preventDefault();
     const { name, value } = e.target;
     const isTrue = validate(name, value, userValues);
 
@@ -30,24 +45,11 @@ const PublicLayout = ({ component: Component, user, ...rest }) => {
       ...prevState,
       [name]: isTrue,
     }));
-    let newValue = value;
-    if (name === 'avatar') {
-      let file = e.target.files[0];
-      let fileURLs = URL.createObjectURL(file);
 
-      if (!file.type.includes('image')) {
-        e.prventDefault();
-        e.target.value = '';
-        throw new Error('이미지 파일만 올려주세요 : )');
-      }
-      newValue = fileURLs;
-    }
-    setUserValues((prevState) => ({
-      ...prevState,
-      [name]: newValue,
-    }));
+    setUserValues({ ...userValues, [name]: value });
   };
 
+  console.log('userValues :', userValues);
   return (
     <Route
       {...rest}
@@ -58,6 +60,7 @@ const PublicLayout = ({ component: Component, user, ...rest }) => {
             user={user}
             userValues={userValues}
             errors={errors}
+            onProfileUpload={onProfileUpload}
             onUserValuesChange={onUserValuesChange}
           />
         </Wrap>
