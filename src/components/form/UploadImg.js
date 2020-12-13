@@ -16,7 +16,6 @@ const UploadImg = ({ name, imgFileURLs, onImageUpload }) => {
     <Wrap className="wrap">
       <label>사진 선택 {imgFileURLs.length}/5</label>
       <input
-        className="fileInput"
         type="file"
         name={name}
         url={imgFileURLs}
