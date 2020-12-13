@@ -22,6 +22,7 @@ const PublicLayout = ({ component: Component, user, ...rest }) => {
   });
 
   const onUserValuesChange = (e) => {
+    console.log(e.target);
     const { name, value } = e.target;
     const isTrue = validate(name, value, userValues);
 
@@ -29,27 +30,22 @@ const PublicLayout = ({ component: Component, user, ...rest }) => {
       ...prevState,
       [name]: isTrue,
     }));
-
+    let newValue = value;
     if (name === 'avatar') {
-      const fileReader = new FileReader();
-      const file = e.target.files[0];
+      let file = e.target.files[0];
+      let fileURLs = URL.createObjectURL(file);
+
       if (!file.type.includes('image')) {
         e.prventDefault();
         e.target.value = '';
         throw new Error('이미지 파일만 올려주세요 : )');
       }
-      fileReader.onload = ({ target }) => {
-        setUserValues((prevState) => ({
-          ...prevState,
-          [name]: target.result,
-        }));
-      };
-    } else {
-      setUserValues((prevState) => ({
-        ...prevState,
-        [name]: value,
-      }));
+      newValue = fileURLs;
     }
+    setUserValues((prevState) => ({
+      ...prevState,
+      [name]: newValue,
+    }));
   };
 
   return (

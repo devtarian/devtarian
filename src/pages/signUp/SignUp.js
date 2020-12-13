@@ -7,14 +7,11 @@ import SignInput from '../../components/form/SignInput';
 import SubmitBtn from '../../components/form/SubmitBtn';
 
 const SignUp = ({ user, userValues, errors, onUserValuesChange, history }) => {
-  const onProfileUpload = (e) => {
-    console.log(e.target);
-  };
   return (
     <div className="wrap">
       <form className="signForm" onSubmit={onUserValuesChange}>
         <h2>회원가입</h2>
-        <UploadProfileImg onProfileUpload={onProfileUpload} />
+        <UploadProfileImg userValues={userValues} onUserValuesChange={onUserValuesChange} />
         <SignInput
           type="text"
           placeholder="이름"
