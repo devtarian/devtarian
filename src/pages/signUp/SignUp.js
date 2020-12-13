@@ -4,25 +4,19 @@ import apis from '../../Service/apis';
 import SignInput from '../../components/form/SignInput';
 import SubmitBtn from '../../components/form/SubmitBtn';
 
-const Login = ({ user, userValues, errors, onUserValuesChange, history }) => {
-  const handleLoginSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await apis.authApi.login({
-        email: userValues.email,
-        pw: String(userValues.pw),
-      });
-      console.log(res);
-      history.push('/');
-    } catch (err) {
-      alert(err.message);
-    }
-  };
-
+const SignUp = ({ user, userValues, errors, onUserValuesChange, history }) => {
   return (
     <div className="wrap">
-      <form className="signForm" onSubmit={handleLoginSubmit}>
-        <h2>로그인</h2>
+      <form className="signForm">
+        <h2>회원가입</h2>
+        <SignInput
+          type="text"
+          placeholder="이름"
+          name="userName"
+          value={userValues.userName}
+          onUserValuesChange={onUserValuesChange}
+          required
+        />
         <SignInput
           type="emai"
           placeholder="이메일"
@@ -41,10 +35,18 @@ const Login = ({ user, userValues, errors, onUserValuesChange, history }) => {
           erors={errors}
           required
         />
-        <SubmitBtn value="로그인">로그인</SubmitBtn>
+        <SignInput
+          type="text"
+          placeholder="비밀번호 확인"
+          name="passwordCheck"
+          value={userValues.passwordCheck}
+          onUserValuesChange={onUserValuesChange}
+          erors={errors}
+          required
+        />
+        <SubmitBtn value="회원가입">회원가입</SubmitBtn>
         <div className="linkTo">
-          <Link to="#">비밀번호를 잊으셨나요?</Link>
-          <Link to="/signup">/ 회원가입</Link>
+          <Link to="/login">계정이 있으신가요? 로그인</Link>
         </div>
       </form>
       <Link to="/" className="backToMain">
@@ -54,4 +56,4 @@ const Login = ({ user, userValues, errors, onUserValuesChange, history }) => {
   );
 };
 
-export default Login;
+export default SignUp;
