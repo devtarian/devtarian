@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Route } from 'react-router-dom';
 import styled from 'styled-components';
-import apis from '.././Service/apis';
 import { validate } from '../utils/helper';
 import { SubmitBtnWrap } from '../components/form/SubmitBtn';
 import bgImg from './images/pexels-ready-made-3850624.jpg';
@@ -12,58 +11,61 @@ const initUserValues = {
   password: '',
   passwordCheck: '',
   avatar: '',
-  avatarURL: '',
 };
 
-const PublicLayout = ({ component: Component, user, history, ...rest }) => {
+const PublicLayout = ({ component: Component, user, ...rest }) => {
   const [userValues, setUserValues] = useState(initUserValues);
+  // const [errors, setErrors] = useState({
+  //   email: true,
+  //   password: true,
+  //   passwordCheck: true,
+  // });
   const [errors, setErrors] = useState({
-    email: true,
-    password: true,
-    passwordCheck: true,
+    email: {
+      isTrue: true,
+      message: '이메일 형식으로 입력해주세요.',
+    },
+    password: {
+      isTrue: true,
+      message: '영문과 숫자를 조합해 8자리 이상 입력하세요.',
+    },
+    passwordCheck: {
+      isTrue: true,
+      message: '비밀번호와 일치하지 않습니다.',
+    },
   });
 
-  const onProfileUpload = (e) => {
-    let file = e.target.files[0];
-    let fileURLs = URL.createObjectURL(file);
-
-    if (!file.type.includes('image')) {
-      e.preventDefault();
-      e.target.value = '';
-      throw new Error('이미지 파일만 올려주세요 : )');
-    } else {
-      setUserValues({ ...userValues, avatar: file, avatarURL: fileURLs });
-    }
-  };
-
   const onUserValuesChange = (e) => {
-    // console.log(e.target);
-    e.preventDefault();
     const { name, value } = e.target;
     const isTrue = validate(name, value, userValues);
 
     setErrors((prevState) => ({
       ...prevState,
-      [name]: isTrue,
+      [name]: {
+        ...prevState[name],
+        isTrue,
+      },
     }));
 
-    setUserValues({ ...userValues, [name]: value });
-  };
-
-  const onUserValuesSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      await apis.usersApi.signUp({
-        username: userValues.userName,
-        email: userValues.email,
-        pw: userValues.password,
-        avatar: userValues.email,
-      });
-      alert('가입 되었습니다.');
-      history.push('/');
-    } catch (err) {
-      throw Error(err.message);
+    if (name === 'avatar') {
+      const fileReader = new FileReader();
+      const file = e.target.files[0];
+      if (!file.type.includes('image')) {
+        e.prventDefault();
+        e.target.value = '';
+        throw new Error('이미지 파일만 올려주세요 : )');
+      }
+      fileReader.onload = ({ target }) => {
+        setUserValues((prevState) => ({
+          ...prevState,
+          [name]: target.result,
+        }));
+      };
+    } else {
+      setUserValues((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
     }
   };
 
@@ -77,9 +79,7 @@ const PublicLayout = ({ component: Component, user, history, ...rest }) => {
             user={user}
             userValues={userValues}
             errors={errors}
-            onProfileUpload={onProfileUpload}
             onUserValuesChange={onUserValuesChange}
-            onUserValuesSubmit={onUserValuesSubmit}
           />
         </Wrap>
       )}
