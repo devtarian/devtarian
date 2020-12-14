@@ -1,15 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import apis from '../../Service/apis';
 import UploadProfileImg from './UploadProfileImg';
-
 import SignInput from '../../components/form/SignInput';
 import SubmitBtn from '../../components/form/SubmitBtn';
 
-const SignUp = ({ user, userValues, errors, onProfileUpload, onUserValuesChange, history }) => {
+const SignUp = ({ user, userValues, errors, onProfileUpload, onUserValuesChange, onUserValuesSubmit }) => {
   return (
     <div className="wrap">
-      <form className="signForm" onSubmit={onUserValuesChange}>
+      <form className="signForm" onSubmit={onUserValuesSubmit}>
         <h2>회원가입</h2>
         <UploadProfileImg
           userValues={userValues}

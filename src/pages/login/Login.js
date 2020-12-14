@@ -5,17 +5,18 @@ import SignInput from '../../components/form/SignInput';
 import SubmitBtn from '../../components/form/SubmitBtn';
 
 const Login = ({ user, userValues, errors, onUserValuesChange, history }) => {
+  console.log(userValues);
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
+
     try {
-      const res = await apis.authApi.login({
+      await apis.authApi.login({
         email: userValues.email,
-        pw: String(userValues.pw),
+        pw: userValues.password,
       });
-      console.log(res);
       history.push('/');
     } catch (err) {
-      alert(err.message);
+      throw Error(err.message);
     }
   };
 

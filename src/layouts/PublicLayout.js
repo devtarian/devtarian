@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Route } from 'react-router-dom';
 import styled from 'styled-components';
+import apis from '.././Service/apis';
 import { validate } from '../utils/helper';
 import { SubmitBtnWrap } from '../components/form/SubmitBtn';
 import bgImg from './images/pexels-ready-made-3850624.jpg';
@@ -14,7 +15,7 @@ const initUserValues = {
   avatarURL: '',
 };
 
-const PublicLayout = ({ component: Component, user, ...rest }) => {
+const PublicLayout = ({ component: Component, user, history, ...rest }) => {
   const [userValues, setUserValues] = useState(initUserValues);
   const [errors, setErrors] = useState({
     email: true,
@@ -49,7 +50,23 @@ const PublicLayout = ({ component: Component, user, ...rest }) => {
     setUserValues({ ...userValues, [name]: value });
   };
 
-  console.log('userValues :', userValues);
+  const onUserValuesSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      await apis.usersApi.signUp({
+        username: userValues.userName,
+        email: userValues.email,
+        pw: userValues.password,
+        avatar: userValues.email,
+      });
+      alert('가입 되었습니다.');
+      history.push('/');
+    } catch (err) {
+      throw Error(err.message);
+    }
+  };
+
   return (
     <Route
       {...rest}
@@ -62,6 +79,7 @@ const PublicLayout = ({ component: Component, user, ...rest }) => {
             errors={errors}
             onProfileUpload={onProfileUpload}
             onUserValuesChange={onUserValuesChange}
+            onUserValuesSubmit={onUserValuesSubmit}
           />
         </Wrap>
       )}
