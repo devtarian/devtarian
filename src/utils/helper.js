@@ -1,6 +1,6 @@
 // Validation
 export const validate = (name, value, users) => {
-  console.log('name : ', name, 'value : ', value, 'users : ', users);
+  // console.log('name : ', name, 'value : ', value, 'users : ', users);
   if (name === 'email') {
     if (value.length === 0 || value.includes('@')) {
       return true;
