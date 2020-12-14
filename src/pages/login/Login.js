@@ -5,15 +5,15 @@ import SignInput from '../../components/form/SignInput';
 import SubmitBtn from '../../components/form/SubmitBtn';
 
 const Login = ({ user, userValues, errors, onUserValuesChange, history }) => {
-  console.log(userValues);
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      await apis.authApi.login({
+      const res = await apis.authApi.login({
         email: userValues.email,
         pw: userValues.password,
       });
+      localStorage.setItem('apiKey', res.data.token);
       history.push('/');
     } catch (err) {
       throw Error(err.message);
@@ -25,7 +25,7 @@ const Login = ({ user, userValues, errors, onUserValuesChange, history }) => {
       <form className="signForm" onSubmit={handleLoginSubmit}>
         <h2>로그인</h2>
         <SignInput
-          type="emai"
+          type="email"
           placeholder="이메일"
           name="email"
           value={userValues.email}
