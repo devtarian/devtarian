@@ -6,7 +6,7 @@ const SignInput = ({ type, placeholder, name, value, errors, onUserValuesChange 
     <Wrap>
       <label>{type}</label>
       <input type={type} placeholder={placeholder} name={name} value={value} onChange={onUserValuesChange} />
-      <p className={errors ? 'err' : 'err on'}>이메일 형식으로 입력해 주세요.</p>
+      <p className={errors[name]?.isTrue ? 'err' : 'err on'}>{errors[name]?.message}</p>
     </Wrap>
   );
 };

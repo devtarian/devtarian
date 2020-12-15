@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, useHistory } from 'react-router-dom';
+
 import styled from 'styled-components';
 import apis from '.././Service/apis';
 import { validate } from '../utils/helper';
@@ -15,13 +16,27 @@ const initUserValues = {
   avatarURL: '',
 };
 
-const PublicLayout = ({ component: Component, user, history, ...rest }) => {
+const PublicLayout = ({ component: Component, user, ...rest }) => {
   const [userValues, setUserValues] = useState(initUserValues);
   const [errors, setErrors] = useState({
-    email: true,
-    password: true,
-    passwordCheck: true,
+    userName: {
+      isTrue: true,
+      message: '표준 한글, 영문 이름을 입력해 주세요. (2~20자)',
+    },
+    email: {
+      isTrue: true,
+      message: '이메일 형식으로 입력해 주세요.',
+    },
+    password: {
+      isTrue: true,
+      message: '영문과 숫자를 조합해 8자리 이상 입력하세요.',
+    },
+    passwordCheck: {
+      isTrue: true,
+      message: '비밀번호와 일치하지 않습니다.',
+    },
   });
+  const history = useHistory();
 
   const onProfileUpload = (e) => {
     let file = e.target.files[0];
@@ -37,21 +52,26 @@ const PublicLayout = ({ component: Component, user, history, ...rest }) => {
   };
 
   const onUserValuesChange = (e) => {
-    // console.log(e.target);
     e.preventDefault();
     const { name, value } = e.target;
     const isTrue = validate(name, value, userValues);
 
     setErrors((prevState) => ({
       ...prevState,
-      [name]: isTrue,
+      [name]: {
+        ...prevState[name],
+        isTrue,
+      },
     }));
 
     setUserValues({ ...userValues, [name]: value });
   };
 
-  const onUserValuesSubmit = async (e) => {
+  const onSignUpSubmit = async (e) => {
     e.preventDefault();
+    const isTrues = Object.values(errors).map((err) => err.isTrue);
+    const isFalse = (curValue) => curValue !== true;
+    if (isTrues.some(isFalse)) return;
 
     try {
       await apis.usersApi.signUp({
@@ -62,6 +82,26 @@ const PublicLayout = ({ component: Component, user, history, ...rest }) => {
       });
       alert('가입 되었습니다.');
       history.push('/');
+      setUserValues(initUserValues);
+    } catch (err) {
+      throw Error(err.message);
+    }
+  };
+
+  const onLoginSubmit = async (e) => {
+    e.preventDefault();
+    const isTrues = Object.values(errors).map((err) => err.isTrue);
+    const isFalse = (curValue) => curValue !== true;
+    if (isTrues.some(isFalse)) return;
+
+    try {
+      const res = await apis.authApi.login({
+        email: userValues.email,
+        pw: userValues.password,
+      });
+      localStorage.setItem('apiKey', res.data.token);
+      history.push('/');
+      setUserValues(initUserValues);
     } catch (err) {
       throw Error(err.message);
     }
@@ -79,7 +119,8 @@ const PublicLayout = ({ component: Component, user, history, ...rest }) => {
             errors={errors}
             onProfileUpload={onProfileUpload}
             onUserValuesChange={onUserValuesChange}
-            onUserValuesSubmit={onUserValuesSubmit}
+            onSignUpSubmit={onSignUpSubmit}
+            onLoginSubmit={onLoginSubmit}
           />
         </Wrap>
       )}
