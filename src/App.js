@@ -5,6 +5,7 @@ import Main from './pages/main/Main';
 import ReviewForm from './pages/reviewForm/ReviewForm';
 import SignUp from './pages/signUp/SignUp';
 import Login from './pages/login/Login';
+import FeedForm from './pages/feedForm/FeedForm';
 
 function App() {
   const [user, setUser] = useState();
@@ -15,6 +16,7 @@ function App() {
         <Switch>
           <PublicLayout path="/signup" component={SignUp} />
           <PublicLayout path="/login" user={user} component={Login} />
+          <DefaultLayout path="/feed" component={FeedForm} />
           <DefaultLayout path="/review" component={ReviewForm} />
           <DefaultLayout path="/" component={Main} />
         </Switch>
