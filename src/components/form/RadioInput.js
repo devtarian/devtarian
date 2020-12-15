@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Category = ({ name, review, onReviewChange }) => {
+const RadioCategory = ({ name, review, onReviewChange }) => {
   const handleReviewChange = (e) => {
     onReviewChange(e);
   };
@@ -29,7 +29,7 @@ const Category = ({ name, review, onReviewChange }) => {
   );
 };
 
-export default Category;
+export default RadioCategory;
 
 const Wrap = styled.div`
   input + input {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Category, UploadImg, VegLevel, StarRating, Input, Textarea, SubmitBtn } from '../../components/form';
+import { RadioInput, UploadImg, VegLevel, StarRating, Input, Textarea, SubmitBtn } from '../../components/form';
 import BgImg from './images/pexels-karolina-grabowska-4197908.jpg';
 
 const initReview = {
@@ -64,7 +64,7 @@ const ReviewForm = () => {
     <Wrap bg={BgImg}>
       <h2>피드 쓰기</h2>
       <form>
-        <Category name="category" review={review} onReviewChange={onReviewChange} />
+        <RadioInput name="category" review={review} onReviewChange={onReviewChange} />
         <UploadImg name="imgFiles" value={imgFiles} imgFileURLs={imgFileURLs} onImageUpload={onImageUpload} />
         <VegLevel activedBtn={activedBtn} onReviewChange={onReviewChange} onVegLevelClick={onVegLevelClick} />
         <StarRating name="starRating" onReviewChange={onReviewChange} />

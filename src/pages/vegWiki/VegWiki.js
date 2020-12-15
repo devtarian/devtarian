@@ -1,54 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Checkbox, Select } from '../../components/form';
+import Cards from '../../components/cards/Cards';
 
 const VegiWiki = () => {
   return (
     <Wrap>
       <div className="filters">
-        <Category>
-          <h2>카테고리</h2>
-          <li>
-            <button>전체</button>
-          </li>
-          <li>
-            <button>가공식품</button>
-          </li>
-          <li>
-            <button>과자/간식</button>
-          </li>
-          <li>
-            <button>제과/제빵</button>
-          </li>
-          <li>
-            <button>음료</button>
-          </li>
-          <li>
-            <button>기타</button>
-          </li>
-        </Category>
-        <Select>
-          <option>최근등록순</option>
-          <option>오름차순</option>
-          <option>내림차순</option>
-        </Select>
+        <Checkbox title="카테고리" info={CATEGORIES} />
+        <Select info={OPTIONS} />
       </div>
       <div className="product">
-        <strong>총 73개</strong>
-        <Cards>
-          {DUMMY_PROD.map((li) => (
-            <li key={li.id}>
-              <div className="imgInfo">
-                <img src={li.src} alt="" />
-                <div className="cover"></div>
-              </div>
-              <div className="itemInfo">
-                <span className="category">{li.category}</span>
-                <h3>{li.product}</h3>
-                <span className="ingredient">{li.ingredient}</span>
-              </div>
-            </li>
-          ))}
-        </Cards>
+        <strong>총 {DUMMY_PROD.length}개</strong>
+        <Cards info={DUMMY_PROD} />
       </div>
     </Wrap>
   );
@@ -60,6 +24,10 @@ const Wrap = styled.section`
   width: 1200px;
   margin: 6rem auto 0;
 
+  h2 {
+    margin-bottom: 20px;
+    font-size: 30px;
+  }
   .filters {
     padding-bottom: 2rem;
     margin: 2rem 0;
@@ -71,108 +39,11 @@ const Wrap = styled.section`
       font-size: 0.95rem;
     }
   }
-
-  h2 {
-    margin-bottom: 40px;
-    font-size: 30px;
-  }
 `;
 
-const Cards = styled.ul`
-  overflow: hidden;
-  width: 1160px;
-  margin: 0.5rem auto 0;
+const CATEGORIES = ['전체', '가공식품', '과자/간식', '제과/제빵', '음료', '기타'];
 
-  li {
-    background: ${(props) => props.theme.background[1]};
-    position: relative;
-    float: left;
-    width: 270px;
-    height: 300px;
-    margin: 0 10px 40px;
-    border-radius: 10px;
-
-    .imgInfo {
-      &:hover .cover {
-        opacity: 0.8;
-      }
-      img {
-        display: block;
-        width: 140px;
-        height: 140px;
-        margin: 34px auto 10px;
-        border-radius: 50%;
-      }
-      .cover {
-        z-index: 100;
-        position: absolute;
-        top: 0;
-        width: 270px;
-        height: 300px;
-        border-radius: 10px;
-        background-color: ${(props) => props.theme.green[1]};
-        opacity: 0;
-        transition: all 0.3s ease-in-out;
-      }
-    }
-    .itemInfo {
-      width: 100%;
-      text-align: center;
-      h3 {
-        margin-top: 0.15rem;
-        font-size: 20px;
-      }
-      span {
-        display: block;
-      }
-      .category {
-        margin-top: 0.7rem;
-        font-size: 0.85rem;
-        color: ${(props) => props.theme.color[1]};
-      }
-      .ingredient {
-        margin-top: 0.7rem;
-      }
-    }
-  }
-`;
-
-const Category = styled.ul`
-  float: left;
-
-  h2 {
-    font-size: 17px;
-    margin-bottom: 20px;
-  }
-  li {
-    float: left;
-    border-radius: 4px;
-    border: 1px solid ${(props) => props.theme.color[1]};
-    padding: 3px 7px;
-    button {
-      color: ${(props) => props.theme.color[1]};
-    }
-    &:hover {
-      background-color: ${(props) => props.theme.brown[0]};
-      button {
-        color: ${(props) => props.theme.background[0]};
-      }
-    }
-  }
-  li + li {
-    margin-left: 0.5rem;
-  }
-`;
-
-const Select = styled.select`
-  float: right;
-  padding: 5px 10px;
-  margin-top: 2.5rem;
-  border-radius: 4px;
-  border: 1px solid ${(props) => props.theme.color[1]};
-  font-size: 16px;
-  color: ${(props) => props.theme.color[1]};
-`;
+const OPTIONS = ['최근등록순', '오름차순', '내림차순'];
 
 const DUMMY_PROD = [
   {

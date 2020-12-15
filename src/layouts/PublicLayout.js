@@ -137,7 +137,6 @@ const Wrap = styled.section`
   margin: 0 auto 40px;
   padding: 7rem 1.5rem 0;
   text-align: center;
-
   .wrap {
     margin-top: 2rem;
   }
@@ -154,14 +153,12 @@ const Wrap = styled.section`
     -webkit-box-shadow: 0 3px 5px ${(props) => props.theme.gray[1]};
     box-shadow: 0 2px 3px ${(props) => props.theme.gray[1]};
     background: rgba(255, 255, 255, 0.85);
-
     ${SubmitBtnWrap} {
       width: 50%;
       margin-top: 1rem;
     }
     .linkTo {
       margin-top: 1rem;
-
       a {
         font-size: 12px;
         color: ${(props) => props.theme.gray[1]};
