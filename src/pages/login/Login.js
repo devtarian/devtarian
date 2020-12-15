@@ -1,28 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import apis from '../../Service/apis';
 import SignInput from '../../components/form/SignInput';
 import SubmitBtn from '../../components/form/SubmitBtn';
 
-const Login = ({ user, userValues, errors, onUserValuesChange, history }) => {
-  const handleLoginSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      const res = await apis.authApi.login({
-        email: userValues.email,
-        pw: userValues.password,
-      });
-      localStorage.setItem('apiKey', res.data.token);
-      history.push('/');
-    } catch (err) {
-      throw Error(err.message);
-    }
-  };
-
+const Login = ({ user, userValues, errors, onUserValuesChange, onLoginSubmit }) => {
   return (
     <div className="wrap">
-      <form className="signForm" onSubmit={handleLoginSubmit}>
+      <form className="signForm" onSubmit={onLoginSubmit}>
         <h2>로그인</h2>
         <SignInput
           type="emai"
