@@ -9,7 +9,7 @@ const Login = ({ user, userValues, errors, onUserValuesChange, onLoginSubmit }) 
       <form className="signForm" onSubmit={onLoginSubmit}>
         <h2>로그인</h2>
         <SignInput
-          type="emai"
+          type="email"
           placeholder="이메일"
           name="email"
           value={userValues.email}
