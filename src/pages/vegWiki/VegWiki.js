@@ -4,13 +4,11 @@ import { Checkbox, Select } from '../../components/form';
 import { CheckboxWrap } from '../../components/form/Checkbox';
 import { SelectWrap } from '../../components/form/Select';
 import Cards from '../../components/cards/Cards';
+import useActivedBtn from '../../hooks/useActivedBtn';
 
 const VegiWiki = () => {
   const [category, setCategory] = useState();
-  const [activedBtn, setActivedBtn] = useState('');
-  const onCheckboxClick = (nextActivedBtn) => {
-    setActivedBtn(nextActivedBtn);
-  };
+  const { activedBtn, setActivedBtn, onCheckboxClick } = useActivedBtn();
 
   const onReviewChange = (e) => {
     const { name, value } = e.target;

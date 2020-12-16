@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { RadioInput, UploadImg, Checkbox, StarRating, Input, Textarea, SubmitBtn } from '../../components/form';
+import useActivedBtn from '../../hooks/useActivedBtn';
 import BgImg from './images/pexels-karolina-grabowska-4197908.jpg';
 
-const initReview = {
+const INITREVIEW = {
   category: '가게',
   imgFiles: [],
   imgFileURLs: [],
@@ -16,8 +17,8 @@ const initReview = {
 const VEGLEVELS = ['비건', '락토', '오보', '락토오보', '페스코'];
 
 const ReviewForm = () => {
-  const [review, setReview] = useState(initReview);
-  const [activedBtn, setActivedBtn] = useState('');
+  const [review, setReview] = useState(INITREVIEW);
+  const { activedBtn, setActivedBtn, onCheckboxClick } = useActivedBtn();
   const { imgFiles, imgFileURLs, title } = review;
 
   const onImageUpload = (e) => {
@@ -43,10 +44,6 @@ const ReviewForm = () => {
     });
   };
 
-  const onCheckboxClick = (nextActivedBtn) => {
-    setActivedBtn(nextActivedBtn);
-  };
-
   const onReviewChange = (e) => {
     const { name, value } = e.target;
     setReview({
@@ -59,7 +56,7 @@ const ReviewForm = () => {
     console.log(review);
     e.preventDefault();
     setActivedBtn('');
-    setReview(initReview);
+    setReview(INITREVIEW);
   };
 
   return (
