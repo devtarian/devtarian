@@ -8,7 +8,6 @@ import SubmitBtn from '../../components/form/SubmitBtn';
 
 const SignUp = ({ initUserValues, history }) => {
   const { inputs, setInputs, errors, onImageUpload, onInputChange } = useInput(initUserValues);
-  console.log('inputs', inputs, 'errors', errors);
   const handleSubmit = async (e) => {
     e.preventDefault();
     const isTrues = Object.values(errors).map((err) => err.isTrue);
