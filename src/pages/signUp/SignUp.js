@@ -1,53 +1,75 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import apis from '../../Service/apis';
+import useInput from '../../hooks/useInput';
 import UploadProfileImg from './UploadProfileImg';
 import SignInput from '../../components/form/SignInput';
 import SubmitBtn from '../../components/form/SubmitBtn';
 
-const SignUp = ({ userValues, errors, onProfileUpload, onUserValuesChange, onSignUpSubmit }) => {
+const SignUp = ({ initUserValues, history }) => {
+  const { inputs, setInputs, errors, onImageUpload, onInputChange } = useInput(initUserValues);
+  console.log('inputs', inputs, 'errors', errors);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const isTrues = Object.values(errors).map((err) => err.isTrue);
+    const isFalse = (curValue) => curValue !== true;
+    if (isTrues.some(isFalse)) return;
+
+    try {
+      await apis.usersApi.signUp({
+        username: inputs.userName,
+        email: inputs.email,
+        pw: inputs.password,
+        avatar: inputs.email,
+      });
+      alert('가입 되었습니다.');
+      history.push('/');
+      setInputs(initUserValues);
+    } catch (err) {
+      console.error(err);
+      console.log(err.response?.data.errors);
+    }
+  };
+
   return (
     <div className="wrap">
-      <form className="signForm" onSubmit={onSignUpSubmit}>
+      <form className="signForm" onSubmit={handleSubmit}>
         <h2>회원가입</h2>
-        <UploadProfileImg
-          userValues={userValues}
-          onProfileUpload={onProfileUpload}
-          onUserValuesChange={onUserValuesChange}
-        />
+        <UploadProfileImg inputs={inputs} onImageUpload={onImageUpload} onInputChange={onInputChange} />
         <SignInput
           type="text"
           placeholder="이름"
           name="userName"
-          value={userValues.userName}
-          onUserValuesChange={onUserValuesChange}
-          errors={errors}
+          value={inputs.userName}
+          onInputChange={onInputChange}
+          errors={errors.userName}
           required
         />
         <SignInput
           type="email"
           placeholder="이메일"
           name="email"
-          value={userValues.email}
-          onUserValuesChange={onUserValuesChange}
-          errors={errors}
+          value={inputs.email}
+          onInputChange={onInputChange}
+          errors={errors.email}
           required
         />
         <SignInput
           type="password"
           placeholder="비밀번호"
           name="password"
-          value={userValues.password}
-          onUserValuesChange={onUserValuesChange}
-          errors={errors}
+          value={inputs.password}
+          onInputChange={onInputChange}
+          errors={errors.password}
           required
         />
         <SignInput
           type="password"
           placeholder="비밀번호 확인"
           name="passwordCheck"
-          value={userValues.passwordCheck}
-          onUserValuesChange={onUserValuesChange}
-          errors={errors}
+          value={inputs.passwordCheck}
+          onInputChange={onInputChange}
+          errors={errors.passwordCheck}
           required
         />
         <SubmitBtn value="회원가입">회원가입</SubmitBtn>

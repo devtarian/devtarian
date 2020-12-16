@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
 
-const UploadProfileImg = ({ userValues, onProfileUpload, onUserValuesChange }) => {
+const UploadProfileImg = ({ inputs, onImageUpload, onInputChange }) => {
   const refHiddenInput = useRef();
 
   const handleUploadBtnClick = (e) => {
@@ -10,14 +10,14 @@ const UploadProfileImg = ({ userValues, onProfileUpload, onUserValuesChange }) =
   };
 
   const handleImageUpload = (e) => {
-    onUserValuesChange(e);
-    onProfileUpload(e);
+    onInputChange(e);
+    onImageUpload(e);
   };
   return (
-    <Wrap className="wrap" url={userValues.avatarURL}>
+    <Wrap className="wrap" url={inputs.avatarURL}>
       <label>프로필 사진</label>
       <input type="file" name="avatar" accept="image/*" ref={refHiddenInput} onChange={handleImageUpload} />
-      <div className="imgContainer" url={userValues.avatarURL} onClick={handleUploadBtnClick}></div>
+      <div className="imgContainer" url={inputs.avatarURL} onClick={handleUploadBtnClick}></div>
     </Wrap>
   );
 };
