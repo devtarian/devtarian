@@ -1,30 +1,28 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const RadioCategory = ({ name, review, onReviewChange }) => {
+const CATEGORIES = ['가게', '제품'];
+
+const RadioCategory = ({ name, label, review, onReviewChange }) => {
   const handleReviewChange = (e) => {
     onReviewChange(e);
   };
 
   return (
     <Wrap className="wrap">
-      <label>카테고리</label>
-      <input
-        type="radio"
-        name={name}
-        value="store"
-        checked={review.category === 'store'}
-        onChange={handleReviewChange}
-      />
-      가게
-      <input
-        type="radio"
-        name={name}
-        value="product"
-        checked={review.category === 'product'}
-        onChange={handleReviewChange}
-      />
-      제품
+      <label>{label}</label>
+      {CATEGORIES.map((item) => (
+        <div className="innerWrap" key={item}>
+          <input
+            type="radio"
+            name={name}
+            value={item}
+            checked={review.category === item}
+            onChange={handleReviewChange}
+          />
+          <span>{item}</span>
+        </div>
+      ))}
     </Wrap>
   );
 };
@@ -32,7 +30,11 @@ const RadioCategory = ({ name, review, onReviewChange }) => {
 export default RadioCategory;
 
 const Wrap = styled.div`
-  input + input {
+  overflow: hidden;
+  .innerWrap {
+    float: left;
+  }
+  .innerWrap + .innerWrap {
     margin-left: 1rem;
   }
 `;
