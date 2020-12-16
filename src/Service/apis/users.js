@@ -13,13 +13,7 @@ export const api = {
     // formData.append('pw', pw);
     // formData.append('avatar', avatar);
 
-    console.log(defaultApi.post('/auth/signup', characterInputs));
-
-    try {
-      const res = await defaultApi.post('/auth/signup', characterInputs);
-      return res.data;
-    } catch (err) {
-      throw Error(err.message);
-    }
+    const res = await defaultApi.post('/auth/signup', characterInputs);
+    return res.data;
   },
 };
