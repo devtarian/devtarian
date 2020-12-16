@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
+// import history from '../../history';
 import BgImg from '../reviewForm/images/pexels-karolina-grabowska-4197908.jpg';
 
-import { Input } from '../../components/form';
-import SelectAll from '../../components/form/SelectAll';
-import InputAddressKakao from './InputAddressKakao/InputAddressKakao';
+import { SubmitBtn } from '../../components/form';
+import useInputs from '../../hooks/useInputs';
+import FeedFormStore from './FeedFormStore';
+import FeedFormMenu from './FeedFormMenu';
+import FeedFormInfo from './FeedFormInfo';
 
 const steps = [
   { id: 'store', title: '가게 정보' },
@@ -12,18 +15,43 @@ const steps = [
   { id: 'info', title: '나의 소개' },
 ];
 
+const renderForm = ({ step, ...rest }) => {
+  switch (step) {
+    case 0:
+      return <FeedFormStore {...rest} />;
+    case 1:
+      return <FeedFormMenu {...rest} />;
+    case 2:
+      return <FeedFormInfo {...rest} />;
+    default:
+      return null;
+  }
+};
+
 const initialValue = {
   step: 0,
+  operatingTime: [],
 };
 
 const FeedForm = () => {
-  const [inputs, setInputs] = useState(initialValue);
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  const { inputs, setInputs, onChange } = useInputs(initialValue);
+
+  const handleClickGoBack = () => {
+    if (inputs.step === '0') {
+      //return history.goBack();
+      return;
+    }
 
     setInputs({
       ...inputs,
-      [name]: value,
+      step: inputs.step - 1,
+    });
+  };
+
+  const handleClick = () => {
+    setInputs({
+      ...inputs,
+      step: inputs.step + 1,
     });
   };
   return (
@@ -31,60 +59,20 @@ const FeedForm = () => {
       <h2>가게 등록</h2>
       <form>
         <FormHeader>
-          <button type="button">뒤로가기</button>
-          <Breadcrumb style={{ float: 'right' }}>
+          <button type="button" onClick={handleClickGoBack}>
+            뒤로가기
+          </button>
+          <Breadcrumb>
             {steps.map((step, idx) => (
-              <div key={idx}>
+              <div key={idx} className={`item ${idx === inputs.step && 'on'}`}>
                 <div className="num">{idx + 1}</div>
                 <span>{step.title}</span>
               </div>
             ))}
           </Breadcrumb>
         </FormHeader>
-
-        <SelectAll
-          title="비건 단계"
-          name="veganType"
-          selectedList={inputs?.veganType || []}
-          onChange={handleChange}
-          options={[
-            { key: 'veganOnly', title: '비건 Only' },
-            { key: 'veganMany', title: '비건 위주' },
-            { key: 'dairy', title: '유제품 사용' },
-            { key: 'egg', title: '계란 사용' },
-            { key: 'honny', title: '꿀 사용' },
-          ]}
-          exceptOnly={['veganOnly']}
-        />
-        <FormRow>
-          <div className="col">
-            <Input
-              label="가게 이름"
-              name="title"
-              value={inputs.title || ''}
-              placeholder="제목을 입력하세요."
-              onReviewChange={handleChange}
-            />
-          </div>
-          <div className="col">
-            <Input
-              label="전화번호"
-              name="phone"
-              value={inputs.phone || ''}
-              placeholder="전화번호를 입력하세요."
-              onReviewChange={handleChange}
-            />
-          </div>
-        </FormRow>
-        <InputAddressKakao setInputs={setInputs} />
-
-        <Input
-          label="전화번호"
-          name="phone"
-          value={inputs.phone || ''}
-          placeholder="전화번호를 입력하세요."
-          onReviewChange={handleChange}
-        />
+        {renderForm({ step: inputs.step, inputs, setInputs, onChange })}
+        <SubmitBtn type="button" value="다음" onSubmit={handleClick} />
       </form>
     </Wrap>
   );
@@ -147,32 +135,63 @@ const FormHeader = styled.div`
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
+  border-bottom: 1px solid ${(props) => props.theme.gray[0]};
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+
+  button {
+    height: 40px;
+    padding: 0.5rem 0.75rem;
+    border-radius: 4px;
+    color: white;
+    font-weight: bold;
+    background-color: ${(props) => props.theme.green[2]};
+    transition: all 0.3s ease;
+    margin-right: 0.5rem;
+    &:hover {
+      background-color: ${(props) => props.theme.green[1]};
+    }
+    &.active {
+      background-color: ${(props) => props.theme.green[1]};
+      transition: none;
+    }
+  }
 `;
 
 const Breadcrumb = styled.div`
-  .num {
-    display: inline-block;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    border: 1px solid red;
-    text-align: center;
-  }
-  span {
-    margin: 0 5px;
-  }
-`;
-
-const FormRow = styled.div`
+  float: right;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  align-items: center;
+  color: ${(props) => props.theme.gray[1]};
 
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-
-  .col {
-    width: 49%;
+  .item {
+    .num {
+      display: inline-block;
+      width: 35px;
+      height: 35px;
+      line-height: 35px;
+      border-radius: 50%;
+      text-align: center;
+      font-weight: bold;
+      color: ${(props) => props.theme.gray[1]};
+      border: 1px solid ${(props) => props.theme.gray[1]};
+      margin-left: 10px;
+    }
+    span {
+      margin-left: 10px;
+    }
+  }
+  .item.on {
+    .num {
+      border: ${(props) => props.theme.green[2]};
+      background: ${(props) => props.theme.green[2]};
+      color: white;
+    }
+    span {
+      color: ${(props) => props.theme.green[2]};
+      font-weight: bold;
+    }
   }
 `;

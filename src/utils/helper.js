@@ -17,3 +17,15 @@ export const validate = (name, value, users) => {
     return false;
   }
 };
+
+export const timeSelect = (startTime) => {
+  const result = [];
+  const startTimeidx = startTime ? startTime.split('시')[0] : 0;
+  for (let i = 0; i <= 24; i++) {
+    if (i >= startTimeidx) {
+      result.push({ title: `${i}시 00분` });
+    }
+  }
+
+  return result;
+};

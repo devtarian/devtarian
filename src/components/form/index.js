@@ -5,3 +5,5 @@ export { default as SubmitBtn } from './SubmitBtn';
 export { default as Textarea } from './Textarea';
 export { default as UploadImg } from './UploadImg';
 export { default as VegLevel } from './VegLevel';
+export { default as SelectAll } from './SelectAll';
+export { default as Select } from './Select';

@@ -1,17 +1,9 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import styled from 'styled-components';
 
-const initialValue = {
-  addr: '',
-  lat: '',
-  lng: '',
-  search: false,
-};
-
 const InputAddressKakao = ({ value, setInputs }) => {
   const mapRef = useRef();
   const [isSearching, setIsSearching] = useState(false);
-  // const [address, setAddress] = useState(initialValue);
   const [kakaoMap, setKakaoMap] = useState({ map: '', marker: '' });
   const [recommend, setRecommend] = useState([]);
 
@@ -87,7 +79,7 @@ const InputAddressKakao = ({ value, setInputs }) => {
   return (
     <Wrap className="wrap">
       <label>위치검색</label>
-      <input value={value} onChange={handleChange} placeholder="주소를 검색하세요." />
+      <input value={value} onChange={handleChange} placeholder="주소를 검색하거나 지도를 클릭해주세요" />
       {isSearching && recommend.length > 0 && (
         <SeachBox>
           {recommend.map((item, idx) => (
