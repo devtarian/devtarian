@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { RadioInput, UploadImg, VegLevel, StarRating, Input, Textarea, SubmitBtn } from '../../components/form';
+import { RadioInput, UploadImg, Checkbox, StarRating, Input, Textarea, SubmitBtn } from '../../components/form';
 import BgImg from './images/pexels-karolina-grabowska-4197908.jpg';
 
 const initReview = {
-  category: 'store',
+  category: '가게',
   imgFiles: [],
   imgFileURLs: [],
   vegLevel: '',
@@ -12,6 +12,8 @@ const initReview = {
   title: '',
   contents: '',
 };
+
+const VEGLEVELS = ['비건', '락토', '오보', '락토오보', '페스코'];
 
 const ReviewForm = () => {
   const [review, setReview] = useState(initReview);
@@ -41,7 +43,7 @@ const ReviewForm = () => {
     });
   };
 
-  const onVegLevelClick = (nextActivedBtn) => {
+  const onCheckboxClick = (nextActivedBtn) => {
     setActivedBtn(nextActivedBtn);
   };
 
@@ -64,9 +66,16 @@ const ReviewForm = () => {
     <Wrap bg={BgImg}>
       <h2>피드 쓰기</h2>
       <form>
-        <RadioInput name="category" review={review} onReviewChange={onReviewChange} />
+        <RadioInput name="category" label="카테고리" review={review} onReviewChange={onReviewChange} />
         <UploadImg name="imgFiles" value={imgFiles} imgFileURLs={imgFileURLs} onImageUpload={onImageUpload} />
-        <VegLevel activedBtn={activedBtn} onReviewChange={onReviewChange} onVegLevelClick={onVegLevelClick} />
+        <Checkbox
+          name="vegLevel"
+          title="채식 단계"
+          info={VEGLEVELS}
+          activedBtn={activedBtn}
+          onReviewChange={onReviewChange}
+          onCheckboxClick={onCheckboxClick}
+        />
         <StarRating name="starRating" onReviewChange={onReviewChange} />
         <Input
           label="제목"
@@ -105,7 +114,7 @@ const Wrap = styled.section`
     border: 1px solid ${(props) => props.theme.gray[1]};
     -webkit-box-shadow: 0 3px 5px ${(props) => props.theme.gray[0]};
     box-shadow: 0 2px 5px ${(props) => props.theme.gray[0]};
-    background-color: ${(props) => props.theme.background[0]};
+    background: rgba(255, 255, 255, 0.85);
 
     * {
       z-index: 1;
