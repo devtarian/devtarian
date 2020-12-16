@@ -1,13 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Checkbox, Select } from '../../components/form';
+import { CheckboxWrap } from '../../components/form/Checkbox';
+import { SelectWrap } from '../../components/form/Select';
 import Cards from '../../components/cards/Cards';
 
 const VegiWiki = () => {
+  const [category, setCategory] = useState();
+  const [activedBtn, setActivedBtn] = useState('');
+  const onCheckboxClick = (nextActivedBtn) => {
+    setActivedBtn(nextActivedBtn);
+  };
+
+  const onReviewChange = (e) => {
+    const { name, value } = e.target;
+    setCategory({
+      ...category,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    console.log(category);
+    e.preventDefault();
+    setActivedBtn('');
+    setCategory('');
+  };
+
   return (
     <Wrap>
       <div className="filters">
-        <Checkbox title="카테고리" info={CATEGORIES} />
+        <Checkbox
+          label="카테고리"
+          info={CATEGORIES}
+          activedBtn={activedBtn}
+          onReviewChange={onReviewChange}
+          onCheckboxClick={onCheckboxClick}
+        />
         <Select info={OPTIONS} />
       </div>
       <div className="product">
@@ -24,15 +53,22 @@ const Wrap = styled.section`
   width: 1200px;
   margin: 6rem auto 0;
 
-  h2 {
-    margin-bottom: 20px;
-    font-size: 30px;
-  }
   .filters {
+    position: relative;
     padding-bottom: 2rem;
     margin: 2rem 0;
     border-bottom: 1px solid ${(props) => props.theme.gray[0]};
-    overflow: hidden;
+
+    ${CheckboxWrap} {
+      input {
+        padding: 0.35rem 0.75rem;
+      }
+    }
+    ${SelectWrap} {
+      position: absolute;
+      bottom: 32px;
+      right: 0;
+    }
   }
   .product {
     strong {

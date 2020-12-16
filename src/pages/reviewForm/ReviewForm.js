@@ -70,7 +70,7 @@ const ReviewForm = () => {
         <UploadImg name="imgFiles" value={imgFiles} imgFileURLs={imgFileURLs} onImageUpload={onImageUpload} />
         <Checkbox
           name="vegLevel"
-          title="채식 단계"
+          label="채식 단계"
           info={VEGLEVELS}
           activedBtn={activedBtn}
           onReviewChange={onReviewChange}
