@@ -1,18 +1,86 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Checkbox, Select } from '../../components/form';
+import { CheckboxWrap } from '../../components/form/Checkbox';
+import { SelectWrap } from '../../components/form/Select';
 import Cards from '../../components/cards/Cards';
+import useActivedBtn from '../../hooks/useActivedBtn';
 
 const VegiWiki = () => {
+  const [category, setCategory] = useState();
+  const [products, setProducts] = useState(DUMMY_PROD);
+  const { activedBtn, setActivedBtn, onCheckboxClick } = useActivedBtn();
+
+  const onReviewChange = (e) => {
+    const { name, value } = e.target;
+    setCategory({
+      ...category,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    console.log(category);
+    e.preventDefault();
+    setActivedBtn('');
+    setCategory('');
+  };
+
+  const loadProducts = () => {
+    setProducts((prevState) => {
+      const nextProducts = [
+        {
+          id: 12,
+          src: 'http://placehold.it/300x300.png?text=A',
+          category: '과자 / 간식',
+          product: '포테토칩',
+          ingredient: ['밀', '대두'],
+          price: 3000,
+        },
+        {
+          id: 13,
+          src: 'http://placehold.it/300x300.png?text=B',
+          category: '과자',
+          product: '포테토칩',
+          ingredient: ['밀', '대두'],
+          price: 3000,
+        },
+        {
+          id: 14,
+          src: 'http://placehold.it/300x300.png?text=C',
+          category: '과자',
+          product: '포테토칩',
+          ingredient: ['밀', '대두'],
+          price: 3000,
+        },
+        {
+          id: 15,
+          src: 'http://placehold.it/300x300.png?text=D',
+          category: '과자',
+          product: '포테토칩',
+          ingredient: ['밀', '대두'],
+          price: 3000,
+        },
+      ];
+      return [...prevState, ...nextProducts];
+    });
+  };
+
   return (
     <Wrap>
       <div className="filters">
-        <Checkbox title="카테고리" info={CATEGORIES} />
+        <Checkbox
+          label="카테고리"
+          info={CATEGORIES}
+          activedBtn={activedBtn}
+          onReviewChange={onReviewChange}
+          onCheckboxClick={onCheckboxClick}
+        />
         <Select info={OPTIONS} />
       </div>
       <div className="product">
-        <strong>총 {DUMMY_PROD.length}개</strong>
-        <Cards info={DUMMY_PROD} />
+        <strong>총 {products.length}개</strong>
+        <Cards info={products} loadProducts={loadProducts} />
       </div>
     </Wrap>
   );
@@ -24,15 +92,22 @@ const Wrap = styled.section`
   width: 1200px;
   margin: 6rem auto 0;
 
-  h2 {
-    margin-bottom: 20px;
-    font-size: 30px;
-  }
   .filters {
+    position: relative;
     padding-bottom: 2rem;
     margin: 2rem 0;
     border-bottom: 1px solid ${(props) => props.theme.gray[0]};
-    overflow: hidden;
+
+    ${CheckboxWrap} {
+      input {
+        padding: 0.35rem 0.75rem;
+      }
+    }
+    ${SelectWrap} {
+      position: absolute;
+      bottom: 32px;
+      right: 0;
+    }
   }
   .product {
     strong {
@@ -128,7 +203,15 @@ const DUMMY_PROD = [
   },
   {
     id: 10,
-    src: 'http://placehold.it/300x300.png?text=k',
+    src: 'http://placehold.it/300x300.png?text=K',
+    category: '과자',
+    product: '로투스',
+    ingredient: ['밀', '대두'],
+    price: 3000,
+  },
+  {
+    id: 11,
+    src: 'http://placehold.it/300x300.png?text=L',
     category: '과자',
     product: '로투스',
     ingredient: ['밀', '대두'],

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Checkbox = ({ title, info, activedBtn, onReviewChange, onCheckboxClick }) => {
+const Checkbox = ({ label, info, activedBtn, onReviewChange, onCheckboxClick }) => {
   const handleBtnClick = (e) => {
     onReviewChange(e);
     onCheckboxClick(e.target.value);
@@ -9,7 +9,7 @@ const Checkbox = ({ title, info, activedBtn, onReviewChange, onCheckboxClick }) 
 
   return (
     <CheckboxWrap className="wrap">
-      <label>{title}</label>
+      <label>{label}</label>
       {info.map((item, index) => (
         <input
           key={index}
@@ -26,6 +26,12 @@ const Checkbox = ({ title, info, activedBtn, onReviewChange, onCheckboxClick }) 
 export default Checkbox;
 
 export const CheckboxWrap = styled.div`
+  label {
+    display: block;
+    margin-bottom: 1rem;
+    font-size: 1.125rem;
+    font-weight: bolder;
+  }
   .active {
     background-color: ${(props) => props.theme.brown[0]};
     transition: none;

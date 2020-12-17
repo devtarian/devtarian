@@ -3,17 +3,17 @@ import styled from 'styled-components';
 
 const Select = ({ info }) => {
   return (
-    <Wrap>
+    <SelectWrap>
       {info.map((item, index) => (
         <option key={index}>{item}</option>
       ))}
-    </Wrap>
+    </SelectWrap>
   );
 };
 
 export default Select;
 
-const Wrap = styled.select`
+export const SelectWrap = styled.select`
   float: right;
   padding: 5px 10px;
   margin-top: 3.5rem;
