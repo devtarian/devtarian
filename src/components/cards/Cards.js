@@ -1,22 +1,48 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 
-const Cards = ({ info }) => {
+const Cards = ({ info, loadProducts }) => {
+  const refTarget = useRef(null);
+
+  useEffect(() => {
+    const options = {
+      threshold: 0.5,
+    };
+
+    const handleObserver = (entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        loadProducts();
+        observer.unobserve(entry.target);
+        observer.observe(refTarget.current);
+      });
+    };
+    const io = new IntersectionObserver(handleObserver, options);
+
+    if (refTarget.current) {
+      io.observe(refTarget.current);
+    }
+    return () => io && io.disconnect();
+  }, [refTarget]);
+
   return (
     <Wrap>
-      {info.map((li) => (
-        <li key={li.id}>
-          <div className="imgInfo">
-            <img src={li.src} alt="" />
-            <div className="cover"></div>
-          </div>
-          <div className="itemInfo">
-            <span className="category">{li.category}</span>
-            <h3>{li.product}</h3>
-            <span className="ingredient">{li.ingredient}</span>
-          </div>
-        </li>
-      ))}
+      {info.map((el, index) => {
+        const lastEl = index === info.length - 1;
+        return (
+          <li key={el.id} ref={lastEl ? refTarget : null}>
+            <div className="imgInfo">
+              <img src={el.src} alt="" />
+              <div className="cover"></div>
+            </div>
+            <div className="itemInfo">
+              <span className="category">{el.category}</span>
+              <h3>{el.product}</h3>
+              <span className="ingredient">{el.ingredient}</span>
+            </div>
+          </li>
+        );
+      })}
     </Wrap>
   );
 };

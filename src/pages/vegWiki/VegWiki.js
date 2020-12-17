@@ -8,6 +8,7 @@ import useActivedBtn from '../../hooks/useActivedBtn';
 
 const VegiWiki = () => {
   const [category, setCategory] = useState();
+  const [products, setProducts] = useState(DUMMY_PROD);
   const { activedBtn, setActivedBtn, onCheckboxClick } = useActivedBtn();
 
   const onReviewChange = (e) => {
@@ -25,6 +26,46 @@ const VegiWiki = () => {
     setCategory('');
   };
 
+  const loadProducts = () => {
+    setProducts((prevState) => {
+      const nextProducts = [
+        {
+          id: 12,
+          src: 'http://placehold.it/300x300.png?text=A',
+          category: '과자 / 간식',
+          product: '포테토칩',
+          ingredient: ['밀', '대두'],
+          price: 3000,
+        },
+        {
+          id: 13,
+          src: 'http://placehold.it/300x300.png?text=B',
+          category: '과자',
+          product: '포테토칩',
+          ingredient: ['밀', '대두'],
+          price: 3000,
+        },
+        {
+          id: 14,
+          src: 'http://placehold.it/300x300.png?text=C',
+          category: '과자',
+          product: '포테토칩',
+          ingredient: ['밀', '대두'],
+          price: 3000,
+        },
+        {
+          id: 15,
+          src: 'http://placehold.it/300x300.png?text=D',
+          category: '과자',
+          product: '포테토칩',
+          ingredient: ['밀', '대두'],
+          price: 3000,
+        },
+      ];
+      return [...prevState, ...nextProducts];
+    });
+  };
+
   return (
     <Wrap>
       <div className="filters">
@@ -38,8 +79,8 @@ const VegiWiki = () => {
         <Select info={OPTIONS} />
       </div>
       <div className="product">
-        <strong>총 {DUMMY_PROD.length}개</strong>
-        <Cards info={DUMMY_PROD} />
+        <strong>총 {products.length}개</strong>
+        <Cards info={products} loadProducts={loadProducts} />
       </div>
     </Wrap>
   );
@@ -162,7 +203,15 @@ const DUMMY_PROD = [
   },
   {
     id: 10,
-    src: 'http://placehold.it/300x300.png?text=k',
+    src: 'http://placehold.it/300x300.png?text=K',
+    category: '과자',
+    product: '로투스',
+    ingredient: ['밀', '대두'],
+    price: 3000,
+  },
+  {
+    id: 11,
+    src: 'http://placehold.it/300x300.png?text=L',
     category: '과자',
     product: '로투스',
     ingredient: ['밀', '대두'],
