@@ -5,9 +5,9 @@ import BgImg from '../reviewForm/images/pexels-karolina-grabowska-4197908.jpg';
 
 import { SubmitBtn } from '../../components/form';
 import useInputs from '../../hooks/useInputs';
-import FeedFormStore from './FeedFormStore';
-import FeedFormMenu from './FeedFormMenu';
-import FeedFormInfo from './FeedFormInfo';
+import FeedFormStore from './FeedFormStore/FeedFormStore';
+import FeedFormMenu from './FeedFormMenu/FeedFormMenu';
+import FeedFormInfo from './FeedFormInfo/FeedFormInfo';
 
 const steps = [
   { id: 'store', title: '가게 정보' },
@@ -29,8 +29,9 @@ const renderForm = ({ step, ...rest }) => {
 };
 
 const initialValue = {
-  step: 0,
+  step: 1,
   operatingTime: [],
+  menus: [],
 };
 
 const FeedForm = () => {
@@ -136,8 +137,9 @@ const FormHeader = styled.div`
   -ms-flex-pack: justify;
   justify-content: space-between;
   border-bottom: 1px solid ${(props) => props.theme.gray[0]};
-  margin-bottom: 20px;
-  padding-bottom: 10px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  padding-bottom: 30px;
 
   button {
     height: 40px;
@@ -145,7 +147,7 @@ const FormHeader = styled.div`
     border-radius: 4px;
     color: white;
     font-weight: bold;
-    background-color: ${(props) => props.theme.green[2]};
+    background-color: ${(props) => props.theme.gray[0]};
     transition: all 0.3s ease;
     margin-right: 0.5rem;
     &:hover {

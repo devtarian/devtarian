@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Select = ({ label, name, value, onChange, options }) => {
+const Select = ({ className, label, name, value, onChange, options }) => {
   return (
-    <Wrap>
+    <Wrap className={className}>
       {label && <label>{label}</label>}
       <select name={name} value={value} onChange={onChange}>
         {options.map((item, idx) => (
@@ -21,12 +21,17 @@ export default Select;
 const Wrap = styled.div`
   select {
     width: 100%;
-    padding: 10px;
+    font: inherit;
+    padding: 9px;
     border-radius: 4px;
     border: 1px solid ${(props) => props.theme.gray[1]};
 
     option {
       font-size: 1.1rem;
+    }
+
+    &:focus {
+      outline: none;
     }
   }
 `;

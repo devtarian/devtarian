@@ -1,8 +1,8 @@
 import React, { useState, useMemo } from 'react';
 import styled from 'styled-components';
 
-import { timeSelect } from '../../../utils/helper';
-import { Select, Input } from '../../../components/form';
+import { timeSelect } from '../../utils/helper';
+import { Select } from '.';
 
 const weekDayOptions = [
   { title: '월요일' },
@@ -75,9 +75,7 @@ const InputOperateHours = ({ value, setInputs }) => {
         <div className="col">
           <Select name="end" value={time.end} onChange={handleChange} options={endTimeOptions} />
         </div>
-        <button type="button" className="addButton" onClick={handleClick}>
-          +
-        </button>
+        <button type="button" className="addButton" onClick={handleClick} />
       </FormRow>
 
       {value.map((item, idx) => (
@@ -96,15 +94,19 @@ export default InputOperateHours;
 
 const Wrap = styled.div`
   .addButton {
+    position: relative;
     width: 40px;
     height: 40px;
-    line-height: 40px;
-    font-size: 2rem;
     border-radius: 50%;
-    color: white;
     background: ${(props) => props.theme.green[2]};
-    text-align: center;
-    align-items: center;
+
+    &:after {
+      content: '+';
+      text-align: center;
+      line-height: 20px;
+      font-size: 2rem;
+      color: white;
+    }
   }
 
   .operatingHours {
@@ -118,6 +120,10 @@ const Wrap = styled.div`
       border-radius: 10%;
       padding: 5px 10px;
     }
+  }
+
+  select:focus {
+    outline: none;
   }
 `;
 

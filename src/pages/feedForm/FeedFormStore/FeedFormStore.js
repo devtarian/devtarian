@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Input, SelectAll } from '../../components/form';
-import InputAddressKakao from './Input/InputAddressKakao';
-import InputOperateHours from './Input/InputOperateHours';
+import { Input, SelectAll, InputAddressKakao, InputOperateHours } from '../../../components/form';
 
 const FeedFormStore = ({ inputs, setInputs, onChange }) => {
   return (
