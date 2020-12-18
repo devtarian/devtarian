@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import Profile from './Profile';
-import ItemInfo from '../ItemInfo';
+import Profile from '../../profile/Profile';
+import ImgTextCard from '../../card/ImgTextCard';
 import CarouselBtn, { CarouselBtnWrap } from '../CarouselBtn';
 import ViewAll from '../VeiwAll';
 import useCarousel from '../../../hooks/useCarousel';
@@ -17,7 +17,7 @@ const ReviewCarousel = ({ carouselInfo }) => {
         {carouselInfo.map((info) => (
           <li key={info.id} ref={refCarouselLi}>
             <Profile userInfo={info.user} />
-            <ItemInfo itemInfo={info.review} width={365} height={235} webkitLineClamp={2} />
+            <ImgTextCard itemInfo={info.review} width={365} height={235} webkitLineClamp={2} />
           </li>
         ))}
       </CarouselUl>

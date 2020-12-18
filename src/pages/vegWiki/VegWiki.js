@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { Checkbox, Select } from '../../components/form';
 import { CheckboxWrap } from '../../components/form/Checkbox';
 import { SelectWrap } from '../../components/form/Select';
-import Cards from '../../components/cards/Cards';
+import CircleImgTextCard from '../../components/card/CircleImgTextCard';
 import useActivedBtn from '../../hooks/useActivedBtn';
 
 const VegiWiki = () => {
@@ -66,6 +66,29 @@ const VegiWiki = () => {
     });
   };
 
+  const refTarget = useRef(null);
+
+  useEffect(() => {
+    const options = {
+      threshold: 0.5,
+    };
+
+    const handleObserver = (entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        loadProducts();
+        observer.unobserve(entry.target);
+        observer.observe(refTarget.current);
+      });
+    };
+    const io = new IntersectionObserver(handleObserver, options);
+
+    if (refTarget.current) {
+      io.observe(refTarget.current);
+    }
+    return () => io && io.disconnect();
+  }, [refTarget]);
+
   return (
     <Wrap>
       <div className="filters">
@@ -80,7 +103,12 @@ const VegiWiki = () => {
       </div>
       <div className="product">
         <strong>총 {products.length}개</strong>
-        <Cards info={products} loadProducts={loadProducts} />
+        <ul>
+          {products.map((data, index) => {
+            const lastEl = index === products.length - 1;
+            return <CircleImgTextCard key={data.id} data={data} ref={lastEl ? refTarget : null} />;
+          })}
+        </ul>
       </div>
     </Wrap>
   );
@@ -113,6 +141,12 @@ const Wrap = styled.section`
     strong {
       font-size: 0.95rem;
     }
+  }
+
+  ul {
+    overflow: hidden;
+    width: 1160px;
+    margin: 2.5rem auto 0;
   }
 `;
 
