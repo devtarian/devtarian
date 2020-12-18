@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Input, SelectAll, InputAddressKakao, InputOperateHours } from '../../../components/form';
+import { Input, SelectAll, InputAddressKakao, InputOperateHours, Textarea, SubmitBtn } from '../../../components/form';
 
 const FeedFormStore = ({ inputs, setInputs, onChange }) => {
+  const handleClickNext = () => {};
   return (
     <>
       <SelectAll
@@ -23,39 +24,34 @@ const FeedFormStore = ({ inputs, setInputs, onChange }) => {
         <div className="col">
           <Input
             label="가게 이름"
-            name="title"
-            value={inputs.title || ''}
+            name="storeName"
+            value={inputs.storeName || ''}
             placeholder="제목을 입력하세요."
-            onReviewChange={onChange}
+            onChange={onChange}
           />
         </div>
         <div className="col">
           <Input
             label="전화번호"
-            name="phone"
-            value={inputs.phone || ''}
+            name="contactNumber"
+            value={inputs.contactNumber || ''}
             placeholder="전화번호를 입력하세요."
-            onReviewChange={onChange}
+            onChange={onChange}
           />
         </div>
       </FormRow>
       <InputAddressKakao value={inputs.addr || ''} setInputs={setInputs} />
       <InputOperateHours value={inputs.operatingTime || []} setInputs={setInputs} />
 
-      <Input
-        label="운영시간 기타"
+      <Textarea
+        label="운영시간 기사사항"
         name="operatingHoursMemo"
         value={inputs.operatingHoursMemo || ''}
         placeholder="운영시간 관련 기타사항을 작성해주세요."
-        onReviewChange={onChange}
+        onChange={onChange}
+        rows="3"
       />
-
-      {/* <Textarea
-          label="운영시간 기사사항"
-          name="operatingHoursMemo"
-          placeholder="운영시간 관련 기타사항을 작성해주세요."
-          onReviewChange={onChange}
-        /> */}
+      <SubmitBtn type="button" value="다음" onSubmit={handleClickNext} />
     </>
   );
 };

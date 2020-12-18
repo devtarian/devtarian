@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Category = ({ name, review, onReviewChange }) => {
+const Category = ({ name, review, onChange }) => {
   const handleReviewChange = (e) => {
-    onReviewChange(e);
+    onChange(e);
   };
 
   return (

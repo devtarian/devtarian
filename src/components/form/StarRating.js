@@ -16,7 +16,7 @@ const ratedTextMap = {
   5.0: '최고에요!',
 };
 
-const StarRating = ({ name, onReviewChange }) => {
+const StarRating = ({ name, onChange }) => {
   const [fetchedRate, setFetchedRate] = useState(0.0);
   const [rate, setRate] = useState(0);
   const starsWidth = 150;
@@ -36,7 +36,12 @@ const StarRating = ({ name, onReviewChange }) => {
 
   const handleClick = (e) => {
     setFetchedRate(rate);
-    onReviewChange(e);
+    onChange({
+      target: {
+        name,
+        value: rate,
+      },
+    });
   };
 
   const Star = ({ isRated }) => {

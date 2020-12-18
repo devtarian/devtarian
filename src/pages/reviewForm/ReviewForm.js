@@ -64,18 +64,12 @@ const ReviewForm = () => {
     <Wrap bg={BgImg}>
       <h2>피드 쓰기</h2>
       <form>
-        <Category name="category" review={review} onReviewChange={onReviewChange} />
+        <Category name="category" review={review} onChange={onReviewChange} />
         <UploadImg name="imgFiles" value={imgFiles} imgFileURLs={imgFileURLs} onImageUpload={onImageUpload} />
-        <VegLevel activedBtn={activedBtn} onReviewChange={onReviewChange} onVegLevelClick={onVegLevelClick} />
-        <StarRating name="starRating" onReviewChange={onReviewChange} />
-        <Input
-          label="제목"
-          name="title"
-          value={title}
-          placeholder="제목을 입력하세요."
-          onReviewChange={onReviewChange}
-        />
-        <Textarea name="contents" placeholder="내용을 입력하세요." onReviewChange={onReviewChange} />
+        <VegLevel activedBtn={activedBtn} onChange={onReviewChange} onVegLevelClick={onVegLevelClick} />
+        <StarRating name="starRating" onChange={onReviewChange} />
+        <Input label="제목" name="title" value={title} placeholder="제목을 입력하세요." onChange={onReviewChange} />
+        <Textarea name="contents" placeholder="내용을 입력하세요." onChange={onReviewChange} />
         <SubmitBtn value="피드 쓰기" onSubmit={handleSubmit} />
       </form>
     </Wrap>

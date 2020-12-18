@@ -9,31 +9,31 @@ const initialValue = {
   price: '',
 };
 const FeedFormMenu = ({ inputs, setInputs }) => {
-  const [menu, setMenu] = useState(initialValue);
+  const [menuItem, setMenuItem] = useState(initialValue);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setMenu({
-      ...menu,
+    setMenuItem({
+      ...menuItem,
       [name]: value,
     });
   };
   const handleClickAdd = () => {
-    if (!menu.name || !menu.price) {
+    if (!menuItem.menuName || !menuItem.price) {
       return alert('빈칸을 작성해주세요.');
     }
 
     setInputs((state) => ({
       ...state,
-      menus: [...state.menus, menu],
+      menu: [...state.menu, menuItem],
     }));
-    setMenu(initialValue);
+    setMenuItem(initialValue);
   };
 
   const handleClickDelete = (deleteIdx) => {
     setInputs((state) => ({
       ...state,
-      menus: state.menus.filter((_, idx) => idx !== deleteIdx),
+      menu: state.menu.filter((_, idx) => idx !== deleteIdx),
     }));
   };
 
@@ -44,7 +44,7 @@ const FeedFormMenu = ({ inputs, setInputs }) => {
           <StyledSelect
             label="채식 단계"
             name="veganLevel"
-            value={menu.veganLevel}
+            value={menuItem.veganLevel}
             onChange={handleChange}
             options={[
               { key: 'vegan', title: '비건' },
@@ -58,10 +58,10 @@ const FeedFormMenu = ({ inputs, setInputs }) => {
         <div className="col">
           <Input
             label="음식명"
-            name="name"
-            value={menu.name || ''}
+            name="menuName"
+            value={menuItem.menuName || ''}
             placeholder="음식 이름을 적어주세요."
-            onReviewChange={handleChange}
+            onChange={handleChange}
           />
         </div>
 
@@ -69,26 +69,28 @@ const FeedFormMenu = ({ inputs, setInputs }) => {
           <Input
             label="가격"
             name="price"
-            value={menu.price || ''}
+            value={menuItem.price || ''}
             placeholder="가격을 적어주세요."
-            onReviewChange={handleChange}
+            onChange={handleChange}
           />
         </div>
 
         <AddMenuBtn type="button" onClick={handleClickAdd} />
       </FormRow>
 
-      {!inputs.menus.length && (
+      {!inputs.menu.length && (
         <MenuCard>
           <div>메뉴를 추가해주세요.</div>
         </MenuCard>
       )}
       <CardList>
-        {inputs.menus.map((item, idx) => (
+        {inputs.menu.map((item, idx) => (
           <MenuCard key={idx}>
             <div>
-              <h2>{item.name}</h2>
-              <span>{item.veganLevel}</span>
+              <h3>
+                {item.name}
+                <span>{item.veganLevel}</span>
+              </h3>
             </div>
             <div>
               {changeNumberWithComma(item.price)} 원
@@ -178,15 +180,14 @@ const MenuCard = styled.div`
 
   align-items: center;
   width: 100%;
-  height: 120px;
+  height: 80px;
   color: ${(props) => props.theme.gray[1]};
   padding: 30px;
   box-shadow: ${(props) => props.theme.gray[0]} 0px 1px 6px 0px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   font-size: 1.1rem;
 
-  h2 {
-    font-size: 1.4rem !important;
+  h3 {
     margin: 0px 0 5px !important;
     padding: 0px !important;
   }
@@ -200,6 +201,7 @@ const MenuCard = styled.div`
     text-align: center;
     border-radius: 10%;
     margin-bottom: 5px;
+    margin-left: 10px;
   }
 
   .btn-delete {

@@ -29,9 +29,10 @@ const renderForm = ({ step, ...rest }) => {
 };
 
 const initialValue = {
-  step: 1,
+  step: 0,
   operatingTime: [],
-  menus: [],
+  menu: [],
+  files: [],
 };
 
 const FeedForm = () => {
@@ -50,10 +51,12 @@ const FeedForm = () => {
   };
 
   const handleClick = () => {
-    setInputs({
-      ...inputs,
-      step: inputs.step + 1,
-    });
+    if (inputs.step !== '2') {
+      setInputs({
+        ...inputs,
+        step: inputs.step + 1,
+      });
+    }
   };
   return (
     <Wrap bg={BgImg}>
