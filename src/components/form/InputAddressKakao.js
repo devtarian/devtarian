@@ -81,13 +81,13 @@ const InputAddressKakao = ({ value, setInputs }) => {
       <label>위치검색</label>
       <input value={value} onChange={handleChange} placeholder="주소를 검색하거나 지도를 클릭해주세요" />
       {isSearching && recommend.length > 0 && (
-        <SeachBox>
+        <SeachCardList>
           {recommend.map((item, idx) => (
             <li key={idx} onClick={() => handleClickRecommend(item)}>
               {item.address_name}
             </li>
           ))}
-        </SeachBox>
+        </SeachCardList>
       )}
       <div id="searchMap" ref={mapRef} />
     </Wrap>
@@ -114,7 +114,7 @@ const Wrap = styled.div`
   }
 `;
 
-const SeachBox = styled.div`
+const SeachCardList = styled.div`
   position: absolute;
   top: 82px;
   left: 0;

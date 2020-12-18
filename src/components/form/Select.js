@@ -29,9 +29,5 @@ const Wrap = styled.div`
     option {
       font-size: 1.1rem;
     }
-
-    &:focus {
-      outline: none;
-    }
   }
 `;

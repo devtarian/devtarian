@@ -75,16 +75,16 @@ const InputOperateHours = ({ value, setInputs }) => {
         <div className="col">
           <Select name="end" value={time.end} onChange={handleChange} options={endTimeOptions} />
         </div>
-        <button type="button" className="addButton" onClick={handleClick} />
+        <button type="button" className="btn-add" onClick={handleClick} />
       </FormRow>
 
       {value.map((item, idx) => (
-        <div className="operatingHours" key={idx}>
+        <Card key={idx}>
           {item}
-          <button type="button" className="deleteButton" onClick={() => handleClickDelete(item)}>
+          <button type="button" className="btn-delete" onClick={() => handleClickDelete(item)}>
             삭제
           </button>
-        </div>
+        </Card>
       ))}
     </Wrap>
   );
@@ -93,7 +93,7 @@ const InputOperateHours = ({ value, setInputs }) => {
 export default InputOperateHours;
 
 const Wrap = styled.div`
-  .addButton {
+  .btn-add {
     position: relative;
     width: 40px;
     height: 40px;
@@ -110,16 +110,6 @@ const Wrap = styled.div`
   }
 
   .operatingHours {
-    margin-left: 5px;
-    margin-top: 15px;
-
-    .deleteButton {
-      margin-left: 10px;
-      background: ${(props) => props.theme.gray[0]};
-      color: white;
-      border-radius: 10%;
-      padding: 5px 10px;
-    }
   }
 
   select:focus {
@@ -143,5 +133,18 @@ const FormRow = styled.div`
     &:last-child {
       margin-right: 0px;
     }
+  }
+`;
+
+const Card = styled.div`
+  margin-left: 5px;
+  margin-top: 15px;
+
+  .btn-delete {
+    margin-left: 10px;
+    background: ${(props) => props.theme.gray[0]};
+    color: white;
+    border-radius: 10%;
+    padding: 5px 10px;
   }
 `;
