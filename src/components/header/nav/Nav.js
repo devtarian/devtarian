@@ -18,17 +18,17 @@ const Nav = ({ recentKeywords, onAddRecentKeywords }) => {
     <Wrap>
       <Navi>
         <li className="navItem">
-          <a className="navLink" href="">
+          <a className="navLink" href="/">
             <span>피드 쓰기</span>
           </a>
         </li>
         <li className="navItem">
-          <a className="navLink" href="">
+          <a className="navLink" href="/">
             <span>비건 편의점</span>
           </a>
         </li>
         <li className="navItem" onClick={handleSearchNavClick}>
-          <a className="navLink" href="">
+          <a className="navLink" href="/">
             <span>검색</span>
           </a>
           {show && (

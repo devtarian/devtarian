@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const SubmitBtn = ({ value, onSubmit }) => {
+const SubmitBtn = ({ value, onSubmit, type = 'submit' }) => {
   return (
     <SubmitBtnWrap className="wrap">
-      <button type="submit" className="submitBtn" onClick={onSubmit}>
+      <button type={type} className="submitBtn" onClick={onSubmit}>
         {value}
       </button>
     </SubmitBtnWrap>

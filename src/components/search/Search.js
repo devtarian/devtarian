@@ -27,7 +27,7 @@ const Search = ({ posTop, bg }) => {
   };
 
   useEffect(() => {
-    window.addEventListener('click', handleShowRecentKeywords);
+    window.addEventListener('click', handleShowRecentKeywords, false);
     return () => {
       window.removeEventListener('click', handleShowRecentKeywords);
     };

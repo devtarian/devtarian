@@ -3,9 +3,9 @@ import styled from 'styled-components';
 const ViewAll = () => {
   return (
     <Wrap>
-      <a href="">
+      <a href="/">
         <span>더 보기</span>
-        <i>></i>
+        <i>{'>'}</i>
       </a>
     </Wrap>
   );

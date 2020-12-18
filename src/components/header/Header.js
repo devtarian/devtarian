@@ -5,7 +5,7 @@ const Header = ({ recentKeywords, onAddRecentKeywords }) => {
   return (
     <Wrap>
       <Logo>
-        <a href="">Devtarian</a>
+        <a href="/">Devtarian</a>
       </Logo>
       <Nav recentKeywords={recentKeywords} onAddRecentKeywords={onAddRecentKeywords} />
     </Wrap>

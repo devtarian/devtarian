@@ -8,7 +8,7 @@ const Profile = ({ userInfo }) => {
         <img src={thumbNail} alt="" />
         <div className="info">
           <strong>
-            <a href="">{name}</a>
+            <a href="/">{name}</a>
           </strong>
           <span>{timeCreated}</span>
         </div>
