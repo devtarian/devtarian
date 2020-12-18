@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import ItemInfo from '../ItemInfo';
+import ImgTextCard from '../../card/ImgTextCard';
 import CarouselBtn from '../CarouselBtn';
 import ViewAll from '../VeiwAll';
 import useCarousel from '../../../hooks/useCarousel';
@@ -15,7 +15,7 @@ const Carousel = ({ carouselInfo }) => {
       <CarouselUl ref={refCarouselUl} value={value}>
         {carouselInfo.map((li) => (
           <li key={li.id} ref={refCarouselLi}>
-            <ItemInfo itemInfo={li.review} width={270} height={175} webkitLineClamp={3} />
+            <ImgTextCard itemInfo={li.review} width={270} height={175} webkitLineClamp={3} />
           </li>
         ))}
       </CarouselUl>
