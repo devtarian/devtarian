@@ -5,12 +5,13 @@ import SquareCarousel from '../../../components/carousel/squareCarousel/SquareCa
 import ReviewCarousel from '../../../components/carousel/reviewCarousel/ReviewCarousel';
 
 const Section = () => {
+  const mg = 9;
   return (
     <Wrap>
-      <Carousel carouselData={DUMMY_LIST} />
-      <Carousel carouselData={DUMMY_LIST} />
-      <SquareCarousel />
-      <ReviewCarousel carouselData={DUMMY_REVIEWS} />
+      <Carousel carouselData={DUMMY_LIST} mg={mg} />
+      <Carousel carouselData={DUMMY_LIST} mg={mg} />
+      <SquareCarousel mg={mg} />
+      <ReviewCarousel carouselData={DUMMY_REVIEWS} mg={mg} />
     </Wrap>
   );
 };

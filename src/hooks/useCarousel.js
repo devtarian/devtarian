@@ -1,10 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 
-const useCarousel = () => {
+const useCarousel = (mg) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [leftPosition, setLeftPosition] = useState(0);
   const [liClientWidth, setLiClientWidth] = useState(288);
-  const liSideMargin = 9;
+  const liSideMargin = mg.mg;
   const [liLength, setLiLength] = useState(10);
   const refCarouselUl = useRef();
   const refCarouselLi = useRef();

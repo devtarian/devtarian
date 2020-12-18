@@ -19,7 +19,7 @@ const ImgCard = forwardRef((props, ref) => {
 
 export default ImgCard;
 
-const ImgCardWrap = styled.li`
+export const ImgCardWrap = styled.li`
   float: left;
   width: 270px;
   margin: 0 ${(props) => props.value.liSideMargin}px 40px;

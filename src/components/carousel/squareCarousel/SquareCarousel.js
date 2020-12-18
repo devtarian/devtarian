@@ -5,8 +5,8 @@ import CarouselBtn, { CarouselBtnWrap } from '../CarouselBtn';
 import ViewAll from '../VeiwAll';
 import useCarousel from '../../../hooks/useCarousel';
 
-const SquareCarousel = () => {
-  const { value, onCarouselBtnClick } = useCarousel();
+const SquareCarousel = (mg) => {
+  const { value, onCarouselBtnClick } = useCarousel(mg);
   const { refCarouselUl, refCarouselLi } = value;
 
   return (
@@ -25,7 +25,7 @@ const SquareCarousel = () => {
 
 export default SquareCarousel;
 
-const SquareCarouselWrap = styled.section`
+export const SquareCarouselWrap = styled.section`
   position: relative;
   bottom: 500px;
   width: 100%;
@@ -42,7 +42,7 @@ const SquareCarouselWrap = styled.section`
   }
 `;
 
-const CarouselUl = styled.ul`
+export const CarouselUl = styled.ul`
   width: ${(props) => (props.value.liClientWidth + props.value.liSideMargin * 2) * props.value.liLength}px;
   position: absolute;
   left: ${(props) => props.value.leftPosition}px;

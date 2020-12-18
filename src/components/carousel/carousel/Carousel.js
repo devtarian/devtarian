@@ -5,8 +5,8 @@ import CarouselBtn from '../CarouselBtn';
 import ViewAll from '../VeiwAll';
 import useCarousel from '../../../hooks/useCarousel';
 
-const Carousel = ({ carouselData }) => {
-  const { value, onCarouselBtnClick } = useCarousel();
+const Carousel = ({ carouselData, mg }) => {
+  const { value, onCarouselBtnClick } = useCarousel(mg);
   const { refCarouselUl, refCarouselLi } = value;
 
   return (
