@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-const Profile = ({ userInfo }) => {
-  const { thumbNail, name, timeCreated } = userInfo;
+const Profile = ({ userData }) => {
+  const { thumbNail, name, timeCreated } = userData;
   return (
     <>
       <Wrap>

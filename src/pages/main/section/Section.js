@@ -7,10 +7,10 @@ import ReviewCarousel from '../../../components/carousel/reviewCarousel/ReviewCa
 const Section = () => {
   return (
     <Wrap>
-      <Carousel carouselInfo={DUMMY_LIST} />
-      <Carousel carouselInfo={DUMMY_LIST} />
+      <Carousel carouselData={DUMMY_LIST} />
+      <Carousel carouselData={DUMMY_LIST} />
       <SquareCarousel />
-      <ReviewCarousel carouselInfo={DUMMY_REVIEWS} />
+      <ReviewCarousel carouselData={DUMMY_REVIEWS} />
     </Wrap>
   );
 };
