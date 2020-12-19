@@ -38,7 +38,7 @@ const Login = ({ user, initUserValues, history }) => {
           name="email"
           value={inputs.email}
           onInputChange={onInputChange}
-          errors={errors.email}
+          error={errors.email}
           required
         />
         <SignInput
@@ -47,7 +47,7 @@ const Login = ({ user, initUserValues, history }) => {
           name="password"
           value={inputs.password}
           onInputChange={onInputChange}
-          errors={errors.password}
+          error={errors.password}
           required
         />
         <SubmitBtn value="로그인">로그인</SubmitBtn>

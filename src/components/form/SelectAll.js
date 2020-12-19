@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const SelectAll = ({ title, name, selectedList, options, exceptOnly, onChange }) => {
+const SelectAll = ({ title, name, selectedList, error, options, exceptOnly, onChange }) => {
   const handleClick = (item) => {
     let newSelectedList = [];
 
@@ -15,6 +15,7 @@ const SelectAll = ({ title, name, selectedList, options, exceptOnly, onChange })
     }
 
     onChange({
+      preventDefault: () => {},
       target: {
         name,
         value: newSelectedList,
@@ -35,13 +36,26 @@ const SelectAll = ({ title, name, selectedList, options, exceptOnly, onChange })
           {item.title}
         </Button>
       ))}
+      <p className={error ? 'err on' : 'err'}>{error}</p>
     </Wrap>
   );
 };
 
 export default SelectAll;
 
-const Wrap = styled.div``;
+const Wrap = styled.div`
+  position: relative;
+  .err {
+    display: none;
+    position: absolute;
+    top: 85px;
+    font-size: 11px;
+    color: ${(props) => props.theme.brown[1]};
+  }
+  .err.on {
+    display: block;
+  }
+`;
 
 const Button = styled.button`
   padding: 0.5rem 0.75rem;

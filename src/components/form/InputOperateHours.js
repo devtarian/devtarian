@@ -19,7 +19,7 @@ const initialValue = {
   start: '0시 00분',
   end: '0시 00분',
 };
-const InputOperateHours = ({ value, setInputs }) => {
+const InputOperateHours = ({ value, setInputs, error, setErrors }) => {
   const [time, setTime] = useState(initialValue);
   const startTimeOptions = useMemo(() => timeSelect(), []);
   const endTimeOptions = useMemo(() => timeSelect(time.start), [time.start]);
@@ -38,16 +38,15 @@ const InputOperateHours = ({ value, setInputs }) => {
 
     if (value.length <= 6 && checkWeekday.length === 0) {
       const result = `${weekDay} ${start} - ${end}`;
-      setInputs((state) => {
-        return {
-          ...state,
-          operatingTime: [...state.operatingTime, result],
-        };
-      });
+      setInputs((state) => ({
+        ...state,
+        operatingTime: [...state.operatingTime, result],
+      }));
+
+      setErrors((state) => ({ ...state, operatingTime: '' }));
 
       setTime({
         ...initialValue,
-
         weekDay: weekDayOptions[value.length + 1] ? weekDayOptions[value.length + 1].title : '일요일',
       });
     }
@@ -77,7 +76,7 @@ const InputOperateHours = ({ value, setInputs }) => {
         </div>
         <button type="button" className="btn-add" onClick={handleClick} />
       </FormRow>
-
+      <p className={error ? 'err on' : 'err'}>{error}</p>
       {value.map((item, idx) => (
         <Card key={idx}>
           {item}
@@ -93,6 +92,7 @@ const InputOperateHours = ({ value, setInputs }) => {
 export default InputOperateHours;
 
 const Wrap = styled.div`
+  position: relative;
   .btn-add {
     position: relative;
     width: 40px;
@@ -109,11 +109,15 @@ const Wrap = styled.div`
     }
   }
 
-  .operatingHours {
+  .err {
+    display: none;
+    position: absolute;
+    top: 90px;
+    font-size: 11px;
+    color: ${(props) => props.theme.brown[1]};
   }
-
-  select:focus {
-    outline: none;
+  .err.on {
+    display: block;
   }
 `;
 

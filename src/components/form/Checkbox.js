@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Checkbox = ({ label, info, activedBtn, onReviewChange, onCheckboxClick }) => {
+const Checkbox = ({ label, info, activedBtn, onChange, onCheckboxClick }) => {
   const handleBtnClick = (e) => {
-    onReviewChange(e);
+    onChange(e);
     onCheckboxClick(e.target.value);
   };
 

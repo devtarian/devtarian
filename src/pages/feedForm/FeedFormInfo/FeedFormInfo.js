@@ -2,7 +2,7 @@ import React, { useCallback, useMemo } from 'react';
 import styled from 'styled-components';
 import { UploadImg, StarRating, Textarea, Input } from '../../../components/form';
 
-const FeedFormInfo = ({ inputs, setInputs, onChange }) => {
+const FeedFormInfo = ({ inputs, setInputs, errors, onChange }) => {
   const handleUpload = useCallback(
     (e) => {
       const files = e.target.files;
@@ -42,6 +42,7 @@ const FeedFormInfo = ({ inputs, setInputs, onChange }) => {
         value={inputs.userName || ''}
         placeholder="이름을 작성해주세요."
         onChange={onChange}
+        error={errors.userName}
       />
       <Input
         label="이메일"
@@ -49,6 +50,7 @@ const FeedFormInfo = ({ inputs, setInputs, onChange }) => {
         value={inputs.email || ''}
         placeholder="이메일을 작성해주세요."
         onChange={onChange}
+        error={errors.email}
       />
     </Wrap>
   );

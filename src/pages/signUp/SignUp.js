@@ -29,7 +29,7 @@ const SignUp = ({ initUserValues, history }) => {
       console.log(err.response?.data.errors);
     }
   };
-
+  console.log(errors);
   return (
     <div className="wrap">
       <form className="signForm" onSubmit={handleSubmit}>
@@ -41,7 +41,7 @@ const SignUp = ({ initUserValues, history }) => {
           name="userName"
           value={inputs.userName}
           onInputChange={onInputChange}
-          errors={errors.userName}
+          error={errors.userName}
           required
         />
         <SignInput
@@ -50,7 +50,7 @@ const SignUp = ({ initUserValues, history }) => {
           name="email"
           value={inputs.email}
           onInputChange={onInputChange}
-          errors={errors.email}
+          error={errors.email}
           required
         />
         <SignInput
@@ -59,7 +59,7 @@ const SignUp = ({ initUserValues, history }) => {
           name="password"
           value={inputs.password}
           onInputChange={onInputChange}
-          errors={errors.password}
+          error={errors.password}
           required
         />
         <SignInput
@@ -68,7 +68,7 @@ const SignUp = ({ initUserValues, history }) => {
           name="passwordCheck"
           value={inputs.passwordCheck}
           onInputChange={onInputChange}
-          errors={errors.passwordCheck}
+          error={errors.passwordCheck}
           required
         />
         <SubmitBtn value="회원가입">회원가입</SubmitBtn>

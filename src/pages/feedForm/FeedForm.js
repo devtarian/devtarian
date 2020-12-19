@@ -4,15 +4,16 @@ import styled from 'styled-components';
 import BgImg from '../reviewForm/images/pexels-karolina-grabowska-4197908.jpg';
 
 import { SubmitBtn } from '../../components/form';
-import useInputs from '../../hooks/useInputs';
+import useInput from '../../hooks/useInput';
+
 import FeedFormStore from './FeedFormStore/FeedFormStore';
 import FeedFormMenu from './FeedFormMenu/FeedFormMenu';
 import FeedFormInfo from './FeedFormInfo/FeedFormInfo';
 
-const steps = [
-  { id: 'store', title: '가게 정보' },
-  { id: 'menu', title: '메뉴 정보' },
-  { id: 'info', title: '나의 소개' },
+const pageConfig = [
+  { id: 'store', title: '가게 정보', validate: ['veganType', 'storeName', 'contactNumber', 'operatingTime'] },
+  { id: 'menu', title: '메뉴 정보', validate: ['menu'] },
+  { id: 'info', title: '나의 소개', validate: ['userName', 'email'] },
 ];
 
 const renderForm = ({ step, ...rest }) => {
@@ -36,8 +37,8 @@ const initialValue = {
 };
 
 const FeedForm = () => {
-  const { inputs, setInputs, onChange } = useInputs(initialValue);
-
+  const { inputs, setInputs, errors, setErrors, onInputChange, requiredValidate } = useInput(initialValue);
+  console.log(errors);
   const handleClickGoBack = () => {
     if (inputs.step === '0') {
       //return history.goBack();
@@ -50,14 +51,21 @@ const FeedForm = () => {
     });
   };
 
-  const handleClick = () => {
-    if (inputs.step !== '2') {
+  const handleClickNext = () => {
+    let requiredList = pageConfig[inputs.step].validate;
+    let isValid = requiredValidate(requiredList);
+    if (!isValid) return;
+
+    if (inputs.step !== 2) {
       setInputs({
         ...inputs,
         step: inputs.step + 1,
       });
+    } else {
+      console.log(inputs);
     }
   };
+
   return (
     <Wrap bg={BgImg}>
       <h2>가게 등록</h2>
@@ -67,7 +75,7 @@ const FeedForm = () => {
             뒤로가기
           </button>
           <Breadcrumb>
-            {steps.map((step, idx) => (
+            {pageConfig.map((step, idx) => (
               <div key={idx} className={`item ${idx === inputs.step && 'on'}`}>
                 <div className="num">{idx + 1}</div>
                 <span>{step.title}</span>
@@ -75,8 +83,8 @@ const FeedForm = () => {
             ))}
           </Breadcrumb>
         </FormHeader>
-        {renderForm({ step: inputs.step, inputs, setInputs, onChange })}
-        <SubmitBtn type="button" value="다음" onSubmit={handleClick} />
+        {renderForm({ step: inputs.step, inputs, setInputs, errors, setErrors, onChange: onInputChange })}
+        <SubmitBtn type="button" value="다음" onSubmit={handleClickNext} />
       </form>
     </Wrap>
   );
