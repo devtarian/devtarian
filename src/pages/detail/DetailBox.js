@@ -4,10 +4,10 @@ import SquareCarousel, {
   SquareCarouselWrap,
   CarouselUl,
 } from '../../components/carousel/squareCarousel/SquareCarousel';
-import detailImg from './images/pexels-vanessa-loring-5965952.jpg';
 import { ImgCardWrap } from '../../components/card/ImgCard';
 import { ViewAllWrap } from '../../components/carousel/VeiwAll';
 import { CarouselBtnWrap } from '../../components/carousel/CarouselBtn';
+import detailImg from './images/pexels-vanessa-loring-5965952.jpg';
 
 const DetailBox = () => {
   return (

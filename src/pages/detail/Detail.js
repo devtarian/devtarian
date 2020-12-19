@@ -16,11 +16,11 @@ const DETAIL = {
   location: '서울특별시 중구 수표동 수표로 66',
 };
 
-const Detail = () => {
+const Detail = ({ posts }) => {
   return (
     <Wrap>
       <DetailBox />
-      <Review />
+      <Review posts={posts} />
     </Wrap>
   );
 };

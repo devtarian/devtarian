@@ -4,7 +4,7 @@ const useCarousel = (mg) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [leftPosition, setLeftPosition] = useState(0);
   const [liClientWidth, setLiClientWidth] = useState(288);
-  const liSideMargin = mg.mg;
+  const liSideMargin = mg.mg || 9;
   const [liLength, setLiLength] = useState(10);
   const refCarouselUl = useRef();
   const refCarouselLi = useRef();

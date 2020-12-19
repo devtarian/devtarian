@@ -28,6 +28,8 @@ const Wrap = styled.li`
   height: 300px;
   margin: 0 10px 40px;
   border-radius: 10px;
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 
   .imgInfo {
     &:hover .cover {
