@@ -1,9 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Input, SelectAll, InputAddressKakao, InputOperateHours, Textarea, SubmitBtn } from '../../../components/form';
+import { Input, SelectAll, InputAddressKakao, InputOperateHours, Textarea } from '../../../components/form';
 
-const FeedFormStore = ({ inputs, setInputs, onChange }) => {
-  const handleClickNext = () => {};
+const FeedFormStore = ({ inputs, setInputs, errors, setErrors, onChange }) => {
   return (
     <>
       <SelectAll
@@ -19,6 +18,7 @@ const FeedFormStore = ({ inputs, setInputs, onChange }) => {
           { key: 'honny', title: '꿀 사용' },
         ]}
         exceptOnly={['veganOnly']}
+        error={errors.veganType}
       />
       <FormRow>
         <div className="col">
@@ -28,6 +28,7 @@ const FeedFormStore = ({ inputs, setInputs, onChange }) => {
             value={inputs.storeName || ''}
             placeholder="제목을 입력하세요."
             onChange={onChange}
+            error={errors.storeName}
           />
         </div>
         <div className="col">
@@ -37,11 +38,17 @@ const FeedFormStore = ({ inputs, setInputs, onChange }) => {
             value={inputs.contactNumber || ''}
             placeholder="전화번호를 입력하세요."
             onChange={onChange}
+            error={errors.contactNumber}
           />
         </div>
       </FormRow>
       <InputAddressKakao value={inputs.addr || ''} setInputs={setInputs} />
-      <InputOperateHours value={inputs.operatingTime || []} setInputs={setInputs} />
+      <InputOperateHours
+        value={inputs.operatingTime || []}
+        setInputs={setInputs}
+        error={errors.operatingTime}
+        setErrors={setErrors}
+      />
 
       <Textarea
         label="운영시간 기사사항"
@@ -51,7 +58,6 @@ const FeedFormStore = ({ inputs, setInputs, onChange }) => {
         onChange={onChange}
         rows="3"
       />
-      <SubmitBtn type="button" value="다음" onSubmit={handleClickNext} />
     </>
   );
 };

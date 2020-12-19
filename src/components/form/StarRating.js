@@ -37,6 +37,7 @@ const StarRating = ({ name, onChange }) => {
   const handleClick = (e) => {
     setFetchedRate(rate);
     onChange({
+      preventDefault: () => {},
       target: {
         name,
         value: rate,

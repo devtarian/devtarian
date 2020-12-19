@@ -1,40 +1,41 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
-import { Input, Select } from '../../../components/form';
+import { Input, InputSelect } from '../../../components/form';
+import useInput from '../../../hooks/useInput';
 import { changeNumberWithComma } from '../../../utils/helper';
 const initialValue = {
-  name: '',
+  menuName: '',
   veganLevel: '락토',
   price: '',
 };
-const FeedFormMenu = ({ inputs, setInputs }) => {
-  const [menuItem, setMenuItem] = useState(initialValue);
+const FeedFormMenu = ({ inputs, setInputs, errors, setErrors }) => {
+  const {
+    inputs: menu,
+    setInputs: setMenu,
+    errors: menuErrors,
+    onInputChange: onChangeMenu,
+    requiredValidate,
+  } = useInput(initialValue);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setMenuItem({
-      ...menuItem,
-      [name]: value,
-    });
-  };
   const handleClickAdd = () => {
-    if (!menuItem.menuName || !menuItem.price) {
-      return alert('빈칸을 작성해주세요.');
-    }
+    const requiredList = ['menuName', 'price'];
+    let isValid = requiredValidate(requiredList);
+    if (!isValid) return;
 
-    setInputs((state) => ({
-      ...state,
-      menu: [...state.menu, menuItem],
-    }));
-    setMenuItem(initialValue);
+    setInputs({
+      ...inputs,
+      menu: [...inputs.menu, menu],
+    });
+    setMenu(initialValue);
+    setErrors((state) => ({ ...state, menu: '' }));
   };
 
   const handleClickDelete = (deleteIdx) => {
-    setInputs((state) => ({
-      ...state,
-      menu: state.menu.filter((_, idx) => idx !== deleteIdx),
-    }));
+    setMenu({
+      ...inputs,
+      menu: inputs.menu.filter((_, idx) => idx !== deleteIdx),
+    });
   };
 
   return (
@@ -44,8 +45,8 @@ const FeedFormMenu = ({ inputs, setInputs }) => {
           <StyledSelect
             label="채식 단계"
             name="veganLevel"
-            value={menuItem.veganLevel}
-            onChange={handleChange}
+            value={menu.veganLevel}
+            onChange={onChangeMenu}
             options={[
               { key: 'vegan', title: '비건' },
               { key: 'lacto ', title: '락토' },
@@ -59,9 +60,10 @@ const FeedFormMenu = ({ inputs, setInputs }) => {
           <Input
             label="음식명"
             name="menuName"
-            value={menuItem.menuName || ''}
+            value={menu.menuName || ''}
             placeholder="음식 이름을 적어주세요."
-            onChange={handleChange}
+            onChange={onChangeMenu}
+            error={menuErrors.menuName}
           />
         </div>
 
@@ -69,18 +71,19 @@ const FeedFormMenu = ({ inputs, setInputs }) => {
           <Input
             label="가격"
             name="price"
-            value={menuItem.price || ''}
+            value={menu.price || ''}
             placeholder="가격을 적어주세요."
-            onChange={handleChange}
+            onChange={onChangeMenu}
+            error={menuErrors.price}
           />
         </div>
-
         <AddMenuBtn type="button" onClick={handleClickAdd} />
       </FormRow>
 
       {!inputs.menu.length && (
         <MenuCard>
           <div>메뉴를 추가해주세요.</div>
+          <p className={errors.menu ? 'err on' : 'err'}>{errors.menu}</p>
         </MenuCard>
       )}
       <CardList>
@@ -88,7 +91,7 @@ const FeedFormMenu = ({ inputs, setInputs }) => {
           <MenuCard key={idx}>
             <div>
               <h3>
-                {item.name}
+                {item.menuName}
                 <span>{item.veganLevel}</span>
               </h3>
             </div>
@@ -157,7 +160,7 @@ const AddMenuBtn = styled.button`
   }
 `;
 
-const StyledSelect = styled(Select)`
+const StyledSelect = styled(InputSelect)`
   margin-top: 2rem;
 `;
 
@@ -170,6 +173,7 @@ const CardList = styled.div`
 `;
 
 const MenuCard = styled.div`
+  position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -214,5 +218,16 @@ const MenuCard = styled.div`
     &:hover {
       background-color: ${(props) => props.theme.green[0]};
     }
+  }
+
+  .err {
+    display: none;
+    position: absolute;
+    top: 90px;
+    font-size: 11px;
+    color: ${(props) => props.theme.brown[1]};
+  }
+  .err.on {
+    display: block;
   }
 `;
