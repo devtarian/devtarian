@@ -1,11 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import Profile, { ProfileWrap } from '../../components/profile/Profile';
+import { ReactComponent as LikeSvg } from '../../icons/heart_border-black.svg';
+import { ReactComponent as CommentSvg } from '../../icons/insert_comment.svg';
 
 const Review = ({ posts }) => {
   return (
     <Wrap>
-      <strong>{posts.length} 개의 리뷰</strong>
+      <strong className="totalReviews">{posts.length} 개의 리뷰</strong>
       {posts.map((post) => (
         <div className="review" key={post.id}>
           <div className="innerWrap">
@@ -23,14 +25,20 @@ const Review = ({ posts }) => {
             </div>
           </div>
           <div className="reactions">
-            <span className="addLikes">좋아요 +5</span>
-            <span className="addComments">댓글달기 +3</span>
+            <div className="addLikes">
+              <i>
+                <Like />
+              </i>
+              <span>+5</span>
+            </div>
+            <div className="addComments">
+              <i>
+                <Comment />
+              </i>
+              <span>+3</span>
+            </div>
           </div>
           <ul className="comments">
-            <li>
-              <Profile userData={post.user} />
-              <p className="comment">놀라워요!</p>
-            </li>
             <li>
               <Profile userData={post.user} />
               <p className="comment">놀라워요!</p>
@@ -53,15 +61,18 @@ const Review = ({ posts }) => {
 export default Review;
 
 const Wrap = styled.section`
-  margin-top: 50px;
+  margin-top: 70px;
 
-  strong {
+  .totalReviews {
     display: block;
-    margin-bottom: 15px;
+    margin-bottom: 40px;
   }
 
   .review {
-    margin-bottom: 30px;
+    width: 768px;
+    margin: 0 auto;
+    margin-bottom: 25px;
+    border-radius: 10px;
     background-color: ${(props) => props.theme.background[1]};
     -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
@@ -78,10 +89,6 @@ const Wrap = styled.section`
         padding-bottom: 15px;
         margin-bottom: 20px;
         border-bottom: 1px solid ${(props) => props.theme.background[2]};
-
-        span {
-          margin-top: -13px;
-        }
       }
 
       .title {
@@ -90,7 +97,7 @@ const Wrap = styled.section`
         font-weight: bolder;
       }
       .contents {
-        line-height: 1.5rem;
+        line-height: 1.7rem;
         display: -webkit-box;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 2;
@@ -108,21 +115,31 @@ const Wrap = styled.section`
       width: 35%;
 
       img {
+        border-top-right-radius: 10px;
         width: 100%;
       }
     }
   }
   .reactions {
     margin: 0 10px;
-    padding: 7px 15px;
+    padding: 7px 10px;
     border-top: 1px solid ${(props) => props.theme.background[2]};
     border-bottom: 1px solid ${(props) => props.theme.background[2]};
+    overflow: hidden;
+    * {
+      float: left;
+    }
 
+    div + div {
+      margin-left: 1.3rem;
+    }
     span {
-      font-size: 0.88rem;
+      padding-left: 0.15rem;
+      font-size: 0.85rem;
+      letter-spacing: -1px;
     }
     span + span {
-      margin-left: 1rem;
+      margin-left: 0.25rem;
     }
   }
 
@@ -136,11 +153,6 @@ const Wrap = styled.section`
       border-bottom: 1px solid ${(props) => props.theme.background[2]};
 
       ${ProfileWrap} {
-        margin: 0 8px 0 0;
-
-        span {
-          margin-top: -13px;
-        }
         a {
           color: ${(props) => props.theme.color[0]};
         }
@@ -168,7 +180,7 @@ const Wrap = styled.section`
         display: none;
       }
       input {
-        width: 1120px;
+        width: 690px;
         margin-top: 0px;
         padding: 8px 10px;
         border-radius: 10px;
@@ -178,4 +190,14 @@ const Wrap = styled.section`
       }
     }
   }
+`;
+
+const Like = styled(LikeSvg)`
+  width: 20px;
+  height: 20px;
+`;
+
+const Comment = styled(CommentSvg)`
+  width: 20px;
+  height: 20px;
 `;
