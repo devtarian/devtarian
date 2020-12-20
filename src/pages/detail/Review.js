@@ -61,11 +61,11 @@ const Review = ({ posts }) => {
 export default Review;
 
 const Wrap = styled.section`
-  margin-top: 70px;
+  margin-top: 50px;
 
   .totalReviews {
     display: block;
-    margin-bottom: 40px;
+    margin-bottom: 50px;
   }
 
   .review {
