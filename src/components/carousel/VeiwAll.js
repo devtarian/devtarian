@@ -5,7 +5,7 @@ const ViewAll = () => {
     <ViewAllWrap>
       <a href="">
         <span>더 보기</span>
-        <i>></i>
+        <i>{'>'}</i>
       </a>
     </ViewAllWrap>
   );

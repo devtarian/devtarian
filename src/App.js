@@ -7,6 +7,7 @@ import VegWiki from './pages/vegWiki/VegWiki';
 import ReviewForm from './pages/reviewForm/ReviewForm';
 import SignUp from './pages/signUp/SignUp';
 import Login from './pages/login/Login';
+import FeedForm from './pages/feedForm/FeedForm';
 
 const INIT_USER = {
   name: 'Harry',
@@ -22,10 +23,11 @@ function App() {
         <Switch>
           <PublicLayout path="/signup" component={SignUp} />
           <PublicLayout path="/login" user={user} component={Login} />
-          <DefaultLayout path="/detail" user={user} component={Detail} />
-          <DefaultLayout path="/vegwiki" user={user} component={VegWiki} />
-          <DefaultLayout path="/review" user={user} component={ReviewForm} />
-          <DefaultLayout path="/" user={user} component={Main} />
+          <DefaultLayout path="/detail" component={Detail} />
+          <DefaultLayout path="/vegwiki" component={VegWiki} />
+          <DefaultLayout path="/feed" component={FeedForm} />
+          <DefaultLayout path="/review" component={ReviewForm} />
+          <DefaultLayout path="/" component={Main} />
         </Switch>
       </BrowserRouter>
     </div>

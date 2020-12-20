@@ -36,7 +36,7 @@ const UploadImg = ({ name, imgFileURLs, onImageUpload }) => {
   );
 };
 
-export default UploadImg;
+export default React.memo(UploadImg);
 
 const Wrap = styled.div`
   input {

@@ -8,7 +8,7 @@ const RecentKeyword = ({ recentKeywords }) => {
       <KeywordList>
         {recentKeywords?.map((keyword) => (
           <li key={keyword}>
-            <a href="">{keyword}</a>
+            <a href="/">{keyword}</a>
           </li>
         ))}
       </KeywordList>

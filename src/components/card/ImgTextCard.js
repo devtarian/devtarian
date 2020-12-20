@@ -11,7 +11,7 @@ const ImgTextCard = ({ cardData }) => {
       </ItemImg>
       <i className="vegOptions">{type}</i>
       <h3 className="title">
-        <a href="">{storeName}</a>
+        <a href="/">{storeName}</a>
       </h3>
       <strong className="region">{region}</strong>
       <span className="starRating">{starRating}</span>

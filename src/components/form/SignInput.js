@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const SignInput = ({ type, placeholder, name, value, errors, onInputChange }) => {
+const SignInput = ({ type, placeholder, name, value, error, onInputChange }) => {
   return (
     <Wrap>
       <label>{type}</label>
       <input type={type} placeholder={placeholder} name={name} value={value} onChange={onInputChange} />
-      <p className={errors?.isTrue ? 'err' : 'err on'}>{errors?.message}</p>
+      <p className={error ? 'err on' : 'err'}>{error}</p>
     </Wrap>
   );
 };

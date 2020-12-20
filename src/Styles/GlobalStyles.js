@@ -30,6 +30,10 @@ button, input, textarea {
   outline: 0;
   font: inherit;  
 }
+
+select:focus {
+      outline: none;
+    }
 `;
 
 export default GlobalStyles;

@@ -63,25 +63,19 @@ const ReviewForm = () => {
     <Wrap bg={BgImg}>
       <h2>피드 쓰기</h2>
       <form>
-        <RadioInput name="category" label="카테고리" review={review} onReviewChange={onReviewChange} />
+        <RadioInput name="category" label="카테고리" review={review} onChange={onReviewChange} />
         <UploadImg name="imgFiles" value={imgFiles} imgFileURLs={imgFileURLs} onImageUpload={onImageUpload} />
         <Checkbox
           name="vegLevel"
           label="채식 단계"
           info={VEGLEVELS}
           activedBtn={activedBtn}
-          onReviewChange={onReviewChange}
+          onChange={onReviewChange}
           onCheckboxClick={onCheckboxClick}
         />
-        <StarRating name="starRating" onReviewChange={onReviewChange} />
-        <Input
-          label="제목"
-          name="title"
-          value={title}
-          placeholder="제목을 입력하세요."
-          onReviewChange={onReviewChange}
-        />
-        <Textarea name="contents" placeholder="내용을 입력하세요." onReviewChange={onReviewChange} />
+        <StarRating name="starRating" onChange={onReviewChange} />
+        <Input label="제목" name="title" value={title} placeholder="제목을 입력하세요." onChange={onReviewChange} />
+        <Textarea name="contents" placeholder="내용을 입력하세요." onChange={onReviewChange} />
         <SubmitBtn value="피드 쓰기" onSubmit={handleSubmit} />
       </form>
     </Wrap>

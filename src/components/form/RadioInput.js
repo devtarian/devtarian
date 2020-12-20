@@ -3,9 +3,9 @@ import styled from 'styled-components';
 
 const CATEGORIES = ['가게', '제품'];
 
-const RadioCategory = ({ name, label, review, onReviewChange }) => {
+const RadioCategory = ({ name, label, review, onChange }) => {
   const handleReviewChange = (e) => {
-    onReviewChange(e);
+    onChange(e);
   };
 
   return (
