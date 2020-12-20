@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import { Input, SelectAll, InputAddressKakao, InputOperateHours, Textarea } from '../../../components/form';
 
 const FeedFormStore = ({ inputs, setInputs, errors, setErrors, onChange }) => {
+  const handleChangeAddr = (address) => {
+    setInputs({ ...inputs, ...address });
+  };
   return (
     <>
       <SelectAll
@@ -42,7 +45,7 @@ const FeedFormStore = ({ inputs, setInputs, errors, setErrors, onChange }) => {
           />
         </div>
       </FormRow>
-      <InputAddressKakao value={inputs.addr || ''} setInputs={setInputs} />
+      <InputAddressKakao address={inputs.addr || ''} onChange={handleChangeAddr} />
       <InputOperateHours
         value={inputs.operatingTime || []}
         setInputs={setInputs}
