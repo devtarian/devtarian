@@ -1,23 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
 import Profile from '../../profile/Profile';
-import ImgTextCard from '../../card/ImgTextCard';
+import ImgTextCard, { ImgTextCardWrap, ItemImg } from '../../card/ImgTextCard';
 import CarouselBtn, { CarouselBtnWrap } from '../CarouselBtn';
 import ViewAll from '../VeiwAll';
 import useCarousel from '../../../hooks/useCarousel';
 
-const ReviewCarousel = ({ carouselInfo }) => {
-  const { value, onCarouselBtnClick } = useCarousel();
+const ReviewCarousel = ({ carouselData, mg }) => {
+  const { value, onCarouselBtnClick } = useCarousel(mg);
   const { refCarouselUl, refCarouselLi } = value;
 
   return (
     <Wrap>
       <h2>새로운 리뷰</h2>
       <CarouselUl ref={refCarouselUl} value={value}>
-        {carouselInfo.map((info) => (
-          <li key={info.id} ref={refCarouselLi}>
-            <Profile userInfo={info.user} />
-            <ImgTextCard itemInfo={info.review} width={365} height={235} webkitLineClamp={2} />
+        {carouselData.map((data) => (
+          <li key={data.id} ref={refCarouselLi}>
+            <Profile userData={data.user} />
+            <ImgTextCard cardData={data.review} />
           </li>
         ))}
       </CarouselUl>
@@ -39,6 +39,19 @@ const Wrap = styled.section`
     margin-bottom: 40px;
     font-size: 30px;
   }
+
+  ${ItemImg} {
+    img {
+      width: 365px;
+      height: 235px;
+    }
+  }
+  ${ImgTextCardWrap} {
+    p {
+      -webkit-line-clamp: 2;
+    }
+  }
+
   ${CarouselBtnWrap} {
     top: 56px;
     height: 235px;

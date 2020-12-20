@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 
-const ImgTextCard = ({ itemInfo, width, height, webkitLineClamp }) => {
-  const { src, type, storeName, region, starRating, contents } = itemInfo;
+const ImgTextCard = ({ cardData }) => {
+  const { src, type, storeName, region, starRating, contents } = cardData;
+
   return (
-    <Wrap webkitLineClamp={webkitLineClamp}>
+    <ImgTextCardWrap>
       <ItemImg>
-        <img src={src} alt="" width={width} height={height} />
+        <img src={src} alt="" />
         <div className="cover"></div>
       </ItemImg>
       <i className="vegOptions">{type}</i>
@@ -15,13 +16,13 @@ const ImgTextCard = ({ itemInfo, width, height, webkitLineClamp }) => {
       <strong className="region">{region}</strong>
       <span className="starRating">{starRating}</span>
       <p>{contents}</p>
-    </Wrap>
+    </ImgTextCardWrap>
   );
 };
 
 export default ImgTextCard;
 
-const Wrap = styled.div`
+export const ImgTextCardWrap = styled.div`
   .vegOptions {
     float: left;
     width: 20px;
@@ -46,19 +47,19 @@ const Wrap = styled.div`
   p {
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: ${(props) => props.webkitLineClamp};
+    -webkit-line-clamp: 3;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 `;
 
-const ItemImg = styled.div`
+export const ItemImg = styled.div`
   position: relative;
   margin-bottom: 10px;
 
   img {
-    width: ${(props) => props.width};
-    height: ${(props) => props.height};
+    width: 270px;
+    height: 175px;
     border-radius: 10px;
   }
 

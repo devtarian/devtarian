@@ -1,7 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import SquareCarousel, { SquareCarouselWrap } from '../../components/carousel/squareCarousel/SquareCarousel';
+import SquareCarousel, {
+  SquareCarouselWrap,
+  CarouselUl,
+} from '../../components/carousel/squareCarousel/SquareCarousel';
+import { ImgCardWrap } from '../../components/card/ImgCard';
+import { ViewAllWrap } from '../../components/carousel/VeiwAll';
+import { CarouselBtnWrap } from '../../components/carousel/CarouselBtn';
 import detailImg from './images/pexels-vanessa-loring-5965952.jpg';
+import { ReactComponent as FavoriteSvg } from '../../icons/heart_border-black.svg';
 
 const DetailBox = () => {
   return (
@@ -10,7 +17,7 @@ const DetailBox = () => {
         <div className="imgContainer">
           <img src={detailImg} alt="" />
         </div>
-        <SquareCarousel />
+        <SquareCarousel mg={7} />
       </section>
       <section className="detailText">
         <div className="innerWrap">
@@ -53,6 +60,9 @@ const DetailBox = () => {
           </div>
         </div>
         <div className="map"></div>
+        <button className="favorite">
+          <Favorite />
+        </button>
       </section>
     </Wrap>
   );
@@ -76,12 +86,12 @@ const Wrap = styled.section`
   }
 
   .detailImg {
-    background-color: ${(props) => props.theme.background[1]};
     .imgContainer {
       width: 100%;
-      height: 100%;
+      height: 539px;
       white-space: nowrap;
       text-align: center;
+      background-color: ${(props) => props.theme.background[1]};
       &:before {
         content: '';
         display: inline-block;
@@ -91,7 +101,8 @@ const Wrap = styled.section`
       }
       img {
         max-width: 600px;
-        max-height: 600px;
+        max-height: 539px;
+        border-radius: 10px;
         vertical-align: middle;
       }
     }
@@ -162,11 +173,48 @@ const Wrap = styled.section`
       background-color: rgba(0, 0, 0, 0.1);
     }
   }
+  ${SquareCarouselWrap} {
+    bottom: -13px;
+    height: 135px;
+    h2 {
+      display: none;
+    }
+  }
 
-  ${SquareCarousel} {
+  ${CarouselUl} {
+  }
+
+  ${ImgCardWrap} {
+    width: 136px;
+
+    img {
+      width: 136px;
+      height: 136px;
+      border-radius: 10px;
+    }
+    .cover {
+      width: 136px;
+      height: 136px;
+    }
     span,
     h3 {
       display: none;
     }
   }
+  ${CarouselBtnWrap} {
+    button {
+      top: 17%;
+    }
+  }
+  ${ViewAllWrap} {
+    display: none;
+  }
+`;
+
+const Favorite = styled(FavoriteSvg)`
+  position: absolute;
+  top: 86px;
+  right: 73px;
+  width: 25px;
+  height: 25px;
 `;

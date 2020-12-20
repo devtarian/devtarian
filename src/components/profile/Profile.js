@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-const Profile = ({ userInfo }) => {
-  const { thumbNail, name, timeCreated } = userInfo;
+const Profile = ({ userData }) => {
+  const { thumbNail, name, timeCreated } = userData;
   return (
     <>
-      <Wrap>
+      <ProfileWrap>
         <img src={thumbNail} alt="" />
         <div className="info">
           <strong>
@@ -12,15 +12,15 @@ const Profile = ({ userInfo }) => {
           </strong>
           <span>{timeCreated}</span>
         </div>
-      </Wrap>
+      </ProfileWrap>
     </>
   );
 };
 
 export default Profile;
 
-const Wrap = styled.div`
-  overflow: auto;
+export const ProfileWrap = styled.div`
+  overflow: hidden;
   margin: 0.5rem 0;
   img {
     float: left;
@@ -30,17 +30,16 @@ const Wrap = styled.div`
   .info {
     float: left;
     width: calc(100% - 48px);
-    margin-top: 0.5rem;
+    margin-top: 0;
     a {
-      float: left;
-      height: 100%;
-      margin-top: -7px;
-      padding: 7px;
+      font-size: 14px;
       color: ${(props) => props.theme.green[1]};
     }
     span {
-      float: right;
-      font-size: 12px;
+      display: block;
+      margin-top: 0.1rem;
+      font-size: 11px;
+      color: ${(props) => props.theme.color[1]};
     }
   }
 `;

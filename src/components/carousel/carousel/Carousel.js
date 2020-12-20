@@ -5,17 +5,17 @@ import CarouselBtn from '../CarouselBtn';
 import ViewAll from '../VeiwAll';
 import useCarousel from '../../../hooks/useCarousel';
 
-const Carousel = ({ carouselInfo }) => {
-  const { value, onCarouselBtnClick } = useCarousel();
+const Carousel = ({ carouselData, mg }) => {
+  const { value, onCarouselBtnClick } = useCarousel(mg);
   const { refCarouselUl, refCarouselLi } = value;
 
   return (
     <Wrap>
       <h2>근처의 비건 식당</h2>
       <CarouselUl ref={refCarouselUl} value={value}>
-        {carouselInfo.map((li) => (
-          <li key={li.id} ref={refCarouselLi}>
-            <ImgTextCard itemInfo={li.review} width={270} height={175} webkitLineClamp={3} />
+        {carouselData.map((data) => (
+          <li key={data.id} ref={refCarouselLi}>
+            <ImgTextCard cardData={data.review} />
           </li>
         ))}
       </CarouselUl>

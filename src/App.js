@@ -9,8 +9,13 @@ import SignUp from './pages/signUp/SignUp';
 import Login from './pages/login/Login';
 import FeedForm from './pages/feedForm/FeedForm';
 
+const INIT_USER = {
+  name: 'Harry',
+  profileImgURL: 'http://placehold.it/40x40.png?text=A',
+};
+
 function App() {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(INIT_USER);
 
   return (
     <div className="App">
