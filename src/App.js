@@ -8,8 +8,13 @@ import ReviewForm from './pages/reviewForm/ReviewForm';
 import SignUp from './pages/signUp/SignUp';
 import Login from './pages/login/Login';
 
+const INIT_USER = {
+  name: 'Harry',
+  profileImgURL: 'http://placehold.it/40x40.png?text=A',
+};
+
 function App() {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(INIT_USER);
 
   return (
     <div className="App">
@@ -17,10 +22,10 @@ function App() {
         <Switch>
           <PublicLayout path="/signup" component={SignUp} />
           <PublicLayout path="/login" user={user} component={Login} />
-          <DefaultLayout path="/detail" component={Detail} />
-          <DefaultLayout path="/vegwiki" component={VegWiki} />
-          <DefaultLayout path="/review" component={ReviewForm} />
-          <DefaultLayout path="/" component={Main} />
+          <DefaultLayout path="/detail" user={user} component={Detail} />
+          <DefaultLayout path="/vegwiki" user={user} component={VegWiki} />
+          <DefaultLayout path="/review" user={user} component={ReviewForm} />
+          <DefaultLayout path="/" user={user} component={Main} />
         </Switch>
       </BrowserRouter>
     </div>

@@ -60,9 +60,9 @@ const DetailBox = () => {
           </div>
         </div>
         <div className="map"></div>
-        <buton className="favorite">
+        <button className="favorite">
           <Favorite />
-        </buton>
+        </button>
       </section>
     </Wrap>
   );
@@ -215,6 +215,6 @@ const Favorite = styled(FavoriteSvg)`
   position: absolute;
   top: 86px;
   right: 73px;
-  width: 24px;
-  height: 24px;
+  width: 25px;
+  height: 25px;
 `;

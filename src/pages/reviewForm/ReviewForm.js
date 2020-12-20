@@ -4,7 +4,7 @@ import { RadioInput, UploadImg, Checkbox, StarRating, Input, Textarea, SubmitBtn
 import useActivedBtn from '../../hooks/useActivedBtn';
 import BgImg from './images/pexels-karolina-grabowska-4197908.jpg';
 
-const INITREVIEW = {
+const INIT_REVIEW = {
   category: '가게',
   imgFiles: [],
   imgFileURLs: [],
@@ -17,7 +17,7 @@ const INITREVIEW = {
 const VEGLEVELS = ['비건', '락토', '오보', '락토오보', '페스코'];
 
 const ReviewForm = () => {
-  const [review, setReview] = useState(INITREVIEW);
+  const [review, setReview] = useState(INIT_REVIEW);
   const { activedBtn, setActivedBtn, onCheckboxClick } = useActivedBtn();
   const { imgFiles, imgFileURLs, title } = review;
 
@@ -56,7 +56,7 @@ const ReviewForm = () => {
     console.log(review);
     e.preventDefault();
     setActivedBtn('');
-    setReview(INITREVIEW);
+    setReview(INIT_REVIEW);
   };
 
   return (

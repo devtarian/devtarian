@@ -6,7 +6,7 @@ const CircleImgTextCard = forwardRef((props, ref) => {
   return (
     <Wrap key={data.id} ref={ref}>
       <div className="imgInfo">
-        <img src={data.src} alt="" />
+        <img src={data.imgFileURL} alt="" />
         <div className="cover"></div>
       </div>
       <div className="itemInfo">

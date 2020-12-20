@@ -3,7 +3,57 @@ import { Route } from 'react-router-dom';
 import styled from 'styled-components';
 import Header from '../components/header/Header';
 
-const DefaultLayout = ({ component: Component, ...rest }) => {
+const DefaultLayout = ({ component: Component, user, ...rest }) => {
+  const INIT_POST = [
+    {
+      id: 0,
+      writer: user,
+      createAt: new Date(),
+      favorite: false,
+      store: {
+        category: '식당',
+        vegType: [],
+        imgFiles: [],
+        imgFileURLs: [],
+        starRating: '⭐⭐⭐⭐⭐',
+        storeName: '발우공양',
+        region: '서울',
+        location: '서울특별시 중구 수표동 수표로 66',
+        contact: '010-7318-1226',
+        openHours: { open: '매일 09:00 ~ 21:00', dayOff: '공휴일' },
+        menus: [
+          {
+            id: 0,
+            menu: '어썸 버거',
+            vegType: [],
+            price: 7000,
+          },
+        ],
+      },
+      reviews: [
+        {
+          id: 0,
+          imgFiles: [],
+          imgFileURLs: [],
+          starRating: '⭐⭐⭐⭐⭐',
+          title: '와!',
+          contents:
+            'Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple',
+          likes: 1,
+          likesOfMe: false,
+          comments: [
+            {
+              id: 0,
+              writer: user,
+              createAt: new Date(),
+              contents: '굉장해요!',
+            },
+          ],
+        },
+      ],
+    },
+  ];
+
   const [posts, setPosts] = useState(DUMMY_LIST);
 
   return (
@@ -11,8 +61,8 @@ const DefaultLayout = ({ component: Component, ...rest }) => {
       {...rest}
       render={(props) => (
         <Wrap>
-          <Header />
-          <Component {...props} posts={posts} />
+          <Header user={user} />
+          <Component {...props} user={user} posts={posts} />
         </Wrap>
       )}
     />
