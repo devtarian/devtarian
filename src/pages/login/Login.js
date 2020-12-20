@@ -6,13 +6,13 @@ import SignInput from '../../components/form/SignInput';
 import SubmitBtn from '../../components/form/SubmitBtn';
 
 const Login = ({ user, initUserValues, history }) => {
-  const { inputs, setInputs, errors, onInputChange } = useInput(initUserValues);
+  const { inputs, setInputs, errors, onInputChange, requiredValidate } = useInput(initUserValues);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const isTrues = Object.values(errors).map((err) => err.isTrue);
-    const isFalse = (curValue) => curValue !== true;
-    if (isTrues.some(isFalse)) return;
+    const requiredList = ['email', 'password'];
+    let isValid = requiredValidate(requiredList);
+    if (!isValid) return;
 
     try {
       const res = await apis.authApi.login({
@@ -24,7 +24,7 @@ const Login = ({ user, initUserValues, history }) => {
       setInputs(initUserValues);
     } catch (err) {
       console.error(err);
-      console.log(err.response && err.response.data.errors);
+      console.log(err.response && err.response.data.error);
     }
   };
 

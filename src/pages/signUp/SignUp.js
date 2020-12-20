@@ -7,12 +7,12 @@ import SignInput from '../../components/form/SignInput';
 import SubmitBtn from '../../components/form/SubmitBtn';
 
 const SignUp = ({ initUserValues, history }) => {
-  const { inputs, setInputs, errors, onImageUpload, onInputChange } = useInput(initUserValues);
+  const { inputs, setInputs, errors, onImageUpload, onInputChange, requiredValidate } = useInput(initUserValues);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const isTrues = Object.values(errors).map((err) => err.isTrue);
-    const isFalse = (curValue) => curValue !== true;
-    if (isTrues.some(isFalse)) return;
+    const requiredList = ['email', 'password'];
+    let isValid = requiredValidate(requiredList);
+    if (!isValid) return;
 
     try {
       await apis.usersApi.signUp({
@@ -26,7 +26,7 @@ const SignUp = ({ initUserValues, history }) => {
       setInputs(initUserValues);
     } catch (err) {
       console.error(err);
-      console.log(err.response?.data.errors);
+      console.log(err.response?.data.error);
     }
   };
   console.log(errors);
