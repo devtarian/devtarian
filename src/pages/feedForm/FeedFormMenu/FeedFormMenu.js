@@ -6,7 +6,7 @@ import useInput from '../../../hooks/useInput';
 import { changeNumberWithComma } from '../../../utils/helper';
 const initialValue = {
   menuName: '',
-  veganLevel: '락토',
+  veganLevel: '비건',
   price: '',
 };
 const FeedFormMenu = ({ inputs, setInputs, errors, setErrors }) => {

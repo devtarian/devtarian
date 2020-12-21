@@ -36,9 +36,9 @@ const initialValue = {
   files: [],
 };
 
-const FeedForm = () => {
+const FeedForm = ({ onAddPost }) => {
   const { inputs, setInputs, errors, setErrors, onInputChange, requiredValidate } = useInput(initialValue);
-  console.log(errors);
+  console.log('errors', errors);
   const handleClickGoBack = () => {
     if (inputs.step === '0') {
       //return history.goBack();
@@ -66,10 +66,27 @@ const FeedForm = () => {
     }
   };
 
+  const handleAddPost = (e) => {
+    e.preventDefault();
+    const requiredList = [
+      'contactNumber',
+      'contents',
+      'email',
+      'menu',
+      'operatingTime',
+      'starRating',
+      'storeName',
+      'userName',
+      'veganType',
+    ];
+    onAddPost(inputs);
+    console.log('피드제출');
+  };
+
   return (
     <Wrap bg={BgImg}>
       <h2>가게 등록</h2>
-      <form>
+      <form onSubmit={handleAddPost}>
         <FormHeader>
           <button type="button" onClick={handleClickGoBack}>
             뒤로가기

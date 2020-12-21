@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route } from 'react-router-dom';
 import styled from 'styled-components';
+import { loadPosts, savePosts } from '../Service/postService';
 import Header from '../components/header/Header';
 
 const DefaultLayout = ({ component: Component, user, ...rest }) => {
@@ -9,7 +10,7 @@ const DefaultLayout = ({ component: Component, user, ...rest }) => {
       id: 0,
       writer: user,
       createAt: new Date(),
-      favorite: false,
+      favorites: false,
       store: {
         category: '식당',
         vegType: [],
@@ -21,16 +22,15 @@ const DefaultLayout = ({ component: Component, user, ...rest }) => {
         location: '서울특별시 중구 수표동 수표로 66',
         contact: '010-7318-1226',
         openHours: { open: '매일 09:00 ~ 21:00', dayOff: '공휴일' },
-        menus: [
-          {
-            id: 0,
-            menu: '어썸 버거',
-            vegType: [],
-            price: 7000,
-          },
-        ],
+        menus: {
+          id: 0,
+          menu: '어썸 버거',
+          vegtype: [],
+          price: 7000,
+        },
       },
-      reviews: [
+      reviews: 0,
+      reviewList: [
         {
           id: 0,
           imgFiles: [],
@@ -55,6 +55,127 @@ const DefaultLayout = ({ component: Component, user, ...rest }) => {
   ];
 
   const [posts, setPosts] = useState(DUMMY_LIST);
+  // const [posts, setPosts] = useState(loadPosts());
+
+  useEffect(() => {
+    savePosts(posts);
+  }, [posts]);
+
+  const onAddPost = (post) => {
+    console.log(post);
+    const {
+      store: {
+        vegType,
+        imgFiles,
+        imgFileURLs,
+        starRating,
+        storeName,
+        region,
+        location,
+        contact,
+        openHours: { open, dayOff },
+        menus: { id, menu, vegtype, price },
+      },
+    } = post;
+    const newPost = {
+      id: posts.length,
+      writer: {
+        id: user.id,
+        name: user.name,
+        profileImgURL: user.profileImgURL,
+      },
+      createAt: new Date(),
+      favorites: false,
+      store: {
+        vegType,
+        imgFiles,
+        imgFileURLs,
+        starRating,
+        storeName,
+        region,
+        location,
+        contact,
+        openHours: { open, dayOff },
+        menus: {
+          id,
+          menu,
+          vegtype,
+          price,
+        },
+      },
+      reviews: 0,
+      reviewList: [],
+    };
+    setPosts([newPost, ...posts]);
+  };
+
+  const handleAddReview = (postId, review) => {
+    const { imgFiles, imgFileURLs, starRating, title, contents, likes, likesOfMe, comments } = review;
+    const newPosts = [...posts];
+    const index = newPosts.findIndex((el) => el.id === postId);
+    const post = newPosts[index];
+
+    post.reviewList = [
+      {
+        id: post.reviews.length,
+        writer: user,
+        imgFiles,
+        imgFileURLs,
+        starRating,
+        title,
+        contents,
+        likes,
+        likesOfMe,
+        comments,
+      },
+      ...post.reviews,
+    ];
+    post.reviews = post.reviewList.length;
+    setPosts(newPosts);
+  };
+
+  const handleAddComment = (postId, reviewId, contents) => {
+    const newPosts = [...posts];
+    const index = newPosts.findIndex((el) => el.id === postId);
+    const post = newPosts[index];
+
+    const newReviews = [...posts.reviews];
+    const idx = newReviews.findIndex((el) => el.id === reviewId);
+    const review = newReviews[idx];
+
+    post[review].comments = [
+      {
+        id: review.comments.length,
+        writer: user,
+        createAt: new Date(),
+        contents,
+      },
+    ];
+    post[review].comments = post[review].commentList.length;
+    setPosts(newPosts);
+  };
+
+  const handleFavoritesPost = (postId) => {
+    const newPosts = [...posts];
+    const index = newPosts.findIndex((el) => el.id === postId);
+    const post = newPosts[index];
+    post.favorites = !post.favorites;
+    setPosts(newPosts);
+  };
+
+  const handleLikeReview = (postId, reviewId) => {
+    const newPosts = [...posts];
+    const index = newPosts.findIndex((el) => el.id === postId);
+    const post = newPosts[index];
+
+    const newReviews = [...posts.reviews];
+    const idx = newPosts.findIndex((el) => el.id === reviewId);
+    const review = newReviews[idx];
+
+    !post[review].likesOfMe ? (post[review].likes += 1) : (post[review].likes -= 1);
+    post[review].likesOfMe = !post[review].likesOfMe;
+    setPosts(newPosts);
+  };
 
   return (
     <Route
@@ -62,7 +183,7 @@ const DefaultLayout = ({ component: Component, user, ...rest }) => {
       render={(props) => (
         <Wrap>
           <Header user={user} />
-          <Component {...props} user={user} posts={posts} />
+          <Component {...props} user={user} posts={posts} onAddPost={onAddPost} />
         </Wrap>
       )}
     />

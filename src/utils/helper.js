@@ -25,7 +25,7 @@ export const validate = (name, value, users) => {
       return value.length !== 0 && !value.match(regExp) && '번호만 입력해주세요.';
     case 'price':
       const numberExp = /[0-9]/;
-      return value.length !== 0 && !numberExp.test(value) && '이메일 형식으로 입력해 주세요.';
+      return value.length !== 0 && !numberExp.test(value) && '숫자만 입력해 주세요.';
     default:
       return '';
   }

@@ -10,7 +10,7 @@ const SignUp = ({ initUserValues, history }) => {
   const { inputs, setInputs, errors, onImageUpload, onInputChange, requiredValidate } = useInput(initUserValues);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const requiredList = ['email', 'password'];
+    const requiredList = ['userName', 'email', 'password', 'passwordCheck'];
     let isValid = requiredValidate(requiredList);
     if (!isValid) return;
 
