@@ -38,5 +38,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://devtarian.herokuapp.com"
+  "proxy": "https://asia-northeast3-project-devtarian.cloudfunctions.net/api"
 }

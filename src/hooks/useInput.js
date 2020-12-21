@@ -26,7 +26,7 @@ const useInput = (initInput) => {
       ...errors,
       [name]: error,
     });
-
+    console.log('errors', errors);
     setInputs({ ...inputs, [name]: value });
   };
 
@@ -42,7 +42,7 @@ const useInput = (initInput) => {
       if (!inputs[name]?.length || errors[name]) {
         isValid = false;
       }
-      requiredErrors[name] = !inputs[name]?.length ? '필수값 입니다.' : '';
+      requiredErrors[name] = !inputs[name]?.length ? '필수 입력값 입니다.' : '';
     });
 
     if (!isValid) {

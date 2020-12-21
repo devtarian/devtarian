@@ -24,7 +24,7 @@ const Login = ({ user, initUserValues, history }) => {
       setInputs(initUserValues);
     } catch (err) {
       console.error(err);
-      console.log(err.response && err.response.data.error);
+      console.log(err.response && err.response.data);
     }
   };
 
