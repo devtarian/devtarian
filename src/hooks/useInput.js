@@ -32,8 +32,8 @@ const useInput = (initInput) => {
 
   const requiredValidate = (requiredList) => {
     const errorValues = Object.values(errors);
-    const isFalse = (curValue) => !!curValue !== false;
-    if (errorValues.some(isFalse)) return;
+    const isError = (error) => !!error;
+    if (errorValues.some(isError)) return;
 
     let isValid = true;
     let requiredErrors = {};
