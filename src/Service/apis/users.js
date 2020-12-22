@@ -6,14 +6,10 @@ export const api = {
     const file = avatar;
     const characterInputs = { username, email, pw };
     formData.append('file', file);
-    formData.append('characterInputs', characterInputs);
+    formData.append('body', JSON.stringify(characterInputs));
 
-    // formData.append('username', username);
-    // formData.append('email', email);
-    // formData.append('pw', pw);
-    // formData.append('avatar', avatar);
-
-    const res = await defaultApi.post('/auth/signup', characterInputs);
+    const res = await defaultApi.post('/auth/signup', formData);
+    console.log(res);
     return res.data;
   },
 };

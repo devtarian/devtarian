@@ -19,7 +19,7 @@ const SignUp = ({ initUserValues, history }) => {
         username: inputs.userName,
         email: inputs.email,
         pw: inputs.password,
-        avatar: inputs.email,
+        avatar: inputs.avatar,
       });
       alert('가입 되었습니다.');
       history.push('/');
