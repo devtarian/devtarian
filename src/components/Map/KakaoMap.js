@@ -84,6 +84,7 @@ const KakaoMap = ({ className, onChange, defaultCenter, defaultLevel = 3, eventL
     setState((state) => ({
       ...state,
       keyword: e.target.value,
+      isSearching: true,
     }));
   };
 
@@ -91,7 +92,7 @@ const KakaoMap = ({ className, onChange, defaultCenter, defaultLevel = 3, eventL
   useEffect(() => {
     if (!map || !marker) return;
     const coords = new window.kakao.maps.LatLng(lat, lng);
-    console.log(marker);
+
     marker.setPosition(coords);
     map.setCenter(coords);
   }, [lat, lng, marker, map]);
@@ -101,6 +102,7 @@ const KakaoMap = ({ className, onChange, defaultCenter, defaultLevel = 3, eventL
     eventSearchCoords(map, marker, coords);
     map.setCenter(coords);
   };
+
   return (
     <Wrap className={className}>
       {eventListenerSearch && (
@@ -146,10 +148,11 @@ const Wrap = styled.div`
 
 const SeachCardList = styled.div`
   position: absolute;
-  top: 82px;
-  left: 0;
+  top: 55px;
+  left: 10px;
   right: 0;
   z-index: 200;
+  width: 80%;
   padding: 17px 50px 18px 20px;
   border-radius: 4px;
   border: 1px solid ${(props) => props.theme.gray[1]};
