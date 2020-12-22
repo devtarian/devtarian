@@ -19,7 +19,7 @@ export const validate = (name, value, users) => {
     case 'avatar':
       const extensions = /(\.jpg|\.jpeg|\.png|\.gif|\.bmp)$/i;
       return value.length !== 0 && !extensions.exec(value) && '이미지 파일(.jpg .jpeg .png .gif .bmp)만 올려주세요.';
-    case 'contactNumber':
+    case 'contactNum':
       const regExp = /[0-9]/;
       // const regExp = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
       return value.length !== 0 && !value.match(regExp) && '번호만 입력해주세요.';
@@ -27,7 +27,7 @@ export const validate = (name, value, users) => {
       const numberExp = /[0-9]/;
       return value.length !== 0 && !numberExp.test(value) && '숫자만 입력해 주세요.';
     default:
-      return '';
+      return false;
   }
 };
 

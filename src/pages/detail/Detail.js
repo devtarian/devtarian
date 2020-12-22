@@ -8,14 +8,14 @@ import { ReactComponent as EditSvg } from '../../icons/edit.svg';
 const DETAIL = {
   urls: [],
   store: '그랑블루',
-  contact: '02-927-5808',
+  contactNum: '02-927-5808',
   openHours: { open: '매일 09:00 ~ 21:00', dayOff: '공휴일' },
-  menus: {
+  menuList: {
     0: ['어썸버거', '3000'],
     1: ['어썸버거', '3000'],
     2: ['어썸버거', '3000'],
   },
-  location: '서울특별시 중구 수표동 수표로 66',
+  address: '서울특별시 중구 수표동 수표로 66',
 };
 
 const Detail = ({ posts }) => {

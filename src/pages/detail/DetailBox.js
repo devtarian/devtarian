@@ -22,7 +22,7 @@ const DetailBox = () => {
       <section className="detailText">
         <div className="innerWrap">
           <h2 className="store">그랑블루</h2>
-          <div className="contact textBox">
+          <div className="contactNum textBox">
             <strong className="infoTitle">전화번호 </strong>
             <span className="infoContents">02 - 927 - 5808</span>
           </div>
@@ -52,7 +52,7 @@ const DetailBox = () => {
               </li>
             </ul>
           </div>
-          <div className="location textBox">
+          <div className="address textBox">
             <div>
               <strong className="infoTitle">위치</strong>
               <span className="infoContents">서울특별시 중구 수표동 수표로 66</span>
@@ -161,7 +161,7 @@ const Wrap = styled.section`
       }
     }
 
-    .location {
+    .address {
       div {
         overflow: hidden;
       }

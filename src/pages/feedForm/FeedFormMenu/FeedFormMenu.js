@@ -5,13 +5,13 @@ import { Input, InputSelect } from '../../../components/form';
 import useInput from '../../../hooks/useInput';
 import { changeNumberWithComma } from '../../../utils/helper';
 const initialValue = {
-  menuName: '',
-  veganLevel: '비건',
+  menu: '',
+  vegtype: '비건',
   price: '',
 };
 const FeedFormMenu = ({ inputs, setInputs, errors, setErrors }) => {
   const {
-    inputs: menu,
+    inputs: menuList,
     setInputs: setMenu,
     errors: menuErrors,
     onInputChange: onChangeMenu,
@@ -19,22 +19,22 @@ const FeedFormMenu = ({ inputs, setInputs, errors, setErrors }) => {
   } = useInput(initialValue);
 
   const handleClickAdd = () => {
-    const requiredList = ['menuName', 'price'];
+    const requiredList = ['menu', 'price'];
     let isValid = requiredValidate(requiredList);
     if (!isValid) return;
 
     setInputs({
       ...inputs,
-      menu: [...inputs.menu, menu],
+      menuList: [...inputs.menuList, menuList],
     });
     setMenu(initialValue);
-    setErrors((state) => ({ ...state, menu: '' }));
+    setErrors((state) => ({ ...state, menuList: '' }));
   };
 
   const handleClickDelete = (deleteIdx) => {
     setMenu({
       ...inputs,
-      menu: inputs.menu.filter((_, idx) => idx !== deleteIdx),
+      menuList: inputs.menuList.filter((_, idx) => idx !== deleteIdx),
     });
   };
 
@@ -44,8 +44,8 @@ const FeedFormMenu = ({ inputs, setInputs, errors, setErrors }) => {
         <div className="col">
           <StyledSelect
             label="채식 단계"
-            name="veganLevel"
-            value={menu.veganLevel}
+            name="vegtype"
+            value={menuList.vegtype}
             onChange={onChangeMenu}
             options={[
               { key: 'vegan', title: '비건' },
@@ -58,12 +58,12 @@ const FeedFormMenu = ({ inputs, setInputs, errors, setErrors }) => {
         </div>
         <div className="col">
           <Input
-            label="음식명"
-            name="menuName"
-            value={menu.menuName || ''}
-            placeholder="음식 이름을 적어주세요."
+            label="메뉴명"
+            name="menu"
+            value={menuList.menu || ''}
+            placeholder="메뉴명을 적어주세요."
             onChange={onChangeMenu}
-            error={menuErrors.menuName}
+            error={menuErrors.menu}
           />
         </div>
 
@@ -71,7 +71,7 @@ const FeedFormMenu = ({ inputs, setInputs, errors, setErrors }) => {
           <Input
             label="가격"
             name="price"
-            value={menu.price || ''}
+            value={menuList.price || ''}
             placeholder="가격을 적어주세요."
             onChange={onChangeMenu}
             error={menuErrors.price}
@@ -80,19 +80,19 @@ const FeedFormMenu = ({ inputs, setInputs, errors, setErrors }) => {
         <AddMenuBtn type="button" onClick={handleClickAdd} />
       </FormRow>
 
-      {!inputs.menu.length && (
+      {!inputs.menuList.length && (
         <MenuCard>
           <div>메뉴를 추가해주세요.</div>
-          <p className={errors.menu ? 'err on' : 'err'}>{errors.menu}</p>
+          <p className={errors.menuList ? 'err on' : 'err'}>{errors.menuList}</p>
         </MenuCard>
       )}
       <CardList>
-        {inputs.menu.map((item, idx) => (
+        {inputs.menuList.map((item, idx) => (
           <MenuCard key={idx}>
             <div>
               <h3>
-                {item.menuName}
-                <span>{item.veganLevel}</span>
+                {item.menu}
+                <span>{item.vegType}</span>
               </h3>
             </div>
             <div>
