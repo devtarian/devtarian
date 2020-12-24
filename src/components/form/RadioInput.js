@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const CATEGORIES = ['가게', '제품'];
 
-const RadioCategory = ({ name, label, review, onChange }) => {
+const RadioCategory = ({ name, label, category, onChange }) => {
   const handleReviewChange = (e) => {
     onChange(e);
   };
@@ -13,13 +13,7 @@ const RadioCategory = ({ name, label, review, onChange }) => {
       <label>{label}</label>
       {CATEGORIES.map((item) => (
         <div className="innerWrap" key={item}>
-          <input
-            type="radio"
-            name={name}
-            value={item}
-            checked={review.category === item}
-            onChange={handleReviewChange}
-          />
+          <input type="radio" name={name} value={item} checked={category === item} onChange={handleReviewChange} />
           <span>{item}</span>
         </div>
       ))}

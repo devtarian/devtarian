@@ -18,7 +18,7 @@ const Nav = ({ recentKeywords, onAddRecentKeywords }) => {
     <Wrap>
       <Navi>
         <li className="navItem">
-          <a className="navLink" href="/">
+          <a className="navLink" href="/feed">
             <span>피드 쓰기</span>
           </a>
         </li>

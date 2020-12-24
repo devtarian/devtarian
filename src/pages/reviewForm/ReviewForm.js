@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { RadioInput, UploadImg, Checkbox, StarRating, Input, Textarea, SubmitBtn } from '../../components/form';
-import useActivedBtn from '../../hooks/useActivedBtn';
+import useInput from '../../hooks/useInput';
 import BgImg from './images/pexels-karolina-grabowska-4197908.jpg';
 
 const INIT_REVIEW = {
   category: '가게',
-  imgFiles: [],
-  imgFileURLs: [],
+  files: [],
   vegLevel: '',
   starRating: '',
   title: '',
@@ -17,65 +16,42 @@ const INIT_REVIEW = {
 const VEGLEVELS = ['비건', '락토', '오보', '락토오보', '페스코'];
 
 const ReviewForm = () => {
-  const [review, setReview] = useState(INIT_REVIEW);
-  const { activedBtn, setActivedBtn, onCheckboxClick } = useActivedBtn();
-  const { imgFiles, imgFileURLs, title } = review;
-
-  const onImageUpload = (e) => {
-    let files = e.target.files;
-    if (files.length > 5) {
-      alert('최대 5장까지 선택해주세요 : )');
-      return;
-    }
-    let file;
-    let fileURLs = [];
-    let fileList = [];
-    let filesLength = files.length > 5 ? 5 : files.length;
-    for (let i = 0; i < filesLength; i++) {
-      file = files[i];
-      fileURLs[i] = URL.createObjectURL(file);
-      fileList[i] = files[i];
-    }
-
-    setReview({
-      ...review,
-      imgFiles: [...fileList],
-      imgFileURLs: [...fileURLs],
-    });
-  };
-
-  const onReviewChange = (e) => {
-    const { name, value } = e.target;
-    setReview({
-      ...review,
-      [name]: value,
-    });
-  };
+  const { inputs, setInputs, errors, onInputChange, onImageUpload, requiredValidate } = useInput(INIT_REVIEW);
 
   const handleSubmit = (e) => {
-    console.log(review);
     e.preventDefault();
-    setActivedBtn('');
-    setReview(INIT_REVIEW);
+    const requiredList = ['vegLevel', 'starRating', 'title', 'contents'];
+    let isValid = requiredValidate(requiredList);
+    if (!isValid) return;
+
+    console.log(inputs);
+    setInputs(INIT_REVIEW);
   };
 
   return (
     <Wrap bg={BgImg}>
       <h2>피드 쓰기</h2>
       <form>
-        <RadioInput name="category" label="카테고리" review={review} onChange={onReviewChange} />
-        <UploadImg name="imgFiles" value={imgFiles} imgFileURLs={imgFileURLs} onImageUpload={onImageUpload} />
+        <RadioInput name="category" label="카테고리" category={inputs.category} onChange={onInputChange} />
+        <UploadImg name="imgFiles" files={inputs.files} onImageUpload={onImageUpload} />
         <Checkbox
           name="vegLevel"
           label="채식 단계"
           info={VEGLEVELS}
-          activedBtn={activedBtn}
-          onChange={onReviewChange}
-          onCheckboxClick={onCheckboxClick}
+          activedBtn={inputs.vegLevel}
+          onChange={onInputChange}
+          error={errors.vegLevel}
         />
-        <StarRating name="starRating" onChange={onReviewChange} />
-        <Input label="제목" name="title" value={title} placeholder="제목을 입력하세요." onChange={onReviewChange} />
-        <Textarea name="contents" placeholder="내용을 입력하세요." onChange={onReviewChange} />
+        <StarRating name="starRating" onChange={onInputChange} error={errors.starRating} />
+        <Input
+          label="제목"
+          name="title"
+          value={inputs.title}
+          placeholder="제목을 입력하세요."
+          onChange={onInputChange}
+          error={errors.title}
+        />
+        <Textarea name="contents" placeholder="내용을 입력하세요." onChange={onInputChange} error={errors.contents} />
         <SubmitBtn value="피드 쓰기" onSubmit={handleSubmit} />
       </form>
     </Wrap>

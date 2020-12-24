@@ -6,6 +6,7 @@ const FeedFormStore = ({ inputs, setInputs, errors, setErrors, onChange }) => {
   const handleChangeAddr = (address) => {
     setInputs({ ...inputs, ...address });
   };
+  console.log(inputs);
   return (
     <>
       <SelectAll
@@ -45,7 +46,8 @@ const FeedFormStore = ({ inputs, setInputs, errors, setErrors, onChange }) => {
           />
         </div>
       </FormRow>
-      <InputAddressKakao address={inputs.addr || ''} onChange={handleChangeAddr} />
+      <InputAddressKakao addr={inputs.addr || ''} addrDetail={inputs.addrDetail || ''} onChange={handleChangeAddr} />
+
       <InputOperateHours
         value={inputs.operatingTime || []}
         setInputs={setInputs}

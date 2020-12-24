@@ -10,7 +10,8 @@ const SignUp = ({ initUserValues, history }) => {
   const { inputs, setInputs, errors, onImageUpload, onInputChange, requiredValidate } = useInput(initUserValues);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const requiredList = ['userName', 'email', 'password', 'passwordCheck'];
+
+    const requiredList = ['userName', 'email', 'password', 'passwordCheck', 'files'];
     let isValid = requiredValidate(requiredList);
     if (!isValid) return;
 
@@ -19,7 +20,7 @@ const SignUp = ({ initUserValues, history }) => {
         username: inputs.userName,
         email: inputs.email,
         pw: inputs.password,
-        avatar: inputs.avatar,
+        thumbNailFile: inputs.files[0],
       });
       alert('가입 되었습니다.');
       history.push('/');
@@ -29,12 +30,12 @@ const SignUp = ({ initUserValues, history }) => {
       console.log(err.response?.data.error);
     }
   };
-  console.log(errors);
+
   return (
     <div className="wrap">
       <form className="signForm" onSubmit={handleSubmit}>
         <h2>회원가입</h2>
-        <UploadProfileImg inputs={inputs} onImageUpload={onImageUpload} onInputChange={onInputChange} />
+        <UploadProfileImg files={inputs.files} onImageUpload={onImageUpload} error={errors.files} />
         <SignInput
           type="text"
           placeholder="이름"

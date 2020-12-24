@@ -19,6 +19,7 @@ const FeedFormMenu = ({ inputs, setInputs, errors, setErrors }) => {
   } = useInput(initialValue);
 
   const handleClickAdd = () => {
+    console.log('??');
     const requiredList = ['menuName', 'price'];
     let isValid = requiredValidate(requiredList);
     if (!isValid) return;

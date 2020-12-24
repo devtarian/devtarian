@@ -1,56 +1,65 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { validate } from '../utils/helper';
 
 const useInput = (initInput) => {
   const [inputs, setInputs] = useState(initInput);
   const [errors, setErrors] = useState({});
 
-  const onImageUpload = (e) => {
-    let file = e.target.files[0];
-    let fileURLs = URL.createObjectURL(file);
-
-    if (!file.type.includes('image')) {
-      e.preventDefault();
-      alert(errors.avatar.message);
-    } else {
-      setInputs({ ...inputs, avatar: file, avatarURL: fileURLs });
+  const onImageUpload = useCallback((e) => {
+    const files = e.target.files;
+    if (files.length > 5) {
+      return alert('5개 까지만 추가 가능합니다.');
     }
-  };
 
-  const onInputChange = (e) => {
-    e.preventDefault();
-    const { name, value } = e.target;
-    const error = validate(name, value, inputs);
-
-    setErrors({
-      ...errors,
-      [name]: error,
-    });
-    console.log('errors', errors);
-    setInputs({ ...inputs, [name]: value });
-  };
-
-  const requiredValidate = (requiredList) => {
-    const errorValues = Object.values(errors);
-    const isError = (error) => !!error;
-    if (errorValues.some(isError)) return;
-
-    let isValid = true;
-    let requiredErrors = {};
-
-    requiredList.forEach((name) => {
-      if (!inputs[name]?.length || errors[name]) {
-        isValid = false;
+    let fileList = [];
+    for (let i = 0; i < files.length; i++) {
+      const error = validate('image', files[i].name);
+      if (error) {
+        return alert(error);
       }
-      requiredErrors[name] = !inputs[name]?.length ? '필수 입력값 입니다.' : '';
-    });
 
-    if (!isValid) {
-      return setErrors((state) => ({ ...state, ...requiredErrors }));
+      fileList[i] = files[i];
     }
+    setErrors((errors) => ({ ...errors, files: false }));
+    setInputs((state) => ({ ...state, files: fileList }));
+  }, []);
 
-    return isValid;
-  };
+  const onInputChange = useCallback(
+    (e) => {
+      e.preventDefault();
+      const { name, value } = e.target;
+      const error = validate(name, value, inputs);
+
+      setErrors((errors) => ({ ...errors, [name]: error }));
+      setInputs((state) => ({ ...state, [name]: value }));
+    },
+    [inputs]
+  );
+
+  const requiredValidate = useCallback(
+    (requiredList) => {
+      const errorValues = Object.values(errors);
+      const isError = (error) => !!error;
+      if (errorValues.some(isError)) return;
+
+      let isValid = true;
+      let requiredErrors = {};
+
+      requiredList.forEach((name) => {
+        if (!inputs[name]?.length || errors[name]) {
+          isValid = false;
+        }
+        requiredErrors[name] = !inputs[name]?.length ? '필수 입력값 입니다.' : '';
+      });
+
+      if (!isValid) {
+        return setErrors((state) => ({ ...state, ...requiredErrors }));
+      }
+
+      return isValid;
+    },
+    [inputs, errors]
+  );
 
   return { inputs, setInputs, errors, setErrors, onImageUpload, onInputChange, requiredValidate };
 };
