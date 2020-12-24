@@ -36,13 +36,11 @@ const initialValue = {
   files: [],
 };
 
-const FeedForm = ({ onAddPost }) => {
+const FeedForm = ({ onAddPost, history }) => {
   const { inputs, setInputs, errors, setErrors, onInputChange, requiredValidate } = useInput(initialValue);
-  console.log('errors', errors);
   const handleClickGoBack = () => {
-    if (inputs.step === '0') {
-      //return history.goBack();
-      return;
+    if (inputs.step === 0) {
+      return history.goBack();
     }
 
     setInputs({

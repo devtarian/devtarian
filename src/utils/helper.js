@@ -47,3 +47,17 @@ export const changeNumberWithComma = (num) => {
   var regexp = /\B(?=(\d{3})+(?!\d))/g;
   return num.toString().replace(regexp, ',');
 };
+
+export const extractRegion = (address) => {
+  let result = '';
+  try {
+    result = address.split(' ')[0];
+    if (result.length > 2) {
+      result = result.slice(0, 2);
+    }
+
+    return result;
+  } catch (e) {
+    return address;
+  }
+};

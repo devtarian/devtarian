@@ -6,6 +6,7 @@ const FeedFormInfo = ({ inputs, setInputs, errors, onChange }) => {
   const handleUpload = useCallback(
     (e) => {
       const files = e.target.files;
+      console.log(files);
 
       if (files.length > 5) return alert('5개 까지만 추가 가능합니다.');
 
