@@ -16,7 +16,7 @@ const ratedTextMap = {
   5.0: '최고에요!',
 };
 
-const StarRating = ({ name, onChange }) => {
+const StarRating = ({ name, onChange, error }) => {
   const [fetchedRate, setFetchedRate] = useState(0.0);
   const [rate, setRate] = useState(0);
   const starsWidth = 150;
@@ -65,6 +65,7 @@ const StarRating = ({ name, onChange }) => {
         </ul>
         <span className="text">{ratedTextMap[fetchedRate]}</span>
       </div>
+      <p className={error ? 'err on' : 'err'}>{error}</p>
     </Wrap>
   );
 };
@@ -72,6 +73,7 @@ const StarRating = ({ name, onChange }) => {
 export default React.memo(StarRating);
 
 const Wrap = styled.div`
+  position: relative;
   .innerWrap {
     position: relative;
   }
@@ -109,5 +111,16 @@ const Wrap = styled.div`
     vertical-align: top;
     width: ${(props) => props.oneStarW}px;
     height: ${(props) => props.oneStarW}px;
+  }
+
+  .err {
+    display: none;
+    position: absolute;
+    bottom: -20px;
+    font-size: 11px;
+    color: ${(props) => props.theme.brown[1]};
+  }
+  .err.on {
+    display: block;
   }
 `;
