@@ -58,7 +58,7 @@ const DefaultLayout = ({ component: Component, user, ...rest }) => {
   // const [posts, setPosts] = useState(loadPosts());
 
   useEffect(() => {
-    savePosts(posts);
+    // savePosts(posts);
   }, [posts]);
 
   const onAddPost = (post) => {

@@ -62,8 +62,13 @@ const FeedForm = ({ onAddPost, history }) => {
         step: inputs.step + 1,
       });
     } else {
-      const res = await apis.postsApi.createPost(inputs);
-      console.log(res);
+      try {
+        const res = await apis.postsApi.createPost(inputs);
+        console.log(res);
+      } catch (err) {
+        console.log(err.response);
+        console.log(err.response.data);
+      }
     }
   };
 
