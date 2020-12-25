@@ -92,7 +92,7 @@ const FeedFormMenu = ({ inputs, setInputs, errors, setErrors }) => {
             <div>
               <h3>
                 {item.menu}
-                <span>{item.vegType}</span>
+                <span>{item.vegtype}</span>
               </h3>
             </div>
             <div>
@@ -185,9 +185,11 @@ const MenuCard = styled.div`
   align-items: center;
   width: 100%;
   height: 80px;
-  color: ${(props) => props.theme.gray[1]};
+  color: ${(props) => props.theme.color[0]};
   padding: 30px;
-  box-shadow: ${(props) => props.theme.gray[0]} 0px 1px 6px 0px;
+  border: 1px solid ${(props) => props.theme.gray[1]};
+  border-radius: 4px;
+  box-shadow: ${(props) => props.theme.gray[0]} 0px 2px 2px 0px;
   margin-bottom: 15px;
   font-size: 1.1rem;
 
