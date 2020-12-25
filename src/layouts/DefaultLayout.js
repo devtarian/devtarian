@@ -19,15 +19,17 @@ const DefaultLayout = ({ component: Component, user, ...rest }) => {
         starRating: '⭐⭐⭐⭐⭐',
         storeName: '발우공양',
         region: '서울',
-        location: '서울특별시 중구 수표동 수표로 66',
-        contact: '010-7318-1226',
-        openHours: { open: '매일 09:00 ~ 21:00', dayOff: '공휴일' },
-        menus: {
-          id: 0,
-          menu: '어썸 버거',
-          vegtype: [],
-          price: 7000,
-        },
+        address: '서울특별시 중구 수표동 수표로 66',
+        contactNum: '010-7318-1226',
+        operatingHours: [],
+        menuList: [
+          {
+            id: 0,
+            menu: '어썸 버거',
+            vegtype: [],
+            price: 7000,
+          },
+        ],
       },
       reviews: 0,
       reviewList: [
@@ -64,18 +66,16 @@ const DefaultLayout = ({ component: Component, user, ...rest }) => {
   const onAddPost = (post) => {
     console.log(post);
     const {
-      store: {
-        vegType,
-        imgFiles,
-        imgFileURLs,
-        starRating,
-        storeName,
-        region,
-        location,
-        contact,
-        openHours: { open, dayOff },
-        menus: { id, menu, vegtype, price },
-      },
+      vegType,
+      imgFiles,
+      imgFileURLs,
+      starRating,
+      storeName,
+      region,
+      address,
+      contactNum,
+      operatingHours,
+      menuList: [{ id, menu, vegtype, price }],
     } = post;
     const newPost = {
       id: posts.length,
@@ -93,15 +93,17 @@ const DefaultLayout = ({ component: Component, user, ...rest }) => {
         starRating,
         storeName,
         region,
-        location,
-        contact,
-        openHours: { open, dayOff },
-        menus: {
-          id,
-          menu,
-          vegtype,
-          price,
-        },
+        address,
+        contactNum,
+        operatingHours,
+        menuList: [
+          {
+            id,
+            menu,
+            vegtype,
+            price,
+          },
+        ],
       },
       reviews: 0,
       reviewList: [],

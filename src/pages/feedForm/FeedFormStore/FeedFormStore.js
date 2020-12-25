@@ -9,9 +9,9 @@ const FeedFormStore = ({ inputs, setInputs, errors, setErrors, onChange }) => {
   return (
     <>
       <SelectAll
-        title="비건 단계"
-        name="veganType"
-        selectedList={inputs?.veganType || []}
+        title="채식 유형"
+        name="vegType"
+        selectedList={inputs?.vegType || []}
         onChange={onChange}
         options={[
           { key: 'veganOnly', title: '비건 Only' },
@@ -21,7 +21,7 @@ const FeedFormStore = ({ inputs, setInputs, errors, setErrors, onChange }) => {
           { key: 'honny', title: '꿀 사용' },
         ]}
         exceptOnly={['veganOnly']}
-        error={errors.veganType}
+        error={errors.vegType}
       />
       <FormRow>
         <div className="col">
@@ -37,11 +37,11 @@ const FeedFormStore = ({ inputs, setInputs, errors, setErrors, onChange }) => {
         <div className="col">
           <Input
             label="전화번호"
-            name="contactNumber"
-            value={inputs.contactNumber || ''}
+            name="contactNum"
+            value={inputs.contactNum || ''}
             placeholder="전화번호를 입력하세요."
             onChange={onChange}
-            error={errors.contactNumber}
+            error={errors.contactNum}
           />
         </div>
       </FormRow>
@@ -54,17 +54,17 @@ const FeedFormStore = ({ inputs, setInputs, errors, setErrors, onChange }) => {
       />
 
       <InputOperateHours
-        value={inputs.operatingTime || []}
+        value={inputs.operatingHours || []}
         setInputs={setInputs}
-        error={errors.operatingTime}
+        error={errors.operatingHours}
         setErrors={setErrors}
       />
 
       <Textarea
-        label="운영시간 기사사항"
+        label="운영시간 기타사항"
         name="operatingHoursMemo"
         value={inputs.operatingHoursMemo || ''}
-        placeholder="운영시간 관련 기타사항을 작성해주세요."
+        placeholder="운영시간과 관련된 기타 사항을 작성해주세요."
         onChange={onChange}
         rows="3"
       />

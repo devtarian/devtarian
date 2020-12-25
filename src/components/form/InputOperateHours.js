@@ -40,10 +40,10 @@ const InputOperateHours = ({ value, setInputs, error, setErrors }) => {
       const result = `${weekDay} ${start} - ${end}`;
       setInputs((state) => ({
         ...state,
-        operatingTime: [...state.operatingTime, result],
+        operatingHours: [...state.operatingHours, result],
       }));
 
-      setErrors((state) => ({ ...state, operatingTime: '' }));
+      setErrors((state) => ({ ...state, operatingHours: '' }));
 
       setTime({
         ...initialValue,
@@ -56,7 +56,7 @@ const InputOperateHours = ({ value, setInputs, error, setErrors }) => {
     setInputs((state) => {
       return {
         ...state,
-        operatingTime: state.operatingTime.filter((item) => item !== deleteItem),
+        operatingHours: state.operatingHours.filter((item) => item !== deleteItem),
       };
     });
   };

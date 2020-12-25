@@ -11,8 +11,8 @@ import FeedFormMenu from './FeedFormMenu/FeedFormMenu';
 import FeedFormInfo from './FeedFormInfo/FeedFormInfo';
 
 const pageConfig = [
-  { id: 'store', title: '가게 정보', validate: ['veganType', 'storeName', 'contactNumber', 'operatingTime'] },
-  { id: 'menu', title: '메뉴 정보', validate: ['menu'] },
+  { id: 'store', title: '가게 정보', validate: ['vegType', 'storeName', 'contactNum', 'operatingHours'] },
+  { id: 'menu', title: '메뉴 정보', validate: ['menuList'] },
   { id: 'info', title: '나의 소개', validate: [] },
 ];
 
@@ -31,9 +31,20 @@ const renderForm = ({ step, ...rest }) => {
 
 const initialValue = {
   step: 0,
-  operatingTime: [],
-  menu: [],
+  vegType: [],
+  imgFiles: [],
+  imgFileURLs: [],
+  starRating: '',
+  storeName: '',
+  region: '',
+  address: '',
+  contactNum: '',
+  operatingHours: [],
+  menuList: [],
   files: [],
+  // operatingHours: [],
+  // menuList: [],
+  // files: [],
 };
 
 const FeedForm = ({ onAddPost, history }) => {
@@ -74,6 +85,21 @@ const FeedForm = ({ onAddPost, history }) => {
 
   const handleAddPost = (e) => {
     e.preventDefault();
+<<<<<<< HEAD
+    const requiredList = [
+      'contactNum',
+      'contents',
+      'email',
+      'menuList',
+      'operatingHours',
+      'starRating',
+      'storeName',
+      'userName',
+      'vegType',
+    ];
+    onAddPost(inputs);
+    console.log('피드제출');
+=======
     // const requiredList = [
     //   'contactNumber',
     //   'contents',
@@ -88,6 +114,7 @@ const FeedForm = ({ onAddPost, history }) => {
     // onAddPost(inputs);
     // console.log('피드제출');
     console.log(inputs);
+>>>>>>> c569d302b1f4643971f118beccd2c2bcebfd5438
   };
 
   return (
