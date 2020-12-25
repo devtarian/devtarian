@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-// import history from '../../history';
 import BgImg from '../reviewForm/images/pexels-karolina-grabowska-4197908.jpg';
+import apis from '../../Service/apis';
 
 import { SubmitBtn } from '../../components/form';
 import useInput from '../../hooks/useInput';
@@ -51,7 +51,7 @@ const FeedForm = ({ onAddPost, history }) => {
     });
   };
 
-  const handleClickNext = () => {
+  const handleClickButton = async () => {
     let requiredList = pageConfig[inputs.step].validate;
     let isValid = requiredValidate(requiredList);
     if (!isValid) return;
@@ -62,7 +62,8 @@ const FeedForm = ({ onAddPost, history }) => {
         step: inputs.step + 1,
       });
     } else {
-      console.log(inputs);
+      const res = await apis.postsApi.createPost(inputs);
+      console.log(res);
     }
   };
 
@@ -110,7 +111,7 @@ const FeedForm = ({ onAddPost, history }) => {
           onImageUpload,
           onChange: onInputChange,
         })}
-        <SubmitBtn type="button" value="다음" onSubmit={handleClickNext} />
+        <SubmitBtn type="button" value="다음" onSubmit={handleClickButton} />
       </form>
     </Wrap>
   );

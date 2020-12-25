@@ -6,7 +6,6 @@ const FeedFormStore = ({ inputs, setInputs, errors, setErrors, onChange }) => {
   const handleChangeAddr = (address) => {
     setInputs({ ...inputs, ...address });
   };
-  console.log(inputs);
   return (
     <>
       <SelectAll

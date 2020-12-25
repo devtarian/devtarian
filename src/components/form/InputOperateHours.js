@@ -64,7 +64,7 @@ const InputOperateHours = ({ value, setInputs, error, setErrors }) => {
   useEffect(() => {
     setTime({
       ...initialValue,
-      weekDay: weekDayOptions[value.length + 1] ? weekDayOptions[value.length + 1].title : '일요일',
+      weekDay: weekDayOptions[value.length] ? weekDayOptions[value.length].title : '일요일',
     });
   }, [setTime, value]);
 

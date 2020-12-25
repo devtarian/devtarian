@@ -1,8 +1,14 @@
 import { defaultApi } from './default';
 
 export const api = {
-  async createPost(contents) {
-    return await defaultApi.post('/post', { contents });
+  async createPost({ files, ...contents }) {
+    const formData = new FormData();
+    for (let i = 0; i < files.length; i++) {
+      formData.append('file', files[i]);
+    }
+    formData.append('body', JSON.stringify(contents));
+    const res = await defaultApi.post('/post', formData);
+    console.log(res);
   },
 
   async getPosts() {
