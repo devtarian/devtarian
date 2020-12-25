@@ -12,7 +12,11 @@ export const api = {
   },
 
   async getPosts() {
-    const res = await defaultApi.get('/post/list');
+    const lat = 33.450701;
+    const lng = 126.570667;
+    const res = await defaultApi.get(`/post?lat=${lat}&lng=${lng}`);
+    console.log(res.data);
+    //const res = await defaultApi.get('/post/list');
     return res.data;
   },
 
