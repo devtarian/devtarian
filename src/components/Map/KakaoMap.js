@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import styled from 'styled-components';
+import { extractRegion } from '../../utils/helper';
 
 const KakaoMap = ({ className, onChange, defaultCenter, defaultLevel = 3, eventListenerSearch }) => {
   const mapRef = useRef();
@@ -7,6 +8,7 @@ const KakaoMap = ({ className, onChange, defaultCenter, defaultLevel = 3, eventL
     address: '서울 강남구 강남역',
     lat: 33.450701,
     lng: 126.570667,
+    region: '',
     keyword: '',
     map: '',
     marker: '',
@@ -38,12 +40,14 @@ const KakaoMap = ({ className, onChange, defaultCenter, defaultLevel = 3, eventL
       geocoder.coord2Address(lng, lat, (result, status) => {
         if (status === window.kakao.maps.services.Status.OK) {
           const addr = result[0].address.address_name;
-          onChange({ addr, lat, lng });
+          const region = extractRegion(addr);
+          onChange({ addr, region, lat, lng });
           setState((state) => ({
             ...state,
             addr,
             lat,
             lng,
+            region,
             isSearching: false,
           }));
         }
@@ -84,6 +88,7 @@ const KakaoMap = ({ className, onChange, defaultCenter, defaultLevel = 3, eventL
     setState((state) => ({
       ...state,
       keyword: e.target.value,
+      isSearching: true,
     }));
   };
 
@@ -91,7 +96,7 @@ const KakaoMap = ({ className, onChange, defaultCenter, defaultLevel = 3, eventL
   useEffect(() => {
     if (!map || !marker) return;
     const coords = new window.kakao.maps.LatLng(lat, lng);
-    console.log(marker);
+
     marker.setPosition(coords);
     map.setCenter(coords);
   }, [lat, lng, marker, map]);
@@ -101,6 +106,7 @@ const KakaoMap = ({ className, onChange, defaultCenter, defaultLevel = 3, eventL
     eventSearchCoords(map, marker, coords);
     map.setCenter(coords);
   };
+
   return (
     <Wrap className={className}>
       {eventListenerSearch && (
@@ -146,10 +152,11 @@ const Wrap = styled.div`
 
 const SeachCardList = styled.div`
   position: absolute;
-  top: 82px;
-  left: 0;
+  top: 55px;
+  left: 10px;
   right: 0;
   z-index: 200;
+  width: 80%;
   padding: 17px 50px 18px 20px;
   border-radius: 4px;
   border: 1px solid ${(props) => props.theme.gray[1]};

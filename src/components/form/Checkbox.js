@@ -1,10 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Checkbox = ({ label, info, activedBtn, onChange, onCheckboxClick }) => {
+const Checkbox = ({ name, label, info, activedBtn, onChange, error }) => {
   const handleBtnClick = (e) => {
-    onChange(e);
-    onCheckboxClick(e.target.value);
+    onChange({
+      preventDefault: () => {},
+      target: {
+        name, // vegLevel
+        value: e.target.value,
+      },
+    });
   };
 
   return (
@@ -14,11 +19,13 @@ const Checkbox = ({ label, info, activedBtn, onChange, onCheckboxClick }) => {
         <input
           key={index}
           type="button"
+          name={item}
           value={item}
           className={activedBtn === item ? 'active' : ''}
           onClick={handleBtnClick}
         />
       ))}
+      <p className={error ? 'err on' : 'err'}>{error}</p>
     </CheckboxWrap>
   );
 };
@@ -26,6 +33,7 @@ const Checkbox = ({ label, info, activedBtn, onChange, onCheckboxClick }) => {
 export default Checkbox;
 
 export const CheckboxWrap = styled.div`
+  position: relative;
   label {
     display: block;
     margin-bottom: 1rem;
@@ -48,5 +56,16 @@ export const CheckboxWrap = styled.div`
   }
   input + input {
     margin-left: 0.5rem;
+  }
+
+  .err {
+    display: none;
+    position: absolute;
+    bottom: -20px;
+    font-size: 11px;
+    color: ${(props) => props.theme.brown[1]};
+  }
+  .err.on {
+    display: block;
   }
 `;

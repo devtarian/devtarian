@@ -13,7 +13,7 @@ import FeedFormInfo from './FeedFormInfo/FeedFormInfo';
 const pageConfig = [
   { id: 'store', title: '가게 정보', validate: ['vegType', 'storeName', 'contactNum', 'operatingHours'] },
   { id: 'menu', title: '메뉴 정보', validate: ['menuList'] },
-  { id: 'info', title: '나의 소개', validate: ['userName', 'email'] },
+  { id: 'info', title: '나의 소개', validate: [] },
 ];
 
 const renderForm = ({ step, ...rest }) => {
@@ -47,13 +47,13 @@ const initialValue = {
   // files: [],
 };
 
-const FeedForm = ({ onAddPost }) => {
-  const { inputs, setInputs, errors, setErrors, onInputChange, requiredValidate } = useInput(initialValue);
-  console.log('errors', errors);
+const FeedForm = ({ onAddPost, history }) => {
+  const { inputs, setInputs, errors, setErrors, onInputChange, onImageUpload, requiredValidate } = useInput(
+    initialValue
+  );
   const handleClickGoBack = () => {
-    if (inputs.step === '0') {
-      //return history.goBack();
-      return;
+    if (inputs.step === 0) {
+      return history.goBack();
     }
 
     setInputs({
@@ -79,6 +79,7 @@ const FeedForm = ({ onAddPost }) => {
 
   const handleAddPost = (e) => {
     e.preventDefault();
+<<<<<<< HEAD
     const requiredList = [
       'contactNum',
       'contents',
@@ -92,6 +93,22 @@ const FeedForm = ({ onAddPost }) => {
     ];
     onAddPost(inputs);
     console.log('피드제출');
+=======
+    // const requiredList = [
+    //   'contactNumber',
+    //   'contents',
+    //   'email',
+    //   'menu',
+    //   'operatingTime',
+    //   'starRating',
+    //   'storeName',
+    //   'userName',
+    //   'veganType',
+    // ];
+    // onAddPost(inputs);
+    // console.log('피드제출');
+    console.log(inputs);
+>>>>>>> c569d302b1f4643971f118beccd2c2bcebfd5438
   };
 
   return (
@@ -111,7 +128,15 @@ const FeedForm = ({ onAddPost }) => {
             ))}
           </Breadcrumb>
         </FormHeader>
-        {renderForm({ step: inputs.step, inputs, setInputs, errors, setErrors, onChange: onInputChange })}
+        {renderForm({
+          step: inputs.step,
+          inputs,
+          setInputs,
+          errors,
+          setErrors,
+          onImageUpload,
+          onChange: onInputChange,
+        })}
         <SubmitBtn type="button" value="다음" onSubmit={handleClickNext} />
       </form>
     </Wrap>

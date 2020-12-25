@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 
 import { timeSelect } from '../../utils/helper';
@@ -60,6 +60,13 @@ const InputOperateHours = ({ value, setInputs, error, setErrors }) => {
       };
     });
   };
+
+  useEffect(() => {
+    setTime({
+      ...initialValue,
+      weekDay: weekDayOptions[value.length + 1] ? weekDayOptions[value.length + 1].title : '일요일',
+    });
+  }, [setTime, value]);
 
   return (
     <Wrap className="wrap">

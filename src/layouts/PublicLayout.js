@@ -11,6 +11,7 @@ const initUserValues = {
   passwordCheck: '',
   avatar: '',
   avatarURL: '',
+  files: [],
 };
 
 const PublicLayout = ({ component: Component, user, ...rest }) => {

@@ -16,7 +16,7 @@ export const validate = (name, value, users) => {
       );
     case 'passwordCheck':
       return users.password !== value && '비밀번호와 일치하지 않습니다.';
-    case 'avatar':
+    case 'image':
       const extensions = /(\.jpg|\.jpeg|\.png|\.gif|\.bmp)$/i;
       return value.length !== 0 && !extensions.exec(value) && '이미지 파일(.jpg .jpeg .png .gif .bmp)만 올려주세요.';
     case 'contactNum':
@@ -26,6 +26,8 @@ export const validate = (name, value, users) => {
     case 'price':
       const numberExp = /[0-9]/;
       return value.length !== 0 && !numberExp.test(value) && '숫자만 입력해 주세요.';
+    case 'files':
+      return value.length === 0 && '파일을 선택해주세요.';
     default:
       return false;
   }
@@ -46,4 +48,18 @@ export const timeSelect = (startTime) => {
 export const changeNumberWithComma = (num) => {
   var regexp = /\B(?=(\d{3})+(?!\d))/g;
   return num.toString().replace(regexp, ',');
+};
+
+export const extractRegion = (address) => {
+  let result = '';
+  try {
+    result = address.split(' ')[0];
+    if (result.length > 2) {
+      result = result.slice(0, 2);
+    }
+
+    return result;
+  } catch (e) {
+    return address;
+  }
 };
