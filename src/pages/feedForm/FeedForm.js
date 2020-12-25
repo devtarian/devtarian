@@ -79,21 +79,6 @@ const FeedForm = ({ onAddPost, history }) => {
 
   const handleAddPost = (e) => {
     e.preventDefault();
-<<<<<<< HEAD
-    const requiredList = [
-      'contactNum',
-      'contents',
-      'email',
-      'menuList',
-      'operatingHours',
-      'starRating',
-      'storeName',
-      'userName',
-      'vegType',
-    ];
-    onAddPost(inputs);
-    console.log('피드제출');
-=======
     // const requiredList = [
     //   'contactNumber',
     //   'contents',
@@ -108,7 +93,6 @@ const FeedForm = ({ onAddPost, history }) => {
     // onAddPost(inputs);
     // console.log('피드제출');
     console.log(inputs);
->>>>>>> c569d302b1f4643971f118beccd2c2bcebfd5438
   };
 
   return (
