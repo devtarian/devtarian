@@ -8,7 +8,8 @@ export const api = {
     formData.append('body', JSON.stringify(characterInputs));
 
     const res = await defaultApi.post('/auth/signup', formData);
-    console.log(res);
-    return res.data;
+    const token = `Bearer ${res.data.token}`;
+    localStorage.setItem('token', token);
+    defaultApi.defaults.headers.common['Authorization'] = token;
   },
 };

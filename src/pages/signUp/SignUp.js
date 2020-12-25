@@ -7,7 +7,9 @@ import SignInput from '../../components/form/SignInput';
 import SubmitBtn from '../../components/form/SubmitBtn';
 
 const SignUp = ({ initUserValues, history }) => {
-  const { inputs, setInputs, errors, onImageUpload, onInputChange, requiredValidate } = useInput(initUserValues);
+  const { inputs, setInputs, errors, setErrors, onImageUpload, onInputChange, requiredValidate } = useInput(
+    initUserValues
+  );
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -27,7 +29,8 @@ const SignUp = ({ initUserValues, history }) => {
       setInputs(initUserValues);
     } catch (err) {
       console.error(err);
-      console.log(err.response?.data.error);
+      console.log(err.response?.data);
+      setErrors(err.response.data);
     }
   };
 

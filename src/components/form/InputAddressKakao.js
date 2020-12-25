@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import KakaoMap from '../Map/KakaoMap';
 import Input from './Input';
 
-const InputAddressKakao = ({ addr, addrDetail, onChange }) => {
+const InputAddressKakao = ({ addr, lat, lng, addrDetail, onChange }) => {
   const handleChangeAddrDetail = (e) => {
     onChange({
       addrDetail: e.target.value,
@@ -28,7 +28,7 @@ const InputAddressKakao = ({ addr, addrDetail, onChange }) => {
 
       <StyledMap
         onChange={onChange}
-        defaultCenter={{ lat: 33.450701, lng: 126.570667 }}
+        defaultCenter={{ lat: lat || 33.450701, lng: lng || 126.570667 }}
         defaultLevel="3"
         eventListenerSearch={true}
       />

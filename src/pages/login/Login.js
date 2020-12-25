@@ -15,11 +15,11 @@ const Login = ({ user, initUserValues, history }) => {
     if (!isValid) return;
 
     try {
-      const res = await apis.authApi.login({
+      await apis.authApi.login({
         email: inputs.email,
         pw: inputs.password,
       });
-      localStorage.setItem('apiKey', res.data.token);
+      // localStorage.setItem('apiKey', res.data.token);
       history.push('/');
       setInputs(initUserValues);
     } catch (err) {
