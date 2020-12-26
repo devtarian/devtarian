@@ -1,8 +1,20 @@
-import React, { forwardRef } from 'react';
+import React, { useState, forwardRef } from 'react';
 import styled from 'styled-components';
+import { ReactComponent as EmptyHeartSvg } from '../../icons/heart_border-black.svg';
+import { ReactComponent as FullHeartSvg } from '../../icons/heart-black.svg';
 
 const CircleImgTextCard = forwardRef((props, ref) => {
   const { data } = props;
+  const [favorites, setFavorites] = useState(false);
+
+  const handleFavoriteBtnClick = () => {
+    setFavorites(!favorites);
+  };
+
+  const renderHeart = () => {
+    return favorites ? <FullHeart /> : <EmptyHeart />;
+  };
+
   return (
     <Wrap key={data.id} ref={ref}>
       <div className="imgInfo">
@@ -14,6 +26,9 @@ const CircleImgTextCard = forwardRef((props, ref) => {
         <h3>{data.product}</h3>
         <span className="ingredient">{data.ingredient}</span>
       </div>
+      <button className="favorite" onClick={handleFavoriteBtnClick}>
+        {renderHeart()}
+      </button>
     </Wrap>
   );
 });
@@ -72,5 +87,31 @@ const Wrap = styled.li`
     .ingredient {
       margin-top: 0.7rem;
     }
+  }
+`;
+
+const EmptyHeart = styled(EmptyHeartSvg)`
+  z-index: 1000;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 25px;
+  height: 25px;
+  fill: ${(props) => props.theme.color[2]};
+
+  &:hover {
+  }
+`;
+
+const FullHeart = styled(FullHeartSvg)`
+  z-index: 1000;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 25px;
+  height: 25px;
+  fill: ${(props) => props.theme.brown[2]};
+
+  &:hover {
   }
 `;
