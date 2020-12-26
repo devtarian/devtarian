@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-// import history from '../../history';
 import BgImg from '../reviewForm/images/pexels-karolina-grabowska-4197908.jpg';
+import apis from '../../Service/apis';
 
 import { SubmitBtn } from '../../components/form';
 import useInput from '../../hooks/useInput';
@@ -42,15 +42,13 @@ const initialValue = {
   operatingHours: [],
   menuList: [],
   files: [],
-  // operatingHours: [],
-  // menuList: [],
-  // files: [],
 };
 
 const FeedForm = ({ onAddPost, history }) => {
   const { inputs, setInputs, errors, setErrors, onInputChange, onImageUpload, requiredValidate } = useInput(
     initialValue
   );
+  console.log(errors);
   const handleClickGoBack = () => {
     if (inputs.step === 0) {
       return history.goBack();
@@ -62,7 +60,7 @@ const FeedForm = ({ onAddPost, history }) => {
     });
   };
 
-  const handleClickNext = () => {
+  const handleClickButton = async () => {
     let requiredList = pageConfig[inputs.step].validate;
     let isValid = requiredValidate(requiredList);
     if (!isValid) return;
@@ -73,32 +71,21 @@ const FeedForm = ({ onAddPost, history }) => {
         step: inputs.step + 1,
       });
     } else {
-      console.log(inputs);
+      try {
+        const res = await apis.postsApi.createPost(inputs);
+        onAddPost(res);
+        console.log('res', res);
+      } catch (err) {
+        console.log(err.response);
+        // console.log(err.response.data);
+      }
     }
-  };
-
-  const handleAddPost = (e) => {
-    e.preventDefault();
-    // const requiredList = [
-    //   'contactNumber',
-    //   'contents',
-    //   'email',
-    //   'menu',
-    //   'operatingTime',
-    //   'starRating',
-    //   'storeName',
-    //   'userName',
-    //   'veganType',
-    // ];
-    // onAddPost(inputs);
-    // console.log('피드제출');
-    console.log(inputs);
   };
 
   return (
     <Wrap bg={BgImg}>
       <h2>가게 등록</h2>
-      <form onSubmit={handleAddPost}>
+      <form>
         <FormHeader>
           <button type="button" onClick={handleClickGoBack}>
             뒤로가기
@@ -121,7 +108,7 @@ const FeedForm = ({ onAddPost, history }) => {
           onImageUpload,
           onChange: onInputChange,
         })}
-        <SubmitBtn type="button" value="다음" onSubmit={handleClickNext} />
+        <SubmitBtn type="button" value="다음" onSubmit={handleClickButton} />
       </form>
     </Wrap>
   );

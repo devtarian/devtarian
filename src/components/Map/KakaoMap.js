@@ -55,15 +55,16 @@ const KakaoMap = ({ className, onChange, defaultCenter, defaultLevel = 3, eventL
     },
     [onChange]
   );
-
+  // console.log('?', defaultCenter);
   // Init KakaoMap & Add Event
   useEffect(() => {
     const latlng = new window.kakao.maps.LatLng(defaultCenter.lat, defaultCenter.lng);
     const map = new window.kakao.maps.Map(mapRef.current, { center: latlng, level: defaultLevel });
     const marker = new window.kakao.maps.Marker({ map, position: latlng });
-
     setState((state) => ({
       ...state,
+      lat: defaultCenter.lat,
+      lng: defaultCenter.lng,
       map,
       marker,
     }));

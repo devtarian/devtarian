@@ -1,12 +1,22 @@
 import { defaultApi } from './default';
 
 export const api = {
-  async createPost(contents) {
-    return await defaultApi.post('/post', { contents });
+  async createPost({ files, ...contents }) {
+    const formData = new FormData();
+    for (let i = 0; i < files.length; i++) {
+      formData.append('file', files[i]);
+    }
+    formData.append('body', JSON.stringify(contents));
+    const res = await defaultApi.post('/post', formData);
+    console.log(res);
   },
 
   async getPosts() {
-    const res = await defaultApi.get('/post/list');
+    const lat = 33.450701;
+    const lng = 126.570667;
+    const res = await defaultApi.get(`/post?lat=${lat}&lng=${lng}`);
+    console.log(res.data);
+    //const res = await defaultApi.get('/post/list');
     return res.data;
   },
 
