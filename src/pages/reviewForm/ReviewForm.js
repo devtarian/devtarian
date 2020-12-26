@@ -32,7 +32,6 @@ const ReviewForm = () => {
     <Wrap bg={BgImg}>
       <h2>리뷰 작성</h2>
       <form>
-        <RadioInput name="category" label="카테고리" category={inputs.category} onChange={onInputChange} />
         <UploadImg name="imgFiles" files={inputs.files} onImageUpload={onImageUpload} />
         <Checkbox
           name="vegLevel"
@@ -52,7 +51,7 @@ const ReviewForm = () => {
           error={errors.title}
         />
         <Textarea name="contents" placeholder="내용을 입력하세요." onChange={onInputChange} error={errors.contents} />
-        <SubmitBtn value="피드 쓰기" onSubmit={handleSubmit} />
+        <SubmitBtn value="리뷰 제출" onSubmit={handleSubmit} />
       </form>
     </Wrap>
   );
