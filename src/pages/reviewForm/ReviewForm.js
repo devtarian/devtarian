@@ -30,7 +30,7 @@ const ReviewForm = () => {
 
   return (
     <Wrap bg={BgImg}>
-      <h2>피드 쓰기</h2>
+      <h2>리뷰 작성</h2>
       <form>
         <RadioInput name="category" label="카테고리" category={inputs.category} onChange={onInputChange} />
         <UploadImg name="imgFiles" files={inputs.files} onImageUpload={onImageUpload} />

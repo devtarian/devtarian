@@ -5,7 +5,7 @@ import useInput from '../../hooks/useInput';
 import BgImg from '../../images/pexels-karolina-grabowska-4197908.jpg';
 
 const WikiForm = () => {
-  return <Wrap></Wrap>;
+  return <Wrap BgImg={BgImg}></Wrap>;
 };
 
 export default WikiForm;
