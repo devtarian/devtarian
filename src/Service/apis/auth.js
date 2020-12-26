@@ -8,4 +8,9 @@ export const api = {
     defaultApi.defaults.headers.common['Authorization'] = token;
     return res;
   },
+
+  async getMe() {
+    const res = await defaultApi.get('/auth/me');
+    return res.data;
+  },
 };
