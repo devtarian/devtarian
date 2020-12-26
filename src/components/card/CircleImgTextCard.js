@@ -1,7 +1,7 @@
 import React, { useState, forwardRef } from 'react';
 import styled from 'styled-components';
-import { ReactComponent as EmptyHeartSvg } from '../../icons/heart_border-black.svg';
-import { ReactComponent as FullHeartSvg } from '../../icons/heart-black.svg';
+import { ReactComponent as EmptyHeartSvg } from '../../images/icons/heart_border-black.svg';
+import { ReactComponent as FullHeartSvg } from '../../images/icons/heart-black.svg';
 
 const CircleImgTextCard = forwardRef((props, ref) => {
   const { data } = props;

@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { SubmitBtnWrap } from '../components/form/SubmitBtn';
-import bgImg from './images/pexels-ready-made-3850624.jpg';
+import bgImg from '../images/pexels-ready-made-3850624.jpg';
 
 const initUserValues = {
   userName: '',
