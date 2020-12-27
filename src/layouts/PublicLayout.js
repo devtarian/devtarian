@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { SubmitBtnWrap } from '../components/form/SubmitBtn';
+import { GoBackWrap } from '../components/goBackLink/GoBackLink';
 import bgImg from '../images/pexels-ready-made-3850624.jpg';
 
 const initUserValues = {
@@ -78,11 +79,9 @@ const Wrap = styled.section`
       background-position: center;
     }
   }
-  .backToMain {
-    position: fixed;
-    top: 1.5rem;
-    right: 3.5rem;
-    color: ${(props) => props.theme.gray[2]};
-    font-weight: bolder;
+  ${GoBackWrap} {
+    a {
+      top: 2rem;
+    }
   }
 `;
