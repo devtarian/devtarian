@@ -9,7 +9,7 @@ const INIT_USER = {
 };
 
 function App() {
-  const { Detail, FeedForm, Login, Main, ReviewForm, SignUp, VegWiki, WikiDetail, WikiForm } = pages;
+  const { PostDetail, FeedForm, Login, Main, ReviewForm, SignUp, VegWiki, WikiDetail, WikiForm } = pages;
   const [user, setUser] = useState(INIT_USER);
   return (
     <div className="App">
@@ -17,7 +17,7 @@ function App() {
         <Switch>
           <PublicLayout path="/signup" component={SignUp} />
           <PublicLayout path="/login" user={user} component={Login} />
-          <DefaultLayout path="/detail" component={Detail} />
+          <DefaultLayout path="/detail" component={PostDetail} />
           <DefaultLayout path="/wikidetail" component={WikiDetail} />
           <DefaultLayout path="/vegwiki" component={VegWiki} />
           <DefaultLayout path="/feed" component={FeedForm} />

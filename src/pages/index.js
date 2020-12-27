@@ -1,4 +1,4 @@
-import Detail from './detail/Detail';
+import PostDetail from './postDetail/PostDetail';
 import FeedForm from './feedForm/FeedForm';
 import Login from './login/Login';
 import Main from './main/Main';
@@ -8,6 +8,6 @@ import VegWiki from './vegWiki/VegWiki';
 import WikiDetail from './wikiDetail/WikiDetail';
 import WikiForm from './wikiForm/WikiForm';
 
-const pages = { Detail, FeedForm, Login, Main, ReviewForm, SignUp, VegWiki, WikiDetail, WikiForm };
+const pages = { PostDetail, FeedForm, Login, Main, ReviewForm, SignUp, VegWiki, WikiDetail, WikiForm };
 
 export default pages;

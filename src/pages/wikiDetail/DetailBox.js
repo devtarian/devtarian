@@ -1,23 +1,13 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import SquareCarousel, { SquareCarouselWrap } from '../../components/carousel/squareCarousel/SquareCarousel';
+import FavoritesHeart from '../../components/favoritesHeart/FavoritesHeart';
 import { ImgCardWrap } from '../../components/card/ImgCard';
 import { ViewAllWrap } from '../../components/carousel/VeiwAll';
 import { CarouselBtnWrap } from '../../components/carousel/CarouselBtn';
 import detailImg from '../../images/pexels-vanessa-loring-5965952.jpg';
-import { ReactComponent as EmptyHeartSvg } from '../../images/icons/heart_border-black.svg';
-import { ReactComponent as FullHeartSvg } from '../../images/icons/heart-black.svg';
 
 const DetailBox = () => {
-  const [favorites, setFavorites] = useState(false);
-
-  const handleFavoriteBtnClick = () => {
-    setFavorites(!favorites);
-  };
-
-  const renderHeart = () => {
-    return favorites ? <FullHeart /> : <EmptyHeart />;
-  };
   return (
     <Wrap>
       <section className="detailImg">
@@ -35,9 +25,7 @@ const DetailBox = () => {
             <span className="infoContents">밀, 대두</span>
           </div>
         </div>
-        <button className="favorite" onClick={handleFavoriteBtnClick}>
-          {renderHeart()}
-        </button>
+        <FavoritesHeart />
       </section>
     </Wrap>
   );
@@ -156,21 +144,4 @@ const Wrap = styled.section`
   ${ViewAllWrap} {
     display: none;
   }
-`;
-
-const EmptyHeart = styled(EmptyHeartSvg)`
-  position: absolute;
-  top: 86px;
-  right: 73px;
-  width: 25px;
-  height: 25px;
-`;
-
-const FullHeart = styled(FullHeartSvg)`
-  position: absolute;
-  top: 86px;
-  right: 73px;
-  width: 25px;
-  height: 25px;
-  fill: ${(props) => props.theme.brown[2]};
 `;
