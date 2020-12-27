@@ -26,12 +26,13 @@ const useInput = (initInput) => {
 
   const onInputChange = useCallback(
     (e) => {
-      e.preventDefault();
+      e.target.type === 'radio' ? e.stopPropagation() : e.preventDefault();
       const { name, value } = e.target;
       const error = validate(name, value, inputs);
 
       setErrors((errors) => ({ ...errors, [name]: error }));
       setInputs((state) => ({ ...state, [name]: value }));
+      console.log(inputs);
     },
     [inputs]
   );

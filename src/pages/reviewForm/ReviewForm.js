@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { RadioInput, UploadImg, Checkbox, StarRating, Input, Textarea, SubmitBtn } from '../../components/form';
+import { UploadImg, Checkbox, StarRating, Input, Textarea, SubmitBtn } from '../../components/form';
 import useInput from '../../hooks/useInput';
 import BgImg from '../../images/pexels-karolina-grabowska-4197908.jpg';
 
@@ -20,7 +20,7 @@ const ReviewForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const requiredList = ['vegLevel', 'starRating', 'title', 'contents'];
+    const requiredList = ['vegLevel', 'title', 'contents'];
     let isValid = requiredValidate(requiredList);
     if (!isValid) return;
 
@@ -50,7 +50,13 @@ const ReviewForm = () => {
           onChange={onInputChange}
           error={errors.title}
         />
-        <Textarea name="contents" placeholder="내용을 입력하세요." onChange={onInputChange} error={errors.contents} />
+        <Textarea
+          name="contents"
+          value={inputs.contents}
+          placeholder="내용을 입력하세요."
+          onChange={onInputChange}
+          error={errors.contents}
+        />
         <SubmitBtn value="리뷰 제출" onSubmit={handleSubmit} />
       </form>
     </Wrap>

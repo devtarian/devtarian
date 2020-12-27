@@ -12,24 +12,17 @@ const UploadImg = ({ name, files, onImageUpload }) => {
   const handleImageUpload = (e) => {
     onImageUpload(e);
   };
+
   return (
     <Wrap className="wrap">
       <label>사진 선택 {files?.length}/5</label>
-      <input
-        type="file"
-        name={name}
-        //url={imgFileURLs}
-        accept="image/*"
-        multiple
-        onChange={handleImageUpload}
-        ref={refHiddenInput}
-      />
+      <input type="file" name={name} accept="image/*" multiple onChange={handleImageUpload} ref={refHiddenInput} />
       <button className="uploadBtn" onClick={handleUploadBtnClick}>
         사진 추가
       </button>
       <ul className="previewImgs">
         {[...new Array(5)].map((_, index) => (
-          <ImgContainer key={index} src={files?.index && URL.createObjectURL(files?.index)} />
+          <ImgContainer key={index} src={files[index] && URL.createObjectURL(files[index])} />
         ))}
       </ul>
     </Wrap>

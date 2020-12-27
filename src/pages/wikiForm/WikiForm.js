@@ -4,7 +4,7 @@ import { RadioInput, UploadImg, Input, Textarea, SubmitBtn } from '../../compone
 import useInput from '../../hooks/useInput';
 import BgImg from '../../images/pexels-karolina-grabowska-4197908.jpg';
 
-const INIT_REVIEW = {
+const INIT_WIKI = {
   category: '가공식품',
   files: [],
   product: '',
@@ -14,22 +14,47 @@ const INIT_REVIEW = {
 const CATEGORIES = ['가공식품', '과자/간식', '제과/제빵', '음료', '기타'];
 
 const WikiForm = () => {
-  const { inputs, setInputs, errors, onInputChange, onImageUpload, requiredValidate } = useInput(INIT_REVIEW);
+  const { inputs, setInputs, errors, onInputChange, onImageUpload, requiredValidate } = useInput(INIT_WIKI);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const requireList = ['category', 'product', 'ingredient'];
+    let isValid = requiredValidate(requireList);
+    if (!isValid) return;
+
+    setInputs(INIT_WIKI);
+  };
 
   return (
     <Wrap bg={BgImg}>
       <h2>위키 작성</h2>
       <form>
-        {/* <RadioInput name="category" label="카테고리" category={inputs.category} onChange={onInputChange} /> */}
-        <RadioInput info={CATEGORIES} name="category" label="카테고리" category={inputs.category} />
-        <UploadImg name="imgFiles" files={inputs.files} />
-        <Input label="상품명" name="product" value={inputs.product} placeholder="상품명을 입력하세요." />
+        <RadioInput
+          name="category"
+          label="카테고리"
+          info={CATEGORIES}
+          category={inputs.category}
+          onChange={onInputChange}
+          error={errors.category}
+        />
+        <UploadImg name="imgFiles" files={inputs.files} onImageUpload={onImageUpload} />
+        <Input
+          label="상품명"
+          name="product"
+          value={inputs.product}
+          placeholder="상품명을 입력하세요."
+          onChange={onInputChange}
+          error={errors.product}
+        />
         <Textarea
           label="성분"
-          name="contents"
+          name="ingredient"
+          value={inputs.ingredient}
           placeholder="ex. 밀가루 믹스 99% (통밀가루 98.4%, 수용성밀식이섬유1.6%), 효모, 설탕, 해바라기씨유, 정제소금, 맥아가루, 비타민C"
+          onChange={onInputChange}
+          error={errors.ingredient}
         />
-        <SubmitBtn value="위키 제출" />
+        <SubmitBtn value="위키 제출" onSubmit={handleSubmit} />
       </form>
     </Wrap>
   );

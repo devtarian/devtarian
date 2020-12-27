@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Textarea = ({ label, name, placeholder, onChange, error, rows = '23' }) => {
+const Textarea = ({ label, name, value, placeholder, onChange, error, rows = '23' }) => {
   return (
     <Wrap className="wrap">
       <label>{label}</label>
-      <textarea name={name} placeholder={placeholder} onChange={onChange} rows={rows}></textarea>
+      <textarea name={name} value={value} placeholder={placeholder} onChange={onChange} rows={rows}></textarea>
       <p className={error ? 'err on' : 'err'}>{error}</p>
     </Wrap>
   );

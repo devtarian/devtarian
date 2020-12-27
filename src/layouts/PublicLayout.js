@@ -10,7 +10,6 @@ const initUserValues = {
   password: '',
   passwordCheck: '',
   avatar: '',
-  avatarURL: '',
   files: [],
 };
 
