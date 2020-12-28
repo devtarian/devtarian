@@ -1,13 +1,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter, Switch } from 'react-router-dom';
 import { DefaultLayout, PublicLayout } from './layouts';
-import Main from './pages/main/Main';
-import Detail from './pages/detail/Detail';
-import VegWiki from './pages/vegWiki/VegWiki';
-import ReviewForm from './pages/reviewForm/ReviewForm';
-import SignUp from './pages/signUp/SignUp';
-import Login from './pages/login/Login';
-import FeedForm from './pages/feedForm/FeedForm';
+import pages from './pages';
 
 const INIT_USER = {
   name: 'Harry',
@@ -15,8 +9,8 @@ const INIT_USER = {
 };
 
 function App() {
+  const { Detail, FeedForm, Login, Main, ReviewForm, SignUp, VegWiki, WikiForm } = pages;
   const [user, setUser] = useState(INIT_USER);
-
   return (
     <div className="App">
       <BrowserRouter>
@@ -27,6 +21,7 @@ function App() {
           <DefaultLayout path="/vegwiki" component={VegWiki} />
           <DefaultLayout path="/feed" component={FeedForm} />
           <DefaultLayout path="/review" component={ReviewForm} />
+          <DefaultLayout path="/wiki" component={WikiForm} />
           <DefaultLayout path="/" component={Main} />
         </Switch>
       </BrowserRouter>

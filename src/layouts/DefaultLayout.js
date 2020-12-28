@@ -56,8 +56,18 @@ const DefaultLayout = ({ component: Component, user, ...rest }) => {
     },
   ];
 
+  const INIT_WIKIPOST = [
+    {
+      category: '가공식품',
+      files: [],
+      product: '',
+      ingredient: '',
+    },
+  ];
+
   const [posts, setPosts] = useState(DUMMY_LIST);
   // const [posts, setPosts] = useState(loadPosts());
+  const [wikiPosts, setWikiPosts] = useState(INIT_WIKIPOST);
 
   useEffect(() => {
     savePosts(posts);

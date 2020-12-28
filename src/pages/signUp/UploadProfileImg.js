@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
-import noImg from '../../components/form/images/images.png';
+import noImg from '../../images/noProfile.png';
 
 const UploadProfileImg = ({ files, onImageUpload, error }) => {
   const refHiddenInput = useRef();
