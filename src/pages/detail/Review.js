@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import Profile, { ProfileWrap } from '../../components/profile/Profile';
-import { ReactComponent as LikeSvg } from '../../icons/heart_border-black.svg';
-import { ReactComponent as CommentSvg } from '../../icons/insert_comment.svg';
+import { ReactComponent as LikeSvg } from '../../images/icons/heart_border-black.svg';
+import { ReactComponent as CommentSvg } from '../../images/icons/insert_comment.svg';
 
 const Review = ({ posts }) => {
   return (

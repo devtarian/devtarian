@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import BgImg from '../reviewForm/images/pexels-karolina-grabowska-4197908.jpg';
+import BgImg from '../../images/pexels-karolina-grabowska-4197908.jpg';
 import apis from '../../Service/apis';
 
 import { SubmitBtn } from '../../components/form';

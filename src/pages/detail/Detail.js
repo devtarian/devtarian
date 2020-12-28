@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import DetailBox from './DetailBox';
 import Review from './Review';
-import { ReactComponent as EditSvg } from '../../icons/edit.svg';
+import { ReactComponent as EditSvg } from '../../images/icons/edit.svg';
 
 const DETAIL = {
   urls: [],

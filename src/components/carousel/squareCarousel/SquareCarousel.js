@@ -27,7 +27,6 @@ export default SquareCarousel;
 
 export const SquareCarouselWrap = styled.section`
   position: relative;
-  bottom: 500px;
   width: 100%;
   height: 421px;
   overflow: hidden;
