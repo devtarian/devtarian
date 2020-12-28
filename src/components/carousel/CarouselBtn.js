@@ -42,9 +42,9 @@ export const CarouselBtnWrap = styled.div`
     height: 30px;
     border-radius: 50%;
     box-shadow: 0 2px 2px 3px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
+    background-color: ${(props) => props.theme.background[0]};
     font-size: 20px;
-    color: #ccc;
+    color: ${(props) => props.theme.gray[1]};
   }
   .prev {
     z-index: 110;

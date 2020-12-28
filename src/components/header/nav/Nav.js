@@ -18,17 +18,17 @@ const Nav = ({ recentKeywords, onAddRecentKeywords }) => {
     <Wrap>
       <Navi>
         <li className="navItem">
-          <a className="navLink" href="">
+          <a className="navLink" href="/feed">
             <span>피드 쓰기</span>
           </a>
         </li>
         <li className="navItem">
-          <a className="navLink" href="">
+          <a className="navLink" href="/">
             <span>비건 편의점</span>
           </a>
         </li>
         <li className="navItem" onClick={handleSearchNavClick}>
-          <a className="navLink" href="">
+          <a className="navLink" href="/">
             <span>검색</span>
           </a>
           {show && (
@@ -69,7 +69,7 @@ const Navi = styled.ul`
       bottom: -17px;
       width: 0px;
       height: 4px;
-      background-color: green;
+      background-color: ${(props) => props.theme.green[1]};
       transition: all 0.2s ease-in;
     }
     &:hover span:after {

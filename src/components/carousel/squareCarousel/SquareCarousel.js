@@ -1,38 +1,31 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
+import ImgCard from '../../card/ImgCard';
 import CarouselBtn, { CarouselBtnWrap } from '../CarouselBtn';
 import ViewAll from '../VeiwAll';
 import useCarousel from '../../../hooks/useCarousel';
 
-const SquareCarousel = () => {
-  const { value, onCarouselBtnClick } = useCarousel();
+const SquareCarousel = (mg) => {
+  const { value, onCarouselBtnClick } = useCarousel(mg);
   const { refCarouselUl, refCarouselLi } = value;
 
   return (
-    <Wrap>
+    <SquareCarouselWrap>
       <h2>비건 편의점</h2>
       <CarouselUl ref={refCarouselUl} value={value}>
-        {DUMMY_PROD.map((li) => (
-          <li key={li.id} ref={refCarouselLi}>
-            <img src={li.src} alt="" />
-            <div className="cover">
-              <div className="itemInfo">
-                <span>{li.category}</span>
-                <h3>{li.product}</h3>
-              </div>
-            </div>
-          </li>
+        {DUMMY_PROD.map((data) => (
+          <ImgCard key={data.id} data={data} value={value} ref={refCarouselLi} />
         ))}
       </CarouselUl>
       <CarouselBtn value={value} onCarouselBtnClick={onCarouselBtnClick} />
       <ViewAll />
-    </Wrap>
+    </SquareCarouselWrap>
   );
 };
 
 export default SquareCarousel;
 
-const Wrap = styled.section`
+export const SquareCarouselWrap = styled.section`
   position: relative;
   width: 100%;
   height: 421px;
@@ -48,47 +41,11 @@ const Wrap = styled.section`
   }
 `;
 
-const CarouselUl = styled.ul`
+export const CarouselUl = styled.ul`
   width: ${(props) => (props.value.liClientWidth + props.value.liSideMargin * 2) * props.value.liLength}px;
   position: absolute;
   left: ${(props) => props.value.leftPosition}px;
   transition: all 0.3s ease;
-
-  li {
-    float: left;
-    width: 270px;
-    margin: 0 ${(props) => props.value.liSideMargin}px 40px;
-    img {
-      width: 270px;
-      height: 300px;
-      border-radius: 10px;
-    }
-    .cover {
-      z-index: 100;
-      position: absolute;
-      top: 0;
-      width: 270px;
-      height: 300px;
-      border-radius: 10px;
-      background-color: #2e7d32;
-      opacity: 0;
-      transition: all 0.3s ease-in-out;
-
-      .itemInfo {
-        position: absolute;
-        top: 40%;
-        width: 100%;
-        text-align: center;
-        h3 {
-          margin-top: 0.4rem;
-          font-size: 20px;
-        }
-      }
-    }
-    &:hover .cover {
-      opacity: 0.75;
-    }
-  }
 `;
 
 const DUMMY_PROD = [
