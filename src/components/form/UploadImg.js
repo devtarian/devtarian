@@ -14,7 +14,7 @@ const UploadImg = ({ name, files, onImageUpload }) => {
   };
   return (
     <Wrap className="wrap">
-      <label>사진 선택 {files.length}/5</label>
+      <label>사진 선택 {files?.length}/5</label>
       <input
         type="file"
         name={name}
@@ -29,7 +29,7 @@ const UploadImg = ({ name, files, onImageUpload }) => {
       </button>
       <ul className="previewImgs">
         {[...new Array(5)].map((_, index) => (
-          <ImgContainer key={index} src={files[index] && URL.createObjectURL(files[index])} />
+          <ImgContainer key={index} src={files?.index && URL.createObjectURL(files?.index)} />
         ))}
       </ul>
     </Wrap>
