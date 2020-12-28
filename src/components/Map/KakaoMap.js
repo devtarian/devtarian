@@ -55,7 +55,7 @@ const KakaoMap = ({ className, onChange, defaultCenter, defaultLevel = 3, eventL
     },
     [onChange]
   );
-  console.log('?', defaultCenter);
+  // console.log('?', defaultCenter);
   // Init KakaoMap & Add Event
   useEffect(() => {
     const latlng = new window.kakao.maps.LatLng(defaultCenter.lat, defaultCenter.lng);
