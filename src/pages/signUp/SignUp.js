@@ -30,7 +30,7 @@ const SignUp = ({ initUserValues, history }) => {
     } catch (err) {
       console.error(err);
       console.log(err.response?.data);
-      setErrors(err.response.data);
+      setErrors(err.response?.data);
     }
   };
 
