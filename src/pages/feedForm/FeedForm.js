@@ -42,15 +42,13 @@ const initialValue = {
   operatingHours: [],
   menuList: [],
   files: [],
-  // operatingHours: [],
-  // menuList: [],
-  // files: [],
 };
 
 const FeedForm = ({ onAddPost, history }) => {
   const { inputs, setInputs, errors, setErrors, onInputChange, onImageUpload, requiredValidate } = useInput(
     initialValue
   );
+  console.log(errors);
   const handleClickGoBack = () => {
     if (inputs.step === 0) {
       return history.goBack();
@@ -75,7 +73,8 @@ const FeedForm = ({ onAddPost, history }) => {
     } else {
       try {
         const res = await apis.postsApi.createPost(inputs);
-        console.log(res);
+        onAddPost(res);
+        console.log('res', res);
       } catch (err) {
         console.log(err.response);
         // console.log(err.response.data);
@@ -83,27 +82,10 @@ const FeedForm = ({ onAddPost, history }) => {
     }
   };
 
-  const handleAddPost = (e) => {
-    e.preventDefault();
-    const requiredList = [
-      'contactNum',
-      'contents',
-      'email',
-      'menuList',
-      'operatingHours',
-      'starRating',
-      'storeName',
-      'userName',
-      'vegType',
-    ];
-    onAddPost(inputs);
-    console.log('피드제출');
-  };
-
   return (
     <Wrap bg={BgImg}>
       <h2>가게 등록</h2>
-      <form onSubmit={handleAddPost}>
+      <form>
         <FormHeader>
           <button type="button" onClick={handleClickGoBack}>
             뒤로가기

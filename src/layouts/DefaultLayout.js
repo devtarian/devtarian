@@ -85,7 +85,7 @@ const DefaultLayout = ({ component: Component, user, ...rest }) => {
   }, [posts]);
 
   const onAddPost = (post) => {
-    console.log(post);
+    console.log('posts', post);
     const {
       vegType,
       imgFiles,
