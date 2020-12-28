@@ -1,14 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import DetailBox from './DetailBox';
-import CommentForm from './CommentForm';
+import WikiDetailBox from '../../components/detailBox/wikiDetailBox/WikiDetailBox';
+import Comment from './Comment';
 import GoBackLink from '../../components/goBackLink/GoBackLink';
 
-const WikiDetail = () => {
+const WikiDetail = ({ wikiPosts }) => {
   return (
     <Wrap>
-      <DetailBox />
-      <CommentForm />
+      <WikiDetailBox data={wikiPosts} />
+      <Comment data={wikiPosts.commentList} />
       <GoBackLink to="/vegwiki" />
     </Wrap>
   );

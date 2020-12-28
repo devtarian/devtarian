@@ -5,7 +5,7 @@ import pages from './pages';
 
 const INIT_USER = {
   name: 'Harry',
-  profileImgURL: 'http://placehold.it/40x40.png?text=A',
+  thumbNail: 'http://placehold.it/40x40.png?text=A',
 };
 
 function App() {

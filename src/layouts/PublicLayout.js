@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, useHistory } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import styled from 'styled-components';
 import { SubmitBtnWrap } from '../components/form/SubmitBtn';
 import { GoBackWrap } from '../components/goBackLink/GoBackLink';

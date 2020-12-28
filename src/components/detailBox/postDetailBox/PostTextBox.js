@@ -2,45 +2,44 @@ import React from 'react';
 import styled from 'styled-components';
 import { ViewAllWrap } from '../../carousel/VeiwAll';
 
-const PostTextBox = () => {
+const PostTextBox = ({ posts }) => {
+  console.log('postsDetailBox', posts);
+  const {
+    store: { vegType, starRating, storeName, address, contactNum, operatingHours, operatingHoursMemo, menuList },
+  } = posts;
   return (
     <Wrap>
       <div className="innerWrap">
-        <h2 className="store">그랑블루</h2>
+        <h2 className="store">{storeName}</h2>
         <div className="contactNum textBox">
           <strong className="infoTitle">전화번호 </strong>
-          <span className="infoContents">02 - 927 - 5808</span>
+          <span className="infoContents">{contactNum}</span>
         </div>
         <div className="openHours textBox">
           <strong className="infoTitle">영업시간</strong>
           <div className="infoContents">
-            <span className="open">매일 09:00 ~ 21:00</span>
+            <span className="open">{operatingHours}</span>
             <div className="dayOff">
-              <span>휴무일 :</span> 공휴일
+              <span>{operatingHoursMemo}</span>
             </div>
           </div>
         </div>
         <div className="menu textBox">
           <strong className="infoTitle">메뉴</strong>
           <ul className="menuList infoContents">
-            <li>
-              <span className="name">어썸 버거</span>
-              <span>7,000원</span>
-            </li>
-            <li>
-              <span className="name">어썸 버거</span>
-              <span>7,000원</span>
-            </li>
-            <li>
-              <span className="name">어썸 버거</span>
-              <span>7,000원</span>
-            </li>
+            {menuList.map((menu) => (
+              <li>
+                <span className="name">{menu.menu}</span>
+                <span>{menu.vegtype}</span>
+                <span>{menu.price}원</span>
+              </li>
+            ))}
           </ul>
         </div>
         <div className="address textBox">
           <div>
             <strong className="infoTitle">위치</strong>
-            <span className="infoContents">서울특별시 중구 수표동 수표로 66</span>
+            <span className="infoContents">{address}</span>
           </div>
         </div>
       </div>

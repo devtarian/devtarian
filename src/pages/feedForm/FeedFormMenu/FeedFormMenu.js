@@ -202,7 +202,7 @@ const MenuCard = styled.div`
     background: ${(props) => props.theme.brown[2]};
     font-size: 1rem;
     font-weight: normal;
-    color: white;
+    color: ${(props) => props.theme.background[0]};
     width: 50px;
     text-align: center;
     border-radius: 10%;

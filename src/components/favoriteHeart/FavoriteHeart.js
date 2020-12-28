@@ -3,20 +3,20 @@ import styled from 'styled-components';
 import { ReactComponent as EmptyHeartSvg } from '../../images/icons/heart_border-black.svg';
 import { ReactComponent as FullHeartSvg } from '../../images/icons/heart-black.svg';
 
-const FavoritesHeart = () => {
-  const [favorites, setFavorites] = useState(false);
+const FavoriteHeart = () => {
+  const [favorite, setFavorite] = useState(false);
 
   const handleFavoriteBtnClick = () => {
-    setFavorites(!favorites);
+    setFavorite(!favorite);
   };
 
   const renderHeart = () => {
-    return favorites ? <FullHeart /> : <EmptyHeart />;
+    return favorite ? <FullHeart /> : <EmptyHeart />;
   };
   return <Wrap onClick={handleFavoriteBtnClick}>{renderHeart()}</Wrap>;
 };
 
-export default FavoritesHeart;
+export default FavoriteHeart;
 
 const Wrap = styled.button`
   position: absolute;

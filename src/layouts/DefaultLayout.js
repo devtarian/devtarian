@@ -9,8 +9,8 @@ const DefaultLayout = ({ component: Component, user, ...rest }) => {
     {
       id: 0,
       writer: user,
-      createAt: new Date(),
-      favorites: false,
+      createAt: '3초 전',
+      favorite: false,
       store: {
         category: '식당',
         vegType: [],
@@ -21,7 +21,8 @@ const DefaultLayout = ({ component: Component, user, ...rest }) => {
         region: '서울',
         address: '서울특별시 중구 수표동 수표로 66',
         contactNum: '010-7318-1226',
-        operatingHours: [],
+        operatingHours: ['09:00 ~ 21:00'],
+        operatingHoursMemo: ['휴무일: 공휴일'],
         menuList: [
           {
             id: 0,
@@ -43,11 +44,12 @@ const DefaultLayout = ({ component: Component, user, ...rest }) => {
             'Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple',
           likes: 1,
           likesOfMe: false,
-          comments: [
+          comments: 1,
+          commentList: [
             {
               id: 0,
               writer: user,
-              createAt: new Date(),
+              createAt: '3초 전',
               contents: '굉장해요!',
             },
           ],
@@ -58,14 +60,23 @@ const DefaultLayout = ({ component: Component, user, ...rest }) => {
 
   const INIT_WIKIPOST = [
     {
+      id: 0,
       category: '가공식품',
       files: [],
       product: '',
       ingredient: '',
+      comments: '',
+      commentList: [
+        {
+          id: 0,
+          writer: user,
+          createAt: '3초 전',
+          contents: '',
+        },
+      ],
     },
   ];
-
-  const [posts, setPosts] = useState(DUMMY_LIST);
+  const [posts, setPosts] = useState(DUMMY_POSTS);
   // const [posts, setPosts] = useState(loadPosts());
   const [wikiPosts, setWikiPosts] = useState(INIT_WIKIPOST);
 
@@ -85,6 +96,7 @@ const DefaultLayout = ({ component: Component, user, ...rest }) => {
       address,
       contactNum,
       operatingHours,
+      operatingHoursMemo,
       menuList: [{ id, menu, vegtype, price }],
     } = post;
     const newPost = {
@@ -92,10 +104,10 @@ const DefaultLayout = ({ component: Component, user, ...rest }) => {
       writer: {
         id: user.id,
         name: user.name,
-        profileImgURL: user.profileImgURL,
+        thumbNail: user.thumbNail,
       },
-      createAt: new Date(),
-      favorites: false,
+      createAt: '3초 전',
+      favorite: false,
       store: {
         vegType,
         imgFiles,
@@ -106,6 +118,7 @@ const DefaultLayout = ({ component: Component, user, ...rest }) => {
         address,
         contactNum,
         operatingHours,
+        operatingHoursMemo,
         menuList: [
           {
             id,
@@ -122,7 +135,7 @@ const DefaultLayout = ({ component: Component, user, ...rest }) => {
   };
 
   const handleAddReview = (postId, review) => {
-    const { imgFiles, imgFileURLs, starRating, title, contents, likes, likesOfMe, comments } = review;
+    const { imgFiles, imgFileURLs, starRating, title, contents, likes, likesOfMe, comments, commentList } = review;
     const newPosts = [...posts];
     const index = newPosts.findIndex((el) => el.id === postId);
     const post = newPosts[index];
@@ -139,6 +152,7 @@ const DefaultLayout = ({ component: Component, user, ...rest }) => {
         likes,
         likesOfMe,
         comments,
+        commentList,
       },
       ...post.reviews,
     ];
@@ -155,11 +169,11 @@ const DefaultLayout = ({ component: Component, user, ...rest }) => {
     const idx = newReviews.findIndex((el) => el.id === reviewId);
     const review = newReviews[idx];
 
-    post[review].comments = [
+    post[review].commentList = [
       {
-        id: review.comments.length,
+        id: review.commentList.length,
         writer: user,
-        createAt: new Date(),
+        createAt: '3초 전',
         contents,
       },
     ];
@@ -167,11 +181,11 @@ const DefaultLayout = ({ component: Component, user, ...rest }) => {
     setPosts(newPosts);
   };
 
-  const handleFavoritesPost = (postId) => {
+  const handleFavoritePost = (postId) => {
     const newPosts = [...posts];
     const index = newPosts.findIndex((el) => el.id === postId);
     const post = newPosts[index];
-    post.favorites = !post.favorites;
+    post.favorite = !post.favorite;
     setPosts(newPosts);
   };
 
@@ -208,203 +222,333 @@ const Wrap = styled.div`
   margin-top: 58px;
 `;
 
-const DUMMY_LIST = [
+const DUMMY_POSTS = [
   {
     id: 0,
-    user: {
-      thumbNail: 'http://placehold.it/40x40.png?text=A',
-      name: 'Harry',
-      timeCreated: '10초 전',
-    },
-    review: {
-      src: 'http://placehold.it/270x175.png?text=A',
-      type: 'VG',
+    writer: { name: 'Harry', thumbNail: '' },
+    createAt: '3초 전',
+    favorite: false,
+    store: {
+      category: '식당',
+      vegType: ['베지테리언'],
+      files: [],
+      starRating: '⭐⭐⭐⭐⭐',
       storeName: '발우공양',
       region: '서울',
-      starRating: '⭐⭐⭐⭐⭐',
-      title: 'Lovely place!',
-      contents:
-        'Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple',
+      address: '서울특별시 중구 수표동 수표로 66',
+      contactNum: '010-7318-1226',
+      operatingHours: ['09:00 ~ 21:00'],
+      operatingHoursMemo: ['휴무일: 공휴일'],
+      menuList: [
+        {
+          id: 0,
+          menu: '어썸 버거',
+          vegtype: ['비건'],
+          price: 7000,
+        },
+      ],
     },
+    reviews: 0,
+    reviewList: [
+      {
+        id: 0,
+        writer: { name: 'Harry', thumbNail: '' },
+        files: [],
+        starRating: '⭐⭐⭐⭐⭐',
+        title: '와!',
+        reviewContents:
+          'Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple',
+        likes: 1,
+        likesOfMe: false,
+        comments: 1,
+        commentList: [
+          {
+            id: 0,
+            writer: { name: 'Harry', thumbNail: '' },
+            createAt: '3초 전',
+            commentContents: '굉장해요!',
+          },
+        ],
+      },
+    ],
   },
   {
     id: 1,
-    user: {
-      thumbNail: 'http://placehold.it/40x40.png?text=B',
-      name: 'Harry',
-      timeCreated: '10초 전',
-    },
-    review: {
-      src: 'http://placehold.it/270x175.png?text=B',
-      type: 'VG',
+    writer: { name: 'Harry', thumbNail: '' },
+    createAt: '3초 전',
+    favorite: false,
+    store: {
+      category: '식당',
+      vegType: ['비건'],
+      files: [],
+      starRating: '⭐⭐⭐⭐⭐',
       storeName: '발우공양',
       region: '서울',
-      starRating: '⭐⭐⭐⭐⭐',
-      title: 'Lovely place!',
-      contents:
-        'Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple',
+      address: '서울특별시 중구 수표동 수표로 66',
+      contactNum: '010-7318-1226',
+      operatingHours: ['09:00 ~ 21:00'],
+      operatingHoursMemo: ['휴무일: 공휴일'],
+      menuList: [
+        {
+          id: 0,
+          menu: '어썸 버거',
+          vegtype: ['비건'],
+          price: 7000,
+        },
+      ],
     },
+    reviews: 0,
+    reviewList: [
+      {
+        id: 0,
+        writer: { name: 'Harry', thumbNail: '' },
+        files: [],
+        starRating: '⭐⭐⭐⭐⭐',
+        title: '와!',
+        reviewContents:
+          'Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple',
+        likes: 1,
+        likesOfMe: false,
+        comments: 1,
+        commentList: [
+          {
+            id: 0,
+            writer: { name: 'Harry', thumbNail: '' },
+            createAt: '3초 전',
+            commentContents: '굉장해요!',
+          },
+        ],
+      },
+    ],
   },
   {
     id: 2,
-    user: {
-      thumbNail: 'http://placehold.it/40x40.png?text=C',
-      name: 'Harry',
-      timeCreated: '10초 전',
-    },
-    review: {
-      src: 'http://placehold.it/270x175.png?text=C',
-      type: 'VG',
+    writer: { name: 'Harry', thumbNail: '' },
+    createAt: '3초 전',
+    favorite: false,
+    store: {
+      category: '식당',
+      vegType: ['비건 옵션'],
+      files: [],
+      starRating: '⭐⭐⭐⭐⭐',
       storeName: '발우공양',
       region: '서울',
-      starRating: '⭐⭐⭐⭐⭐',
-      title: 'Lovely place!',
-      contents:
-        'Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple',
+      address: '서울특별시 중구 수표동 수표로 66',
+      contactNum: '010-7318-1226',
+      operatingHours: ['09:00 ~ 21:00'],
+      operatingHoursMemo: ['휴무일: 공휴일'],
+      menuList: [
+        {
+          id: 0,
+          menu: '어썸 버거',
+          vegtype: ['비건'],
+          price: 7000,
+        },
+      ],
     },
+    reviews: 0,
+    reviewList: [
+      {
+        id: 0,
+        writer: { name: 'Harry', thumbNail: '' },
+        files: [],
+        starRating: '⭐⭐⭐⭐⭐',
+        title: '와!',
+        reviewContents:
+          'Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple',
+        likes: 1,
+        likesOfMe: false,
+        comments: 1,
+        commentList: [
+          {
+            id: 0,
+            writer: { name: 'Harry', thumbNail: '' },
+            createAt: '3초 전',
+            commentContents: '굉장해요!',
+          },
+        ],
+      },
+    ],
   },
   {
     id: 3,
-    user: {
-      thumbNail: 'http://placehold.it/40x40.png?text=D',
-      name: 'Harry',
-      timeCreated: '10초 전',
-    },
-    review: {
-      src: 'http://placehold.it/270x175.png?text=D',
-      type: 'VG',
+    writer: { name: 'Harry', thumbNail: '' },
+    createAt: '3초 전',
+    favorite: false,
+    store: {
+      category: '식당',
+      vegType: ['베지테리언'],
+      files: [],
+      starRating: '⭐⭐⭐⭐⭐',
       storeName: '발우공양',
       region: '서울',
-      starRating: '⭐⭐⭐⭐⭐',
-      title: 'Lovely place!',
-      contents:
-        'Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple',
+      address: '서울특별시 중구 수표동 수표로 66',
+      contactNum: '010-7318-1226',
+      operatingHours: ['09:00 ~ 21:00'],
+      operatingHoursMemo: ['휴무일: 공휴일'],
+      menuList: [
+        {
+          id: 0,
+          menu: '어썸 버거',
+          vegtype: ['비건'],
+          price: 7000,
+        },
+      ],
     },
+    reviews: 0,
+    reviewList: [
+      {
+        id: 0,
+        writer: { name: 'Harry', thumbNail: 'http://placehold.it/40x40.png?text=A' },
+        files: [],
+        starRating: '⭐⭐⭐⭐⭐',
+        title: '와!',
+        reviewContents:
+          'Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple',
+        likes: 1,
+        likesOfMe: false,
+        comments: 1,
+        commentList: [
+          {
+            id: 0,
+            writer: { name: 'Harry', thumbNail: '' },
+            createAt: '3초 전',
+            commentContents: '굉장해요!',
+          },
+        ],
+      },
+    ],
   },
   {
     id: 4,
-    user: {
-      thumbNail: 'http://placehold.it/40x40.png?text=E',
-      name: 'Harry',
-      timeCreated: '10초 전',
-    },
-    review: {
-      src: 'http://placehold.it/270x175.png?text=E',
-      type: 'VG',
+    writer: { name: 'Harry', thumbNail: 'http://placehold.it/40x40.png?text=A' },
+    createAt: '3초 전',
+    favorite: false,
+    store: {
+      category: '식당',
+      vegType: ['베지테리언'],
+      files: [],
+      starRating: '⭐⭐⭐⭐⭐',
       storeName: '발우공양',
       region: '서울',
-      starRating: '⭐⭐⭐⭐⭐',
-      title: 'Lovely place!',
-      contents:
-        'Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple',
+      address: '서울특별시 중구 수표동 수표로 66',
+      contactNum: '010-7318-1226',
+      operatingHours: ['09:00 ~ 21:00'],
+      operatingHoursMemo: ['휴무일: 공휴일'],
+      menuList: [
+        {
+          id: 0,
+          menu: '어썸 버거',
+          vegtype: ['비건'],
+          price: 7000,
+        },
+      ],
     },
+    reviews: 0,
+    reviewList: [
+      {
+        id: 0,
+        writer: { name: 'Harry', thumbNail: 'http://placehold.it/40x40.png?text=A' },
+        files: [],
+        starRating: '⭐⭐⭐⭐⭐',
+        title: '와!',
+        reviewContents:
+          'Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple',
+        likes: 1,
+        likesOfMe: false,
+        comments: 1,
+        commentList: [
+          {
+            id: 0,
+            writer: { name: 'Harry', thumbNail: 'http://placehold.it/40x40.png?text=A' },
+            createAt: '3초 전',
+            commentContents: '굉장해요!',
+          },
+        ],
+      },
+    ],
+  },
+];
+
+const DUMMY_WIKIPOST = [
+  {
+    id: 0,
+    category: '가공식품',
+    files: [],
+    product: '',
+    ingredient: '',
+    comments: '',
+    commentList: [
+      {
+        id: 0,
+        writer: { name: 'Harry', thumbNail: 'http://placehold.it/40x40.png?text=A' },
+        createAt: '3초 전',
+        contents: '',
+      },
+    ],
   },
   {
-    id: 5,
-    user: {
-      thumbNail: 'http://placehold.it/40x40.png?text=F',
-      name: 'Harry',
-      timeCreated: '10초 전',
-    },
-    review: {
-      src: 'http://placehold.it/270x175.png?text=F',
-      type: 'VG',
-      storeName: '발우공양',
-      region: '서울',
-      starRating: '⭐⭐⭐⭐⭐',
-      title: 'Lovely place!',
-      contents:
-        'Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple',
-    },
+    id: 1,
+    category: '가공식품',
+    files: [],
+    product: '',
+    ingredient: '',
+    comments: '',
+    commentList: [
+      {
+        id: 0,
+        writer: { name: 'Harry', thumbNail: 'http://placehold.it/40x40.png?text=A' },
+        createAt: '3초 전',
+        contents: '',
+      },
+    ],
   },
   {
-    id: 6,
-    user: {
-      thumbNail: 'http://placehold.it/40x40.png?text=G',
-      name: 'Harry',
-      timeCreated: '10초 전',
-    },
-    review: {
-      src: 'http://placehold.it/270x175.png?text=G',
-      type: 'VG',
-      storeName: '발우공양',
-      region: '서울',
-      starRating: '⭐⭐⭐⭐⭐',
-      title: 'Lovely place!',
-      contents:
-        'Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple',
-    },
+    id: 2,
+    category: '가공식품',
+    files: [],
+    product: '',
+    ingredient: '',
+    comments: '',
+    commentList: [
+      {
+        id: 0,
+        writer: { name: 'Harry', thumbNail: 'http://placehold.it/40x40.png?text=A' },
+        createAt: '3초 전',
+        contents: '',
+      },
+    ],
   },
   {
-    id: 7,
-    user: {
-      thumbNail: 'http://placehold.it/40x40.png?text=H',
-      name: 'Harry',
-      timeCreated: '10초 전',
-    },
-    review: {
-      src: 'http://placehold.it/270x175.png?text=H',
-      type: 'VG',
-      storeName: '발우공양',
-      region: '서울',
-      starRating: '⭐⭐⭐⭐⭐',
-      title: 'Lovely place!',
-      contents:
-        'Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple',
-    },
+    id: 3,
+    category: '가공식품',
+    files: [],
+    product: '',
+    ingredient: '',
+    comments: '',
+    commentList: [
+      {
+        id: 0,
+        writer: { name: 'Harry', thumbNail: 'http://placehold.it/40x40.png?text=A' },
+        createAt: '3초 전',
+        contents: '',
+      },
+    ],
   },
   {
-    id: 8,
-    user: {
-      thumbNail: 'http://placehold.it/40x40.png?text=I',
-      name: 'Harry',
-      timeCreated: '10초 전',
-    },
-    review: {
-      src: 'http://placehold.it/270x175.png?text=I',
-      type: 'VG',
-      storeName: '발우공양',
-      region: '서울',
-      starRating: '⭐⭐⭐⭐⭐',
-      title: 'Lovely place!',
-      contents:
-        'Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple',
-    },
-  },
-  {
-    id: 9,
-    user: {
-      thumbNail: 'http://placehold.it/40x40.png?text=J',
-      name: 'Harry',
-      timeCreated: '10초 전',
-    },
-    review: {
-      src: 'http://placehold.it/270x175.png?text=J',
-      type: 'VG',
-      storeName: '발우공양',
-      region: '서울',
-      starRating: '⭐⭐⭐⭐⭐',
-      title: 'Lovely place!',
-      contents:
-        'Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple',
-    },
-  },
-  {
-    id: 10,
-    user: {
-      thumbNail: 'http://placehold.it/40x40.png?text=K',
-      name: 'Harry',
-      timeCreated: '10초 전',
-    },
-    review: {
-      src: 'http://placehold.it/270x175.png?text=K',
-      type: 'VG',
-      storeName: '발우공양',
-      region: '서울',
-      starRating: '⭐⭐⭐⭐⭐',
-      title: 'Lovely place!',
-      contents:
-        'Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple',
-    },
+    id: 4,
+    category: '가공식품',
+    files: [],
+    product: '',
+    ingredient: '',
+    comments: '',
+    commentList: [
+      {
+        id: 0,
+        writer: { name: 'Harry', thumbNail: '' },
+        createAt: '3초 전',
+        contents: '',
+      },
+    ],
   },
 ];

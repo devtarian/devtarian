@@ -1,20 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
 import ImgBox from '../ImgBox';
-import PostTextBox from './PostTextBox';
+import WikiTextBox from './WikiTextBox';
 import FavoriteHeart from '../../favoriteHeart/FavoriteHeart';
 
-const PostDetailBox = ({ posts }) => {
+const WikiDetailBox = () => {
   return (
     <Wrap>
-      <ImgBox posts={posts} />
-      <PostTextBox posts={posts} />
-      <FavoriteHeart posts={posts} />
+      <ImgBox />
+      <WikiTextBox />
+      <FavoriteHeart />
     </Wrap>
   );
 };
 
-export default PostDetailBox;
+export default WikiDetailBox;
 
 const Wrap = styled.section`
   position: relative;
