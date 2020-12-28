@@ -15,7 +15,7 @@ const Carousel = ({ carouselData, mg }) => {
       <CarouselUl ref={refCarouselUl} value={value}>
         {carouselData.map((data) => (
           <li key={data.id} ref={refCarouselLi}>
-            <ImgTextCard cardData={data.review} />
+            <ImgTextCard cardData={data} />
           </li>
         ))}
       </CarouselUl>

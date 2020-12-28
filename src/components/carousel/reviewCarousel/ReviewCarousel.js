@@ -16,8 +16,8 @@ const ReviewCarousel = ({ carouselData, mg }) => {
       <CarouselUl ref={refCarouselUl} value={value}>
         {carouselData.map((data) => (
           <li key={data.id} ref={refCarouselLi}>
-            <Profile userData={data.user} />
-            <ImgTextCard cardData={data.review} />
+            <Profile userData={data.writer} createAt={data.createAt} />
+            <ImgTextCard cardData={data} />
           </li>
         ))}
       </CarouselUl>
@@ -41,10 +41,8 @@ const Wrap = styled.section`
   }
 
   ${ItemImg} {
-    img {
-      width: 365px;
-      height: 235px;
-    }
+    width: 365px;
+    height: 235px;
   }
   ${ImgTextCardWrap} {
     p {

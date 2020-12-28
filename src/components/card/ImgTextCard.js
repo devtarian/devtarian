@@ -1,21 +1,27 @@
 import styled from 'styled-components';
+import noImg from '../../images/noImg.jpg';
 
 const ImgTextCard = ({ cardData }) => {
-  const { src, type, storeName, region, starRating, contents } = cardData;
+  const {
+    store: { files, vegType, storeName, region, starRating },
+    reviewList: {
+      0: { reviewContents },
+    },
+  } = cardData;
 
   return (
     <ImgTextCardWrap>
       <ItemImg>
-        <img src={src} alt="" />
+        <img src={files[0] ? URL.createObjectURL(files[0]) : noImg} alt="" />
         <div className="cover"></div>
       </ItemImg>
-      <i className="vegOptions">{type}</i>
+      <span className="vegOptions">{vegType}</span>
       <h3 className="title">
         <a href="/">{storeName}</a>
       </h3>
       <strong className="region">{region}</strong>
       <span className="starRating">{starRating}</span>
-      <p>{contents}</p>
+      <p>{reviewContents}</p>
     </ImgTextCardWrap>
   );
 };
@@ -24,15 +30,26 @@ export default ImgTextCard;
 
 export const ImgTextCardWrap = styled.div`
   .vegOptions {
-    float: left;
-    width: 20px;
-    height: 20px;
+    display: inline-block;
+    width: 70px;
+    padding: 2px 4px;
+    border-radius: 4px;
+    text-align: center;
     font-size: 12px;
+    background: ${(props) => props.theme.brown[1]};
+    color: ${(props) => props.theme.background[0]};
+  }
+  .title {
+    display: inline-block;
+    width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: top;
+    color: ${(props) => props.theme.green[1]};
   }
   .title a {
-    width: calc(100% - 24px);
-    float: left;
-    margin-left: 0.25rem;
+    margin-left: 0.3rem;
     font-size: 18px;
     color: ${(props) => props.theme.green[1]};
   }
@@ -55,11 +72,14 @@ export const ImgTextCardWrap = styled.div`
 
 export const ItemImg = styled.div`
   position: relative;
+  width: 270px;
+  height: 175px;
   margin-bottom: 10px;
 
   img {
-    width: 270px;
-    height: 175px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     border-radius: 10px;
   }
 

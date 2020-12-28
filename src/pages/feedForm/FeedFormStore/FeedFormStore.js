@@ -14,13 +14,11 @@ const FeedFormStore = ({ inputs, setInputs, errors, setErrors, onChange }) => {
         selectedList={inputs?.vegType || []}
         onChange={onChange}
         options={[
-          { key: 'veganOnly', title: '비건 Only' },
-          { key: 'veganMany', title: '비건 위주' },
-          { key: 'dairy', title: '유제품 사용' },
-          { key: 'egg', title: '계란 사용' },
-          { key: 'honny', title: '꿀 사용' },
+          { key: 'vegan', title: '비건' },
+          { key: 'vegetarian', title: '베지테리언' },
+          { key: 'veganOption', title: '비건 옵션' },
         ]}
-        exceptOnly={['veganOnly']}
+        exceptOnly={['vegan']}
         error={errors.vegType}
       />
       <FormRow>

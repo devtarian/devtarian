@@ -11,7 +11,7 @@ const Section = ({ posts }) => {
       <Carousel carouselData={posts} mg={mg} />
       <Carousel carouselData={posts} mg={mg} />
       <SquareCarousel mg={mg} />
-      <ReviewCarousel carouselData={DUMMY_REVIEWS} mg={mg} />
+      <ReviewCarousel carouselData={posts} mg={mg} />
     </Wrap>
   );
 };

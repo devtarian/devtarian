@@ -1,51 +1,57 @@
 import React from 'react';
 import styled from 'styled-components';
 import Profile, { ProfileWrap } from '../../components/profile/Profile';
+import Comment from '../../components/comment/Comment';
 import { ReactComponent as LikeSvg } from '../../images/icons/heart_border-black.svg';
 import { ReactComponent as CommentSvg } from '../../images/icons/insert_comment.svg';
+import noImg from '../../images/noImg.jpg';
+import noProfile from '../../images/noProfile.png';
 
-const Review = ({ posts }) => {
+const Review = ({ reviewList }) => {
   return (
     <Wrap>
-      <strong className="totalReviews">{posts.length} 개의 리뷰</strong>
-      {posts.map((post) => (
-        <div className="review" key={post.id}>
+      <strong className="totalReviews">{reviewList.length} 개의 리뷰</strong>
+      {reviewList.map((review) => (
+        <div className="review" key={review.id}>
           <div className="innerWrap">
             <div className="leftBox">
-              <Profile userData={post.user} />
-              <p className="starRating">{post.review.starRating}</p>
-              <p className="title">{post.review.title}</p>
-              <p className="contents">{post.review.contents}</p>
+              <Profile userData={review.writer} createAt={review.createAt} />
+              <p className="starRating">{review.starRating}</p>
+              <p className="title">{review.title}</p>
+              <p className="contents">{review.reviewContents}</p>
               <a className="viewMore" href="">
                 ... 더보기
               </a>
             </div>
             <div className="rightBox">
-              <img className="photos" src={post.review.src} alt="" />
+              <img className="photos" src={review.files[0] ? URL.createObjectURL(review.files[0]) : noImg} alt="" />
             </div>
           </div>
           <div className="reactions">
             <div className="addLikes">
               <i>
-                <Like />
+                <LikeBtn />
               </i>
-              <span>+5</span>
+              <span>+{review.likes}</span>
             </div>
             <div className="addComments">
               <i>
-                <Comment />
+                <CommentBtn />
               </i>
-              <span>+3</span>
+              <span>+{review.comments}</span>
             </div>
           </div>
           <ul className="comments">
-            <li>
-              <Profile userData={post.user} />
-              <p className="comment">놀라워요!</p>
-            </li>
+            {review.commentList.map((comment) => (
+              <Comment key={comment.id} commentData={comment} />
+            ))}
           </ul>
           <div className="writeComments">
-            <img className="userThumbnail" src="http://placehold.it/40x40.png?text=a" alt="" />
+            <img
+              className="userThumbnail"
+              src={review.files[0] ? URL.createObjectURL(review.files[0]) : noProfile}
+              alt=""
+            />
 
             <form>
               <label>댓글달기</label>
@@ -86,11 +92,11 @@ const Wrap = styled.section`
       padding: 15px;
 
       ${ProfileWrap} {
-        padding-bottom: 15px;
-        margin-bottom: 20px;
         border-bottom: 1px solid ${(props) => props.theme.background[2]};
       }
-
+      .starRating {
+        margin-top: 30px;
+      }
       .title {
         margin: 10px 0;
         font-size: 1.1rem;
@@ -113,6 +119,7 @@ const Wrap = styled.section`
     .rightBox {
       float: right;
       width: 35%;
+      height: 220px;
 
       img {
         border-top-right-radius: 10px;
@@ -146,22 +153,6 @@ const Wrap = styled.section`
   .comments {
     padding: 0px 15px;
     overflow: hidden;
-
-    li {
-      padding: 5px 0 10px;
-      overflow: hidden;
-      border-bottom: 1px solid ${(props) => props.theme.background[2]};
-
-      ${ProfileWrap} {
-        a {
-          color: ${(props) => props.theme.color[0]};
-        }
-      }
-    }
-    .comment {
-      margin-top: 9px;
-      padding-left: 47px;
-    }
   }
   .writeComments {
     padding: 5px 15px;
@@ -192,12 +183,12 @@ const Wrap = styled.section`
   }
 `;
 
-const Like = styled(LikeSvg)`
+const LikeBtn = styled(LikeSvg)`
   width: 20px;
   height: 20px;
 `;
 
-const Comment = styled(CommentSvg)`
+const CommentBtn = styled(CommentSvg)`
   width: 20px;
   height: 20px;
 `;

@@ -4,6 +4,7 @@ import apis from '../../Service/apis';
 import useInput from '../../hooks/useInput';
 import SignInput from '../../components/form/SignInput';
 import SubmitBtn from '../../components/form/SubmitBtn';
+import GoBackLink from '../../components/goBackLink/GoBackLink';
 
 const Login = ({ user, initUserValues, history }) => {
   const { inputs, setInputs, errors, onInputChange, requiredValidate } = useInput(initUserValues);
@@ -56,9 +57,7 @@ const Login = ({ user, initUserValues, history }) => {
           <Link to="/signup">/ 회원가입</Link>
         </div>
       </form>
-      <Link to="/" className="backToMain">
-        &lt; 메인으로
-      </Link>
+      <GoBackLink to="/" />
     </div>
   );
 };

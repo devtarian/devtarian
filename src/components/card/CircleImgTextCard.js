@@ -5,14 +5,14 @@ import { ReactComponent as FullHeartSvg } from '../../images/icons/heart-black.s
 
 const CircleImgTextCard = forwardRef((props, ref) => {
   const { data } = props;
-  const [favorites, setFavorites] = useState(false);
+  const [favorite, setFavorite] = useState(false);
 
   const handleFavoriteBtnClick = () => {
-    setFavorites(!favorites);
+    setFavorite(!favorite);
   };
 
   const renderHeart = () => {
-    return favorites ? <FullHeart /> : <EmptyHeart />;
+    return favorite ? <FullHeart /> : <EmptyHeart />;
   };
 
   return (

@@ -1,16 +1,19 @@
 import styled from 'styled-components';
+import noProfile from '../../images/noProfile.png';
 
-const Profile = ({ userData }) => {
-  const { thumbNail, name, timeCreated } = userData;
+const Profile = ({ userData, createAt }) => {
+  const { thumbNail, name } = userData;
   return (
     <>
       <ProfileWrap>
-        <img src={thumbNail} alt="" />
+        <div className="thumbNail">
+          <img src={thumbNail ? thumbNail : noProfile} alt="" />
+        </div>
         <div className="info">
           <strong>
             <a href="/">{name}</a>
           </strong>
-          <span>{timeCreated}</span>
+          <span>{createAt}</span>
         </div>
       </ProfileWrap>
     </>
@@ -20,17 +23,30 @@ const Profile = ({ userData }) => {
 export default Profile;
 
 export const ProfileWrap = styled.div`
+  position: relative;
   overflow: hidden;
-  margin: 0.5rem 0;
-  img {
+
+  .thumbNail {
     float: left;
-    margin-right: 0.5rem;
-    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    vertical-align: middle;
+    margin: 0.5rem 0;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
   }
+
   .info {
-    float: left;
-    width: calc(100% - 48px);
-    margin-top: 0;
+    position: absolute;
+    top: 50%;
+    left: 50px;
+    transform: translateY(-50%);
+
     a {
       font-size: 14px;
       color: ${(props) => props.theme.green[1]};

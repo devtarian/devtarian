@@ -5,11 +5,11 @@ import pages from './pages';
 
 const INIT_USER = {
   name: 'Harry',
-  profileImgURL: 'http://placehold.it/40x40.png?text=A',
+  thumbNail: 'http://placehold.it/40x40.png?text=A',
 };
 
 function App() {
-  const { Detail, FeedForm, Login, Main, ReviewForm, SignUp, VegWiki, WikiForm } = pages;
+  const { PostDetail, FeedForm, Login, Main, ReviewForm, SignUp, VegWiki, WikiDetail, WikiForm } = pages;
   const [user, setUser] = useState(INIT_USER);
   return (
     <div className="App">
@@ -17,7 +17,8 @@ function App() {
         <Switch>
           <PublicLayout path="/signup" component={SignUp} />
           <PublicLayout path="/login" user={user} component={Login} />
-          <DefaultLayout path="/detail" component={Detail} />
+          <DefaultLayout path="/detail" component={PostDetail} />
+          <DefaultLayout path="/wikidetail" component={WikiDetail} />
           <DefaultLayout path="/vegwiki" component={VegWiki} />
           <DefaultLayout path="/feed" component={FeedForm} />
           <DefaultLayout path="/review" component={ReviewForm} />

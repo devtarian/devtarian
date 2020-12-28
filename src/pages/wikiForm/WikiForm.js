@@ -4,17 +4,27 @@ import { RadioInput, UploadImg, Input, Textarea, SubmitBtn } from '../../compone
 import useInput from '../../hooks/useInput';
 import BgImg from '../../images/pexels-karolina-grabowska-4197908.jpg';
 
-const INIT_WIKI = {
-  category: '가공식품',
-  files: [],
-  product: '',
-  ingredient: '',
-};
-
 const CATEGORIES = ['가공식품', '과자/간식', '제과/제빵', '음료', '기타'];
 
-const WikiForm = () => {
-  const { inputs, setInputs, errors, onInputChange, onImageUpload, requiredValidate } = useInput(INIT_WIKI);
+const WikiForm = ({ user }) => {
+  const INIT_WIKIPOST = [
+    {
+      category: '가공식품',
+      files: [],
+      product: '',
+      ingredient: '',
+      comments: '',
+      commentList: [
+        {
+          id: 0,
+          writer: user,
+          createAt: '3초 전',
+          contents: '',
+        },
+      ],
+    },
+  ];
+  const { inputs, setInputs, errors, onInputChange, onImageUpload, requiredValidate } = useInput(INIT_WIKIPOST);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -22,7 +32,7 @@ const WikiForm = () => {
     let isValid = requiredValidate(requireList);
     if (!isValid) return;
 
-    setInputs(INIT_WIKI);
+    setInputs(INIT_WIKIPOST);
   };
 
   return (
