@@ -15,7 +15,7 @@ const ImgTextCard = ({ cardData }) => {
         <img src={files[0] ? URL.createObjectURL(files[0]) : noImg} alt="" />
         <div className="cover"></div>
       </ItemImg>
-      <span className="vegOptions">{vegType}</span>
+      <span className="vegType">{vegType}</span>
       <h3 className="title">
         <a href="/">{storeName}</a>
       </h3>
@@ -29,7 +29,7 @@ const ImgTextCard = ({ cardData }) => {
 export default ImgTextCard;
 
 export const ImgTextCardWrap = styled.div`
-  .vegOptions {
+  .vegType {
     display: inline-block;
     width: 70px;
     padding: 2px 4px;

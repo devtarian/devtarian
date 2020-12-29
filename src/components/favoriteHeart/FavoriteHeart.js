@@ -21,7 +21,7 @@ export default FavoriteHeart;
 const Wrap = styled.button`
   position: absolute;
   top: 86px;
-  right: 73px;
+  right: 0px;
 `;
 
 const EmptyHeart = styled(EmptyHeartSvg)`
