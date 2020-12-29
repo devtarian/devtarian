@@ -17,9 +17,9 @@ const Review = ({ reviewList }) => {
           <div className="innerWrap">
             <div className="leftBox">
               <Profile userData={review.writer} createAt={review.createAt} />
-              <p className="starRating">
+              <div className="starRating">
                 <Stars rate={review.starRating} starsW={100} />
-              </p>
+              </div>
               <p className="title">{review.title}</p>
               <p className="contents">{review.reviewContents}</p>
               <a className="viewMore" href="">

@@ -21,9 +21,9 @@ const ImgTextCard = ({ cardData }) => {
         <a href="/">{storeName}</a>
       </h3>
       <strong className="region">{region}</strong>
-      <p className="starRating">
+      <div className="starRating">
         <Stars rate={starRating} starsW={80} />
-      </p>
+      </div>
       <p className="reviewContents">{reviewContents}</p>
     </ImgTextCardWrap>
   );

@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
 import Stars from '../../stars/Stars';
+import KaKaoMap from '../../Map/KakaoMap';
 import { ViewAllWrap } from '../../carousel/VeiwAll';
 import { ReactComponent as PlusSvg } from '../../../images/icons/add.svg';
 import useViewMore from '../../../hooks/useViewMore';
@@ -47,7 +48,9 @@ const PostTextBox = ({ posts }) => {
             <strong className="infoTitle">영업시간</strong>
             <ul className="infoContents">
               {operatingHours.map((hour) => (
-                <li className="open">{hour}</li>
+                <li key={hour} className="open">
+                  {hour}
+                </li>
               ))}
               <div className="memo">
                 <span>{operatingHoursMemo}</span>
@@ -61,8 +64,8 @@ const PostTextBox = ({ posts }) => {
         <div className="menu textBox" ref={refMoreMenu}>
           <strong className="infoTitle">메뉴</strong>
           <ul className="menuList infoContents">
-            {menuList.map((menu, index) => (
-              <li key={menu.menu + index}>
+            {menuList.map((menu) => (
+              <li key={menu.menu}>
                 <span className="vegType">{menu.vegtype}</span>
                 <span className="name">{menu.menu}</span>
                 <span>{menu.price}원</span>
@@ -80,7 +83,9 @@ const PostTextBox = ({ posts }) => {
           </div>
         </div>
       </div>
-      <div className="map"></div>
+      <div className="map">
+        <KaKaoMap defaultCenter={{ lat: 33.450701, lng: 126.570667 }} />
+      </div>
     </Wrap>
   );
 };
