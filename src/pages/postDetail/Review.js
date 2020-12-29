@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Profile, { ProfileWrap } from '../../components/profile/Profile';
 import Comment from '../../components/comment/Comment';
+import Stars from '../../components/stars/Stars';
 import { ReactComponent as LikeSvg } from '../../images/icons/heart_border-black.svg';
 import { ReactComponent as CommentSvg } from '../../images/icons/insert_comment.svg';
 import noImg from '../../images/noImg.jpg';
@@ -16,7 +17,9 @@ const Review = ({ reviewList }) => {
           <div className="innerWrap">
             <div className="leftBox">
               <Profile userData={review.writer} createAt={review.createAt} />
-              <p className="starRating">{review.starRating}</p>
+              <div className="starRating">
+                <Stars rate={review.starRating} starsW={100} />
+              </div>
               <p className="title">{review.title}</p>
               <p className="contents">{review.reviewContents}</p>
               <a className="viewMore" href="">
