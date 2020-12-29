@@ -2,6 +2,7 @@ import React, { useState, forwardRef } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as EmptyHeartSvg } from '../../images/icons/heart_border-black.svg';
 import { ReactComponent as FullHeartSvg } from '../../images/icons/heart-black.svg';
+import noImg from '../../images/noImg.jpg';
 
 const CircleImgTextCard = forwardRef((props, ref) => {
   const { data } = props;
@@ -18,7 +19,7 @@ const CircleImgTextCard = forwardRef((props, ref) => {
   return (
     <Wrap key={data.id} ref={ref}>
       <div className="imgInfo">
-        <img src={data.imgFileURL} alt="" />
+        <img src={data.files[0] ? URL.createObjectURL(data.files[0]) : noImg} alt="" />
         <div className="cover"></div>
       </div>
       <div className="itemInfo">

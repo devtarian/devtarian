@@ -7,15 +7,16 @@ import { CarouselBtnWrap } from '../carousel/CarouselBtn';
 import detailImg from '../../images/pexels-vanessa-loring-5965952.jpg';
 import noImg from '../../images/noImg.jpg';
 
-const ImgBox = ({ data }) => {
-  console.log('imgData', data);
+const ImgBox = ({ wikiPosts }) => {
+  console.log('wikiPosts', wikiPosts);
   return (
     <Wrap>
       <section className="detailImg">
         <div className="imgContainer">
-          <img src={data.files[0] ? URL.createObjectURL(data.files[0]) : noImg} alt="" />
+          <div className="innerContainer">
+            <img src={wikiPosts[0].files[0] ? URL.createObjectURL(wikiPosts[0].files[0]) : detailImg} alt="" />
+          </div>
         </div>
-
         <SquareCarousel mg={7} />
       </section>
     </Wrap>
@@ -42,11 +43,18 @@ const Wrap = styled.div`
       vertical-align: middle;
       width: 1px;
     }
-    img {
+
+    .innerContainer {
       max-width: 600px;
       max-height: 539px;
-      border-radius: 10px;
       vertical-align: middle;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 10px;
+      }
     }
   }
 

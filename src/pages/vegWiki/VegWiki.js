@@ -6,9 +6,9 @@ import { SelectWrap } from '../../components/form/Select';
 import CircleImgTextCard from '../../components/card/CircleImgTextCard';
 import useActivedBtn from '../../hooks/useActivedBtn';
 
-const VegiWiki = () => {
+const VegiWiki = ({ wikiPosts }) => {
   const [category, setCategory] = useState();
-  const [products, setProducts] = useState(DUMMY_PROD);
+  const [products, setProducts] = useState(wikiPosts);
   const { activedBtn, setActivedBtn, onCheckboxClick } = useActivedBtn();
 
   const onReviewChange = (e) => {
@@ -31,35 +31,66 @@ const VegiWiki = () => {
       const nextProducts = [
         {
           id: 12,
-          imgFileURL: 'http://placehold.it/300x300.png?text=A',
-          category: '과자 / 간식',
+          category: '가공식품',
+          files: [],
           product: '포테토칩',
-          ingredient: ['밀', '대두'],
-          price: 3000,
+          ingredient: '밀/대두',
+          comments: '',
+          commentList: [
+            {
+              id: 0,
+              writer: { name: 'Harry', thumbNail: 'http://placehold.it/40x40.png?text=A' },
+              createAt: '3초 전',
+              contents: '',
+            },
+          ],
         },
         {
-          id: 13,
-          imgFileURL: 'http://placehold.it/300x300.png?text=B',
-          category: '과자',
+          category: '가공식품',
+          files: [],
           product: '포테토칩',
-          ingredient: ['밀', '대두'],
-          price: 3000,
+          ingredient: '밀/대두',
+          comments: '',
+          commentList: [
+            {
+              id: 0,
+              writer: { name: 'Harry', thumbNail: 'http://placehold.it/40x40.png?text=A' },
+              createAt: '3초 전',
+              contents: '',
+            },
+          ],
         },
         {
           id: 14,
-          imgFileURL: 'http://placehold.it/300x300.png?text=C',
-          category: '과자',
+          category: '가공식품',
+          files: [],
           product: '포테토칩',
-          ingredient: ['밀', '대두'],
-          price: 3000,
+          ingredient: '밀/대두',
+          comments: '',
+          commentList: [
+            {
+              id: 0,
+              writer: { name: 'Harry', thumbNail: 'http://placehold.it/40x40.png?text=A' },
+              createAt: '3초 전',
+              contents: '',
+            },
+          ],
         },
         {
           id: 15,
-          imgFileURL: 'http://placehold.it/300x300.png?text=D',
-          category: '과자',
+          category: '가공식품',
+          files: [],
           product: '포테토칩',
-          ingredient: ['밀', '대두'],
-          price: 3000,
+          ingredient: '밀/대두',
+          comments: '',
+          commentList: [
+            {
+              id: 0,
+              writer: { name: 'Harry', thumbNail: 'http://placehold.it/40x40.png?text=A' },
+              createAt: '3초 전',
+              contents: '',
+            },
+          ],
         },
       ];
       return [...prevState, ...nextProducts];
@@ -153,102 +184,3 @@ const Wrap = styled.section`
 const CATEGORIES = ['전체', '가공식품', '과자/간식', '제과/제빵', '음료', '기타'];
 
 const OPTIONS = ['최근등록순', '오름차순', '내림차순'];
-
-const DUMMY_PROD = [
-  {
-    id: 0,
-    imgFileURL: 'http://placehold.it/300x300.png?text=A',
-    category: '과자 / 간식',
-    product: '로투스',
-    ingredient: ['밀', '대두'],
-    price: 3000,
-  },
-  {
-    id: 1,
-    imgFileURL: 'http://placehold.it/300x300.png?text=B',
-    category: '과자',
-    product: '로투스',
-    ingredient: ['밀', '대두'],
-    price: 3000,
-  },
-  {
-    id: 2,
-    imgFileURL: 'http://placehold.it/300x300.png?text=C',
-    category: '과자',
-    product: '로투스',
-    ingredient: ['밀', '대두'],
-    price: 3000,
-  },
-  {
-    id: 3,
-    imgFileURL: 'http://placehold.it/300x300.png?text=D',
-    category: '과자',
-    product: '로투스',
-    ingredient: ['밀', '대두'],
-    price: 3000,
-  },
-  {
-    id: 4,
-    imgFileURL: 'http://placehold.it/300x300.png?text=E',
-    category: '과자',
-    product: '로투스',
-    ingredient: ['밀', '대두'],
-    price: 3000,
-  },
-  {
-    id: 5,
-    imgFileURL: 'http://placehold.it/300x300.png?text=F',
-    category: '과자',
-    product: '로투스',
-    ingredient: ['밀', '대두'],
-    price: 3000,
-  },
-  {
-    id: 6,
-    imgFileURL: 'http://placehold.it/300x300.png?text=G',
-    category: '과자',
-    product: '로투스',
-    ingredient: ['밀', '대두'],
-    price: 3000,
-  },
-  {
-    id: 7,
-    imgFileURL: 'http://placehold.it/300x300.png?text=H',
-    category: '과자',
-    product: '로투스',
-    ingredient: ['밀', '대두'],
-    price: 3000,
-  },
-  {
-    id: 8,
-    imgFileURL: 'http://placehold.it/300x300.png?text=I',
-    category: '과자',
-    product: '로투스',
-    ingredient: ['밀', '대두'],
-    price: 3000,
-  },
-  {
-    id: 9,
-    imgFileURL: 'http://placehold.it/300x300.png?text=J',
-    category: '과자',
-    product: '로투스',
-    ingredient: ['밀', '대두'],
-    price: 3000,
-  },
-  {
-    id: 10,
-    imgFileURL: 'http://placehold.it/300x300.png?text=K',
-    category: '과자',
-    product: '로투스',
-    ingredient: ['밀', '대두'],
-    price: 3000,
-  },
-  {
-    id: 11,
-    imgFileURL: 'http://placehold.it/300x300.png?text=L',
-    category: '과자',
-    product: '로투스',
-    ingredient: ['밀', '대두'],
-    price: 3000,
-  },
-];

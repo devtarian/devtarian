@@ -7,7 +7,7 @@ import GoBackLink from '../../components/goBackLink/GoBackLink';
 const WikiDetail = ({ wikiPosts }) => {
   return (
     <Wrap>
-      <WikiDetailBox data={wikiPosts} />
+      <WikiDetailBox wikiPosts={wikiPosts} />
       <Comment data={wikiPosts.commentList} />
       <GoBackLink to="/vegwiki" />
     </Wrap>

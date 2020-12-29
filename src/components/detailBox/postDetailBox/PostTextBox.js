@@ -2,11 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import { ViewAllWrap } from '../../carousel/VeiwAll';
 
-const PostTextBox = ({ posts }) => {
-  console.log('postsDetailBox', posts);
+const PostTextBox = ({ post }) => {
+  console.log('postDetailBox', post);
   const {
     store: { vegType, starRating, storeName, address, contactNum, operatingHours, operatingHoursMemo, menuList },
-  } = posts;
+  } = post;
   return (
     <Wrap>
       <div className="innerWrap">

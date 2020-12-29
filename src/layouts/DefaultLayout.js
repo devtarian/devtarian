@@ -78,7 +78,7 @@ const DefaultLayout = ({ component: Component, user, ...rest }) => {
   ];
   const [posts, setPosts] = useState(DUMMY_POSTS);
   // const [posts, setPosts] = useState(loadPosts());
-  const [wikiPosts, setWikiPosts] = useState(INIT_WIKIPOST);
+  const [wikiPosts, setWikiPosts] = useState(DUMMY_WIKIPOST);
 
   useEffect(() => {
     savePosts(posts);
@@ -209,7 +209,7 @@ const DefaultLayout = ({ component: Component, user, ...rest }) => {
       render={(props) => (
         <Wrap>
           <Header user={user} />
-          <Component {...props} user={user} posts={posts} onAddPost={onAddPost} />
+          <Component {...props} user={user} posts={posts} wikiPosts={wikiPosts} onAddPost={onAddPost} />
         </Wrap>
       )}
     />
@@ -475,8 +475,8 @@ const DUMMY_WIKIPOST = [
     id: 0,
     category: '가공식품',
     files: [],
-    product: '',
-    ingredient: '',
+    product: '로투스',
+    ingredient: '밀/대두',
     comments: '',
     commentList: [
       {
@@ -491,8 +491,8 @@ const DUMMY_WIKIPOST = [
     id: 1,
     category: '가공식품',
     files: [],
-    product: '',
-    ingredient: '',
+    product: '로투스',
+    ingredient: '밀/대두',
     comments: '',
     commentList: [
       {
@@ -507,8 +507,8 @@ const DUMMY_WIKIPOST = [
     id: 2,
     category: '가공식품',
     files: [],
-    product: '',
-    ingredient: '',
+    product: '로투스',
+    ingredient: '밀/대두',
     comments: '',
     commentList: [
       {
@@ -523,8 +523,8 @@ const DUMMY_WIKIPOST = [
     id: 3,
     category: '가공식품',
     files: [],
-    product: '',
-    ingredient: '',
+    product: '로투스',
+    ingredient: '밀/대두',
     comments: '',
     commentList: [
       {
@@ -539,13 +539,13 @@ const DUMMY_WIKIPOST = [
     id: 4,
     category: '가공식품',
     files: [],
-    product: '',
-    ingredient: '',
+    product: '로투스',
+    ingredient: '밀/대두',
     comments: '',
     commentList: [
       {
         id: 0,
-        writer: { name: 'Harry', thumbNail: '' },
+        writer: { name: 'Harry', thumbNail: 'http://placehold.it/40x40.png?text=A' },
         createAt: '3초 전',
         contents: '',
       },
