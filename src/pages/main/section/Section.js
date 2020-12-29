@@ -39,7 +39,7 @@ const DUMMY_REVIEWS = [
       type: 'VG',
       storeName: '발우공양',
       region: '서울',
-      starRating: '⭐⭐⭐⭐⭐',
+      starRating: 4.5,
       contents:
         'Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple',
     },
@@ -56,7 +56,7 @@ const DUMMY_REVIEWS = [
       type: 'VG',
       storeName: '발우공양',
       region: '서울',
-      starRating: '⭐⭐⭐⭐⭐',
+      starRating: 4.5,
       contents:
         'Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple',
     },
@@ -73,7 +73,7 @@ const DUMMY_REVIEWS = [
       type: 'VG',
       storeName: '발우공양',
       region: '서울',
-      starRating: '⭐⭐⭐⭐⭐',
+      starRating: 4.5,
       contents:
         'Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple',
     },
@@ -90,7 +90,7 @@ const DUMMY_REVIEWS = [
       type: 'VG',
       storeName: '발우공양',
       region: '서울',
-      starRating: '⭐⭐⭐⭐⭐',
+      starRating: 4.5,
       contents:
         'Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple',
     },
@@ -107,7 +107,7 @@ const DUMMY_REVIEWS = [
       type: 'VG',
       storeName: '발우공양',
       region: '서울',
-      starRating: '⭐⭐⭐⭐⭐',
+      starRating: 4.5,
       contents:
         'Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple',
     },
@@ -124,7 +124,7 @@ const DUMMY_REVIEWS = [
       type: 'VG',
       storeName: '발우공양',
       region: '서울',
-      starRating: '⭐⭐⭐⭐⭐',
+      starRating: 4.5,
       contents:
         'Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple',
     },
@@ -141,7 +141,7 @@ const DUMMY_REVIEWS = [
       type: 'VG',
       storeName: '발우공양',
       region: '서울',
-      starRating: '⭐⭐⭐⭐⭐',
+      starRating: 4.5,
       contents:
         'Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple',
     },
@@ -158,7 +158,7 @@ const DUMMY_REVIEWS = [
       type: 'VG',
       storeName: '발우공양',
       region: '서울',
-      starRating: '⭐⭐⭐⭐⭐',
+      starRating: 4.5,
       contents:
         'Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple',
     },
@@ -175,7 +175,7 @@ const DUMMY_REVIEWS = [
       type: 'VG',
       storeName: '발우공양',
       region: '서울',
-      starRating: '⭐⭐⭐⭐⭐',
+      starRating: 4.5,
       contents:
         'Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple',
     },
@@ -192,7 +192,7 @@ const DUMMY_REVIEWS = [
       type: 'VG',
       storeName: '발우공양',
       region: '서울',
-      starRating: '⭐⭐⭐⭐⭐',
+      starRating: 4.5,
       contents:
         'Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple',
     },
@@ -209,7 +209,7 @@ const DUMMY_REVIEWS = [
       type: 'VG',
       storeName: '발우공양',
       region: '서울',
-      starRating: '⭐⭐⭐⭐⭐',
+      starRating: 4.5,
       contents:
         'Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple',
     },

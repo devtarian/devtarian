@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Stars from '../stars/Stars';
 import noImg from '../../images/noImg.jpg';
 
 const ImgTextCard = ({ cardData }) => {
@@ -20,8 +21,10 @@ const ImgTextCard = ({ cardData }) => {
         <a href="/">{storeName}</a>
       </h3>
       <strong className="region">{region}</strong>
-      <span className="starRating">{starRating}</span>
-      <p>{reviewContents}</p>
+      <p className="starRating">
+        <Stars rate={starRating} starsW={80} />
+      </p>
+      <p className="reviewContents">{reviewContents}</p>
     </ImgTextCardWrap>
   );
 };
@@ -59,12 +62,16 @@ export const ImgTextCardWrap = styled.div`
     color: ${(props) => props.theme.color[1]};
   }
   .starRating {
-    width: 100%;
+    overflow: hidden;
+    li {
+      margin: 0;
+    }
   }
-  p {
+  .reviewContents {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
+    margin-top: 0.25rem;
     overflow: hidden;
     text-overflow: ellipsis;
   }

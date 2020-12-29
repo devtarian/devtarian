@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
+import Stars from '../../stars/Stars';
 import { ViewAllWrap } from '../../carousel/VeiwAll';
 import { ReactComponent as PlusSvg } from '../../../images/icons/add.svg';
 import useViewMore from '../../../hooks/useViewMore';
@@ -33,7 +34,9 @@ const PostTextBox = ({ posts }) => {
         <h2 className="store">{storeName}</h2>
         <div className="starRating textBox">
           <strong className="infoTitle">별점</strong>
-          <span className="infoContents">{starRating}</span>
+          <span className="infoContents">
+            <Stars rate={starRating} starsW={100} />
+          </span>
         </div>
         <div className="contactNum textBox">
           <strong className="infoTitle">전화번호</strong>
@@ -49,7 +52,9 @@ const PostTextBox = ({ posts }) => {
               <div className="memo">
                 <span>{operatingHoursMemo}</span>
               </div>
-              <ViewMoreBtn ref={refMoreHoursBtn} onMouseOver={handleMoreBtnHover} onMouseOut={handleMoreBtnHover} />
+              {operatingHours.length > 3 && (
+                <ViewMoreBtn ref={refMoreHoursBtn} onMouseOver={handleMoreBtnHover} onMouseOut={handleMoreBtnHover} />
+              )}
             </ul>
           </div>
         </div>
@@ -63,7 +68,9 @@ const PostTextBox = ({ posts }) => {
                 <span>{menu.price}원</span>
               </li>
             ))}
-            <ViewMoreBtn ref={refMoreMenuBtn} onMouseOver={handleMoreMenuHover} onMouseOut={handleMoreMenuHover} />
+            {menuList.length > 3 && (
+              <ViewMoreBtn ref={refMoreMenuBtn} onMouseOver={handleMoreMenuHover} onMouseOut={handleMoreMenuHover} />
+            )}
           </ul>
         </div>
         <div className="address textBox">
@@ -177,16 +184,21 @@ const Wrap = styled.div`
         overflow: hidden;
       }
     }
-    .map {
-      width: 100%;
-      height: 264px;
-      margin-top: 30px;
-      background-color: rgba(0, 0, 0, 0.1);
-    }
 
     ${ViewAllWrap} {
       display: none;
     }
+  }
+
+  .map {
+    z-index: 3;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    width: 530px;
+    height: 200px;
+    margin-top: 30px;
+    background-color: rgba(0, 0, 0, 0.1);
   }
 `;
 
