@@ -3,13 +3,14 @@ import styled from 'styled-components';
 import ImgCarousel from '../carousel/imgCarousel/ImgCarousel';
 import { CarouselBtnWrap } from '../carousel/CarouselBtn';
 import noImg from '../../images/noImg.jpg';
+import dummyImg from '../../images/pexels-vanessa-loring-5965952.jpg';
 
 const ImgBox = ({ data }) => {
   return (
     <Wrap>
       <section className="detailImg">
         <div className="imgContainer">
-          <img src={data.files[0] ? URL.createObjectURL(data.files[0]) : noImg} alt="" />
+          <img src={data.files[0] ? URL.createObjectURL(data.files[0]) : dummyImg} alt="" />
         </div>
         <ImgCarousel carouselData={data.files} mg={7} />
       </section>

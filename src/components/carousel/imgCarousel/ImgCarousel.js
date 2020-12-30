@@ -7,7 +7,6 @@ import useCarousel from '../../../hooks/useCarousel';
 const ImgCarousel = ({ carouselData, mg }) => {
   const { value, onCarouselBtnClick } = useCarousel(mg);
   const { refCarouselUl, refCarouselLi } = value;
-  console.log('carouselData', carouselData, mg);
   return (
     <Wrap>
       <CarouselUl ref={refCarouselUl} value={value}>

@@ -2,14 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 
 const WikiTextBox = ({ wikiPost }) => {
+  console.log(wikiPost);
+  const { category, product, ingredient } = wikiPost;
   return (
     <Wrap>
       <div className="innerWrap">
-        <h2 className="category">과자/스낵</h2>
-        <h3 className="product">로투스</h3>
+        <h2 className="category">{category}</h2>
+        <h3 className="product">{product}</h3>
         <div className="ingredient textBox">
           <strong className="infoTitle">성분</strong>
-          <span className="infoContents">밀, 대두</span>
+          <span className="infoContents">{ingredient}</span>
         </div>
       </div>
     </Wrap>
