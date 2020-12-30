@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Profile, { ProfileWrap } from '../../components/profile/Profile';
 import Comment from '../../components/comment/Comment';
-import CommnetForm from '../../components/comment/CommentForm';
+import CommentForm from '../../components/comment/CommentForm';
 import Stars from '../../components/stars/Stars';
 import { ReactComponent as LikeSvg } from '../../images/icons/heart_border-black.svg';
 import { ReactComponent as CommentSvg } from '../../images/icons/insert_comment.svg';
@@ -50,7 +50,7 @@ const Review = ({ reviewList }) => {
               <Comment key={comment.id} data={comment} />
             ))}
           </ul>
-          <CommnetForm />
+          <CommentForm />
         </div>
       ))}
     </Wrap>
