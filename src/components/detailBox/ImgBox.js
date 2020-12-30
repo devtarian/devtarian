@@ -1,22 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
-import SquareCarousel, { SquareCarouselWrap, CarouselUl } from '../carousel/squareCarousel/SquareCarousel';
-import { ImgCardWrap } from '../card/ImgCard';
-import { ViewAllWrap } from '../carousel/VeiwAll';
+import ImgCarousel from '../carousel/imgCarousel/ImgCarousel';
 import { CarouselBtnWrap } from '../carousel/CarouselBtn';
-import detailImg from '../../images/pexels-vanessa-loring-5965952.jpg';
 import noImg from '../../images/noImg.jpg';
 
 const ImgBox = ({ data }) => {
-  console.log('imgData', data);
   return (
     <Wrap>
       <section className="detailImg">
         <div className="imgContainer">
           <img src={data.files[0] ? URL.createObjectURL(data.files[0]) : noImg} alt="" />
         </div>
-
-        <SquareCarousel mg={7} />
+        <ImgCarousel carouselData={data.files} mg={7} />
       </section>
     </Wrap>
   );
@@ -50,40 +45,9 @@ const Wrap = styled.div`
     }
   }
 
-  ${SquareCarouselWrap} {
-    bottom: -13px;
-    height: 135px;
-    h2 {
-      display: none;
-    }
-  }
-
-  ${CarouselUl} {
-  }
-
-  ${ImgCardWrap} {
-    width: 136px;
-
-    img {
-      width: 136px;
-      height: 136px;
-      border-radius: 10px;
-    }
-    .cover {
-      width: 136px;
-      height: 136px;
-    }
-    span,
-    h3 {
-      display: none;
-    }
-  }
   ${CarouselBtnWrap} {
     button {
       top: 17%;
     }
-  }
-  ${ViewAllWrap} {
-    display: none;
   }
 `;

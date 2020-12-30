@@ -1,12 +1,13 @@
 import React, { forwardRef } from 'react';
 import styled from 'styled-components';
+import noImg from '../../images/noImg.jpg';
 
 const ImgCard = forwardRef((props, ref) => {
   const { data, value } = props;
 
   return (
     <ImgCardWrap value={value} ref={ref}>
-      <img src={data.src} alt="" />
+      <img src={data.files[0] ? URL.createObjectURL(data.files[0]) : noImg} alt="" />
       <div className="cover">
         <div className="itemInfo">
           <span>{data.category}</span>

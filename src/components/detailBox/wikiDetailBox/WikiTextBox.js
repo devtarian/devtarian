@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const WikiTextBox = () => {
+const WikiTextBox = ({ wikiPost }) => {
   return (
     <Wrap>
       <div className="innerWrap">

@@ -7,8 +7,8 @@ import FavoriteHeart from '../../favoriteHeart/FavoriteHeart';
 const WikiDetailBox = ({ wikiPosts }) => {
   return (
     <Wrap>
-      <ImgBox data={wikiPosts[0]} />
-      <WikiTextBox data={wikiPosts} />
+      <ImgBox data={wikiPosts} />
+      <WikiTextBox wikiPost={wikiPosts} />
       <FavoriteHeart data={wikiPosts} />
     </Wrap>
   );
