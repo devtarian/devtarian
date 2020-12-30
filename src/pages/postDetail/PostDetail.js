@@ -10,7 +10,6 @@ const PostDetail = ({ posts }) => {
       <PostDetailBox post={posts[0]} />
       <div className="review">
         <EditBtn to="/review" innerText="리뷰 작성" />
-        {posts.map}
         <Review reviewList={posts[0].reviewList} />
       </div>
     </Wrap>

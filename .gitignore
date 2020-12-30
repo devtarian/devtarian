@@ -23,3 +23,5 @@ yarn-debug.log*
 yarn-error.log*
 
 .eslintcache
+
+개발일지.md

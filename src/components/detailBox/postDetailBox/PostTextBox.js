@@ -1,7 +1,7 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Stars from '../../stars/Stars';
-import KaKaoMap from '../../Map/KakaoMap';
+import KakaoMap from '../../Map/KakaoMap';
 import { ViewAllWrap } from '../../carousel/VeiwAll';
 import { ReactComponent as PlusSvg } from '../../../images/icons/add.svg';
 import useViewMore from '../../../hooks/useViewMore';
@@ -11,22 +11,8 @@ const PostTextBox = ({ post }) => {
   const {
     store: { vegType, starRating, storeName, address, contactNum, operatingHours, operatingHoursMemo, menuList },
   } = post;
-  const refMoreHoursBtn = useRef(null);
-  const refMoreHours = useRef(null);
-  const refMoreMenuBtn = useRef(null);
-  const refMoreMenu = useRef(null);
-  let handleMoreBtnHover = useViewMore(refMoreHoursBtn, refMoreHours);
-
-  const handleMoreMenuHover = () => {
-    let zIndex0 = refMoreMenu.current.style.zIndex === '';
-    zIndex0 ? (refMoreMenu.current.style.zIndex = '1000') : (refMoreMenu.current.style.zIndex = '');
-
-    let rotate45 = refMoreMenuBtn.current.style.transform === 'rotate(45deg)';
-    if (refMoreMenuBtn.current.style.transform === '') refMoreMenuBtn.current.style.transform = 'rotate(45deg)';
-    rotate45
-      ? (refMoreMenuBtn.current.style.transform = 'rotate(0deg)')
-      : (refMoreMenuBtn.current.style.transform = 'rotate(45deg)');
-  };
+  const hours = useViewMore();
+  const menu = useViewMore();
 
   return (
     <Wrap>
@@ -43,7 +29,7 @@ const PostTextBox = ({ post }) => {
           <strong className="infoTitle">전화번호</strong>
           <span className="infoContents">{contactNum}</span>
         </div>
-        <div className="openHoursWrap" ref={refMoreHours}>
+        <div className="openHoursWrap" ref={hours.refMore}>
           <div className="openHours textBox">
             <strong className="infoTitle">영업시간</strong>
             <ul className="infoContents">
@@ -56,12 +42,16 @@ const PostTextBox = ({ post }) => {
                 <span>{operatingHoursMemo}</span>
               </div>
               {operatingHours.length > 3 && (
-                <ViewMoreBtn ref={refMoreHoursBtn} onMouseOver={handleMoreBtnHover} onMouseOut={handleMoreBtnHover} />
+                <ViewMoreBtn
+                  ref={hours.refBtn}
+                  onMouseOver={hours.handleMoreBtnHover}
+                  onMouseOut={hours.handleMoreBtnHover}
+                />
               )}
             </ul>
           </div>
         </div>
-        <div className="menu textBox" ref={refMoreMenu}>
+        <div className="menu textBox" ref={menu.refMore}>
           <strong className="infoTitle">메뉴</strong>
           <ul className="menuList infoContents">
             {menuList.map((menu) => (
@@ -72,7 +62,11 @@ const PostTextBox = ({ post }) => {
               </li>
             ))}
             {menuList.length > 3 && (
-              <ViewMoreBtn ref={refMoreMenuBtn} onMouseOver={handleMoreMenuHover} onMouseOut={handleMoreMenuHover} />
+              <ViewMoreBtn
+                ref={menu.refBtn}
+                onMouseOver={menu.handleMoreBtnHover}
+                onMouseOut={menu.handleMoreBtnHover}
+              />
             )}
           </ul>
         </div>
@@ -82,9 +76,7 @@ const PostTextBox = ({ post }) => {
             <span className="infoContents">{address}</span>
           </div>
         </div>
-      </div>
-      <div className="map">
-        <KaKaoMap defaultCenter={{ lat: 33.450701, lng: 126.570667 }} />
+        <StyledMap defaultCenter={{ lat: 33.450701, lng: 126.570667 }} />
       </div>
     </Wrap>
   );
@@ -158,8 +150,9 @@ const Wrap = styled.div`
     .menu {
       z-index: 1;
       position: absolute;
-      top: 369px;
+      top: 362px;
       min-height: 123px;
+      padding-top: 10px;
       background-color: ${(props) => props.theme.background[0]};
       transition: all 0.2s;
       .menuList {
@@ -182,8 +175,9 @@ const Wrap = styled.div`
     .address {
       z-index: 2;
       position: absolute;
-      top: 453px;
+      top: 455px;
       min-height: 123px;
+      padding-top: 10px;
       background-color: ${(props) => props.theme.background[0]};
       div {
         overflow: hidden;
@@ -193,17 +187,6 @@ const Wrap = styled.div`
     ${ViewAllWrap} {
       display: none;
     }
-  }
-
-  .map {
-    z-index: 3;
-    position: absolute;
-    bottom: 0px;
-    right: 0px;
-    width: 530px;
-    height: 200px;
-    margin-top: 30px;
-    background-color: rgba(0, 0, 0, 0.1);
   }
 `;
 
@@ -216,4 +199,14 @@ const ViewMoreBtn = styled(PlusSvg)`
   height: 20px;
   cursor: pointer;
   transition: all 0.1s ease-in;
+`;
+
+const StyledMap = styled(KakaoMap)`
+  z-index: 3;
+  position: absolute;
+  bottom: -220px;
+  right: 0px;
+  width: 530px;
+  height: 200px;
+  margin-top: 30px;
 `;
