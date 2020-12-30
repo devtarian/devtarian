@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Stars from '../stars/Stars';
 import noImg from '../../images/noImg.jpg';
 
 const ImgTextCard = ({ cardData }) => {
@@ -15,13 +16,15 @@ const ImgTextCard = ({ cardData }) => {
         <img src={files[0] ? URL.createObjectURL(files[0]) : noImg} alt="" />
         <div className="cover"></div>
       </ItemImg>
-      <span className="vegOptions">{vegType}</span>
+      <span className="vegType">{vegType}</span>
       <h3 className="title">
         <a href="/">{storeName}</a>
       </h3>
       <strong className="region">{region}</strong>
-      <span className="starRating">{starRating}</span>
-      <p>{reviewContents}</p>
+      <div className="starRating">
+        <Stars rate={starRating} starsW={80} />
+      </div>
+      <p className="reviewContents">{reviewContents}</p>
     </ImgTextCardWrap>
   );
 };
@@ -29,7 +32,7 @@ const ImgTextCard = ({ cardData }) => {
 export default ImgTextCard;
 
 export const ImgTextCardWrap = styled.div`
-  .vegOptions {
+  .vegType {
     display: inline-block;
     width: 70px;
     padding: 2px 4px;
@@ -59,12 +62,16 @@ export const ImgTextCardWrap = styled.div`
     color: ${(props) => props.theme.color[1]};
   }
   .starRating {
-    width: 100%;
+    overflow: hidden;
+    li {
+      margin: 0;
+    }
   }
-  p {
+  .reviewContents {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
+    margin-top: 0.25rem;
     overflow: hidden;
     text-overflow: ellipsis;
   }
