@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import PostDetailBox from '../../components/detailBox/postDetailBox/PostDetailBox';
 import Review from './Review';
 import EditBtn from '../../components/editBtn/EditBtn';
+import GoBackLink from '../../components/goBackLink/GoBackLink';
 
 const PostDetail = ({ posts }) => {
   return (
@@ -10,9 +11,9 @@ const PostDetail = ({ posts }) => {
       <PostDetailBox post={posts[0]} />
       <div className="review">
         <EditBtn to="/review" innerText="리뷰 작성" />
-        {posts.map}
         <Review reviewList={posts[0].reviewList} />
       </div>
+      <GoBackLink to="/main" innerText="메인으로" />
     </Wrap>
   );
 };

@@ -1,31 +1,34 @@
 import React from 'react';
 import styled from 'styled-components';
-import ImgCarousel from '../carousel/imgCarousel/ImgCarousel';
-import { CarouselBtnWrap } from '../carousel/CarouselBtn';
 import noImg from '../../images/noImg.jpg';
 import dummyImg from '../../images/pexels-vanessa-loring-5965952.jpg';
 
 const ImgBox = ({ data }) => {
   return (
     <Wrap>
-      <section className="detailImg">
-        <div className="imgContainer">
-          <img src={data.files[0] ? URL.createObjectURL(data.files[0]) : dummyImg} alt="" />
-        </div>
-        <ImgCarousel carouselData={data.files} mg={7} />
-      </section>
+      <div className="largeImg">
+        <img src={data.files[0] ? URL.createObjectURL(data.files[0]) : dummyImg} alt="" />
+      </div>
+      <ul className="smallImgs">
+        {[...new Array(5)].map((_, index) => (
+          <li key={index}>
+            <img src={data[index] ? URL.createObjectURL(data[index]) : noImg} alt="" />
+            <div className="cover"></div>
+          </li>
+        ))}
+      </ul>
     </Wrap>
   );
 };
 
 export default ImgBox;
 
-const Wrap = styled.div`
+const Wrap = styled.section`
   float: left;
   width: 600px;
   height: 700px;
 
-  .imgContainer {
+  .largeImg {
     width: 100%;
     height: 539px;
     white-space: nowrap;
@@ -46,9 +49,37 @@ const Wrap = styled.div`
     }
   }
 
-  ${CarouselBtnWrap} {
-    button {
-      top: 17%;
+  .smallImgs {
+    width: 100%;
+    margin-top: 29px;
+    position: absolute;
+
+    li {
+      display: inline-block;
+      width: 114px;
+      height: 114px;
+      margin: 0 3px 40px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 10px;
+      }
+      .cover {
+        z-index: 100;
+        position: absolute;
+        top: 0;
+        width: 114px;
+        height: 114px;
+        border-radius: 10px;
+        background-color: ${(props) => props.theme.green[1]};
+        opacity: 0;
+        transition: all 0.3s ease-in-out;
+      }
+      &:hover .cover {
+        opacity: 0.8;
+      }
     }
   }
 `;

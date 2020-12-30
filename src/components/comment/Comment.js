@@ -16,15 +16,13 @@ const Comment = ({ data }) => {
 export default Comment;
 
 const Wrap = styled.li`
-  li {
-    padding: 5px 0 10px;
-    overflow: hidden;
-    border-bottom: 1px solid ${(props) => props.theme.background[2]};
+  padding: 5px 0 10px;
+  overflow: hidden;
+  border-bottom: 1px solid ${(props) => props.theme.background[2]};
 
-    ${ProfileWrap} {
-      a {
-        color: ${(props) => props.theme.color[0]};
-      }
+  ${ProfileWrap} {
+    a {
+      color: ${(props) => props.theme.color[0]};
     }
   }
   .comment {
