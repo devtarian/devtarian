@@ -31,6 +31,7 @@ const Wrap = styled.div`
   .innerContainer {
     width: 768px;
     margin: 0 auto 25px;
+    padding-top: 15px;
     border-radius: 10px;
     background-color: ${(props) => props.theme.background[1]};
     -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
