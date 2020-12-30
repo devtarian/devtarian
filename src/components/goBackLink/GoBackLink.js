@@ -2,10 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const GoBackLink = ({ to }) => {
+const GoBackLink = ({ to, innerText }) => {
   return (
     <GoBackWrap>
-      <Link to={to}>&lt; 목록으로</Link>
+      <Link to={to}>&lt; {innerText}</Link>
     </GoBackWrap>
   );
 };
