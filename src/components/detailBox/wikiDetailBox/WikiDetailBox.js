@@ -4,12 +4,12 @@ import ImgBox from '../ImgBox';
 import WikiTextBox from './WikiTextBox';
 import FavoriteHeart from '../../favoriteHeart/FavoriteHeart';
 
-const WikiDetailBox = () => {
+const WikiDetailBox = ({ wikiPosts }) => {
   return (
     <Wrap>
-      <ImgBox />
-      <WikiTextBox />
-      <FavoriteHeart />
+      <ImgBox data={wikiPosts} />
+      <WikiTextBox wikiPost={wikiPosts} />
+      <FavoriteHeart data={wikiPosts} />
     </Wrap>
   );
 };

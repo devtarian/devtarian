@@ -4,12 +4,12 @@ import ImgBox from '../ImgBox';
 import PostTextBox from './PostTextBox';
 import FavoriteHeart from '../../favoriteHeart/FavoriteHeart';
 
-const PostDetailBox = ({ posts }) => {
+const PostDetailBox = ({ post }) => {
   return (
     <Wrap>
-      <ImgBox posts={posts} />
-      <PostTextBox posts={posts} />
-      <FavoriteHeart posts={posts} />
+      <ImgBox data={post.store} />
+      <PostTextBox post={post} />
+      <FavoriteHeart data={post} />
     </Wrap>
   );
 };

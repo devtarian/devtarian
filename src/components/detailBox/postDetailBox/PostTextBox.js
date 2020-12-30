@@ -6,11 +6,11 @@ import { ViewAllWrap } from '../../carousel/VeiwAll';
 import { ReactComponent as PlusSvg } from '../../../images/icons/add.svg';
 import useViewMore from '../../../hooks/useViewMore';
 
-const PostTextBox = ({ posts }) => {
-  console.log('postsDetailBox', posts);
+const PostTextBox = ({ post }) => {
+  console.log('postDetailBox', post);
   const {
     store: { vegType, starRating, storeName, address, contactNum, operatingHours, operatingHoursMemo, menuList },
-  } = posts;
+  } = post;
   const refMoreHoursBtn = useRef(null);
   const refMoreHours = useRef(null);
   const refMoreMenuBtn = useRef(null);

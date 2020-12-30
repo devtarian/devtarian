@@ -2,8 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import Profile, { ProfileWrap } from '../profile/Profile';
 
-const Comment = ({ commentData }) => {
-  const { writer, createAt, commentContents } = commentData;
+const Comment = ({ data }) => {
+  console.log('commentData', data);
+  const { writer, createAt, commentContents } = data;
   return (
     <Wrap>
       <Profile userData={writer} createAt={createAt} />

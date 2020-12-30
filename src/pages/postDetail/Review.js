@@ -46,7 +46,7 @@ const Review = ({ reviewList }) => {
           </div>
           <ul className="comments">
             {review.commentList.map((comment) => (
-              <Comment key={comment.id} commentData={comment} />
+              <Comment key={comment.id} data={comment} />
             ))}
           </ul>
           <div className="writeComments">

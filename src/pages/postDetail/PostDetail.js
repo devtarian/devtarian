@@ -7,7 +7,7 @@ import EditBtn from '../../components/editBtn/EditBtn';
 const PostDetail = ({ posts }) => {
   return (
     <Wrap>
-      <PostDetailBox posts={posts[0]} />
+      <PostDetailBox post={posts[0]} />
       <div className="review">
         <EditBtn to="/review" innerText="리뷰 작성" />
         {posts.map}
