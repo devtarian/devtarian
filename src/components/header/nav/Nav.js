@@ -25,6 +25,7 @@ const Nav = ({ user, recentKeywords, onAddRecentKeywords }) => {
       </Link>
     );
   };
+
   return (
     <Wrap>
       <Navi>
@@ -50,9 +51,7 @@ const Nav = ({ user, recentKeywords, onAddRecentKeywords }) => {
             />
           )}
         </li>
-        <li li className="navItem sign">
-          {renderUserProfile()}
-        </li>
+        <li className="navItem">{renderUserProfile()}</li>
       </Navi>
     </Wrap>
   );
