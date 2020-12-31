@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import Stars from '../stars/Stars';
+import FavoriteHeart, { FavoriteWrap, EmptyHeart } from '../../components/favoriteHeart/FavoriteHeart';
 import noImg from '../../images/noImg.jpg';
 
 const ImgTextCard = ({ cardData }) => {
@@ -25,6 +26,7 @@ const ImgTextCard = ({ cardData }) => {
         <Stars rate={starRating} starsW={80} />
       </div>
       <p className="reviewContents">{reviewContents}</p>
+      <FavoriteHeart data={cardData} />
     </ImgTextCardWrap>
   );
 };
@@ -32,6 +34,8 @@ const ImgTextCard = ({ cardData }) => {
 export default ImgTextCard;
 
 export const ImgTextCardWrap = styled.div`
+  position: relative;
+
   .vegType {
     display: inline-block;
     width: 70px;
@@ -74,6 +78,14 @@ export const ImgTextCardWrap = styled.div`
     margin-top: 0.25rem;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+
+  ${FavoriteWrap} {
+    top: 10px;
+    right: 10px;
+  }
+  ${EmptyHeart} {
+    fill: ${(props) => props.theme.color[2]};
   }
 `;
 
