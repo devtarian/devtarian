@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PostDetailBox from '../../components/detailBox/postDetailBox/PostDetailBox';
-import Review from './Review';
+import Review from './review/Review';
 import EditBtn from '../../components/editBtn/EditBtn';
 import GoBackLink from '../../components/goBackLink/GoBackLink';
 

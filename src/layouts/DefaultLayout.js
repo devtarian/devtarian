@@ -32,7 +32,6 @@ const DefaultLayout = ({ component: Component, user, ...rest }) => {
           },
         ],
       },
-      reviews: 0,
       reviewList: [
         {
           id: 0,
@@ -44,7 +43,6 @@ const DefaultLayout = ({ component: Component, user, ...rest }) => {
             'Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple',
           likes: 1,
           likesOfMe: false,
-          comments: 1,
           commentList: [
             {
               id: 0,
@@ -65,7 +63,6 @@ const DefaultLayout = ({ component: Component, user, ...rest }) => {
       files: [],
       product: '',
       ingredient: '',
-      comments: '',
       commentList: [
         {
           id: 0,
@@ -128,7 +125,7 @@ const DefaultLayout = ({ component: Component, user, ...rest }) => {
           },
         ],
       },
-      reviews: 0,
+
       reviewList: [],
     };
     setPosts([newPost, ...posts]);
@@ -151,7 +148,6 @@ const DefaultLayout = ({ component: Component, user, ...rest }) => {
         contents,
         likes,
         likesOfMe,
-        comments,
         commentList,
       },
       ...post.reviews,
@@ -274,19 +270,23 @@ const DUMMY_POSTS = [
         },
       ],
     },
-    reviews: 0,
     reviewList: [
       {
         id: 0,
         writer: { name: 'Harry', thumbNail: '' },
-        files: [],
+        files: [
+          'http://placehold.it/150x150.png?text=A',
+          'http://placehold.it/150x150.png?text=B',
+          'http://placehold.it/150x150.png?text=C',
+          'http://placehold.it/150x150.png?text=D',
+          'http://placehold.it/150x150.png?text=E',
+        ],
         starRating: 5.0,
         title: '와!',
         reviewContents:
           'Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple',
         likes: 1,
         likesOfMe: false,
-        comments: 1,
         commentList: [
           {
             id: 0,
@@ -323,7 +323,6 @@ const DUMMY_POSTS = [
         },
       ],
     },
-    reviews: 0,
     reviewList: [
       {
         id: 0,
@@ -335,7 +334,6 @@ const DUMMY_POSTS = [
           'Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple',
         likes: 1,
         likesOfMe: false,
-        comments: 1,
         commentList: [
           {
             id: 0,
@@ -372,7 +370,6 @@ const DUMMY_POSTS = [
         },
       ],
     },
-    reviews: 0,
     reviewList: [
       {
         id: 0,
@@ -384,7 +381,6 @@ const DUMMY_POSTS = [
           'Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple',
         likes: 1,
         likesOfMe: false,
-        comments: 1,
         commentList: [
           {
             id: 0,
@@ -421,7 +417,6 @@ const DUMMY_POSTS = [
         },
       ],
     },
-    reviews: 0,
     reviewList: [
       {
         id: 0,
@@ -433,7 +428,6 @@ const DUMMY_POSTS = [
           'Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple',
         likes: 1,
         likesOfMe: false,
-        comments: 1,
         commentList: [
           {
             id: 0,
@@ -470,7 +464,6 @@ const DUMMY_POSTS = [
         },
       ],
     },
-    reviews: 0,
     reviewList: [
       {
         id: 0,
@@ -482,7 +475,6 @@ const DUMMY_POSTS = [
           'Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple',
         likes: 1,
         likesOfMe: false,
-        comments: 1,
         commentList: [
           {
             id: 0,
@@ -503,7 +495,6 @@ const DUMMY_WIKIPOST = [
     files: [],
     product: '로투스',
     ingredient: '밀/대두',
-    comments: '',
     commentList: [
       {
         id: 0,
@@ -525,7 +516,6 @@ const DUMMY_WIKIPOST = [
     files: [],
     product: '로투스',
     ingredient: '밀/대두',
-    comments: '',
     commentList: [
       {
         id: 0,
@@ -541,7 +531,6 @@ const DUMMY_WIKIPOST = [
     files: [],
     product: '로투스',
     ingredient: '밀/대두',
-    comments: '',
     commentList: [
       {
         id: 0,
@@ -557,7 +546,6 @@ const DUMMY_WIKIPOST = [
     files: [],
     product: '로투스',
     ingredient: '밀/대두',
-    comments: '',
     commentList: [
       {
         id: 0,
@@ -573,7 +561,6 @@ const DUMMY_WIKIPOST = [
     files: [],
     product: '로투스',
     ingredient: '밀/대두',
-    comments: '',
     commentList: [
       {
         id: 0,

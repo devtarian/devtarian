@@ -5,12 +5,12 @@ import CarouselBtn, { CarouselBtnWrap } from '../CarouselBtn';
 import ViewAll from '../VeiwAll';
 import useCarousel from '../../../hooks/useCarousel';
 
-const InfoCoverCarousel = ({ carouselData, mg }) => {
+const CoverCarousel = ({ carouselData, mg }) => {
   const { value, onCarouselBtnClick } = useCarousel(mg);
   const { refCarouselUl, refCarouselLi } = value;
-  console.log('carouselData', carouselData);
+
   return (
-    <InfoCoverCarouselWrap>
+    <CoverCarouselWrap>
       <h2>비건위키</h2>
       <CarouselUl ref={refCarouselUl} value={value}>
         {carouselData.map((data, index) => (
@@ -19,13 +19,13 @@ const InfoCoverCarousel = ({ carouselData, mg }) => {
       </CarouselUl>
       <CarouselBtn value={value} onCarouselBtnClick={onCarouselBtnClick} />
       <ViewAll />
-    </InfoCoverCarouselWrap>
+    </CoverCarouselWrap>
   );
 };
 
-export default InfoCoverCarousel;
+export default CoverCarousel;
 
-export const InfoCoverCarouselWrap = styled.section`
+export const CoverCarouselWrap = styled.section`
   position: relative;
   width: 100%;
   height: 421px;

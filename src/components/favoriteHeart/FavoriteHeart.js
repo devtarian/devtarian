@@ -27,10 +27,12 @@ const Wrap = styled.button`
 const EmptyHeart = styled(EmptyHeartSvg)`
   width: 25px;
   height: 25px;
+  cursor: pointer;
 `;
 
 const FullHeart = styled(FullHeartSvg)`
   width: 25px;
   height: 25px;
   fill: ${(props) => props.theme.brown[2]};
+  cursor: pointer;
 `;
