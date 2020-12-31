@@ -1,13 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import PhotoReviewBox from './PhotoReviewBox';
 import TextReviewBox from './TextReviewBox';
 import Comment from '../../components/comment/Comment';
 import CommentForm from '../../components/comment/CommentForm';
-import { ReactComponent as LikeSvg } from '../../images/icons/heart_border-black.svg';
+import { ReactComponent as EmptyHeartSvg } from '../../images/icons/heart_border-black.svg';
+import { ReactComponent as FullHeartSvg } from '../../images/icons/heart-black.svg';
 import { ReactComponent as CommentSvg } from '../../images/icons/insert_comment.svg';
 
 const Review = ({ reviewList }) => {
+  const [likes, setLikes] = useState(false);
+
+  const handleLikesBtnClick = () => {
+    setLikes(!likes);
+  };
+
+  const renderHeart = () => {
+    return likes ? <FullHeart /> : <EmptyHeart />;
+  };
+
   return (
     <Wrap>
       <strong className="totalReviews">{reviewList.length} 개의 리뷰</strong>
@@ -17,16 +28,13 @@ const Review = ({ reviewList }) => {
             {review.files ? <PhotoReviewBox review={review} /> : <TextReviewBox review={review} />}
           </div>
           <div className="reactions">
-            <div className="addLikes">
-              <i>
-                <LikeBtn />
-              </i>
+            <div className="addLikes" onClick={handleLikesBtnClick}>
+              {renderHeart()}
               <span>+{review.likes}</span>
             </div>
             <div className="addComments">
-              <i>
-                <CommentBtn />
-              </i>
+              <CommentBtn />
+
               <span>+{review.commentList.length}</span>
             </div>
           </div>
@@ -120,9 +128,17 @@ const Wrap = styled.section`
   }
 `;
 
-const LikeBtn = styled(LikeSvg)`
+const EmptyHeart = styled(EmptyHeartSvg)`
   width: 20px;
   height: 20px;
+  cursor: pointer;
+`;
+
+const FullHeart = styled(FullHeartSvg)`
+  width: 20px;
+  height: 20px;
+  fill: ${(props) => props.theme.brown[2]};
+  cursor: pointer;
 `;
 
 const CommentBtn = styled(CommentSvg)`
