@@ -21,7 +21,7 @@ const Wrap = styled.header`
   left: 0;
   right: 0;
   height: 58px;
-  padding: 15px 65px 0 25px;
+  padding: 15px 25px 0;
   -webkit-box-shadow: 0 3px 5px ${(props) => props.theme.gray[0]};
   box-shadow: 0 3px 5px ${(props) => props.theme.gray[0]};
   background-color: ${(props) => props.theme.background[0]};

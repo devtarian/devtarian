@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import SearchModal from '../SearchModal';
 
@@ -18,19 +19,19 @@ const Nav = ({ recentKeywords, onAddRecentKeywords }) => {
     <Wrap>
       <Navi>
         <li className="navItem">
-          <a className="navLink" href="/feed">
+          <Link className="navLink" to="/feed">
             <span>피드 쓰기</span>
-          </a>
+          </Link>
         </li>
         <li className="navItem">
-          <a className="navLink" href="/">
-            <span>비건 편의점</span>
-          </a>
+          <Link className="navLink" to="/vegwiki">
+            <span>비건위키</span>
+          </Link>
         </li>
         <li className="navItem" onClick={handleSearchNavClick}>
-          <a className="navLink" href="/">
+          <Link className="navLink" to="/">
             <span>검색</span>
-          </a>
+          </Link>
           {show && (
             <SearchModal
               recentKeywords={recentKeywords}
@@ -38,6 +39,11 @@ const Nav = ({ recentKeywords, onAddRecentKeywords }) => {
               onToggleShow={onToggleShow}
             />
           )}
+        </li>
+        <li li className="navItem sign">
+          <Link className="navLink" to="/login">
+            <span>로그인 / 회원가입</span>
+          </Link>
         </li>
       </Navi>
     </Wrap>
@@ -55,26 +61,31 @@ const Wrap = styled.nav`
 const Navi = styled.ul`
   .navItem {
     float: left;
+
+    .navLink {
+      display: block;
+      padding: 15px 20px;
+      span {
+        position: relative;
+      }
+      span:after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        bottom: -17px;
+        width: 0px;
+        height: 4px;
+        background-color: ${(props) => props.theme.green[1]};
+        transition: all 0.2s ease-in;
+      }
+      &:hover span:after {
+        width: 100%;
+        left: 0;
+      }
+    }
   }
-  .navLink {
-    display: block;
-    padding: 15px 20px;
-    span {
-      position: relative;
-    }
-    span:after {
-      content: '';
-      position: absolute;
-      left: 50%;
-      bottom: -17px;
-      width: 0px;
-      height: 4px;
-      background-color: ${(props) => props.theme.green[1]};
-      transition: all 0.2s ease-in;
-    }
-    &:hover span:after {
-      width: 100%;
-      left: 0;
-    }
+  .sign span {
+    color: ${(props) => props.theme.green[1]};
+    font-weight: bold;
   }
 `;
