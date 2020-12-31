@@ -7,19 +7,14 @@ import useCarousel from '../../../hooks/useCarousel';
 const ImgCarousel = ({ carouselData, mg }) => {
   const { value, onCarouselBtnClick } = useCarousel(mg);
   const { refCarouselUl, refCarouselLi } = value;
-  console.log(value);
+  console.log('imgCarousel', value);
   return (
     <Wrap>
       <CarouselUl ref={refCarouselUl} value={value}>
-        {[...new Array(10)].map((_, index) => (
-          <CarouselLi key={index} value={value}>
-            <img
-              src={carouselData[index] ? URL.createObjectURL(carouselData[index]) : noImg}
-              alt=""
-              ref={refCarouselLi}
-            />
-            <div className="cover"></div>
-          </CarouselLi>
+        {carouselData.map((data, index) => (
+          <li key={index} data={data}>
+            <img src={carouselData[index] ? carouselData[index] : noImg} alt="" ref={refCarouselLi} />
+          </li>
         ))}
       </CarouselUl>
       <CarouselBtn value={value} onCarouselBtnClick={onCarouselBtnClick} />
@@ -31,14 +26,13 @@ export default ImgCarousel;
 
 export const Wrap = styled.section`
   position: relative;
-  bottom: -13px;
   width: 100%;
-  height: 135px;
+  height: 100%;
   overflow: hidden;
 
   ${CarouselBtnWrap} {
     top: 0px;
-    height: 301px;
+    height: 220px;
   }
 `;
 
@@ -47,30 +41,17 @@ export const CarouselUl = styled.ul`
   position: absolute;
   left: ${(props) => props.value.leftPosition}px;
   transition: all 0.3s ease;
-`;
 
-export const CarouselLi = styled.li`
-  float: left;
-  width: 136px;
-  margin: 0 ${(props) => props.value.liSideMargin}px 40px;
+  li {
+    float: left;
+    width: 269px;
+    height: 220px;
+    margin: 0;
 
-  img {
-    width: 136px;
-    height: 136px;
-    border-radius: 10px;
-  }
-  .cover {
-    z-index: 100;
-    position: absolute;
-    top: 0;
-    width: 136px;
-    height: 136px;
-    border-radius: 10px;
-    background-color: ${(props) => props.theme.green[1]};
-    opacity: 0;
-    transition: all 0.3s ease-in-out;
-  }
-  &:hover .cover {
-    opacity: 0.8;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
 `;

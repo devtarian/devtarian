@@ -274,7 +274,13 @@ const DUMMY_POSTS = [
       {
         id: 0,
         writer: { name: 'Harry', thumbNail: '' },
-        files: [],
+        files: [
+          'http://placehold.it/150x150.png?text=A',
+          'http://placehold.it/150x150.png?text=B',
+          'http://placehold.it/150x150.png?text=C',
+          'http://placehold.it/150x150.png?text=D',
+          'http://placehold.it/150x150.png?text=E',
+        ],
         starRating: 5.0,
         title: '와!',
         reviewContents:

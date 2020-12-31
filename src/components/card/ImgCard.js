@@ -34,6 +34,7 @@ export const ImgCardWrap = styled.li`
     position: absolute;
     top: 0;
     width: 270px;
+
     height: 300px;
     border-radius: 10px;
     background-color: ${(props) => props.theme.green[1]};

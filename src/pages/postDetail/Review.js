@@ -1,13 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import Profile, { ProfileWrap } from '../../components/profile/Profile';
+import PhotoReviewBox from './PhotoReviewBox';
+import TextReviewBox from './TextReviewBox';
 import Comment from '../../components/comment/Comment';
 import CommentForm from '../../components/comment/CommentForm';
-import Stars from '../../components/stars/Stars';
 import { ReactComponent as LikeSvg } from '../../images/icons/heart_border-black.svg';
 import { ReactComponent as CommentSvg } from '../../images/icons/insert_comment.svg';
-import noImg from '../../images/noImg.jpg';
-import noProfile from '../../images/noProfile.png';
 
 const Review = ({ reviewList }) => {
   return (
@@ -16,20 +14,7 @@ const Review = ({ reviewList }) => {
       {reviewList.map((review) => (
         <div className="review" key={review.id}>
           <div className="innerWrap">
-            <div className="leftBox">
-              <Profile userData={review.writer} createAt={review.createAt} />
-              <div className="starRating">
-                <Stars rate={review.starRating} starsW={100} />
-              </div>
-              <p className="title">{review.title}</p>
-              <p className="contents">{review.reviewContents}</p>
-              <a className="viewMore" href="">
-                ... 더보기
-              </a>
-            </div>
-            <div className="rightBox">
-              <img className="photos" src={review.files[0] ? URL.createObjectURL(review.files[0]) : noImg} alt="" />
-            </div>
+            {review.files ? <PhotoReviewBox review={review} /> : <TextReviewBox review={review} />}
           </div>
           <div className="reactions">
             <div className="addLikes">
@@ -42,7 +27,7 @@ const Review = ({ reviewList }) => {
               <i>
                 <CommentBtn />
               </i>
-              <span>+{review.comments}</span>
+              <span>+{review.commentList.length}</span>
             </div>
           </div>
           <ul className="comments">
@@ -78,47 +63,6 @@ const Wrap = styled.section`
   }
   .innerWrap {
     overflow: hidden;
-
-    .leftBox {
-      float: left;
-      width: 65%;
-      padding: 15px;
-
-      ${ProfileWrap} {
-        border-bottom: 1px solid ${(props) => props.theme.background[2]};
-      }
-      .starRating {
-        margin-top: 30px;
-      }
-      .title {
-        margin: 10px 0;
-        font-size: 1.1rem;
-        font-weight: bolder;
-      }
-      .contents {
-        line-height: 1.7rem;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-      .viewMore {
-        line-height: 1.6rem;
-        font-size: 0.95rem;
-        color: ${(props) => props.theme.color[1]};
-      }
-    }
-    .rightBox {
-      float: right;
-      width: 35%;
-      height: 220px;
-
-      img {
-        border-top-right-radius: 10px;
-        width: 100%;
-      }
-    }
   }
   .reactions {
     margin: 0 10px;
