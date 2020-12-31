@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import Profile, { ProfileWrap } from '../../profile/Profile';
 import SearchModal from '../SearchModal';
 
-const Nav = ({ recentKeywords, onAddRecentKeywords }) => {
+const Nav = ({ user, recentKeywords, onAddRecentKeywords }) => {
   const [show, setShow] = useState(false);
 
   const onToggleShow = (isShow) => {
@@ -15,6 +16,15 @@ const Nav = ({ recentKeywords, onAddRecentKeywords }) => {
     onToggleShow(true);
   };
 
+  const renderUserProfile = () => {
+    return user ? (
+      <Profile userData={user} createAt="" />
+    ) : (
+      <Link className="navLink" to="/login">
+        <span>로그인 / 회원가입</span>
+      </Link>
+    );
+  };
   return (
     <Wrap>
       <Navi>
@@ -41,9 +51,7 @@ const Nav = ({ recentKeywords, onAddRecentKeywords }) => {
           )}
         </li>
         <li li className="navItem sign">
-          <Link className="navLink" to="/login">
-            <span>로그인 / 회원가입</span>
-          </Link>
+          {renderUserProfile()}
         </li>
       </Navi>
     </Wrap>
@@ -87,5 +95,21 @@ const Navi = styled.ul`
   .sign span {
     color: ${(props) => props.theme.green[1]};
     font-weight: bold;
+  }
+  ${ProfileWrap} {
+    width: 88px;
+    margin-left: 20px;
+    .thumbNail {
+      width: 32px;
+      height: 32px;
+      margin: 0.6rem 0;
+    }
+    .info {
+      left: 39px;
+
+      a {
+        font-size: 15px;
+      }
+    }
   }
 `;
