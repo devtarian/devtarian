@@ -4,15 +4,15 @@ import Stars from '../../stars/Stars';
 import KakaoMap from '../../Map/KakaoMap';
 import { ViewAllWrap } from '../../carousel/VeiwAll';
 import { ReactComponent as PlusSvg } from '../../../images/icons/add.svg';
-import useViewMore from '../../../hooks/useViewMore';
+import useMoreDetail from '../../../hooks/useMoreDetail';
 
 const PostTextBox = ({ post }) => {
   console.log('postDetailBox', post);
   const {
     store: { vegType, starRating, storeName, address, contactNum, operatingHours, operatingHoursMemo, menuList },
   } = post;
-  const hours = useViewMore();
-  const menu = useViewMore();
+  const hours = useMoreDetail();
+  const menu = useMoreDetail();
 
   return (
     <Wrap>

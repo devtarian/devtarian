@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-const useViewMore = () => {
+const useMoreDetail = () => {
   const refBtn = useRef(null);
   const refMore = useRef(null);
 
@@ -14,4 +14,4 @@ const useViewMore = () => {
   return { refBtn, refMore, handleMoreBtnHover };
 };
 
-export default useViewMore;
+export default useMoreDetail;

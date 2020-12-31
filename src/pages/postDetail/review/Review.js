@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import PhotoReviewBox from './PhotoReviewBox';
 import TextReviewBox from './TextReviewBox';
-import Comment from '../../components/comment/Comment';
-import CommentForm from '../../components/comment/CommentForm';
-import { ReactComponent as EmptyHeartSvg } from '../../images/icons/heart_border-black.svg';
-import { ReactComponent as FullHeartSvg } from '../../images/icons/heart-black.svg';
-import { ReactComponent as CommentSvg } from '../../images/icons/insert_comment.svg';
+import Comment from '../../../components/comment/Comment';
+import CommentForm from '../../../components/comment/CommentForm';
+import { ReactComponent as EmptyHeartSvg } from '../../../images/icons/heart_border-black.svg';
+import { ReactComponent as FullHeartSvg } from '../../../images/icons/heart-black.svg';
+import { ReactComponent as CommentSvg } from '../../../images/icons/insert_comment.svg';
 
 const Review = ({ reviewList }) => {
   const [likes, setLikes] = useState(false);

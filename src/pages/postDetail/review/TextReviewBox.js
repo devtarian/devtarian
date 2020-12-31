@@ -1,9 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import Profile, { ProfileWrap } from '../../components/profile/Profile';
-import Stars from '../../components/stars/Stars';
+import Profile, { ProfileWrap } from '../../../components/profile/Profile';
+import Stars from '../../../components/stars/Stars';
+import useMoreContents from '../../../hooks/useMoreContents';
 
 const TextReviewBox = ({ review }) => {
+  const { viewMore, handleToggleBtnClick } = useMoreContents();
+
   return (
     <Wrap>
       <Profile userData={review.writer} createAt={review.createAt} />
@@ -11,10 +14,10 @@ const TextReviewBox = ({ review }) => {
         <Stars rate={review.starRating} starsW={100} />
       </div>
       <p className="title">{review.title}</p>
-      <p className="contents">{review.reviewContents}</p>
-      <a className="viewMore" href="">
+      <p className={viewMore ? 'moreContents' : 'contents'}>{review.reviewContents}</p>
+      <button className={viewMore ? 'hideBtn' : 'showBtn'} href="" onClick={handleToggleBtnClick}>
         ... 더보기
-      </a>
+      </button>
     </Wrap>
   );
 };
@@ -45,9 +48,15 @@ const Wrap = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  .viewMore {
+  .moreContents {
+    line-height: 1.7rem;
+  }
+  .showBtn {
     line-height: 1.6rem;
     font-size: 0.95rem;
     color: ${(props) => props.theme.color[1]};
+  }
+  .hideBtn {
+    display: none;
   }
 `;
