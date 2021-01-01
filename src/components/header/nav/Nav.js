@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Profile, { ProfileWrap } from '../../profile/Profile';
 import SearchModal from '../SearchModal';
 
-const Nav = ({ user, recentKeywords, onAddRecentKeywords }) => {
+const Nav = ({ user, recentKeywords, onLogOut, onAddRecentKeywords }) => {
   const [show, setShow] = useState(false);
 
   const onToggleShow = (isShow) => {
@@ -16,13 +16,29 @@ const Nav = ({ user, recentKeywords, onAddRecentKeywords }) => {
     onToggleShow(true);
   };
 
+  const handleLogOut = () => {
+    onLogOut(null);
+    localStorage.removeItem('token');
+  };
+
   const renderUserProfile = () => {
     return user ? (
-      <Profile userData={user} createAt="" />
+      <>
+        <li className="navItem">
+          <Link className="navLink signOut" to="/" onClick={handleLogOut}>
+            <span>로그아웃</span>
+          </Link>
+        </li>
+        <li className="navItem">
+          <Profile userData={user} createAt="" />
+        </li>
+      </>
     ) : (
-      <Link className="navLink" to="/login">
-        <span>로그인 / 회원가입</span>
-      </Link>
+      <li className="navItem">
+        <Link className="navLink signIn" to="/login">
+          <span>로그인 / 회원가입</span>
+        </Link>
+      </li>
     );
   };
 
@@ -51,7 +67,7 @@ const Nav = ({ user, recentKeywords, onAddRecentKeywords }) => {
             />
           )}
         </li>
-        <li className="navItem">{renderUserProfile()}</li>
+        {renderUserProfile()}
       </Navi>
     </Wrap>
   );
@@ -91,7 +107,11 @@ const Navi = styled.ul`
       }
     }
   }
-  .sign span {
+  .signOut span {
+    color: ${(props) => props.theme.color[1]};
+    font-weight: bold;
+  }
+  .signIn span {
     color: ${(props) => props.theme.green[1]};
     font-weight: bold;
   }

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { loadPosts, savePosts } from '../Service/postService';
 import Header from '../components/header/Header';
 
-const DefaultLayout = ({ component: Component, user, ...rest }) => {
+const DefaultLayout = ({ component: Component, user, onLogOut, ...rest }) => {
   const INIT_POST = [
     {
       id: 0,
@@ -204,7 +204,7 @@ const DefaultLayout = ({ component: Component, user, ...rest }) => {
       {...rest}
       render={(props) => (
         <Wrap>
-          <Header user={user} />
+          <Header user={user} onLogOut={onLogOut} />
           <Component {...props} user={user} posts={posts} wikiPosts={wikiPosts} onAddPost={onAddPost} />
         </Wrap>
       )}

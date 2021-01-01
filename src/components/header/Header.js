@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 import Nav from './nav/Nav';
 
-const Header = ({ user, recentKeywords, onAddRecentKeywords }) => {
+const Header = ({ user, recentKeywords, onLogOut, onAddRecentKeywords }) => {
   return (
     <Wrap>
       <Logo>
         <a href="/">Devtarian</a>
       </Logo>
-      <Nav user={user} recentKeywords={recentKeywords} onAddRecentKeywords={onAddRecentKeywords} />
+      <Nav user={user} recentKeywords={recentKeywords} onLogOut={onLogOut} onAddRecentKeywords={onAddRecentKeywords} />
     </Wrap>
   );
 };
