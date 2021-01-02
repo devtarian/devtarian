@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { ProfileWrap } from '../../profile/Profile';
 import SearchModal from '../SearchModal';
 import NaviItem from '../nav/NaviItem';
 import { ReactComponent as MenuSvg } from '../../../images/icons/menu.svg';
 import { ReactComponent as SearchSvg } from '../../../images/icons/search.svg';
 
-const Nav = ({ user, recentKeywords, onAddRecentKeywords, renderUserProfile }) => {
+const Nav = ({ recentKeywords, onAddRecentKeywords, renderUserProfile, onSubNavShow }) => {
   const [show, setShow] = useState(false);
 
   const onToggleShow = (isShow) => {
@@ -17,6 +16,10 @@ const Nav = ({ user, recentKeywords, onAddRecentKeywords, renderUserProfile }) =
   const handleSearchNavClick = (e) => {
     e.preventDefault();
     onToggleShow(true);
+  };
+
+  const handleSubNavShow = (e) => {
+    onSubNavShow(e);
   };
 
   return (
@@ -56,7 +59,7 @@ const Nav = ({ user, recentKeywords, onAddRecentKeywords, renderUserProfile }) =
           )}
         </div>
         <div className="navItem">
-          <button className="navLink">
+          <button className="navLink" onClick={handleSubNavShow}>
             <HBGBtn />
           </button>
         </div>
@@ -100,23 +103,6 @@ const Wrap = styled.nav`
 
   .search .navLink span:after {
     bottom: -10px;
-  }
-
-  ${ProfileWrap} {
-    width: 88px;
-    margin-left: 20px;
-    .thumbNail {
-      width: 32px;
-      height: 32px;
-      margin: 0.6rem 0;
-    }
-    .info {
-      left: 39px;
-
-      a {
-        font-size: 15px;
-      }
-    }
   }
 `;
 const FullNav = styled.ul`

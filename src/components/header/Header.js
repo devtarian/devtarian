@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import Nav from './nav/Nav';
 import { Link } from 'react-router-dom';
 
-const Header = ({ user, recentKeywords, onAddRecentKeywords, renderUserProfile }) => {
+const Header = ({ user, recentKeywords, onAddRecentKeywords, renderUserProfile, onSubNavShow }) => {
   return (
     <Wrap>
       <Logo>
@@ -13,6 +13,7 @@ const Header = ({ user, recentKeywords, onAddRecentKeywords, renderUserProfile }
         recentKeywords={recentKeywords}
         onAddRecentKeywords={onAddRecentKeywords}
         renderUserProfile={renderUserProfile}
+        onSubNavShow={onSubNavShow}
       />
     </Wrap>
   );
