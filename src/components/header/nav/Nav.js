@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import Profile, { ProfileWrap } from '../../profile/Profile';
+import { ProfileWrap } from '../../profile/Profile';
 import SearchModal from '../SearchModal';
+import NaviItem from '../nav/NaviItem';
+import { ReactComponent as MenuSvg } from '../../../images/icons/menu.svg';
+import { ReactComponent as SearchSvg } from '../../../images/icons/search.svg';
 
-const Nav = ({ user, recentKeywords, onLogOut, onAddRecentKeywords }) => {
+const Nav = ({ user, recentKeywords, onAddRecentKeywords, renderUserProfile }) => {
   const [show, setShow] = useState(false);
 
   const onToggleShow = (isShow) => {
@@ -16,48 +19,16 @@ const Nav = ({ user, recentKeywords, onLogOut, onAddRecentKeywords }) => {
     onToggleShow(true);
   };
 
-  const handleLogOut = () => {
-    onLogOut(null);
-    localStorage.removeItem('token');
-  };
-
-  const renderUserProfile = () => {
-    return user ? (
-      <>
-        <li className="navItem">
-          <Link className="navLink signOut" to="/" onClick={handleLogOut}>
-            <span>로그아웃</span>
-          </Link>
-        </li>
-        <li className="navItem">
-          <Profile userData={user} createAt="" />
-        </li>
-      </>
-    ) : (
-      <li className="navItem">
-        <Link className="navLink signIn" to="/login">
-          <span>로그인 / 회원가입</span>
-        </Link>
-      </li>
-    );
-  };
-
   return (
     <Wrap>
-      <Navi>
-        <li className="navItem">
-          <Link className="navLink" to="/feed">
-            <span>피드 쓰기</span>
-          </Link>
-        </li>
-        <li className="navItem">
-          <Link className="navLink" to="/vegwiki">
-            <span>비건위키</span>
-          </Link>
-        </li>
-        <li className="navItem" onClick={handleSearchNavClick}>
-          <Link className="navLink" to="/">
-            <span>검색</span>
+      <FullNav>
+        <NaviItem to="/feed" innerText="피드 쓰기" />
+        <NaviItem to="/vegwiki" innerText="비건위키" />
+        <li className="navItem search" onClick={handleSearchNavClick}>
+          <Link className="navLink" to="">
+            <span>
+              <Search />
+            </span>
           </Link>
           {show && (
             <SearchModal
@@ -68,7 +39,28 @@ const Nav = ({ user, recentKeywords, onLogOut, onAddRecentKeywords }) => {
           )}
         </li>
         {renderUserProfile()}
-      </Navi>
+      </FullNav>
+      <HBGNav>
+        <div className="navItem" onClick={handleSearchNavClick}>
+          <Link className="navLink" to="/">
+            <span>
+              <Search />
+            </span>
+          </Link>
+          {show && (
+            <SearchModal
+              recentKeywords={recentKeywords}
+              onAddRecentKeywords={onAddRecentKeywords}
+              onToggleShow={onToggleShow}
+            />
+          )}
+        </div>
+        <div className="navItem">
+          <button className="navLink">
+            <HBGBtn />
+          </button>
+        </div>
+      </HBGNav>
     </Wrap>
   );
 };
@@ -79,9 +71,7 @@ const Wrap = styled.nav`
   position: relative;
   top: -10px;
   float: right;
-`;
 
-const Navi = styled.ul`
   .navItem {
     float: left;
 
@@ -107,14 +97,11 @@ const Navi = styled.ul`
       }
     }
   }
-  .signOut span {
-    color: ${(props) => props.theme.color[1]};
-    font-weight: bold;
+
+  .search .navLink span:after {
+    bottom: -10px;
   }
-  .signIn span {
-    color: ${(props) => props.theme.green[1]};
-    font-weight: bold;
-  }
+
   ${ProfileWrap} {
     width: 88px;
     margin-left: 20px;
@@ -131,4 +118,27 @@ const Navi = styled.ul`
       }
     }
   }
+`;
+const FullNav = styled.ul`
+  @media (min-width: 320px) and (max-width: 768px) {
+    display: none;
+  }
+`;
+const HBGNav = styled.ul`
+  display: none;
+
+  @media (min-width: 320px) and (max-width: 768px) {
+    display: block;
+  }
+`;
+
+const Search = styled(SearchSvg)`
+  width: 24px;
+  height: 24px;
+  fill: ${(props) => props.theme.color[1]};
+`;
+
+const HBGBtn = styled(MenuSvg)`
+  width: 24px;
+  height: 24px;
 `;

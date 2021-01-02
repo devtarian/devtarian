@@ -54,8 +54,12 @@ const Wrap = styled.div`
 
 const InnerWrap = styled.div`
   position: relative;
+  width: 55%;
   top: ${(props) => props.posTop};
-  width: 876px;
   max-height: 239px;
   margin: 0 auto;
+
+  @media (min-width: 320px) and (max-width: 768px) {
+    width: 95%;
+  }
 `;

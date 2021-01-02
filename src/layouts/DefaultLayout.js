@@ -3,6 +3,9 @@ import { Route } from 'react-router-dom';
 import styled from 'styled-components';
 import { loadPosts, savePosts } from '../Service/postService';
 import Header from '../components/header/Header';
+import NaviItem from '../components/header/nav/NaviItem';
+import Profile from '../components/profile/Profile';
+import SubNav from '../components/header/nav/SubNav';
 
 const DefaultLayout = ({ component: Component, user, onLogOut, ...rest }) => {
   const INIT_POST = [
@@ -199,12 +202,31 @@ const DefaultLayout = ({ component: Component, user, onLogOut, ...rest }) => {
     setPosts(newPosts);
   };
 
+  const handleLogOut = () => {
+    onLogOut(null);
+    localStorage.removeItem('token');
+  };
+
+  const renderUserProfile = () => {
+    return user ? (
+      <>
+        <NaviItem to="/" innerText="로그아웃" sign={true} onLogOut={handleLogOut} />
+        <li className="navItem profile">
+          <Profile userData={user} createAt="" />
+        </li>
+      </>
+    ) : (
+      <NaviItem to="login" innerText="로그인 / 회원가입" sign={true} />
+    );
+  };
+
   return (
     <Route
       {...rest}
       render={(props) => (
         <Wrap>
-          <Header user={user} onLogOut={onLogOut} />
+          <Header user={user} renderUserProfile={renderUserProfile} />
+          <SubNav renderUserProfile={renderUserProfile} />
           <Component {...props} user={user} posts={posts} wikiPosts={wikiPosts} onAddPost={onAddPost} />
         </Wrap>
       )}
@@ -216,6 +238,7 @@ export default DefaultLayout;
 
 const Wrap = styled.div`
   margin-top: 58px;
+  overflow-x: hidden;
 `;
 
 const DUMMY_POSTS = [

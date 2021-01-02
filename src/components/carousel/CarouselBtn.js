@@ -43,6 +43,7 @@ export default React.memo(CarouselBtn);
 
 export const CarouselBtnWrap = styled.div`
   position: relative;
+  width: 100%;
   height: 177px;
   button {
     position: absolute;
