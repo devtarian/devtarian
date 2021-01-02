@@ -3,8 +3,17 @@ import { Route } from 'react-router-dom';
 import styled from 'styled-components';
 import { loadPosts, savePosts } from '../Service/postService';
 import Header from '../components/header/Header';
+import NaviItem from '../components/header/nav/NaviItem';
+import Profile, { ProfileWrap } from '../components/profile/Profile';
+import SubNav from '../components/header/nav/SubNav';
 
-const DefaultLayout = ({ component: Component, user, ...rest }) => {
+const DefaultLayout = ({ component: Component, user, onLogOut, ...rest }) => {
+  const [show, setShow] = useState(false);
+
+  const onSubNavShow = () => {
+    setShow(!show);
+  };
+
   const INIT_POST = [
     {
       id: 0,
@@ -199,12 +208,31 @@ const DefaultLayout = ({ component: Component, user, ...rest }) => {
     setPosts(newPosts);
   };
 
+  const handleLogOut = () => {
+    onLogOut(null);
+    localStorage.removeItem('token');
+  };
+
+  const renderUserProfile = () => {
+    return user ? (
+      <>
+        <NaviItem to="/" innerText="로그아웃" sign={true} onLogOut={handleLogOut} />
+        <li className="navItem profile">
+          <Profile userData={user} createAt="" />
+        </li>
+      </>
+    ) : (
+      <NaviItem to="login" innerText="로그인 / 회원가입" sign={true} />
+    );
+  };
+
   return (
     <Route
       {...rest}
       render={(props) => (
         <Wrap>
-          <Header user={user} />
+          <Header user={user} renderUserProfile={renderUserProfile} onSubNavShow={onSubNavShow} />
+          {show && <SubNav renderUserProfile={renderUserProfile} />}
           <Component {...props} user={user} posts={posts} wikiPosts={wikiPosts} onAddPost={onAddPost} />
         </Wrap>
       )}
@@ -216,6 +244,24 @@ export default DefaultLayout;
 
 const Wrap = styled.div`
   margin-top: 58px;
+  overflow-x: hidden;
+
+  ${ProfileWrap} {
+    width: 88px;
+    margin-left: 20px;
+    .thumbNail {
+      width: 32px;
+      height: 32px;
+      margin: 0.6rem 0;
+    }
+    .info {
+      left: 39px;
+
+      a {
+        font-size: 15px;
+      }
+    }
+  }
 `;
 
 const DUMMY_POSTS = [

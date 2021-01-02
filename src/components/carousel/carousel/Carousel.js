@@ -31,6 +31,7 @@ const Wrap = styled.section`
   position: relative;
   width: 100%;
   height: 426px;
+  margin: 0 auto;
   overflow: hidden;
 
   h2 {

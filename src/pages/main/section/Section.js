@@ -20,7 +20,8 @@ export default Section;
 
 const Wrap = styled.section`
   overflow: hidden;
-  width: 1200px;
+  width: 100%;
+  max-width: 1200px;
   height: 100%;
   margin: 0 auto;
   padding: 3rem 1.5rem 0;

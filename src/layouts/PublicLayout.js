@@ -14,13 +14,13 @@ const initUserValues = {
   files: [],
 };
 
-const PublicLayout = ({ component: Component, user, ...rest }) => {
+const PublicLayout = ({ component: Component, user, onGetUser, ...rest }) => {
   return (
     <Route
       {...rest}
       render={(props) => (
         <Wrap bg={bgImg}>
-          <Component {...props} user={user} initUserValues={initUserValues} />
+          <Component {...props} user={user} onGetUser={onGetUser} initUserValues={initUserValues} />
         </Wrap>
       )}
     />

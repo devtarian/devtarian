@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import noProfile from '../../images/noProfile.png';
 
 const Profile = ({ userData, createAt }) => {
-  const { thumbNail, name } = userData;
+  const { thumbNail, username } = userData;
   return (
     <>
       <ProfileWrap>
@@ -10,9 +10,7 @@ const Profile = ({ userData, createAt }) => {
           <img src={thumbNail ? thumbNail : noProfile} alt="" />
         </div>
         <div className="info">
-          <strong>
-            <a href="/">{name}</a>
-          </strong>
+          <strong>{username}</strong>
           <span>{createAt}</span>
         </div>
       </ProfileWrap>
@@ -47,7 +45,7 @@ export const ProfileWrap = styled.div`
     left: 50px;
     transform: translateY(-50%);
 
-    a {
+    strong {
       font-size: 14px;
       color: ${(props) => props.theme.green[1]};
     }
