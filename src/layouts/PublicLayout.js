@@ -31,14 +31,13 @@ export default PublicLayout;
 
 const Wrap = styled.section`
   position: relative;
-  width: 500px;
+  width: 100%;
+  max-width: 500px;
   height: 100%;
-  margin: 0 auto 40px;
-  padding: 7rem 1.5rem 0;
+  margin: 6rem auto;
+  padding: 0 1.5rem;
   text-align: center;
-  .wrap {
-    margin-top: 2rem;
-  }
+
   h2 {
     margin: 2rem 0.5rem 3rem;
     font-size: 3rem;
@@ -82,6 +81,12 @@ const Wrap = styled.section`
   ${GoBackWrap} {
     a {
       top: 2rem;
+    }
+  }
+
+  @media (max-width: 767px) {
+    form {
+      padding: 1rem 2rem 2rem;
     }
   }
 `;

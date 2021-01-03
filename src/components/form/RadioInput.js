@@ -24,12 +24,11 @@ const Wrap = styled.div`
   overflow: hidden;
   .innerWrap {
     float: left;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
 
     span {
       margin-left: 0.3rem;
     }
-  }
-  .innerWrap + .innerWrap {
-    margin-left: 1rem;
   }
 `;
