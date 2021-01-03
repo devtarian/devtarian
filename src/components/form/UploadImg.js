@@ -50,22 +50,27 @@ const Wrap = styled.div`
   .previewImgs {
     position: relative;
     width: 100%;
-    height: 150px;
     margin-top: 1rem;
     overflow: hidden;
-
-    li + li {
-      margin-left: 0.5rem;
-    }
   }
 `;
 
 const ImgContainer = styled.li`
   float: left;
-  width: 150px;
-  height: 150px;
+  width: calc(20% - 0.5rem);
+  margin: 0 0.25rem 0.5rem;
   border: 1px solid ${(props) => props.theme.gray[1]};
   border-radius: 4px;
   background: ${(props) => (props.src ? `url(${props.src})` : props.theme.background[1])};
   background-size: cover;
+
+  &::before {
+    content: '';
+    display: block;
+    padding-top: 100%;
+  }
+
+  @media (max-width: 767px) {
+    width: calc(33% - 0.5rem);
+  }
 `;

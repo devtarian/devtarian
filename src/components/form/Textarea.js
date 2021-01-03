@@ -17,6 +17,7 @@ const Wrap = styled.div`
   position: relative;
   textarea {
     width: 100%;
+    max-height: 230px;
     padding: 10px;
     border-radius: 4px;
     border: 1px solid ${(props) => props.theme.gray[1]};
