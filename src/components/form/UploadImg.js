@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import styled from 'styled-components';
 
 const UploadImg = ({ name, files, onImageUpload }) => {
+  console.log('uploadImg', files);
   const refHiddenInput = useRef();
 
   const handleUploadBtnClick = (e) => {

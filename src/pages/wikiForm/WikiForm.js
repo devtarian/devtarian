@@ -7,23 +7,21 @@ import BgImg from '../../images/pexels-karolina-grabowska-4197908.jpg';
 const CATEGORIES = ['가공식품', '과자/간식', '제과/제빵', '음료', '기타'];
 
 const WikiForm = ({ user }) => {
-  const INIT_WIKIPOST = [
-    {
-      category: '가공식품',
-      files: [],
-      product: '',
-      ingredient: '',
-      comments: '',
-      commentList: [
-        {
-          id: 0,
-          writer: user,
-          createAt: '3초 전',
-          contents: '',
-        },
-      ],
-    },
-  ];
+  const INIT_WIKIPOST = {
+    category: '가공식품',
+    files: [],
+    product: '',
+    ingredient: '',
+    commentList: [
+      {
+        id: 0,
+        writer: user,
+        createAt: '3초 전',
+        contents: '',
+      },
+    ],
+  };
+
   const { inputs, setInputs, errors, onInputChange, onImageUpload, requiredValidate } = useInput(INIT_WIKIPOST);
 
   const handleSubmit = (e) => {
@@ -74,7 +72,8 @@ export default WikiForm;
 
 const Wrap = styled.section`
   position: relative;
-  width: 1000px;
+  width: 100%;
+  max-width: 1000px;
   height: 100%;
   margin: 0 auto 40px;
   padding: 3rem 1.5rem 0;
