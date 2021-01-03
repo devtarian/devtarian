@@ -20,7 +20,6 @@ const Login = ({ user, initUserValues, onGetUser, history }) => {
         email: inputs.email,
         pw: inputs.password,
       });
-      // localStorage.setItem('apiKey', res.data.token);
       history.push('/');
       setInputs(initUserValues);
       handleGetUser(user);
@@ -70,7 +69,7 @@ const Login = ({ user, initUserValues, onGetUser, history }) => {
           <Link to="/signup">/ 회원가입</Link>
         </div>
       </form>
-      <GoBackLink to="/" />
+      <GoBackLink to="/" innerText="메인으로" />
     </div>
   );
 };
