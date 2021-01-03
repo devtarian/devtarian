@@ -7,7 +7,7 @@ const CircleImgTextCard = forwardRef((props, ref) => {
   const { data } = props;
 
   return (
-    <Wrap key={data.id} ref={ref}>
+    <CircleCardWrap key={data.id} ref={ref}>
       <div className="imgInfo">
         <img src={data.files[0] ? URL.createObjectURL(data.files[0]) : noImg} alt="" />
         <div className="cover"></div>
@@ -18,19 +18,19 @@ const CircleImgTextCard = forwardRef((props, ref) => {
         <span className="ingredient">{data.ingredient}</span>
       </div>
       <FavoriteHeart data={data} />
-    </Wrap>
+    </CircleCardWrap>
   );
 });
 
 export default CircleImgTextCard;
 
-const Wrap = styled.li`
+export const CircleCardWrap = styled.li`
   background: ${(props) => props.theme.background[1]};
   position: relative;
   float: left;
   width: 270px;
   height: 300px;
-  margin: 0 10px 40px;
+  margin: 0 0.8rem 1.4rem;
   border-radius: 10px;
   -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
@@ -50,8 +50,8 @@ const Wrap = styled.li`
       z-index: 100;
       position: absolute;
       top: 0;
-      width: 270px;
-      height: 300px;
+      width: 100%;
+      height: 100%;
       border-radius: 10px;
       background-color: ${(props) => props.theme.green[1]};
       opacity: 0;

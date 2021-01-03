@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Checkbox, Select } from '../../components/form';
 import { CheckboxWrap } from '../../components/form/Checkbox';
 import { SelectWrap } from '../../components/form/Select';
-import CircleImgTextCard from '../../components/card/CircleImgTextCard';
+import CircleImgTextCard, { CircleCardWrap } from '../../components/card/CircleImgTextCard';
 import useActivedBtn from '../../hooks/useActivedBtn';
 
 const VegiWiki = ({ wikiPosts }) => {
@@ -148,8 +148,10 @@ const VegiWiki = ({ wikiPosts }) => {
 export default VegiWiki;
 
 const Wrap = styled.section`
-  width: 1200px;
-  margin: 6rem auto 0;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0.6rem auto 0;
+  padding: 1.5rem;
 
   .filters {
     position: relative;
@@ -164,7 +166,7 @@ const Wrap = styled.section`
     }
     ${SelectWrap} {
       position: absolute;
-      bottom: 32px;
+      bottom: 39px;
       right: 0;
     }
   }
@@ -176,8 +178,29 @@ const Wrap = styled.section`
 
   ul {
     overflow: hidden;
-    width: 1160px;
     margin: 2.5rem auto 0;
+  }
+  ${CircleCardWrap} {
+    width: calc(25% - 1.6rem);
+  }
+
+  @media (max-width: 767px) {
+    ${CircleCardWrap} {
+      width: calc(33% - 1.6rem);
+    }
+    .filters {
+      ${SelectWrap} {
+        bottom: -61px;
+      }
+    }
+  }
+  @media (max-width: 639px) {
+    ul {
+      padding: 3rem;
+    }
+    ${CircleCardWrap} {
+      width: calc(100% - 1.6rem);
+    }
   }
 `;
 
