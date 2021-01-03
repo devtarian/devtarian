@@ -24,12 +24,9 @@ const Wrap = styled.div`
   overflow: hidden;
   .innerWrap {
     float: left;
-
-    span {
+    margin-right: 1rem;
+    margin-bottom: 1rem;
       margin-left: 0.3rem;
     }
-  }
-  .innerWrap + .innerWrap {
-    margin-left: 1rem;
   }
 `;
