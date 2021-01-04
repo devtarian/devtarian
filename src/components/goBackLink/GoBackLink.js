@@ -16,7 +16,7 @@ export const GoBackWrap = styled.div`
   a {
     position: fixed;
     top: 5rem;
-    left: 42px;
+    left: 1.5rem;
     color: ${(props) => props.theme.color[1]};
   }
 `;

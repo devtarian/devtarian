@@ -26,4 +26,9 @@ const Wrap = styled.section`
   .review {
     position: relative;
   }
+
+  @media (max-width: 767px) {
+    width: 100%;
+    max-width: 1200px;
+  }
 `;
