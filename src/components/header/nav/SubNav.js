@@ -24,7 +24,7 @@ const Wrap = styled.ul`
   text-align: right;
   background-color: rgba(255, 255, 255, 0.9);
 
-  @media (min-width: 320px) and (max-width: 768px) {
+  @media (max-width: 767px) {
     display: block;
 
     .profile {

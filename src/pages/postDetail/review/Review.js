@@ -63,8 +63,7 @@ const Wrap = styled.section`
   .review {
     width: 100%;
     max-width: 768px;
-    margin: 0 auto;
-    margin-bottom: 25px;
+    margin: 0 auto 25px;
     border-radius: 10px;
     background-color: ${(props) => props.theme.background[1]};
     -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
@@ -110,7 +109,6 @@ const Wrap = styled.section`
     }
     form {
       float: left;
-      width: calc(100% - 48px);
       padding: 5px 0;
       label {
         display: none;

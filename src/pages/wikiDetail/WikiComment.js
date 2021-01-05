@@ -23,13 +23,15 @@ export default WikiComment;
 
 const Wrap = styled.div`
   margin-top: 50px;
+  padding: 0 1.5rem;
 
   .totalComments {
     display: block;
     margin-bottom: 50px;
   }
   .innerContainer {
-    width: 768px;
+    width: 100%;
+    max-width: 768px;
     margin: 0 auto 25px;
     padding-top: 15px;
     border-radius: 10px;
@@ -43,9 +45,15 @@ const Wrap = styled.div`
     }
 
     ${CommentFormWrap} {
-      input {
-        height: 40px;
+      form {
+        input {
+          height: 40px;
+        }
       }
     }
+  }
+
+  @media (max-width: 767px) {
+    margin-top: 80px;
   }
 `;

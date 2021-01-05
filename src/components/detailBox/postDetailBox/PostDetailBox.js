@@ -27,7 +27,7 @@ export default PostDetailBox;
 
 const Wrap = styled.section`
   position: relative;
-  margin-top: 58px;
+
   &:after {
     content: '';
     display: block;
@@ -53,7 +53,6 @@ const Wrap = styled.section`
     font-size: 60px;
   }
   @media (max-width: 767px) {
-    position: relative;
     padding: 0 1.5rem;
     .show {
       display: block;
