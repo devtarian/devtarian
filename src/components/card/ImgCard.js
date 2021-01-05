@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react';
 import styled from 'styled-components';
+import FavoriteHeart, { FavoriteWrap, EmptyHeart } from '../../components/favoriteHeart/FavoriteHeart';
 import noImg from '../../images/noImg.jpg';
 
 const ImgCard = forwardRef((props, ref) => {
@@ -14,6 +15,7 @@ const ImgCard = forwardRef((props, ref) => {
           <h3>{data.product}</h3>
         </div>
       </div>
+      <FavoriteHeart data={data} />
     </ImgCardWrap>
   );
 });
@@ -21,6 +23,7 @@ const ImgCard = forwardRef((props, ref) => {
 export default ImgCard;
 
 export const ImgCardWrap = styled.li`
+  position: relative;
   float: left;
   width: 270px;
   margin: 0 ${(props) => props.value.liSideMargin}px 40px;
@@ -34,6 +37,7 @@ export const ImgCardWrap = styled.li`
     position: absolute;
     top: 0;
     width: 270px;
+
     height: 300px;
     border-radius: 10px;
     background-color: ${(props) => props.theme.green[1]};
@@ -53,5 +57,13 @@ export const ImgCardWrap = styled.li`
   }
   &:hover .cover {
     opacity: 0.8;
+  }
+
+  ${FavoriteWrap} {
+    top: 10px;
+    right: 10px;
+  }
+  ${EmptyHeart} {
+    fill: ${(props) => props.theme.color[2]};
   }
 `;

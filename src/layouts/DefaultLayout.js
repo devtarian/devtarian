@@ -3,8 +3,17 @@ import { Route } from 'react-router-dom';
 import styled from 'styled-components';
 import { loadPosts, savePosts } from '../Service/postService';
 import Header from '../components/header/Header';
+import NaviItem from '../components/header/nav/NaviItem';
+import Profile, { ProfileWrap } from '../components/profile/Profile';
+import SubNav from '../components/header/nav/SubNav';
 
-const DefaultLayout = ({ component: Component, user, ...rest }) => {
+const DefaultLayout = ({ component: Component, user, onLogOut, ...rest }) => {
+  const [show, setShow] = useState(false);
+
+  const onSubNavShow = () => {
+    setShow(!show);
+  };
+
   const INIT_POST = [
     {
       id: 0,
@@ -32,7 +41,6 @@ const DefaultLayout = ({ component: Component, user, ...rest }) => {
           },
         ],
       },
-      reviews: 0,
       reviewList: [
         {
           id: 0,
@@ -44,7 +52,6 @@ const DefaultLayout = ({ component: Component, user, ...rest }) => {
             'Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple',
           likes: 1,
           likesOfMe: false,
-          comments: 1,
           commentList: [
             {
               id: 0,
@@ -65,7 +72,6 @@ const DefaultLayout = ({ component: Component, user, ...rest }) => {
       files: [],
       product: '',
       ingredient: '',
-      comments: '',
       commentList: [
         {
           id: 0,
@@ -128,7 +134,7 @@ const DefaultLayout = ({ component: Component, user, ...rest }) => {
           },
         ],
       },
-      reviews: 0,
+
       reviewList: [],
     };
     setPosts([newPost, ...posts]);
@@ -151,7 +157,6 @@ const DefaultLayout = ({ component: Component, user, ...rest }) => {
         contents,
         likes,
         likesOfMe,
-        comments,
         commentList,
       },
       ...post.reviews,
@@ -203,12 +208,31 @@ const DefaultLayout = ({ component: Component, user, ...rest }) => {
     setPosts(newPosts);
   };
 
+  const handleLogOut = () => {
+    onLogOut(null);
+    localStorage.removeItem('token');
+  };
+
+  const renderUserProfile = () => {
+    return user ? (
+      <>
+        <NaviItem to="/" innerText="로그아웃" sign={true} onLogOut={handleLogOut} />
+        <li className="navItem profile">
+          <Profile userData={user} createAt="" />
+        </li>
+      </>
+    ) : (
+      <NaviItem to="login" innerText="로그인 / 회원가입" sign={true} />
+    );
+  };
+
   return (
     <Route
       {...rest}
       render={(props) => (
         <Wrap>
-          <Header user={user} />
+          <Header user={user} renderUserProfile={renderUserProfile} onSubNavShow={onSubNavShow} />
+          {show && <SubNav renderUserProfile={renderUserProfile} />}
           <Component {...props} user={user} posts={posts} wikiPosts={wikiPosts} onAddPost={onAddPost} />
         </Wrap>
       )}
@@ -219,7 +243,23 @@ const DefaultLayout = ({ component: Component, user, ...rest }) => {
 export default DefaultLayout;
 
 const Wrap = styled.div`
-  margin-top: 58px;
+  padding-top: 58px;
+
+  ${ProfileWrap} {
+    width: 88px;
+    .thumbNail {
+      width: 32px;
+      height: 32px;
+      margin: 0.6rem 0;
+    }
+    .info {
+      left: 39px;
+
+      a {
+        font-size: 15px;
+      }
+    }
+  }
 `;
 
 const DUMMY_POSTS = [
@@ -274,19 +314,23 @@ const DUMMY_POSTS = [
         },
       ],
     },
-    reviews: 0,
     reviewList: [
       {
         id: 0,
         writer: { name: 'Harry', thumbNail: '' },
-        files: [],
+        files: [
+          'http://placehold.it/150x150.png?text=A',
+          'http://placehold.it/150x150.png?text=B',
+          'http://placehold.it/150x150.png?text=C',
+          'http://placehold.it/150x150.png?text=D',
+          'http://placehold.it/150x150.png?text=E',
+        ],
         starRating: 5.0,
         title: '와!',
         reviewContents:
           'Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple',
         likes: 1,
         likesOfMe: false,
-        comments: 1,
         commentList: [
           {
             id: 0,
@@ -323,7 +367,6 @@ const DUMMY_POSTS = [
         },
       ],
     },
-    reviews: 0,
     reviewList: [
       {
         id: 0,
@@ -335,7 +378,6 @@ const DUMMY_POSTS = [
           'Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple',
         likes: 1,
         likesOfMe: false,
-        comments: 1,
         commentList: [
           {
             id: 0,
@@ -372,7 +414,6 @@ const DUMMY_POSTS = [
         },
       ],
     },
-    reviews: 0,
     reviewList: [
       {
         id: 0,
@@ -384,7 +425,6 @@ const DUMMY_POSTS = [
           'Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple',
         likes: 1,
         likesOfMe: false,
-        comments: 1,
         commentList: [
           {
             id: 0,
@@ -421,7 +461,6 @@ const DUMMY_POSTS = [
         },
       ],
     },
-    reviews: 0,
     reviewList: [
       {
         id: 0,
@@ -433,7 +472,6 @@ const DUMMY_POSTS = [
           'Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple',
         likes: 1,
         likesOfMe: false,
-        comments: 1,
         commentList: [
           {
             id: 0,
@@ -470,7 +508,6 @@ const DUMMY_POSTS = [
         },
       ],
     },
-    reviews: 0,
     reviewList: [
       {
         id: 0,
@@ -482,7 +519,6 @@ const DUMMY_POSTS = [
           'Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple Buddhist temple cuisine in a clean and modern space, at 서울시종로구견지동715F. from the Choe Gae Sa Temple',
         likes: 1,
         likesOfMe: false,
-        comments: 1,
         commentList: [
           {
             id: 0,
@@ -503,7 +539,6 @@ const DUMMY_WIKIPOST = [
     files: [],
     product: '로투스',
     ingredient: '밀/대두',
-    comments: '',
     commentList: [
       {
         id: 0,
@@ -525,7 +560,6 @@ const DUMMY_WIKIPOST = [
     files: [],
     product: '로투스',
     ingredient: '밀/대두',
-    comments: '',
     commentList: [
       {
         id: 0,
@@ -541,7 +575,6 @@ const DUMMY_WIKIPOST = [
     files: [],
     product: '로투스',
     ingredient: '밀/대두',
-    comments: '',
     commentList: [
       {
         id: 0,
@@ -557,7 +590,6 @@ const DUMMY_WIKIPOST = [
     files: [],
     product: '로투스',
     ingredient: '밀/대두',
-    comments: '',
     commentList: [
       {
         id: 0,
@@ -573,7 +605,6 @@ const DUMMY_WIKIPOST = [
     files: [],
     product: '로투스',
     ingredient: '밀/대두',
-    comments: '',
     commentList: [
       {
         id: 0,

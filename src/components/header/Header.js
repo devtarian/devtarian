@@ -1,13 +1,20 @@
 import styled from 'styled-components';
 import Nav from './nav/Nav';
+import { Link } from 'react-router-dom';
 
-const Header = ({ recentKeywords, onAddRecentKeywords }) => {
+const Header = ({ user, recentKeywords, onAddRecentKeywords, renderUserProfile, onSubNavShow }) => {
   return (
     <Wrap>
       <Logo>
-        <a href="/">Devtarian</a>
+        <Link to="/">Devtarian</Link>
       </Logo>
-      <Nav recentKeywords={recentKeywords} onAddRecentKeywords={onAddRecentKeywords} />
+      <Nav
+        user={user}
+        recentKeywords={recentKeywords}
+        onAddRecentKeywords={onAddRecentKeywords}
+        renderUserProfile={renderUserProfile}
+        onSubNavShow={onSubNavShow}
+      />
     </Wrap>
   );
 };
@@ -21,9 +28,9 @@ const Wrap = styled.header`
   left: 0;
   right: 0;
   height: 58px;
-  padding: 15px 65px 0 25px;
-  -webkit-box-shadow: 0 3px 5px ${(props) => props.theme.gray[0]};
-  box-shadow: 0 3px 5px ${(props) => props.theme.gray[0]};
+  padding: 15px 0 0 25px;
+  -webkit-box-shadow: 0 3px 5px ${(props) => props.theme.color[2]};
+  box-shadow: 0 3px 5px ${(props) => props.theme.color[2]};
   background-color: ${(props) => props.theme.background[0]};
 `;
 

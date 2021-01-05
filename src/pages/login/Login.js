@@ -6,7 +6,7 @@ import SignInput from '../../components/form/SignInput';
 import SubmitBtn from '../../components/form/SubmitBtn';
 import GoBackLink from '../../components/goBackLink/GoBackLink';
 
-const Login = ({ user, initUserValues, history }) => {
+const Login = ({ user, initUserValues, onGetUser, history }) => {
   const { inputs, setInputs, errors, onInputChange, requiredValidate } = useInput(initUserValues);
 
   const handleSubmit = async (e) => {
@@ -20,11 +20,23 @@ const Login = ({ user, initUserValues, history }) => {
         email: inputs.email,
         pw: inputs.password,
       });
-      // localStorage.setItem('apiKey', res.data.token);
       history.push('/');
       setInputs(initUserValues);
+      handleGetUser(user);
     } catch (err) {
       console.error(err);
+      console.log(err.response && err.response.data);
+    }
+  };
+
+  const handleGetUser = async () => {
+    try {
+      const res = await apis.authApi.getMe();
+      onGetUser(res);
+      console.log('login', res);
+      return res;
+    } catch (err) {
+      console.log(err);
       console.log(err.response && err.response.data);
     }
   };
@@ -57,7 +69,7 @@ const Login = ({ user, initUserValues, history }) => {
           <Link to="/signup">/ 회원가입</Link>
         </div>
       </form>
-      <GoBackLink to="/" />
+      <GoBackLink to="/" innerText="메인으로" />
     </div>
   );
 };

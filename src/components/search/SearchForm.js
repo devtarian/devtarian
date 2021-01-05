@@ -37,10 +37,9 @@ const SearchInput = styled.input`
   z-index: 1;
   position: absolute;
   float: left;
-  width: 826px;
+  width: 100%;
   padding: 14px 10px;
-  border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px;
+  border-radius: 4px;
   background-color: ${(props) => props.theme.background[0]};
   border: 1px solid ${(props) => props.theme.gray[1]};
 `;

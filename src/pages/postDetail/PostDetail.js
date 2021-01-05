@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PostDetailBox from '../../components/detailBox/postDetailBox/PostDetailBox';
-import Review from './Review';
+import Review from './review/Review';
 import EditBtn from '../../components/editBtn/EditBtn';
 import GoBackLink from '../../components/goBackLink/GoBackLink';
 
@@ -25,5 +25,10 @@ const Wrap = styled.section`
   margin: 0 auto;
   .review {
     position: relative;
+  }
+
+  @media (max-width: 767px) {
+    width: 100%;
+    max-width: 1200px;
   }
 `;

@@ -9,7 +9,7 @@ import apis from './Service/apis';
 apis.authApi
   .getMe()
   .then((res) => {
-    //console.log(res)
+    console.log(res);
   })
   .catch((err) => {
     console.log(err);

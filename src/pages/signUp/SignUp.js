@@ -5,6 +5,7 @@ import useInput from '../../hooks/useInput';
 import UploadProfileImg from './UploadProfileImg';
 import SignInput from '../../components/form/SignInput';
 import SubmitBtn from '../../components/form/SubmitBtn';
+import GoBackLink from '../../components/goBackLink/GoBackLink';
 
 const SignUp = ({ initUserValues, history }) => {
   const { inputs, setInputs, errors, setErrors, onImageUpload, onInputChange, requiredValidate } = useInput(
@@ -80,9 +81,7 @@ const SignUp = ({ initUserValues, history }) => {
           <Link to="/login">계정이 있으신가요? 로그인</Link>
         </div>
       </form>
-      <Link to="/" className="backToMain">
-        &lt; 메인으로
-      </Link>
+      <GoBackLink to="/" innerText="메인으로" />
     </div>
   );
 };

@@ -67,7 +67,8 @@ export default ReviewForm;
 
 const Wrap = styled.section`
   position: relative;
-  width: 1000px;
+  width: 100%;
+  max-width: 1000px;
   height: 100%;
   margin: 0 auto 40px;
   padding: 3rem 1.5rem 0;

@@ -1,23 +1,13 @@
-import React, { useState, forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 import styled from 'styled-components';
-import { ReactComponent as EmptyHeartSvg } from '../../images/icons/heart_border-black.svg';
-import { ReactComponent as FullHeartSvg } from '../../images/icons/heart-black.svg';
+import FavoriteHeart, { FavoriteWrap, EmptyHeart } from '../../components/favoriteHeart/FavoriteHeart';
 import noImg from '../../images/noImg.jpg';
 
 const CircleImgTextCard = forwardRef((props, ref) => {
   const { data } = props;
-  const [favorite, setFavorite] = useState(false);
-
-  const handleFavoriteBtnClick = () => {
-    setFavorite(!favorite);
-  };
-
-  const renderHeart = () => {
-    return favorite ? <FullHeart /> : <EmptyHeart />;
-  };
 
   return (
-    <Wrap key={data.id} ref={ref}>
+    <CircleCardWrap key={data.id} ref={ref}>
       <div className="imgInfo">
         <img src={data.files[0] ? URL.createObjectURL(data.files[0]) : noImg} alt="" />
         <div className="cover"></div>
@@ -27,22 +17,20 @@ const CircleImgTextCard = forwardRef((props, ref) => {
         <h3>{data.product}</h3>
         <span className="ingredient">{data.ingredient}</span>
       </div>
-      <button className="favorite" onClick={handleFavoriteBtnClick}>
-        {renderHeart()}
-      </button>
-    </Wrap>
+      <FavoriteHeart data={data} />
+    </CircleCardWrap>
   );
 });
 
 export default CircleImgTextCard;
 
-const Wrap = styled.li`
+export const CircleCardWrap = styled.li`
   background: ${(props) => props.theme.background[1]};
   position: relative;
   float: left;
   width: 270px;
   height: 300px;
-  margin: 0 10px 40px;
+  margin: 0 0.8rem 1.4rem;
   border-radius: 10px;
   -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
@@ -62,8 +50,8 @@ const Wrap = styled.li`
       z-index: 100;
       position: absolute;
       top: 0;
-      width: 270px;
-      height: 300px;
+      width: 100%;
+      height: 100%;
       border-radius: 10px;
       background-color: ${(props) => props.theme.green[1]};
       opacity: 0;
@@ -89,30 +77,12 @@ const Wrap = styled.li`
       margin-top: 0.7rem;
     }
   }
-`;
 
-const EmptyHeart = styled(EmptyHeartSvg)`
-  z-index: 1000;
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 25px;
-  height: 25px;
-  fill: ${(props) => props.theme.color[2]};
-
-  &:hover {
+  ${FavoriteWrap} {
+    top: 10px;
+    right: 10px;
   }
-`;
-
-const FullHeart = styled(FullHeartSvg)`
-  z-index: 1000;
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 25px;
-  height: 25px;
-  fill: ${(props) => props.theme.brown[2]};
-
-  &:hover {
+  ${EmptyHeart} {
+    fill: ${(props) => props.theme.color[2]};
   }
 `;

@@ -46,6 +46,7 @@ export const CheckboxWrap = styled.div`
   }
   input {
     padding: 0.5rem 0.75rem;
+    margin: 0 0.5rem 0.5rem 0;
     border-radius: 4px;
     border: 1px solid ${(props) => props.theme.gray[1]};
     transition: all 0.3s ease;
@@ -53,9 +54,6 @@ export const CheckboxWrap = styled.div`
     &:hover {
       background-color: ${(props) => props.theme.brown[0]};
     }
-  }
-  input + input {
-    margin-left: 0.5rem;
   }
 
   .err {

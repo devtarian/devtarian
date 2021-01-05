@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { ReactComponent as PrevSvg } from '../../images/icons/arrow_left.svg';
+import { ReactComponent as NextSvg } from '../../images/icons/arrow_right.svg';
 
 const CarouselBtn = ({ value, onCarouselBtnClick }) => {
   const { currentIndex, leftPosition, liClientWidth, liSideMargin } = value;
@@ -20,11 +22,18 @@ const CarouselBtn = ({ value, onCarouselBtnClick }) => {
 
   return (
     <CarouselBtnWrap>
-      <button className="prev" onClick={HandleCarouselBtnClick}>
-        <span>&lt;</span>
-      </button>
+      {currentIndex !== 0 && (
+        <button className="prev" onClick={HandleCarouselBtnClick}>
+          <span>
+            <PrevBtn />
+          </span>
+        </button>
+      )}
+
       <button className="next" onClick={HandleCarouselBtnClick}>
-        <span>&gt;</span>
+        <span>
+          <NextBtn />
+        </span>
       </button>
     </CarouselBtnWrap>
   );
@@ -34,6 +43,7 @@ export default React.memo(CarouselBtn);
 
 export const CarouselBtnWrap = styled.div`
   position: relative;
+  width: 100%;
   height: 177px;
   button {
     position: absolute;
@@ -45,6 +55,7 @@ export const CarouselBtnWrap = styled.div`
     background-color: ${(props) => props.theme.background[0]};
     font-size: 20px;
     color: ${(props) => props.theme.gray[1]};
+    opacity: 0.5;
   }
   .prev {
     z-index: 110;
@@ -57,4 +68,17 @@ export const CarouselBtnWrap = styled.div`
   span {
     pointer-events: none;
   }
+`;
+
+const PrevBtn = styled(PrevSvg)`
+  width: 30px;
+  height: 30px;
+  vertical-align: middle;
+  fill: ${(props) => props.theme.gray[0]};
+`;
+const NextBtn = styled(NextSvg)`
+  width: 30px;
+  height: 30px;
+  vertical-align: middle;
+  fill: ${(props) => props.theme.gray[0]};
 `;
