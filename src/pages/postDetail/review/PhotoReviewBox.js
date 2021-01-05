@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Profile, { ProfileWrap } from '../../../components/profile/Profile';
-import ImgCarousel from '../../../components/carousel/imgCarousel/ImgCarousel';
+import ImgCarousel, { CarouselUl } from '../../../components/carousel/imgCarousel/ImgCarousel';
 import Stars from '../../../components/stars/Stars';
 import useMoreContents from '../../../hooks/useMoreContents';
 
@@ -75,6 +75,21 @@ const Wrap = styled.div`
     img {
       border-top-right-radius: 10px;
       width: 100%;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .leftBox {
+      float: none;
+      width: 100%;
+    }
+    .rightBox {
+      float: none;
+      width: 100%;
+      height: 300px;
+      img {
+        border-top-right-radius: 0;
+      }
     }
   }
 `;

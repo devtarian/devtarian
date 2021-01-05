@@ -26,7 +26,7 @@ export default ImgBox;
 const Wrap = styled.section`
   float: left;
   width: 600px;
-  height: 700px;
+  max-height: 700px;
 
   .largeImg {
     width: 100%;
@@ -52,12 +52,12 @@ const Wrap = styled.section`
   .smallImgs {
     width: 100%;
     margin-top: 29px;
-    position: absolute;
 
     li {
+      position: relative;
       display: inline-block;
       width: 114px;
-      height: 114px;
+      max-height: 114px;
       margin: 0 3px 40px;
 
       img {
@@ -70,8 +70,8 @@ const Wrap = styled.section`
         z-index: 100;
         position: absolute;
         top: 0;
-        width: 114px;
-        height: 114px;
+        width: 100%;
+        height: 100%;
         border-radius: 10px;
         background-color: ${(props) => props.theme.green[1]};
         opacity: 0;
@@ -79,6 +79,38 @@ const Wrap = styled.section`
       }
       &:hover .cover {
         opacity: 0.8;
+      }
+    }
+  }
+
+  @media (max-width: 767px) {
+    float: none;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    .largeImg {
+      img {
+        width: 100%;
+        max-width: 600px;
+      }
+    }
+    .smallImgs {
+      li {
+        width: calc(20% - 6px);
+        max-width: 114px;
+        img {
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+        }
+
+        &:before {
+          content: '';
+          display: block;
+          padding-top: 100%;
+        }
       }
     }
   }

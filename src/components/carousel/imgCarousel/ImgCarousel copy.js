@@ -73,7 +73,6 @@ export const Wrap = styled.section`
 
 export const CarouselUl = styled.ul`
   width: ${(props) => (props.value.liClientWidth + props.value.liSideMargin * 2) * props.value.liLength}px;
-  height: 100%;
   position: absolute;
   left: ${(props) => props.value.leftPosition}px;
   transition: all 0.3s ease;
@@ -81,12 +80,14 @@ export const CarouselUl = styled.ul`
   li {
     float: left;
     width: ${(props) => props.value.liClientWidth}px;
-    height: 100%;
     margin: 0;
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      @media (max-width: 767px) {
+        margin-top: -25%;
+      }
     }
   }
 `;

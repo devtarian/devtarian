@@ -16,7 +16,7 @@ const Comment = ({ data }) => {
 export default Comment;
 
 const Wrap = styled.li`
-  padding: 5px 0 10px;
+  padding: 5px 15px 10px;
   overflow: hidden;
   border-bottom: 1px solid ${(props) => props.theme.background[2]};
 
@@ -26,7 +26,6 @@ const Wrap = styled.li`
     }
   }
   .comment {
-    margin-top: 9px;
-    padding-left: 47px;
+    padding-left: 38px;
   }
 `;
