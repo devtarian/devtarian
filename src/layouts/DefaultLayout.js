@@ -243,12 +243,10 @@ const DefaultLayout = ({ component: Component, user, onLogOut, ...rest }) => {
 export default DefaultLayout;
 
 const Wrap = styled.div`
-  margin-top: 58px;
-  overflow-x: hidden;
+  padding-top: 58px;
 
   ${ProfileWrap} {
     width: 88px;
-    margin-left: 20px;
     .thumbNail {
       width: 32px;
       height: 32px;

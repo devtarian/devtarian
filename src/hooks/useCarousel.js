@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useLayoutEffect } from 'react';
 
 const useCarousel = (mg) => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -9,10 +9,10 @@ const useCarousel = (mg) => {
   const refCarouselUl = useRef();
   const refCarouselLi = useRef();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setLiClientWidth(refCarouselLi.current?.clientWidth);
     setLiLength(refCarouselUl.current?.childElementCount);
-  }, []);
+  }, [liClientWidth]);
 
   const onCarouselBtnClick = (newIndex, newLeftPosition) => {
     console.log(newIndex, newLeftPosition);

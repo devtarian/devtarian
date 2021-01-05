@@ -202,24 +202,41 @@ const Wrap = styled.div`
     float: none;
     width: 100%;
     max-width: 600px;
+    height: 570px;
     margin: 0 auto;
     .innerWrap {
       padding: 0;
       .textBox {
         width: 100%;
+        .infoTitle,
+        .infoContents {
+          float: none;
+          display: block;
+        }
+
+        .infoContents {
+          margin-top: 0.4rem;
+        }
       }
       .hide {
         display: none;
       }
       .menu {
-        top: 145px;
+        top: 227px;
         .menuList {
+          width: 100%;
           li {
+            .name {
+              width: calc(100% - 152px);
+            }
+            .price {
+              width: 85px;
+            }
           }
         }
       }
       .address {
-        top: 232px;
+        top: 339px;
       }
     }
   }
@@ -245,6 +262,6 @@ const StyledMap = styled(KakaoMap)`
   height: 200px;
   margin-top: 30px;
   @media (max-width: 767px) {
-    bottom: -203px;
+    bottom: -254px;
   }
 `;

@@ -40,6 +40,10 @@ const Wrap = styled.div`
       background-color: ${(props) => props.theme.green[0]};
     }
   }
+
+  @media (max-width: 767px) {
+    right: 1.5rem;
+  }
 `;
 
 const Edit = styled(EditSvg)`
