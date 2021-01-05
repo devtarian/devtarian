@@ -7,8 +7,8 @@ const WikiTextBox = ({ wikiPost }) => {
   return (
     <Wrap>
       <div className="innerWrap">
-        <h2 className="category">{category}</h2>
-        <h3 className="product">{product}</h3>
+        <h2 className="category hide">{category}</h2>
+        <h3 className="product hide">{product}</h3>
         <div className="ingredient textBox">
           <strong className="infoTitle">성분</strong>
           <span className="infoContents">{ingredient}</span>
@@ -26,11 +26,13 @@ const Wrap = styled.div`
   height: 700px;
   padding: 70px 0 0 70px;
 
+  .hide {
+    display: block;
+  }
   .category {
     font-size: 1rem;
     color: ${(props) => props.theme.color[2]};
   }
-
   .product {
     margin: 0px 0px 10px;
     font-size: 60px;
@@ -57,6 +59,22 @@ const Wrap = styled.div`
       float: left;
       width: 430px;
       overflow: hidden;
+    }
+  }
+
+  @media (max-width: 767px) {
+    float: none;
+    width: 100%;
+    max-width: 600px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0;
+
+    .hide {
+      display: none;
+    }
+    .textBox {
+      height: 100%;
     }
   }
 `;

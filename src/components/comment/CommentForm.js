@@ -31,6 +31,7 @@ export const CommentFormWrap = styled.div`
     }
     form {
       float: left;
+      width: calc(100% - 48px);
       padding: 5px 0;
       label {
         display: none;

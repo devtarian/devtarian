@@ -260,6 +260,9 @@ const Wrap = styled.div`
       }
     }
   }
+  @media (max-width: 767px) {
+    margin-top: 58px;
+  }
 `;
 
 const DUMMY_POSTS = [

@@ -106,14 +106,14 @@ const Wrap = styled.nav`
   }
 `;
 const FullNav = styled.ul`
-  @media (min-width: 320px) and (max-width: 768px) {
+  @media (max-width: 767px) {
     display: none;
   }
 `;
 const HBGNav = styled.ul`
   display: none;
 
-  @media (min-width: 320px) and (max-width: 768px) {
+  @media (max-width: 767px) {
     display: block;
   }
 `;
