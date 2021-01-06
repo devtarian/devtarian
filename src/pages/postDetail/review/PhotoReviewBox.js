@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Profile, { ProfileWrap } from '../../../components/profile/Profile';
-import ImgCarousel, { CarouselUl } from '../../../components/carousel/imgCarousel/ImgCarousel';
+import ImgCarousel from '../../../components/carousel/imgCarousel/ImgCarousel';
 import Stars from '../../../components/stars/Stars';
 import useMoreContents from '../../../hooks/useMoreContents';
 
@@ -22,7 +22,7 @@ const PhotoReviewBox = ({ review }) => {
         </button>
       </div>
       <div className="rightBox">
-        <ImgCarousel carouselData={review.files} mg={0} />
+        <ImgCarousel carouselData={review.files} />
       </div>
     </Wrap>
   );
