@@ -31,11 +31,11 @@ const ImgCarousel = ({ carouselData }) => {
   }, [innerW]);
 
   useLayoutEffect(() => {
-    setCarouselValue({
-      ...carouselValue,
+    setCarouselValue((state) => ({
+      ...state.carouselValue,
       liClientWidth: wrapW,
       liLength: refCarouselUl.current?.childElementCount,
-    });
+    }));
   }, [wrapW]);
 
   const onCarouselBtnClick = (newIndex, newLeftPosition) => {

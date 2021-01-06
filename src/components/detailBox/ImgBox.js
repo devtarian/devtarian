@@ -89,6 +89,7 @@ const Wrap = styled.section`
     max-width: 600px;
     margin: 0 auto;
     .largeImg {
+      max-height: 400px;
       img {
         width: 100%;
         max-width: 600px;

@@ -4,6 +4,7 @@ import Stars from '../../stars/Stars';
 import KakaoMap from '../../Map/KakaoMap';
 import { ViewAllWrap } from '../../carousel/VeiwAll';
 import { ReactComponent as PlusSvg } from '../../../images/icons/add.svg';
+import { ReactComponent as MoreDotSvg } from '../../../images/icons/more_vert.svg';
 import useMoreDetail from '../../../hooks/useMoreDetail';
 
 const PostTextBox = ({ post }) => {
@@ -13,6 +14,9 @@ const PostTextBox = ({ post }) => {
   } = post;
   const hours = useMoreDetail();
   const menu = useMoreDetail();
+
+  const HOURSLIST = hours.more ? operatingHours : operatingHours.slice(0, 3);
+  const MENULIST = menu.more ? menuList : menuList.slice(0, 3);
 
   return (
     <Wrap>
@@ -29,39 +33,41 @@ const PostTextBox = ({ post }) => {
           <strong className="infoTitle">전화번호</strong>
           <span className="infoContents">{contactNum}</span>
         </div>
-        <div className="openHoursWrap" ref={hours.refMore}>
-          <div className="openHours textBox">
-            <strong className="infoTitle">영업시간</strong>
-            <ul className="infoContents">
-              {operatingHours.map((hour) => (
-                <li key={hour} className="open">
-                  {hour}
-                </li>
-              ))}
+
+        <div className="openHours textBox" ref={hours.refMore}>
+          <strong className="infoTitle">영업시간</strong>
+          <ul className="infoContents">
+            {HOURSLIST.map((hour) => (
+              <li key={hour} className="open">
+                {hour}
+              </li>
+            ))}
+            {hours.more && (
               <div className="memo">
                 <span>{operatingHoursMemo}</span>
               </div>
-              {operatingHours.length > 3 && (
-                <ViewMoreBtn
-                  ref={hours.refBtn}
-                  onMouseOver={hours.handleMoreBtnHover}
-                  onMouseOut={hours.handleMoreBtnHover}
-                />
-              )}
-            </ul>
-          </div>
+            )}
+
+            {operatingHours.length > 2 && (
+              <ViewMoreBtn
+                ref={hours.refBtn}
+                onMouseOver={hours.handleMoreBtnHover}
+                onMouseOut={hours.handleMoreBtnHover}
+              />
+            )}
+          </ul>
         </div>
         <div className="menu textBox" ref={menu.refMore}>
           <strong className="infoTitle">메뉴</strong>
           <ul className="menuList infoContents">
-            {menuList.map((menu) => (
+            {MENULIST.map((menu) => (
               <li key={menu.menu}>
                 <span className="vegType">{menu.vegtype}</span>
                 <span className="name">{menu.menu}</span>
                 <span className="price">{menu.price}원</span>
               </li>
             ))}
-            {menuList.length > 3 && (
+            {menuList.length > 2 && (
               <ViewMoreBtn
                 ref={menu.refBtn}
                 onMouseOver={menu.handleMoreBtnHover}
@@ -71,12 +77,10 @@ const PostTextBox = ({ post }) => {
           </ul>
         </div>
         <div className="address textBox">
-          <div>
-            <strong className="infoTitle">위치</strong>
-            <span className="infoContents">{address}</span>
-          </div>
+          <strong className="infoTitle">위치</strong>
+          <span className="infoContents">{address}</span>
+          <StyledMap defaultCenter={{ lat: 33.450701, lng: 126.570667 }} />
         </div>
-        <StyledMap defaultCenter={{ lat: 33.450701, lng: 126.570667 }} />
       </div>
     </Wrap>
   );
@@ -117,8 +121,11 @@ const Wrap = styled.div`
         margin: 20px 0;
       }
     }
-    .textBox {
+    .starRating,
+    .contactNum {
       overflow: hidden;
+    }
+    .textBox {
       width: 100%;
       margin-bottom: 15px;
 
@@ -131,34 +138,26 @@ const Wrap = styled.div`
         overflow: hidden;
       }
     }
-
-    .openHoursWrap {
+    .openHours {
       z-index: 0;
       position: relative;
       background-color: ${(props) => props.theme.background[0]};
-      border-bottom: 1px solid ${(props) => props.theme.color[2]};
-      transition: all 0.2s;
-      .openHours {
-        overflow: hidden;
-        .open {
-          margin-bottom: 5px;
-        }
-        .memo {
-          color: ${(props) => props.theme.brown[2]};
-        }
+      overflow: hidden;
+      .open {
+        margin-bottom: 5px;
+      }
+      .memo {
+        color: ${(props) => props.theme.brown[2]};
       }
     }
 
     .menu {
       z-index: 1;
       position: absolute;
-      top: 362px;
+      top: 383px;
       width: calc(100% - 70px);
-      min-height: 123px;
-      padding: 10px 0;
+      padding-bottom: 14px;
       background-color: ${(props) => props.theme.background[0]};
-      border-bottom: 1px solid ${(props) => props.theme.color[2]};
-      transition: all 0.2s;
       .menuList {
         width: calc(100% - 100px);
         li {
@@ -167,11 +166,11 @@ const Wrap = styled.div`
 
           .vegType {
             float: left;
-            width: 62px;
+            width: 67px;
           }
           .name {
             float: left;
-            width: calc(100% - 167px);
+            width: calc(100% - 172px);
             margin-left: 5px;
           }
           .price {
@@ -185,13 +184,16 @@ const Wrap = styled.div`
     .address {
       z-index: 2;
       position: absolute;
-      top: 447px;
+      top: 479px;
       min-height: 123px;
-      padding-top: 10px;
       background-color: ${(props) => props.theme.background[0]};
       div {
         overflow: hidden;
       }
+    }
+
+    .moreDot {
+      text-align: center;
     }
 
     ${ViewAllWrap} {
@@ -222,12 +224,12 @@ const Wrap = styled.div`
         display: none;
       }
       .menu {
-        top: 227px;
+        top: 251px;
         .menuList {
           width: 100%;
           li {
             .name {
-              width: calc(100% - 152px);
+              width: calc(100% - 157px);
             }
             .price {
               width: 85px;
@@ -236,7 +238,7 @@ const Wrap = styled.div`
         }
       }
       .address {
-        top: 339px;
+        top: 371px;
       }
     }
   }
@@ -253,15 +255,20 @@ const ViewMoreBtn = styled(PlusSvg)`
   transition: all 0.1s ease-in;
 `;
 
+const MoreDot = styled(MoreDotSvg)`
+  width: 20px;
+  height: 20px;
+`;
+
 const StyledMap = styled(KakaoMap)`
   z-index: 3;
   position: absolute;
-  bottom: -220px;
-  right: 0px;
+  bottom: -140px;
+  left: 0px;
   width: 100%;
   height: 200px;
   margin-top: 30px;
   @media (max-width: 767px) {
-    bottom: -254px;
+    bottom: -165px;
   }
 `;

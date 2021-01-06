@@ -52,7 +52,7 @@ const Review = ({ reviewList }) => {
 export default Review;
 
 const Wrap = styled.section`
-  margin: 50px auto 0;
+  margin: 100px auto 0;
   padding: 0 1.5rem;
 
   .totalReviews {
@@ -125,7 +125,7 @@ const Wrap = styled.section`
   }
 
   @media (max-width: 767px) {
-    margin-top: 130px;
+    margin-top: 170px;
   }
 `;
 
