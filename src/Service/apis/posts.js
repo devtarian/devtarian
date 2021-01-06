@@ -8,7 +8,7 @@ export const api = {
     }
     formData.append('body', JSON.stringify(contents));
     const res = await defaultApi.post('/post', formData);
-    console.log(res);
+    console.log('createPost', res);
   },
 
   async getPosts() {

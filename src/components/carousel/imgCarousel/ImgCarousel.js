@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
+import React, { useState, useLayoutEffect, useRef } from 'react';
 import styled from 'styled-components';
 import CarouselBtn, { CarouselBtnWrap } from '../CarouselBtn';
 import noImg from '../../../images/noImg.jpg';
 
-const ImgCarousel = ({ carouselData, mg }) => {
+const ImgCarousel = ({ carouselData }) => {
+  const refWrap = useRef();
   const refCarouselUl = useRef();
   const refCarouselLi = useRef();
-  const refWrap = useRef();
-  const [innerW, setInnerW] = useState();
   const [wrapW, setWrapW] = useState();
+  const [innerW, setInnerW] = useState();
   const [carouselValue, setCarouselValue] = useState({
     currentIndex: 0,
     leftPosition: 0,
@@ -35,9 +35,8 @@ const ImgCarousel = ({ carouselData, mg }) => {
       ...carouselValue,
       liClientWidth: wrapW,
       liLength: refCarouselUl.current?.childElementCount,
-      liSideMargin: mg,
     });
-  }, [wrapW, mg]);
+  }, [wrapW]);
 
   const onCarouselBtnClick = (newIndex, newLeftPosition) => {
     setCarouselValue({ ...carouselValue, currentIndex: newIndex, leftPosition: newLeftPosition });
@@ -48,7 +47,7 @@ const ImgCarousel = ({ carouselData, mg }) => {
       <CarouselUl ref={refCarouselUl} value={carouselValue} wrapw={wrapW}>
         {carouselData.map((data, index) => (
           <li key={index} data={data} ref={refCarouselLi}>
-            <img src={data ? data : noImg} alt="" ref={refCarouselLi} />
+            <img src={data ? data : noImg} alt="" />
           </li>
         ))}
       </CarouselUl>
