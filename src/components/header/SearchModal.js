@@ -7,13 +7,13 @@ const SearchModal = ({ recentKeywords, onAddRecentKeywords, onToggleShow }) => {
     <Wrap>
       <SearchCategory>
         <li>
-          <a href="">전체</a>
+          <a href="/">전체</a>
         </li>
         <li>
-          <a href="">식당</a>
+          <a href="/">식당</a>
         </li>
         <li>
-          <a href="">제품</a>
+          <a href="/">제품</a>
         </li>
       </SearchCategory>
       <Search posTop="80px" bg="none" recentKeywords={recentKeywords} onAddRecentKeywords={onAddRecentKeywords} />
@@ -26,7 +26,7 @@ export default SearchModal;
 
 const Wrap = styled.section`
   z-index: 10;
-  background: #fff;
+  background: ${(props) => props.theme.background[0]};
   position: fixed;
   top: 0;
   bottom: 0;
@@ -50,7 +50,7 @@ const SearchCategory = styled.ul`
 
     &:hover {
       transition: all 0.2s ease;
-      color: green;
+      color: ${(props) => props.theme.green[1]};
       font-weight: bolder;
     }
   }

@@ -1,59 +1,63 @@
 import React from 'react';
 import styled from 'styled-components';
+import { UploadImg, Checkbox, StarRating, Input, Textarea, SubmitBtn } from '../../components/form';
+import useInput from '../../hooks/useInput';
+import BgImg from '../../images/pexels-karolina-grabowska-4197908.jpg';
+
+const INIT_REVIEW = {
+  category: '가게',
+  files: [],
+  vegLevel: '',
+  starRating: '',
+  title: '',
+  contents: '',
+};
+
+const VEGLEVELS = ['비건', '락토', '오보', '락토오보', '페스코'];
 
 const ReviewForm = () => {
+  const { inputs, setInputs, errors, onInputChange, onImageUpload, requiredValidate } = useInput(INIT_REVIEW);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const requiredList = ['vegLevel', 'title', 'contents'];
+    let isValid = requiredValidate(requiredList);
+    if (!isValid) return;
+
+    console.log(inputs);
+    setInputs(INIT_REVIEW);
+  };
+
   return (
-    <Wrap>
-      <h2>피드 쓰기</h2>
+    <Wrap bg={BgImg}>
+      <h2>리뷰 작성</h2>
       <form>
-        <Categoty>
-          <label>카테고리</label>
-          <input type="radio" name="category" /> 가게
-          <input type="radio" name="category" /> 제품
-        </Categoty>
-        <UploadImg>
-          <label>사진 선택 0/5</label>
-          <input type="file" accept="image/*" multiple></input>
-          <ul className="imgPreview">
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-          </ul>
-        </UploadImg>
-        <VegLevel>
-          <label>채식 단계</label>
-          <button>
-            <i></i>
-            <span>비건</span>
-          </button>
-          <button>
-            <i></i>
-            <span>락토</span>
-          </button>
-          <button>
-            <i></i>
-            <span>오보</span>
-          </button>
-          <button>
-            <i></i>
-            <span>락토 오보</span>
-          </button>
-          <button>
-            <i></i>
-            <span>페스코</span>
-          </button>
-        </VegLevel>
-        <Title>
-          <label>제목</label>
-          <input></input>
-        </Title>
-        <Contents>
-          <label>내용</label>
-          <textarea></textarea>
-        </Contents>
-        <button className="submitBtn">피드 쓰기</button>
+        <UploadImg name="imgFiles" files={inputs.files} onImageUpload={onImageUpload} />
+        <Checkbox
+          name="vegLevel"
+          label="채식 단계"
+          info={VEGLEVELS}
+          activedBtn={inputs.vegLevel}
+          onChange={onInputChange}
+          error={errors.vegLevel}
+        />
+        <StarRating name="starRating" onChange={onInputChange} error={errors.starRating} />
+        <Input
+          label="제목"
+          name="title"
+          value={inputs.title}
+          placeholder="제목을 입력하세요."
+          onChange={onInputChange}
+          error={errors.title}
+        />
+        <Textarea
+          name="contents"
+          value={inputs.contents}
+          placeholder="내용을 입력하세요."
+          onChange={onInputChange}
+          error={errors.contents}
+        />
+        <SubmitBtn value="리뷰 제출" onSubmit={handleSubmit} />
       </form>
     </Wrap>
   );
@@ -62,103 +66,49 @@ const ReviewForm = () => {
 export default ReviewForm;
 
 const Wrap = styled.section`
-  width: 1000px;
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
   height: 100%;
   margin: 0 auto 40px;
   padding: 3rem 1.5rem 0;
-  /* background-color: rgba(0, 0, 0, 0.1); */
+
+  .wrap {
+    margin-top: 2rem;
+  }
   h2 {
     margin: 1rem 0.5rem 1.5rem;
     font-size: 1.8rem;
   }
   form {
+    position: relative;
     padding: 1rem 2rem 2rem;
     border-radius: 10px;
-    border: 1px solid #999;
-  }
-  div {
-    margin-top: 2rem;
-  }
-  label {
-    display: block;
-    margin-bottom: 1rem;
-    font-size: 1.125rem;
-    font-weight: bolder;
-  }
+    border: 1px solid ${(props) => props.theme.gray[1]};
+    -webkit-box-shadow: 0 3px 5px ${(props) => props.theme.gray[0]};
+    box-shadow: 0 2px 5px ${(props) => props.theme.gray[0]};
+    background: rgba(255, 255, 255, 0.85);
 
-  .submitBtn {
-    width: 100%;
-    margin-top: 2rem;
-    padding: 0.65rem 0.75rem;
-    border-radius: 4px;
-    border: 1px solid #999;
-    background-color: green;
-  }
-`;
-
-const Categoty = styled.div`
-  /* background-color: rgba(0, 0, 0, 0.1); */
-  input + input {
-    margin-left: 1rem;
-  }
-`;
-const VegLevel = styled.div`
-  /* background-color: rgba(0, 0, 0, 0.1); */
-  button {
-    padding: 0.5rem 0.75rem;
-    border-radius: 4px;
-    border: 1px solid #999;
-    transition: all 0.3s ease;
-
-    &:hover {
-      background-color: green;
+    * {
+      z-index: 1;
     }
-  }
-  button + button {
-    margin-left: 0.5rem;
-  }
-`;
-const UploadImg = styled.div`
-  /* background-color: rgba(0, 0, 0, 0.1); */
-  .imgPreview {
-    width: 100%;
-    margin-top: 1rem;
-    &:after {
-      content: '';
+    label,
+    h3 {
       display: block;
-      clear: both;
+      margin-bottom: 1rem;
+      font-size: 1.125rem;
+      font-weight: bolder;
     }
-
-    li {
-      float: left;
-      width: 150px;
-      height: 150px;
-      border-radius: 4px;
-      border: 1px solid #999;
+    &:before {
+      z-index: -1;
+      content: '';
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-image: url(${(props) => props.bg});
+      background-size: cover;
     }
-    li + li {
-      margin-left: 0.5rem;
-    }
-  }
-`;
-const Title = styled.div`
-  /* background-color: rgba(0, 0, 0, 0.1); */
-
-  input {
-    width: 100%;
-    padding: 10px;
-    border-radius: 4px;
-    border: 1px solid #999;
-  }
-`;
-const Contents = styled.div`
-  /* background-color: rgba(0, 0, 0, 0.1); */
-
-  textarea {
-    width: 100%;
-    padding: 10px;
-    min-height: 500px;
-    border-radius: 4px;
-    border: 1px solid #999;
   }
 `;
