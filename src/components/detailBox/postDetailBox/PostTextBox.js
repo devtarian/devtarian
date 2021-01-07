@@ -33,7 +33,6 @@ const PostTextBox = ({ post }) => {
           <strong className="infoTitle">전화번호</strong>
           <span className="infoContents">{contactNum}</span>
         </div>
-
         <div className="openHours textBox" ref={hours.refMore}>
           <strong className="infoTitle">영업시간</strong>
           <ul className="infoContents">
@@ -47,8 +46,7 @@ const PostTextBox = ({ post }) => {
                 <span>{operatingHoursMemo}</span>
               </div>
             )}
-
-            {operatingHours.length > 2 && (
+            {operatingHours.length > 3 && (
               <ViewMoreBtn
                 ref={hours.refBtn}
                 onMouseOver={hours.handleMoreBtnHover}
@@ -67,7 +65,7 @@ const PostTextBox = ({ post }) => {
                 <span className="price">{menu.price}원</span>
               </li>
             ))}
-            {menuList.length > 2 && (
+            {menuList.length > 3 && (
               <ViewMoreBtn
                 ref={menu.refBtn}
                 onMouseOver={menu.handleMoreBtnHover}
