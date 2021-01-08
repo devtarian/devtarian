@@ -8,12 +8,6 @@ import Profile, { ProfileWrap } from '../components/profile/Profile';
 import SubNav from '../components/header/nav/SubNav';
 
 const DefaultLayout = ({ component: Component, user, onLogOut, ...rest }) => {
-  const [show, setShow] = useState(false);
-
-  const onSubNavShow = () => {
-    setShow(!show);
-  };
-
   const INIT_POST = [
     {
       id: 0,
@@ -213,26 +207,12 @@ const DefaultLayout = ({ component: Component, user, onLogOut, ...rest }) => {
     localStorage.removeItem('token');
   };
 
-  const renderUserProfile = () => {
-    return user ? (
-      <>
-        <NaviItem to="/" innerText="로그아웃" sign={true} onLogOut={handleLogOut} />
-        <li className="navItem profile">
-          <Profile userData={user} createAt="" />
-        </li>
-      </>
-    ) : (
-      <NaviItem to="login" innerText="로그인 / 회원가입" sign={true} />
-    );
-  };
-
   return (
     <Route
       {...rest}
       render={(props) => (
         <Wrap>
-          <Header user={user} renderUserProfile={renderUserProfile} onSubNavShow={onSubNavShow} />
-          {show && <SubNav renderUserProfile={renderUserProfile} />}
+          <Header />
           <Component {...props} user={user} posts={posts} wikiPosts={wikiPosts} onAddPost={onAddPost} />
         </Wrap>
       )}
