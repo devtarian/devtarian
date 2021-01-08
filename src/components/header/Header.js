@@ -2,19 +2,13 @@ import styled from 'styled-components';
 import Nav from './nav/Nav';
 import { Link } from 'react-router-dom';
 
-const Header = ({ user, recentKeywords, onAddRecentKeywords, renderUserProfile, onSubNavShow }) => {
+const Header = ({ recentKeywords, onAddRecentKeywords, onSubNavShow }) => {
   return (
     <Wrap>
       <Logo>
         <Link to="/">Devtarian</Link>
       </Logo>
-      <Nav
-        user={user}
-        recentKeywords={recentKeywords}
-        onAddRecentKeywords={onAddRecentKeywords}
-        renderUserProfile={renderUserProfile}
-        onSubNavShow={onSubNavShow}
-      />
+      <Nav recentKeywords={recentKeywords} onAddRecentKeywords={onAddRecentKeywords} onSubNavShow={onSubNavShow} />
     </Wrap>
   );
 };

@@ -5,9 +5,9 @@ import SearchModal from '../SearchModal';
 import NaviItem from '../nav/NaviItem';
 import { ReactComponent as MenuSvg } from '../../../images/icons/menu.svg';
 import { ReactComponent as SearchSvg } from '../../../images/icons/search.svg';
-import UserProfile from '../../UserProfile/UserProfile';
+import UserProfile from '../../userProfile/UserProfile';
 
-const Nav = ({ recentKeywords, onAddRecentKeywords, renderUserProfile, onSubNavShow }) => {
+const Nav = ({ recentKeywords, onAddRecentKeywords, onSubNavShow }) => {
   const [show, setShow] = useState(false);
 
   const onToggleShow = (isShow) => {
