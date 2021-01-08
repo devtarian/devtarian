@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import Search from '../search/Search';
-import CloseBtn from '../closeBtn/CloseBtn';
+// import CloseBtn from '../closeBtn/CloseBtn';
 
-const SearchModal = ({ recentKeywords, onAddRecentKeywords, onToggleShow }) => {
+const SearchModal = ({ onCloseModal }) => {
   return (
     <Wrap>
       <SearchCategory>
@@ -16,8 +16,10 @@ const SearchModal = ({ recentKeywords, onAddRecentKeywords, onToggleShow }) => {
           <a href="/">제품</a>
         </li>
       </SearchCategory>
-      <Search posTop="80px" bg="none" recentKeywords={recentKeywords} onAddRecentKeywords={onAddRecentKeywords} />
-      <CloseBtn onToggleShow={onToggleShow} />
+      <Search posTop="80px" bg="none" />
+      <CloseBtn onClick={onCloseModal}>
+        <i>x</i>
+      </CloseBtn>
     </Wrap>
   );
 };
@@ -53,5 +55,17 @@ const SearchCategory = styled.ul`
       color: ${(props) => props.theme.green[1]};
       font-weight: bolder;
     }
+  }
+`;
+
+const CloseBtn = styled.button`
+  position: fixed;
+  top: 10px;
+  right: 20px;
+  width: 16px;
+  height: 16px;
+
+  i {
+    font-size: 22px;
   }
 `;
