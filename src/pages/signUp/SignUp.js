@@ -1,13 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import apis from '../../Service/apis';
 import useInput from '../../hooks/useInput';
 import UploadProfileImg from './UploadProfileImg';
 import SignInput from '../../components/form/SignInput';
 import SubmitBtn from '../../components/form/SubmitBtn';
 import GoBackLink from '../../components/goBackLink/GoBackLink';
+import authActions from '../../redux/actions/authActions';
+import { useDispatch } from 'react-redux';
 
-const SignUp = ({ initUserValues, history }) => {
+const initUserValues = {
+  userName: '',
+  email: '',
+  password: '',
+  passwordCheck: '',
+  avatar: '',
+  files: [],
+};
+
+const SignUp = () => {
+  const dispatch = useDispatch();
   const { inputs, setInputs, errors, setErrors, onImageUpload, onInputChange, requiredValidate } = useInput(
     initUserValues
   );
@@ -19,14 +30,14 @@ const SignUp = ({ initUserValues, history }) => {
     if (!isValid) return;
 
     try {
-      await apis.usersApi.signUp({
-        username: inputs.userName,
-        email: inputs.email,
-        pw: inputs.password,
-        thumbNailFile: inputs.files[0],
-      });
-      alert('가입 되었습니다.');
-      history.push('/');
+      dispatch(
+        authActions.signup({
+          username: inputs.userName,
+          email: inputs.email,
+          pw: inputs.password,
+          thumbNailFile: inputs.files[0],
+        })
+      );
       setInputs(initUserValues);
     } catch (err) {
       console.error(err);
@@ -34,7 +45,7 @@ const SignUp = ({ initUserValues, history }) => {
       setErrors(err.response?.data);
     }
   };
-
+  console.log(inputs.files);
   return (
     <div className="wrap">
       <form className="signForm" onSubmit={handleSubmit}>
