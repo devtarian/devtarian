@@ -5,6 +5,7 @@ import SearchModal from '../SearchModal';
 import NaviItem from '../nav/NaviItem';
 import { ReactComponent as MenuSvg } from '../../../images/icons/menu.svg';
 import { ReactComponent as SearchSvg } from '../../../images/icons/search.svg';
+import UserProfile from '../../UserProfile/UserProfile';
 
 const Nav = ({ recentKeywords, onAddRecentKeywords, renderUserProfile, onSubNavShow }) => {
   const [show, setShow] = useState(false);
@@ -41,7 +42,8 @@ const Nav = ({ recentKeywords, onAddRecentKeywords, renderUserProfile, onSubNavS
             />
           )}
         </li>
-        {renderUserProfile()}
+
+        <UserProfile />
       </FullNav>
       <HBGNav>
         <div className="navItem" onClick={handleSearchNavClick}>
