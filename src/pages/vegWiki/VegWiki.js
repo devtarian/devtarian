@@ -124,10 +124,11 @@ const VegiWiki = ({ wikiPosts }) => {
     <Wrap>
       <div className="filters">
         <Checkbox
+          name="category"
           label="카테고리"
           info={CATEGORIES}
           activedBtn={activedBtn}
-          onReviewChange={onReviewChange}
+          onChange={onReviewChange}
           onCheckboxClick={onCheckboxClick}
         />
         <Select info={OPTIONS} />

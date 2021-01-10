@@ -24,7 +24,7 @@ const SelectAll = ({ title, name, selectedList, error, options, exceptOnly, onCh
   };
 
   return (
-    <Wrap>
+    <Wrap className="wrap">
       <label>{title}</label>
       {options.map((item) => (
         <Button

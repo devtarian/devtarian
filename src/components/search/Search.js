@@ -59,7 +59,7 @@ const InnerWrap = styled.div`
   max-height: 239px;
   margin: 0 auto;
 
-  @media (min-width: 320px) and (max-width: 768px) {
+  @media (max-width: 767px) {
     width: 95%;
   }
 `;

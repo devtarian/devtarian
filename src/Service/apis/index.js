@@ -1,7 +1,6 @@
 import { api as authApi } from './auth';
-import { api as usersApi } from './users';
-import { api as postsApi } from './posts';
+import { api as storeApi } from './store';
 
-const apis = { authApi, usersApi, postsApi };
+const apis = { authApi, storeApi };
 
 export default apis;

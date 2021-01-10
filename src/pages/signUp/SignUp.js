@@ -1,32 +1,45 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import apis from '../../Service/apis';
+import authActions from '../../redux/actions/authActions';
+import { useDispatch } from 'react-redux';
+
 import useInput from '../../hooks/useInput';
 import UploadProfileImg from './UploadProfileImg';
 import SignInput from '../../components/form/SignInput';
 import SubmitBtn from '../../components/form/SubmitBtn';
+import GoBackLink from '../../components/goBackLink/GoBackLink';
 
-const SignUp = ({ initUserValues, history }) => {
+const INIT_USER_VALUES = {
+  userName: '',
+  email: '',
+  password: '',
+  passwordCheck: '',
+  avatar: '',
+  files: [],
+};
+
+const SignUp = () => {
+  const dispatch = useDispatch();
   const { inputs, setInputs, errors, setErrors, onImageUpload, onInputChange, requiredValidate } = useInput(
-    initUserValues
+    INIT_USER_VALUES
   );
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const requiredList = ['userName', 'email', 'password', 'passwordCheck', 'files'];
+    const requiredList = ['userName', 'email', 'password', 'passwordCheck'];
     let isValid = requiredValidate(requiredList);
     if (!isValid) return;
 
     try {
-      await apis.usersApi.signUp({
-        username: inputs.userName,
-        email: inputs.email,
-        pw: inputs.password,
-        thumbNailFile: inputs.files[0],
-      });
-      alert('가입 되었습니다.');
-      history.push('/');
-      setInputs(initUserValues);
+      dispatch(
+        authActions.signup({
+          username: inputs.userName,
+          email: inputs.email,
+          pw: inputs.password,
+          thumbNailFile: inputs.files[0],
+        })
+      );
+      setInputs(INIT_USER_VALUES);
     } catch (err) {
       console.error(err);
       console.log(err.response?.data);
@@ -80,9 +93,7 @@ const SignUp = ({ initUserValues, history }) => {
           <Link to="/login">계정이 있으신가요? 로그인</Link>
         </div>
       </form>
-      <Link to="/" className="backToMain">
-        &lt; 메인으로
-      </Link>
+      <GoBackLink to="/" innerText="메인으로" />
     </div>
   );
 };

@@ -22,7 +22,7 @@ const PhotoReviewBox = ({ review }) => {
         </button>
       </div>
       <div className="rightBox">
-        <ImgCarousel carouselData={review.files} mg={0} />
+        <ImgCarousel carouselData={review.files} />
       </div>
     </Wrap>
   );
@@ -75,6 +75,21 @@ const Wrap = styled.div`
     img {
       border-top-right-radius: 10px;
       width: 100%;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .leftBox {
+      float: none;
+      width: 100%;
+    }
+    .rightBox {
+      float: none;
+      width: 100%;
+      height: 300px;
+      img {
+        border-top-right-radius: 0;
+      }
     }
   }
 `;

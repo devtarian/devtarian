@@ -1,13 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
+import UserProfile from '../../userProfile/UserProfile';
 import NaviItem from './NaviItem';
 
-const SubNav = ({ renderUserProfile }) => {
+const SubNav = () => {
   return (
     <Wrap>
       <NaviItem to="/feed" innerText="피드 쓰기" />
       <NaviItem to="/vegwiki" innerText="비건위키" />
-      {renderUserProfile()}
+      <UserProfile />
     </Wrap>
   );
 };
@@ -24,7 +25,7 @@ const Wrap = styled.ul`
   text-align: right;
   background-color: rgba(255, 255, 255, 0.9);
 
-  @media (min-width: 320px) and (max-width: 768px) {
+  @media (max-width: 767px) {
     display: block;
 
     .profile {

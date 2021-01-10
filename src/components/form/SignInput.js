@@ -23,6 +23,7 @@ const Wrap = styled.div`
     margin-bottom: 2.3rem;
     padding: 5px 7px;
     border-bottom: 1px solid ${(props) => props.theme.gray[1]};
+    font-size: 1rem;
   }
   .err {
     display: none;

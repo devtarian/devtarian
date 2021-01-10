@@ -26,4 +26,9 @@ const Wrap = styled.div`
   .comment {
     position: relative;
   }
+
+  @media (max-width: 767px) {
+    width: 100%;
+    max-width: 1200px;
+  }
 `;

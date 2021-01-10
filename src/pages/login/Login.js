@@ -1,45 +1,36 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import apis from '../../Service/apis';
+import { useDispatch } from 'react-redux';
+import authActions from '../../redux/actions/authActions';
+import history from '../../history';
 import useInput from '../../hooks/useInput';
 import SignInput from '../../components/form/SignInput';
 import SubmitBtn from '../../components/form/SubmitBtn';
 import GoBackLink from '../../components/goBackLink/GoBackLink';
 
-const Login = ({ user, initUserValues, onGetUser, history }) => {
-  const { inputs, setInputs, errors, onInputChange, requiredValidate } = useInput(initUserValues);
+const INIT_USER_VALUES = {
+  userName: '',
+  email: '',
+  password: '',
+  passwordCheck: '',
+  avatar: '',
+  files: [],
+};
 
-  const handleSubmit = async (e) => {
+const Login = () => {
+  const dispatch = useDispatch();
+  const { inputs, setInputs, errors, onInputChange, requiredValidate } = useInput(INIT_USER_VALUES);
+
+  const handleSubmit = (e) => {
     e.preventDefault();
+
     const requiredList = ['email', 'password'];
     let isValid = requiredValidate(requiredList);
     if (!isValid) return;
 
-    try {
-      await apis.authApi.login({
-        email: inputs.email,
-        pw: inputs.password,
-      });
-      // localStorage.setItem('apiKey', res.data.token);
-      history.push('/');
-      setInputs(initUserValues);
-      handleGetUser(user);
-    } catch (err) {
-      console.error(err);
-      console.log(err.response && err.response.data);
-    }
-  };
-
-  const handleGetUser = async () => {
-    try {
-      const res = await apis.authApi.getMe();
-      onGetUser(res);
-      console.log('login', res);
-      return res;
-    } catch (err) {
-      console.log(err);
-      console.log(err.response && err.response.data);
-    }
+    dispatch(authActions.login(inputs));
+    history.push('/');
+    setInputs(INIT_USER_VALUES);
   };
 
   return (
@@ -70,7 +61,7 @@ const Login = ({ user, initUserValues, onGetUser, history }) => {
           <Link to="/signup">/ 회원가입</Link>
         </div>
       </form>
-      <GoBackLink to="/" />
+      <GoBackLink to="/" innerText="메인으로" />
     </div>
   );
 };

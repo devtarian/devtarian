@@ -34,7 +34,6 @@ const Review = ({ reviewList }) => {
             </div>
             <div className="addComments">
               <CommentBtn />
-
               <span>+{review.commentList.length}</span>
             </div>
           </div>
@@ -53,7 +52,8 @@ const Review = ({ reviewList }) => {
 export default Review;
 
 const Wrap = styled.section`
-  margin-top: 50px;
+  margin: 100px auto 0;
+  padding: 0 1.5rem;
 
   .totalReviews {
     display: block;
@@ -61,9 +61,9 @@ const Wrap = styled.section`
   }
 
   .review {
-    width: 768px;
-    margin: 0 auto;
-    margin-bottom: 25px;
+    width: 100%;
+    max-width: 768px;
+    margin: 0 auto 25px;
     border-radius: 10px;
     background-color: ${(props) => props.theme.background[1]};
     -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
@@ -94,9 +94,7 @@ const Wrap = styled.section`
       margin-left: 0.25rem;
     }
   }
-
   .comments {
-    padding: 0px 15px;
     overflow: hidden;
   }
   .writeComments {
@@ -116,7 +114,6 @@ const Wrap = styled.section`
         display: none;
       }
       input {
-        width: 690px;
         margin-top: 0px;
         padding: 8px 10px;
         border-radius: 10px;
@@ -125,6 +122,10 @@ const Wrap = styled.section`
         color: ${(props) => props.theme.color[2]};
       }
     }
+  }
+
+  @media (max-width: 767px) {
+    margin-top: 170px;
   }
 `;
 

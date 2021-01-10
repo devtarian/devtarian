@@ -31,12 +31,13 @@ export const CommentFormWrap = styled.div`
     }
     form {
       float: left;
+      width: calc(100% - 48px);
       padding: 5px 0;
       label {
         display: none;
       }
       input {
-        width: 690px;
+        width: 100%;
         margin-top: 0px;
         padding: 8px 10px;
         border-radius: 10px;

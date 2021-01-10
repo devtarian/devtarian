@@ -8,10 +8,17 @@ const RadioCategory = ({ name, label, info, category, onChange }) => {
   return (
     <Wrap className="wrap">
       <label>{label}</label>
-      {info.map((item) => (
+      {info.map((item, index) => (
         <div className="innerWrap" key={item}>
-          <input type="radio" name={name} value={item} checked={category === item} onChange={handleChange} />
-          <span>{item}</span>
+          <input
+            id={`item${index}`}
+            type="radio"
+            name={name}
+            value={item}
+            checked={category === item}
+            onChange={handleChange}
+          />
+          <label htmlFor={`item${index}`}>{item}</label>
         </div>
       ))}
     </Wrap>
@@ -25,8 +32,14 @@ const Wrap = styled.div`
   .innerWrap {
     float: left;
     margin-right: 1rem;
-    margin-bottom: 1rem;
+
+    label {
+      float: right;
       margin-left: 0.3rem;
+      margin-bottom: 0;
+      font-size: 16px;
+      font-weight: normal;
+      cursor: pointer;
     }
   }
 `;

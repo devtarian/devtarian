@@ -47,7 +47,7 @@ const Wrap = styled.li`
     font-weight: bold;
   }
 
-  @media (min-width: 320px) and (max-width: 768px) {
+  @media (max-width: 767px) {
     float: none;
   }
 `;
