@@ -22,6 +22,7 @@ const FeedFormStore = ({ inputs, setInputs, errors, setErrors, onChange }) => {
         info={VEG_TYPE}
         activedBtn={activedBtn}
         onChange={onChange}
+        setInputs={setInputs}
         onCheckboxClick={onCheckboxClick}
         error={errors.vegType}
       />
