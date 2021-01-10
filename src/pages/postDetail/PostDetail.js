@@ -6,6 +6,7 @@ import EditBtn from '../../components/editBtn/EditBtn';
 import GoBackLink from '../../components/goBackLink/GoBackLink';
 import { useSelector, useDispatch } from 'react-redux';
 import storeActions from '../../redux/actions/storeActions';
+import Loading from '../../components/loading/Loding';
 
 const PostDetail = ({ posts }) => {
   const dispatch = useDispatch();
@@ -15,7 +16,7 @@ const PostDetail = ({ posts }) => {
     dispatch(storeActions.getStore('few'));
   }, []);
 
-  // if (isFetching) return <Loading />;
+  if (isFetching) return <Loading type="bubbles" />;
 
   return (
     <Wrap>
