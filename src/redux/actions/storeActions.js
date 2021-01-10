@@ -1,6 +1,4 @@
 import { STORE_GET_STORE } from '../types';
-import history from '../../history';
-import { defaultApi } from '../../Service/apis/default';
 import apis from '../../Service/apis';
 
 const getStore = (storeId) => async (dispatch) => {
@@ -18,32 +16,5 @@ const getStore = (storeId) => async (dispatch) => {
   }
 };
 
-const createReview = async (inputs) => {
-  try {
-    const { id, starRating, title, contents, files } = inputs;
-    const formData = new FormData();
-    const characterInputs = {
-      id,
-      starRating,
-      title,
-      contents,
-    };
-    for (let i = 0; i < files.length; i++) {
-      formData.append('file', files[i]);
-    }
-    formData.append('body', JSON.stringify(characterInputs));
-
-    const resToken = await apis.storeApi.createReview(id, formData);
-    const token = `Bearer ${resToken.token}`;
-    //localStorage.setItem('token', token);
-    defaultApi.defaults.headers.common['Authorization'] = token;
-
-    return history.push('/');
-  } catch (err) {
-    console.error(err);
-    console.log(err.response && err.response.data);
-  }
-};
-
-const storeActions = { getStore, createReview };
+const storeActions = { getStore };
 export default storeActions;
