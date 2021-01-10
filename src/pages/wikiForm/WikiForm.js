@@ -3,10 +3,11 @@ import styled from 'styled-components';
 import { RadioInput, UploadImg, Input, Textarea, SubmitBtn } from '../../components/form';
 import useInput from '../../hooks/useInput';
 import BgImg from '../../images/pexels-karolina-grabowska-4197908.jpg';
+import apis from '../../Service/apis';
 
 const CATEGORIES = ['가공식품', '과자/간식', '제과/제빵', '음료', '기타'];
 
-const WikiForm = ({ user }) => {
+const WikiForm = () => {
   const INIT_WIKIPOST = {
     id: 0,
     category: '가공식품',
@@ -18,22 +19,33 @@ const WikiForm = ({ user }) => {
       {
         id: 0,
         wikiId: '',
-        writer: user,
+        writer: '',
         createAt: '3초 전',
         contents: '',
       },
     ],
   };
 
-  const { inputs, setInputs, errors, onInputChange, onImageUpload, requiredValidate } = useInput(INIT_WIKIPOST);
+  const { inputs, errors, onInputChange, onImageUpload, requiredValidate } = useInput(INIT_WIKIPOST);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const requireList = ['category', 'product', 'ingredient'];
     let isValid = requiredValidate(requireList);
     if (!isValid) return;
 
-    setInputs(INIT_WIKIPOST);
+    try {
+      const { files, ...body } = inputs;
+      const formData = new FormData();
+      for (let i = 0; i < files.length; i++) {
+        formData.append('file', files[i]);
+      }
+      formData.append('body', JSON.stringify(body));
+      const res = await apis.wikiApi.createWiki(formData);
+      console.log(res);
+    } catch (err) {
+      console.log(err.response ? err.response : err);
+    }
   };
 
   return (

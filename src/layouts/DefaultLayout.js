@@ -3,15 +3,8 @@ import { Route } from 'react-router-dom';
 import styled from 'styled-components';
 import Header from '../components/header/Header';
 import { ProfileWrap } from '../components/profile/Profile';
-import SubNav from '../components/header/nav/SubNav';
 
-const DefaultLayout = ({ component: Component, user, ...rest }) => {
-  const [show, setShow] = useState(false);
-
-  const onSubNavShow = () => {
-    setShow(!show);
-  };
-
+const DefaultLayout = ({ component: Component, user, onLogOut, ...rest }) => {
   const [posts, setPosts] = useState(DUMMY_POSTS);
   const [wikiPosts, setWikiPosts] = useState(DUMMY_WIKIPOST);
 
@@ -20,9 +13,8 @@ const DefaultLayout = ({ component: Component, user, ...rest }) => {
       {...rest}
       render={(props) => (
         <Wrap>
-          <Header onSubNavShow={onSubNavShow} />
-          {show && <SubNav />}
-          <Component {...props} posts={posts} wikiPosts={wikiPosts} />
+          <Header />
+          <Component {...props} user={user} posts={posts} wikiPosts={wikiPosts} onAddPost={onAddPost} />
         </Wrap>
       )}
     />
