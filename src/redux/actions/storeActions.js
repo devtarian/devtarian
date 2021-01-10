@@ -3,54 +3,6 @@ import history from '../../history';
 import { defaultApi } from '../../Service/apis/default';
 import apis from '../../Service/apis';
 
-const createStore = async (inputs) => {
-  console.log('createStore', inputs);
-  try {
-    const {
-      id,
-      step,
-      vegType,
-      starRating,
-      storeName,
-      region,
-      address,
-      contactNum,
-      operatingHours,
-      operatingHoursMemo,
-      menuList,
-      files,
-    } = inputs;
-    const formData = new FormData();
-    const characterInputs = {
-      id,
-      step,
-      vegType,
-      starRating,
-      storeName,
-      region,
-      address,
-      contactNum,
-      operatingHours,
-      operatingHoursMemo,
-      menuList,
-    };
-    for (let i = 0; i < files.length; i++) {
-      formData.append('file', files[i]);
-    }
-    formData.append('body', JSON.stringify(characterInputs));
-
-    const resToken = await apis.storeApi.createStore(formData);
-    const token = `Bearer ${resToken.token}`;
-    //localStorage.setItem('token', token);
-    defaultApi.defaults.headers.common['Authorization'] = token;
-
-    return history.push('/');
-  } catch (err) {
-    console.error(err);
-    console.log(err.response && err.response.data);
-  }
-};
-
 const getStore = (storeId) => async (dispatch) => {
   try {
     const data = await apis.storeApi.getStore(storeId);
@@ -93,5 +45,5 @@ const createReview = async (inputs) => {
   }
 };
 
-const storeActions = { createStore, getStore, createReview };
+const storeActions = { getStore, createReview };
 export default storeActions;

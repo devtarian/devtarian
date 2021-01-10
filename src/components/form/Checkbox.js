@@ -1,8 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Checkbox = ({ name, label, info, activedBtn, onCheckboxClick, error }) => {
+const Checkbox = ({ name, setInputs, label, info, activedBtn, onCheckboxClick, error }) => {
   const handleBtnClick = (e) => {
+    setInputs((state) => ({
+      ...state,
+      [name]: e.target.value,
+    }));
     onCheckboxClick(e.target.value);
   };
 
