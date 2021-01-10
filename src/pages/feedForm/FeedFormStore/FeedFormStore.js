@@ -9,7 +9,7 @@ const VEG_TYPE = ['비건', '베지테리언', '비건 옵션'];
 
 const FeedFormStore = ({ inputs, setInputs, errors, setErrors, onChange }) => {
   const { activedBtn, onCheckboxClick } = useActivedBtn();
-
+  console.log(inputs);
   const handleChangeAddr = (address) => {
     setInputs({ ...inputs, ...address });
   };
@@ -21,7 +21,7 @@ const FeedFormStore = ({ inputs, setInputs, errors, setErrors, onChange }) => {
         label="채식 유형"
         info={VEG_TYPE}
         activedBtn={activedBtn}
-        onChange={onChange}
+        setInputs={setInputs}
         onCheckboxClick={onCheckboxClick}
         error={errors.vegType}
       />

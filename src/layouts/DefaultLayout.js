@@ -14,7 +14,7 @@ const DefaultLayout = ({ component: Component, user, onLogOut, ...rest }) => {
       render={(props) => (
         <Wrap>
           <Header />
-          <Component {...props} user={user} posts={posts} wikiPosts={wikiPosts} onAddPost={onAddPost} />
+          <Component {...props} user={user} posts={posts} wikiPosts={wikiPosts} />
         </Wrap>
       )}
     />

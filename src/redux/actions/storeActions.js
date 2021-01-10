@@ -4,7 +4,6 @@ import { defaultApi } from '../../Service/apis/default';
 import apis from '../../Service/apis';
 
 const createStore = async (inputs) => {
-  console.log('createStore', inputs);
   try {
     const {
       id,
@@ -66,7 +65,7 @@ const getStore = (storeId) => async (dispatch) => {
   }
 };
 
-const createReview = async (inputs) => {
+const createReview = (inputs) => async (dispatch) => {
   try {
     const { id, starRating, title, contents, files } = inputs;
     const formData = new FormData();
@@ -90,6 +89,7 @@ const createReview = async (inputs) => {
   } catch (err) {
     console.error(err);
     console.log(err.response && err.response.data);
+    return null;
   }
 };
 

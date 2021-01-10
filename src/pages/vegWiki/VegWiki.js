@@ -4,11 +4,13 @@ import { Checkbox, Select } from '../../components/form';
 import { CheckboxWrap } from '../../components/form/Checkbox';
 import { SelectWrap } from '../../components/form/Select';
 import CircleImgTextCard, { CircleCardWrap } from '../../components/card/CircleImgTextCard';
+import useInput from '../../hooks/useInput';
 import useActivedBtn from '../../hooks/useActivedBtn';
 
 const VegiWiki = ({ wikiPosts }) => {
   const [category, setCategory] = useState();
   const [products, setProducts] = useState(wikiPosts);
+  const { inputs, setInputs, onInputChange } = useInput();
   const { activedBtn, setActivedBtn, onCheckboxClick } = useActivedBtn();
 
   const onReviewChange = (e) => {
@@ -128,7 +130,7 @@ const VegiWiki = ({ wikiPosts }) => {
           label="카테고리"
           info={CATEGORIES}
           activedBtn={activedBtn}
-          onChange={onReviewChange}
+          setInputs={setInputs}
           onCheckboxClick={onCheckboxClick}
         />
         <Select info={OPTIONS} />
