@@ -54,7 +54,7 @@ const FeedForm = ({ history }) => {
   const { inputs, setInputs, errors, setErrors, onInputChange, onImageUpload, requiredValidate } = useInput(
     INIT_VALUES
   );
-  console.log(errors);
+
   const handleClickGoBack = () => {
     if (inputs.step === 0) {
       return history.goBack();
@@ -77,28 +77,7 @@ const FeedForm = ({ history }) => {
         step: inputs.step + 1,
       });
     } else {
-      dispatch(
-        storeActions.createStore({
-          Coordinates: {
-            _latitude: inputs.lat,
-            _longitude: inputs.lng,
-          },
-          Store: {
-            category: inputs.category,
-            vegType: inputs.vegType,
-            storeName: inputs.storeName,
-            contactNum: inputs.contactNum,
-            address: inputs.address,
-            region: inputs.region,
-            operatingHours: inputs.operatingHours,
-            operatingHoursMemo: inputs.operatingHoursMemo,
-            menuList: inputs.menuList,
-            contents: inputs.contents,
-            starRating: inputs.starRating,
-            imgUrls: inputs.imgUrls,
-          },
-        })
-      );
+      dispatch(storeActions.createStore(inputs));
       setInputs(INIT_VALUES);
     }
   };
