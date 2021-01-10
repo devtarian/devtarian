@@ -10,7 +10,17 @@ import useMoreDetail from '../../../hooks/useMoreDetail';
 const PostTextBox = ({ post }) => {
   console.log('postDetailBox', post);
   const {
-    store: { vegType, starRating, storeName, address, contactNum, operatingHours, operatingHoursMemo, menuList },
+    store: {
+      category,
+      vegType,
+      starRating,
+      storeName,
+      address,
+      contactNum,
+      operatingHours,
+      operatingHoursMemo,
+      menuList,
+    },
   } = post;
   const hours = useMoreDetail();
   const menu = useMoreDetail();
@@ -21,7 +31,10 @@ const PostTextBox = ({ post }) => {
   return (
     <Wrap>
       <div className="innerWrap">
-        <span className="vegType hide">{vegType}</span>
+        <div className="tags">
+          <span className="storeCategory hide">{category}</span>
+          <span className="vegType hide">{vegType}</span>
+        </div>
         <h2 className="store hide">{storeName}</h2>
         <div className="starRating textBox">
           <strong className="infoTitle">별점</strong>
@@ -97,14 +110,30 @@ const Wrap = styled.div`
     .hide {
       display: block;
     }
-    .vegType {
-      max-width: 80px;
-      padding: 1px 4px;
-      border-radius: 4px;
-      border: 1px solid ${(props) => props.theme.brown[1]};
-      text-align: center;
-      font-size: 13px;
-      color: ${(props) => props.theme.brown[1]};
+    .tags {
+      overflow: hidden;
+
+      .vegType {
+        float: left;
+        max-width: 80px;
+        padding: 1px 4px;
+        margin-left: 0.4rem;
+        border-radius: 4px;
+        border: 1px solid ${(props) => props.theme.brown[1]};
+        text-align: center;
+        font-size: 13px;
+        color: ${(props) => props.theme.brown[1]};
+      }
+      .storeCategory {
+        float: left;
+        max-width: 70px;
+        padding: 1px 4px;
+        border-radius: 4px;
+        border: 1px solid ${(props) => props.theme.color[1]};
+        text-align: center;
+        font-size: 13px;
+        color: ${(props) => props.theme.color[1]};
+      }
     }
     .store {
       margin: 0px 0px 10px;

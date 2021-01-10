@@ -37,7 +37,7 @@ const logout = () => {
   return { type: AUTH_LOGOUT };
 };
 
-const signup = (inputs) => async (dispatch) => {
+const signup = async (inputs) => {
   const { username, email, pw, thumbNailFile } = inputs;
   const formData = new FormData();
   const characterInputs = { username, email, pw };
@@ -48,6 +48,7 @@ const signup = (inputs) => async (dispatch) => {
   const token = `Bearer ${resToken.token}`;
   localStorage.setItem('token', token);
   defaultApi.defaults.headers.common['Authorization'] = token;
+
   alert('가입 되었습니다.');
   return history.push('/login');
 };

@@ -1,18 +1,25 @@
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+import storeActions from '../../redux/actions/storeActions';
 import Stars from '../stars/Stars';
 import FavoriteHeart, { FavoriteWrap, EmptyHeart } from '../../components/favoriteHeart/FavoriteHeart';
 import noImg from '../../images/noImg.jpg';
 
 const ImgTextCard = ({ cardData }) => {
+  const dispatch = useDispatch();
   const {
-    store: { files, vegType, storeName, region, starRating },
+    store: { id, files, vegType, storeName, region, starRating },
     reviewList: {
       0: { reviewContents },
     },
   } = cardData;
 
+  const GetStoreInfo = (e) => {
+    dispatch(storeActions.getStore(id));
+  };
+
   return (
-    <ImgTextCardWrap>
+    <ImgTextCardWrap onClick={GetStoreInfo}>
       <ItemImg>
         <img src={files[0] ? URL.createObjectURL(files[0]) : noImg} alt="" />
         <div className="cover"></div>

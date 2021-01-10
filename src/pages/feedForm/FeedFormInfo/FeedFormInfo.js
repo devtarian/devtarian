@@ -10,7 +10,7 @@ const FeedFormInfo = ({ inputs, onChange, onImageUpload }) => {
       <Textarea
         label="소개"
         name="contents"
-        value={inputs.cntents || ''}
+        value={inputs.contents || ''}
         placeholder="가게 소개를 작성해주세요."
         onChange={onChange}
         rows="5"

@@ -1,31 +1,32 @@
 import React from 'react';
 import styled from 'styled-components';
-import { UploadImg, Checkbox, StarRating, Input, Textarea, SubmitBtn } from '../../components/form';
+import storeActions from '../../redux/actions/storeActions';
+import { useDispatch } from 'react-redux';
+import { UploadImg, StarRating, Input, Textarea, SubmitBtn } from '../../components/form';
 import useInput from '../../hooks/useInput';
 import BgImg from '../../images/pexels-karolina-grabowska-4197908.jpg';
 
 const INIT_REVIEW = {
-  category: '가게',
-  files: [],
-  vegLevel: '',
+  id: 0,
   starRating: '',
   title: '',
   contents: '',
+  files: [],
 };
 
-const VEGLEVELS = ['비건', '락토', '오보', '락토오보', '페스코'];
-
 const ReviewForm = () => {
+  const dispatch = useDispatch();
   const { inputs, setInputs, errors, onInputChange, onImageUpload, requiredValidate } = useInput(INIT_REVIEW);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const requiredList = ['vegLevel', 'title', 'contents'];
+    const requiredList = ['title', 'contents'];
     let isValid = requiredValidate(requiredList);
     if (!isValid) return;
 
-    console.log(inputs);
+    dispatch(storeActions.createReview(inputs));
     setInputs(INIT_REVIEW);
+    console.log(inputs);
   };
 
   return (
@@ -33,14 +34,6 @@ const ReviewForm = () => {
       <h2>리뷰 작성</h2>
       <form>
         <UploadImg name="imgFiles" files={inputs.files} onImageUpload={onImageUpload} />
-        <Checkbox
-          name="vegLevel"
-          label="채식 단계"
-          info={VEGLEVELS}
-          activedBtn={inputs.vegLevel}
-          onChange={onInputChange}
-          error={errors.vegLevel}
-        />
         <StarRating name="starRating" onChange={onInputChange} error={errors.starRating} />
         <Input
           label="제목"

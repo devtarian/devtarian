@@ -36,6 +36,7 @@ const Wrap = styled.div`
     label {
       float: right;
       margin-left: 0.3rem;
+      margin-bottom: 0;
       font-size: 16px;
       font-weight: normal;
       cursor: pointer;

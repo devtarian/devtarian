@@ -1,24 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Input, SelectAll, InputAddressKakao, InputOperateHours, Textarea } from '../../../components/form';
+import { RadioInput, Input, Checkbox, InputAddressKakao, InputOperateHours, Textarea } from '../../../components/form';
+import { CheckboxWrap } from '../../../components/form/Checkbox';
+import useActivedBtn from '../../../hooks/useActivedBtn';
+
+const CATEGORIES = ['식당', '카페', '베이커리', 'Bar', '기타'];
+const VEG_TYPE = ['비건', '베지테리언', '비건 옵션'];
 
 const FeedFormStore = ({ inputs, setInputs, errors, setErrors, onChange }) => {
+  const { activedBtn, onCheckboxClick } = useActivedBtn();
+
   const handleChangeAddr = (address) => {
     setInputs({ ...inputs, ...address });
   };
   return (
     <>
-      <SelectAll
-        title="채식 유형"
+      <RadioInput name="category" label="카테고리" info={CATEGORIES} category={inputs.category} onChange={onChange} />
+      <Checkbox
         name="vegType"
-        selectedList={inputs?.vegType || []}
+        label="채식 유형"
+        info={VEG_TYPE}
+        activedBtn={activedBtn}
         onChange={onChange}
-        options={[
-          { key: 'vegan', title: '비건' },
-          { key: 'vegetarian', title: '베지테리언' },
-          { key: 'veganOption', title: '비건 옵션' },
-        ]}
-        exceptOnly={['vegan']}
+        onCheckboxClick={onCheckboxClick}
         error={errors.vegType}
       />
       <FormRow>

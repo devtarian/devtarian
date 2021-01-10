@@ -1,15 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Checkbox = ({ name, label, info, activedBtn, onChange, error }) => {
+const Checkbox = ({ name, label, info, activedBtn, onCheckboxClick, error }) => {
   const handleBtnClick = (e) => {
-    onChange({
-      preventDefault: () => {},
-      target: {
-        name, // vegLevel
-        value: e.target.value,
-      },
-    });
+    onCheckboxClick(e.target.value);
   };
 
   return (
@@ -19,7 +13,7 @@ const Checkbox = ({ name, label, info, activedBtn, onChange, error }) => {
         <input
           key={index}
           type="button"
-          name={item}
+          name={name}
           value={item}
           className={activedBtn === item ? 'active' : ''}
           onClick={handleBtnClick}
@@ -55,7 +49,6 @@ export const CheckboxWrap = styled.div`
       background-color: ${(props) => props.theme.brown[0]};
     }
   }
-
   .err {
     display: none;
     position: absolute;

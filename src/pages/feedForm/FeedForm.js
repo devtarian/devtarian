@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import BgImg from '../../images/pexels-karolina-grabowska-4197908.jpg';
-import apis from '../../Service/apis';
+import storeActions from '../../redux/actions/storeActions';
+import { useDispatch } from 'react-redux';
 
 import { SubmitBtn } from '../../components/form';
 import useInput from '../../hooks/useInput';
@@ -11,7 +12,7 @@ import FeedFormMenu from './FeedFormMenu/FeedFormMenu';
 import FeedFormInfo from './FeedFormInfo/FeedFormInfo';
 
 const pageConfig = [
-  { id: 'store', title: '가게 정보', validate: ['vegType', 'storeName', 'contactNum', 'operatingHours'] },
+  { id: 'store', title: '가게 정보', validate: ['category', 'vegType', 'storeName', 'contactNum', 'operatingHours'] },
   { id: 'menu', title: '메뉴 정보', validate: ['menuList'] },
   { id: 'info', title: '나의 소개', validate: [] },
 ];
@@ -29,24 +30,29 @@ const renderForm = ({ step, ...rest }) => {
   }
 };
 
-const initialValue = {
+const INIT_VALUES = {
+  id: 0,
   step: 0,
-  vegType: [],
-  imgFiles: [],
-  imgFileURLs: [],
-  starRating: '',
+  category: '식당',
+  lat: '',
+  lng: '',
+  vegType: '',
   storeName: '',
+  contactNum: '',
   region: '',
   address: '',
-  contactNum: '',
   operatingHours: [],
+  operatingHoursMemo: '',
   menuList: [],
+  starRating: '',
+  contents: '',
   files: [],
 };
 
-const FeedForm = ({ onAddPost, history }) => {
+const FeedForm = ({ history }) => {
+  const dispatch = useDispatch();
   const { inputs, setInputs, errors, setErrors, onInputChange, onImageUpload, requiredValidate } = useInput(
-    initialValue
+    INIT_VALUES
   );
   console.log(errors);
   const handleClickGoBack = () => {
@@ -71,14 +77,29 @@ const FeedForm = ({ onAddPost, history }) => {
         step: inputs.step + 1,
       });
     } else {
-      try {
-        const res = await apis.postsApi.createPost(inputs);
-        onAddPost(res);
-        console.log('res', res);
-      } catch (err) {
-        console.log(err.response);
-        // console.log(err.response.data);
-      }
+      dispatch(
+        storeActions.createStore({
+          Coordinates: {
+            _latitude: inputs.lat,
+            _longitude: inputs.lng,
+          },
+          Store: {
+            category: inputs.category,
+            vegType: inputs.vegType,
+            storeName: inputs.storeName,
+            contactNum: inputs.contactNum,
+            address: inputs.address,
+            region: inputs.region,
+            operatingHours: inputs.operatingHours,
+            operatingHoursMemo: inputs.operatingHoursMemo,
+            menuList: inputs.menuList,
+            contents: inputs.contents,
+            starRating: inputs.starRating,
+            imgUrls: inputs.imgUrls,
+          },
+        })
+      );
+      setInputs(INIT_VALUES);
     }
   };
 
