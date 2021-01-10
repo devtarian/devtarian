@@ -8,7 +8,7 @@ import SignInput from '../../components/form/SignInput';
 import SubmitBtn from '../../components/form/SubmitBtn';
 import GoBackLink from '../../components/goBackLink/GoBackLink';
 
-const initUserValues = {
+const INIT_USER_VALUES = {
   userName: '',
   email: '',
   password: '',
@@ -19,7 +19,7 @@ const initUserValues = {
 
 const Login = () => {
   const dispatch = useDispatch();
-  const { inputs, setInputs, errors, onInputChange, requiredValidate } = useInput(initUserValues);
+  const { inputs, setInputs, errors, onInputChange, requiredValidate } = useInput(INIT_USER_VALUES);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,7 +30,7 @@ const Login = () => {
 
     dispatch(authActions.login(inputs));
     history.push('/');
-    setInputs(initUserValues);
+    setInputs(INIT_USER_VALUES);
   };
 
   return (

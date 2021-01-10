@@ -9,10 +9,21 @@ const CATEGORIES = ['가공식품', '과자/간식', '제과/제빵', '음료', 
 
 const WikiForm = () => {
   const INIT_WIKIPOST = {
+    id: 0,
     category: '가공식품',
-    files: [],
     product: '',
     ingredient: '',
+    likesOfMe: false,
+    imgUrls: [],
+    commentList: [
+      {
+        id: 0,
+        wikiId: '',
+        writer: '',
+        createAt: '3초 전',
+        contents: '',
+      },
+    ],
   };
 
   const { inputs, errors, onInputChange, onImageUpload, requiredValidate } = useInput(INIT_WIKIPOST);
@@ -47,7 +58,6 @@ const WikiForm = () => {
           info={CATEGORIES}
           category={inputs.category}
           onChange={onInputChange}
-          error={errors.category}
         />
         <UploadImg name="imgFiles" files={inputs.files} onImageUpload={onImageUpload} />
         <Input

@@ -1,14 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import authActions from '../../redux/actions/authActions';
+import { useDispatch } from 'react-redux';
+
 import useInput from '../../hooks/useInput';
 import UploadProfileImg from './UploadProfileImg';
 import SignInput from '../../components/form/SignInput';
 import SubmitBtn from '../../components/form/SubmitBtn';
 import GoBackLink from '../../components/goBackLink/GoBackLink';
-import authActions from '../../redux/actions/authActions';
-import { useDispatch } from 'react-redux';
 
-const initUserValues = {
+const INIT_USER_VALUES = {
   userName: '',
   email: '',
   password: '',
@@ -20,12 +21,12 @@ const initUserValues = {
 const SignUp = () => {
   const dispatch = useDispatch();
   const { inputs, setInputs, errors, setErrors, onImageUpload, onInputChange, requiredValidate } = useInput(
-    initUserValues
+    INIT_USER_VALUES
   );
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const requiredList = ['userName', 'email', 'password', 'passwordCheck', 'files'];
+    const requiredList = ['userName', 'email', 'password', 'passwordCheck'];
     let isValid = requiredValidate(requiredList);
     if (!isValid) return;
 
@@ -38,14 +39,14 @@ const SignUp = () => {
           thumbNailFile: inputs.files[0],
         })
       );
-      setInputs(initUserValues);
+      setInputs(INIT_USER_VALUES);
     } catch (err) {
       console.error(err);
       console.log(err.response?.data);
       setErrors(err.response?.data);
     }
   };
-  console.log(inputs.files);
+
   return (
     <div className="wrap">
       <form className="signForm" onSubmit={handleSubmit}>
