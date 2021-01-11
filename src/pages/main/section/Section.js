@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import mainActions from '../../../redux/actions/mainActions';
 import Loading from '../../../components/loading/Loding';
 
-const Section = ({ posts, wikiPosts }) => {
+const Section = (wikiPosts) => {
   const dispatch = useDispatch();
   const { isFetching, data } = useSelector((state) => state.main);
   const mg = 9;

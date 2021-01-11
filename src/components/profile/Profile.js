@@ -1,9 +1,13 @@
 import styled from 'styled-components';
 import noProfile from '../../images/noProfile.png';
 import { timeToString } from '../../utils/helper';
-const Profile = ({ userData }) => {
-  const { thumbNail, writer, createdAt } = userData;
 
+const Profile = ({ profileData }) => {
+  const {
+    writer: { thumbNail, username },
+    createdAt,
+  } = profileData;
+  console.log('profile', profileData);
   return (
     <>
       <ProfileWrap>
@@ -11,7 +15,7 @@ const Profile = ({ userData }) => {
           <img src={thumbNail ? thumbNail : noProfile} alt="" />
         </div>
         <div className="info">
-          <strong>{writer}</strong>
+          <strong>{username}</strong>
           <span>{timeToString(createdAt)}</span>
         </div>
       </ProfileWrap>

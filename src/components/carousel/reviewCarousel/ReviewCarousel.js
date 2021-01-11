@@ -16,7 +16,7 @@ const ReviewCarousel = ({ carouselData, mg }) => {
       <CarouselUl ref={refCarouselUl} value={value}>
         {carouselData.store.map((data, index) => (
           <li key={index} ref={refCarouselLi}>
-            <Profile userData={carouselData.review[0]} />
+            <Profile profileData={carouselData.review[0]} />
             <ImgTextCard storeData={data} reviewData={carouselData.review[0]} />
           </li>
         ))}

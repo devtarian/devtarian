@@ -16,7 +16,7 @@ const PostDetail = ({ posts }) => {
     dispatch(storeActions.getStore('few'));
   }, []);
 
-  if (isFetching) return <Loading />;
+  // if (isFetching) return <Loading />
 
   return (
     <Wrap>

@@ -4,10 +4,11 @@ import Profile, { ProfileWrap } from '../profile/Profile';
 
 const Comment = ({ data }) => {
   console.log('commentData', data);
+
   const { writer, createAt, commentContents } = data;
   return (
     <Wrap>
-      <Profile userData={writer} createAt={createAt} />
+      <Profile profileData={writer} createAt={createAt} />
       <p className="comment">{commentContents}</p>
     </Wrap>
   );

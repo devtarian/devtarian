@@ -9,7 +9,6 @@ const ImgTextCard = ({ storeData, reviewData }) => {
   const dispatch = useDispatch();
   const {
     info: { imgUrls, vegType, storeName, region, starRating },
-    favorite,
   } = storeData;
   const { contents } = reviewData;
 
@@ -32,7 +31,7 @@ const ImgTextCard = ({ storeData, reviewData }) => {
         <Stars rate={starRating} starsW={80} />
       </div>
       <p className="contents">{contents}</p>
-      <FavoriteHeart data={favorite} />
+      <FavoriteHeart data={storeData} />
     </ImgTextCardWrap>
   );
 };

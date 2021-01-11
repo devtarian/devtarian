@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import storeActions from '../../../redux/actions/storeActions';
 import PhotoReviewBox from './PhotoReviewBox';
 import TextReviewBox from './TextReviewBox';
 import Comment from '../../../components/comment/Comment';
@@ -9,10 +11,13 @@ import { ReactComponent as FullHeartSvg } from '../../../images/icons/heart-blac
 import { ReactComponent as CommentSvg } from '../../../images/icons/insert_comment.svg';
 
 const Review = ({ reviewList }) => {
-  const [likes, setLikes] = useState(false);
-
-  const handleLikesBtnClick = () => {
-    setLikes(!likes);
+  console.log('reviewList', reviewList);
+  const dispatch = useDispatch();
+  const likes = useSelector((state) => state.store.likes);
+  console.log(likes);
+  const handleLikesBtnClick = (e) => {
+    e.preventDefault();
+    dispatch(storeActions.likeReview());
   };
 
   const renderHeart = () => {

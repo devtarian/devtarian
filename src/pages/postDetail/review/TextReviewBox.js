@@ -9,7 +9,7 @@ const TextReviewBox = ({ review }) => {
 
   return (
     <Wrap>
-      <Profile userData={review.writer} createAt={review.createAt} />
+      <Profile profileData={review} />
       <div className="starRating">
         <Stars rate={review.starRating} starsW={100} />
       </div>

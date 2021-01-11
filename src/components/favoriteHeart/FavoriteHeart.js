@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { ReactComponent as EmptyHeartSvg } from '../../images/icons/heart_border-black.svg';
 import { ReactComponent as FullHeartSvg } from '../../images/icons/heart-black.svg';
+import { useDispatch, useSelector } from 'react-redux';
+import storeActions from '../../redux/actions/storeActions';
 
-const FavoriteHeart = ({ data }) => {
-  const [favorite, setFavorite] = useState(false);
+const FavoriteHeart = (data) => {
+  const dispatch = useDispatch();
+  const favorite = useSelector((state) => state.store.favorite);
 
-  const handleFavoriteBtnClick = () => {
-    setFavorite(!favorite);
+  const handleFavoriteBtnClick = (e) => {
+    e.preventDefault();
+    favorite ? dispatch(storeActions.favoriteStore(data.id)) : dispatch(storeActions.unFavoriteStore(data.id));
   };
 
   const renderHeart = () => {

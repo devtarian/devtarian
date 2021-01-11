@@ -1,15 +1,34 @@
 import React from 'react';
 import styled from 'styled-components';
 import noProfile from '../../images/noProfile.png';
+import apis from '../../Service/apis';
+import useInput from '../../hooks/useInput';
+
+const INIT_COMMENT = {
+  comment: '',
+};
 
 const CommentForm = () => {
+  const { inputs, setInputs, onInputChange } = useInput(INIT_COMMENT);
+
+  const handleSubmit = async (e) => {
+    e.preventDerault();
+
+    try {
+      await apis.storeApi.createComments(inputs);
+      setInputs(INIT_COMMENT);
+    } catch (err) {
+      console.error(err.response ? err.response : err);
+    }
+  };
+
   return (
     <CommentFormWrap>
       <div className="writeComments">
         <img className="userThumbnail" src={noProfile} alt="" />
-        <form>
+        <form onSubmit={handleSubmit}>
           <label>댓글달기</label>
-          <input placeholder="댓글을 입력하세요."></input>
+          <input placeholder="댓글을 입력하세요." name="comment" value={inputs.comment} onInputChange={onInputChange} />
         </form>
       </div>
     </CommentFormWrap>

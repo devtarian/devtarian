@@ -11,7 +11,7 @@ const PhotoReviewBox = ({ review }) => {
   return (
     <Wrap>
       <div className="leftBox">
-        <Profile userData={review.writer} createAt={review.createAt} />
+        <Profile profileData={review.writer} createAt={review.createAt} />
         <div className="starRating">
           <Stars rate={review.starRating} starsW={100} />
         </div>
