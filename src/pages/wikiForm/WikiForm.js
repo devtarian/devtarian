@@ -14,7 +14,6 @@ const WikiForm = () => {
     product: '',
     ingredient: '',
     likesOfMe: false,
-    imgUrls: [],
     files: [],
     commentList: [
       {
