@@ -19,8 +19,8 @@ const getMe = () => async (dispatch) => {
 
 const login = (inputs) => async (dispatch) => {
   try {
-    const { email, password } = inputs;
-    const resToken = await apis.authApi.login({ email, pw: password });
+    const { email, pw } = inputs;
+    const resToken = await apis.authApi.login({ email, pw });
     const token = `Bearer ${resToken.token}`;
     localStorage.setItem('token', token);
     defaultApi.defaults.headers.common['Authorization'] = token;

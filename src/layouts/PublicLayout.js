@@ -6,10 +6,10 @@ import { GoBackWrap } from '../components/goBackLink/GoBackLink';
 import bgImg from '../images/pexels-ready-made-3850624.jpg';
 
 const INIT_USER_VALUES = {
-  userName: '',
+  username: '',
   email: '',
-  password: '',
-  passwordCheck: '',
+  pw: '',
+  pwCheck: '',
   avatar: '',
   files: [],
 };

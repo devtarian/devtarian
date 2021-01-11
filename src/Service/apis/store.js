@@ -11,8 +11,8 @@ export const api = {
     return res.data;
   },
 
-  async createReview({ storeId, contents }) {
-    const res = await defaultApi.post(`/store/${storeId}/review`, contents);
+  async createReview(storeId, formData) {
+    const res = await defaultApi.post(`/store/${storeId}/review`, formData);
     return res.data;
   },
 

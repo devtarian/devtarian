@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { RadioInput, Input, Checkbox, InputAddressKakao, InputOperateHours, Textarea } from '../../../components/form';
-import { CheckboxWrap } from '../../../components/form/Checkbox';
 import useActivedBtn from '../../../hooks/useActivedBtn';
 
 const CATEGORIES = ['식당', '카페', '베이커리', 'Bar', '기타'];
@@ -21,6 +20,7 @@ const FeedFormStore = ({ inputs, setInputs, errors, setErrors, onChange }) => {
         label="채식 유형"
         info={VEG_TYPE}
         activedBtn={activedBtn}
+        onChange={onChange}
         setInputs={setInputs}
         onCheckboxClick={onCheckboxClick}
         error={errors.vegType}

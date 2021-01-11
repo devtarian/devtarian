@@ -9,10 +9,10 @@ import SubmitBtn from '../../components/form/SubmitBtn';
 import GoBackLink from '../../components/goBackLink/GoBackLink';
 
 const INIT_USER_VALUES = {
-  userName: '',
+  username: '',
   email: '',
-  password: '',
-  passwordCheck: '',
+  pw: '',
+  pwCheck: '',
   avatar: '',
   files: [],
 };
@@ -24,7 +24,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const requiredList = ['email', 'password'];
+    const requiredList = ['email', 'pw'];
     let isValid = requiredValidate(requiredList);
     if (!isValid) return;
 
@@ -49,10 +49,10 @@ const Login = () => {
         <SignInput
           type="password"
           placeholder="비밀번호"
-          name="password"
-          value={inputs.password}
+          name="pw"
+          value={inputs.pw}
           onInputChange={onInputChange}
-          error={errors.password}
+          error={errors.pw}
           required
         />
         <SubmitBtn value="로그인">로그인</SubmitBtn>

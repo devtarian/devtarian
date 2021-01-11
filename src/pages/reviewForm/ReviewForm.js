@@ -1,32 +1,40 @@
 import React from 'react';
 import styled from 'styled-components';
-import storeActions from '../../redux/actions/storeActions';
-import { useDispatch } from 'react-redux';
 import { UploadImg, StarRating, Input, Textarea, SubmitBtn } from '../../components/form';
+import history from '../../history';
 import useInput from '../../hooks/useInput';
 import BgImg from '../../images/pexels-karolina-grabowska-4197908.jpg';
+import apis from '../../Service/apis';
 
 const INIT_REVIEW = {
-  id: 0,
   starRating: '',
   title: '',
   contents: '',
   files: [],
 };
 
-const ReviewForm = () => {
-  const dispatch = useDispatch();
+const ReviewForm = ({ match }) => {
+  const storeId = match.params.storeId || 'YbvnHdy8lso5tTqzAXIn';
   const { inputs, setInputs, errors, onInputChange, onImageUpload, requiredValidate } = useInput(INIT_REVIEW);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const requiredList = ['title', 'contents'];
-    let isValid = requiredValidate(requiredList);
-    if (!isValid) return;
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      const requiredList = ['title', 'contents'];
+      let isValid = requiredValidate(requiredList);
+      if (!isValid) return;
 
-    dispatch(storeActions.createReview(inputs));
-    setInputs(INIT_REVIEW);
-    console.log(inputs);
+      const { files, ...body } = inputs;
+
+      const formData = new FormData();
+      files.forEach((file) => formData.append('file', file));
+      formData.append('body', JSON.stringify(body));
+      await apis.storeApi.createReview(storeId, formData);
+      history.goBack();
+      setInputs(INIT_REVIEW);
+    } catch (err) {
+      console.log(err.response ? err.response : err);
+    }
   };
 
   return (

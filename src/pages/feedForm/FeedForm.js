@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import BgImg from '../../images/pexels-karolina-grabowska-4197908.jpg';
-import storeActions from '../../redux/actions/storeActions';
-import { useDispatch } from 'react-redux';
 
 import { SubmitBtn } from '../../components/form';
 import useInput from '../../hooks/useInput';
@@ -10,6 +8,7 @@ import useInput from '../../hooks/useInput';
 import FeedFormStore from './FeedFormStore/FeedFormStore';
 import FeedFormMenu from './FeedFormMenu/FeedFormMenu';
 import FeedFormInfo from './FeedFormInfo/FeedFormInfo';
+import apis from '../../Service/apis';
 
 const pageConfig = [
   { id: 'store', title: '가게 정보', validate: ['category', 'vegType', 'storeName', 'contactNum', 'operatingHours'] },
@@ -31,7 +30,6 @@ const renderForm = ({ step, ...rest }) => {
 };
 
 const INIT_VALUES = {
-  id: 0,
   step: 0,
   category: '식당',
   lat: '',
@@ -40,7 +38,8 @@ const INIT_VALUES = {
   storeName: '',
   contactNum: '',
   region: '',
-  address: '',
+  addr: '',
+  addrDetail: '',
   operatingHours: [],
   operatingHoursMemo: '',
   menuList: [],
@@ -50,11 +49,10 @@ const INIT_VALUES = {
 };
 
 const FeedForm = ({ history }) => {
-  const dispatch = useDispatch();
   const { inputs, setInputs, errors, setErrors, onInputChange, onImageUpload, requiredValidate } = useInput(
     INIT_VALUES
   );
-  console.log(errors);
+
   const handleClickGoBack = () => {
     if (inputs.step === 0) {
       return history.goBack();
@@ -67,39 +65,27 @@ const FeedForm = ({ history }) => {
   };
 
   const handleClickButton = async () => {
-    let requiredList = pageConfig[inputs.step].validate;
-    let isValid = requiredValidate(requiredList);
-    if (!isValid) return;
+    try {
+      let requiredList = pageConfig[inputs.step].validate;
+      let isValid = requiredValidate(requiredList);
+      if (!isValid) return;
 
-    if (inputs.step !== 2) {
-      setInputs({
-        ...inputs,
-        step: inputs.step + 1,
-      });
-    } else {
-      dispatch(
-        storeActions.createStore({
-          Coordinates: {
-            _latitude: inputs.lat,
-            _longitude: inputs.lng,
-          },
-          Store: {
-            category: inputs.category,
-            vegType: inputs.vegType,
-            storeName: inputs.storeName,
-            contactNum: inputs.contactNum,
-            address: inputs.address,
-            region: inputs.region,
-            operatingHours: inputs.operatingHours,
-            operatingHoursMemo: inputs.operatingHoursMemo,
-            menuList: inputs.menuList,
-            contents: inputs.contents,
-            starRating: inputs.starRating,
-            imgUrls: inputs.imgUrls,
-          },
-        })
-      );
+      if (inputs.step !== 2) {
+        return setInputs({ ...inputs, step: inputs.step + 1 });
+      }
+
+      const { files, step, addr, addrDetail, ...body } = inputs;
+      body.address = addr + addrDetail;
+
+      const formData = new FormData();
+      files.forEach((file) => formData.append('file', file));
+      formData.append('body', JSON.stringify(body));
+
+      await apis.storeApi.createStore(formData);
+      alert('제출되었습니다.');
       setInputs(INIT_VALUES);
+    } catch (err) {
+      console.log(err.response ? err.response : err);
     }
   };
 
@@ -129,7 +115,7 @@ const FeedForm = ({ history }) => {
           onImageUpload,
           onChange: onInputChange,
         })}
-        <SubmitBtn type="button" value="다음" onSubmit={handleClickButton} />
+        <SubmitBtn type="button" value={inputs.step === 2 ? '제출' : '다음'} onSubmit={handleClickButton} />
       </form>
     </Wrap>
   );

@@ -1,48 +1,57 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import authActions from '../../redux/actions/authActions';
-import { useDispatch } from 'react-redux';
+import apis from '../../Service/apis';
+import { defaultApi } from '../../Service/apis/default';
 
 import useInput from '../../hooks/useInput';
 import UploadProfileImg from './UploadProfileImg';
 import SignInput from '../../components/form/SignInput';
 import SubmitBtn from '../../components/form/SubmitBtn';
 import GoBackLink from '../../components/goBackLink/GoBackLink';
+import history from '../../history';
 
 const INIT_USER_VALUES = {
-  userName: '',
+  username: '',
   email: '',
-  password: '',
-  passwordCheck: '',
-  avatar: '',
+  pw: '',
+  pwCheck: '',
   files: [],
 };
 
 const SignUp = () => {
-  const dispatch = useDispatch();
   const { inputs, setInputs, errors, setErrors, onImageUpload, onInputChange, requiredValidate } = useInput(
     INIT_USER_VALUES
   );
+
+  useEffect(() => {
+    return () => setInputs(INIT_USER_VALUES);
+  }, [setInputs]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const requiredList = ['userName', 'email', 'password', 'passwordCheck'];
+    const requiredList = ['username', 'email', 'pw', 'pwCheck'];
     let isValid = requiredValidate(requiredList);
+
     if (!isValid) return;
 
     try {
-      dispatch(
-        authActions.signup({
-          username: inputs.userName,
-          email: inputs.email,
-          pw: inputs.password,
-          thumbNailFile: inputs.files[0],
-        })
-      );
+      const { username, email, pw, files } = inputs;
+      const formData = new FormData();
+      const body = { username, email, pw };
+
+      files.forEach((file) => formData.append('file', file));
+      formData.append('body', JSON.stringify(body));
+
+      const resToken = await apis.authApi.signUp(formData);
+      const token = `Bearer ${resToken.token}`;
+      localStorage.setItem('token', token);
+      defaultApi.defaults.headers.common['Authorization'] = token;
+
+      alert('가입 되었습니다.');
       setInputs(INIT_USER_VALUES);
+      history.push('/');
     } catch (err) {
-      console.error(err);
-      console.log(err.response?.data);
+      console.error(err.response ? err.response : err);
       setErrors(err.response?.data);
     }
   };
@@ -55,10 +64,10 @@ const SignUp = () => {
         <SignInput
           type="text"
           placeholder="이름"
-          name="userName"
-          value={inputs.userName}
+          name="username"
+          value={inputs.username}
           onInputChange={onInputChange}
-          error={errors.userName}
+          error={errors.username}
           required
         />
         <SignInput
@@ -73,19 +82,19 @@ const SignUp = () => {
         <SignInput
           type="password"
           placeholder="비밀번호"
-          name="password"
-          value={inputs.password}
+          name="pw"
+          value={inputs.pw}
           onInputChange={onInputChange}
-          error={errors.password}
+          error={errors.pw}
           required
         />
         <SignInput
           type="password"
           placeholder="비밀번호 확인"
-          name="passwordCheck"
-          value={inputs.passwordCheck}
+          name="pwCheck"
+          value={inputs.pwCheck}
           onInputChange={onInputChange}
-          error={errors.passwordCheck}
+          error={errors.pwCheck}
           required
         />
         <SubmitBtn value="회원가입">회원가입</SubmitBtn>
