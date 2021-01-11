@@ -16,7 +16,7 @@ const PostDetail = ({ posts }) => {
     dispatch(storeActions.getStore('few'));
   }, []);
 
-  if (isFetching) return <Loading type="bubbles" />;
+  if (isFetching) return <Loading />;
 
   return (
     <Wrap>

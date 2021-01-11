@@ -13,9 +13,9 @@ const Carousel = ({ carouselData, mg }) => {
     <Wrap>
       <h2>근처의 비건 식당</h2>
       <CarouselUl ref={refCarouselUl} value={value}>
-        {carouselData.map((data) => (
-          <li key={data.id} ref={refCarouselLi}>
-            <ImgTextCard cardData={data} />
+        {carouselData.store.map((data, index) => (
+          <li key={index} ref={refCarouselLi}>
+            <ImgTextCard storeData={data} reviewData={carouselData.review[0]} />
           </li>
         ))}
       </CarouselUl>

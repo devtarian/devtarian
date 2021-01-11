@@ -9,15 +9,15 @@ import useCarousel from '../../../hooks/useCarousel';
 const ReviewCarousel = ({ carouselData, mg }) => {
   const { value, onCarouselBtnClick } = useCarousel(mg);
   const { refCarouselUl, refCarouselLi } = value;
-
+  console.log(carouselData);
   return (
     <Wrap>
       <h2>새로운 리뷰</h2>
       <CarouselUl ref={refCarouselUl} value={value}>
-        {carouselData.map((data) => (
-          <li key={data.id} ref={refCarouselLi}>
-            <Profile userData={data.writer} createAt={data.createAt} />
-            <ImgTextCard cardData={data} />
+        {carouselData.store.map((data, index) => (
+          <li key={index} ref={refCarouselLi}>
+            <Profile userData={carouselData.review[0]} />
+            <ImgTextCard storeData={data} reviewData={carouselData.review[0]} />
           </li>
         ))}
       </CarouselUl>

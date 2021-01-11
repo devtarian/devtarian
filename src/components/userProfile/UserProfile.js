@@ -14,7 +14,7 @@ const UserProfile = () => {
     <>
       <NaviItem to="/" innerText="로그아웃" sign={true} onLogOut={handleLogOut} />
       <li className="navItem profile">
-        <Profile userData={user} createAt="" />
+        <Profile userData={user} />
       </li>
     </>
   ) : (
