@@ -15,6 +15,7 @@ const WikiForm = () => {
     ingredient: '',
     likesOfMe: false,
     imgUrls: [],
+    files: [],
     commentList: [
       {
         id: 0,
