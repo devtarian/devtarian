@@ -5,23 +5,22 @@ import Stars from '../stars/Stars';
 import FavoriteHeart, { FavoriteWrap, EmptyHeart } from '../../components/favoriteHeart/FavoriteHeart';
 import noImg from '../../images/noImg.jpg';
 
-const ImgTextCard = ({ cardData }) => {
+const ImgTextCard = ({ storeData, reviewData }) => {
   const dispatch = useDispatch();
   const {
-    store: { id, files, vegType, storeName, region, starRating },
-    reviewList: {
-      0: { reviewContents },
-    },
-  } = cardData;
+    info: { imgUrls, vegType, storeName, region, starRating },
+    favorite,
+  } = storeData;
+  const { contents } = reviewData;
 
-  const GetStoreInfo = (e) => {
-    dispatch(storeActions.getStore(id));
+  const GetStoreInfo = () => {
+    dispatch(storeActions.getStore(1));
   };
 
   return (
     <ImgTextCardWrap onClick={GetStoreInfo}>
       <ItemImg>
-        <img src={files[0] ? URL.createObjectURL(files[0]) : noImg} alt="" />
+        <img src={imgUrls[0] ? imgUrls[0] : noImg} alt="" />
         <div className="cover"></div>
       </ItemImg>
       <span className="vegType">{vegType}</span>
@@ -32,8 +31,8 @@ const ImgTextCard = ({ cardData }) => {
       <div className="starRating">
         <Stars rate={starRating} starsW={80} />
       </div>
-      <p className="reviewContents">{reviewContents}</p>
-      <FavoriteHeart data={cardData} />
+      <p className="contents">{contents}</p>
+      <FavoriteHeart data={favorite} />
     </ImgTextCardWrap>
   );
 };
@@ -78,7 +77,7 @@ export const ImgTextCardWrap = styled.div`
       margin: 0;
     }
   }
-  .reviewContents {
+  .contents {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;

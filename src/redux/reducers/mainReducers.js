@@ -1,13 +1,13 @@
-import { STORE_GET_STORE } from '../types';
+import { MAIN_GET_MAIN } from '../types';
 
 const INIT_STATE = {
   isFetching: true,
   data: {},
 };
 
-export const storeReducers = (state = INIT_STATE, action = {}) => {
+export const mainReducers = (state = INIT_STATE, action = {}) => {
   switch (action.type) {
-    case STORE_GET_STORE:
+    case MAIN_GET_MAIN:
       return {
         data: action.payload,
         isFetching: false,
