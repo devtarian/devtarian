@@ -5,8 +5,7 @@ import SearchModal from '../SearchModal';
 import NaviItem from '../nav/NaviItem';
 import { ReactComponent as MenuSvg } from '../../../images/icons/menu.svg';
 import { ReactComponent as SearchSvg } from '../../../images/icons/search.svg';
-import UserProfile from '../../userProfile/UserProfile';
-import { ProfileWrap } from '../../profile/Profile';
+import UserProfile from './UserAuth';
 import SubNav from './SubNav';
 
 const Nav = () => {
@@ -88,11 +87,6 @@ const Wrap = styled.nav`
 
   .search .navLink span:after {
     bottom: -10px;
-  }
-  ${ProfileWrap} {
-    span {
-      display: none;
-    }
   }
 `;
 const FullNav = styled.ul`

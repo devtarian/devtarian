@@ -11,10 +11,9 @@ import { ReactComponent as FullHeartSvg } from '../../../images/icons/heart-blac
 import { ReactComponent as CommentSvg } from '../../../images/icons/insert_comment.svg';
 
 const Review = ({ reviewList }) => {
-  console.log('reviewList', reviewList);
   const dispatch = useDispatch();
   const likes = useSelector((state) => state.store.likes);
-  console.log(likes);
+
   const handleLikesBtnClick = (e) => {
     e.preventDefault();
     dispatch(storeActions.likeReview());
