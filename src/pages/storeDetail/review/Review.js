@@ -10,26 +10,24 @@ import { ReactComponent as EmptyHeartSvg } from '../../../images/icons/heart_bor
 import { ReactComponent as FullHeartSvg } from '../../../images/icons/heart-black.svg';
 import { ReactComponent as CommentSvg } from '../../../images/icons/insert_comment.svg';
 
-const Review = ({ reviewList }) => {
+const Review = () => {
   const dispatch = useDispatch();
-  const likes = useSelector((state) => state.store.likes);
-
+  const { id, reviews, reviewList, likes } = useSelector((state) => state.store.data);
   const handleLikesBtnClick = (e) => {
     e.preventDefault();
     dispatch(storeActions.likeReview());
   };
-
   const renderHeart = () => {
     return likes ? <FullHeart /> : <EmptyHeart />;
   };
 
   return (
     <Wrap>
-      <strong className="totalReviews">{reviewList.length} 개의 리뷰</strong>
+      <strong className="totalReviews">{reviews} 개의 리뷰</strong>
       {reviewList.map((review) => (
         <div className="review" key={review.id}>
           <div className="innerWrap">
-            {review.files ? <PhotoReviewBox review={review} /> : <TextReviewBox review={review} />}
+            {review.imgUrl ? <PhotoReviewBox reviewData={review} /> : <TextReviewBox reviewData={review} />}
           </div>
           <div className="reactions">
             <div className="addLikes" onClick={handleLikesBtnClick}>
@@ -38,15 +36,13 @@ const Review = ({ reviewList }) => {
             </div>
             <div className="addComments">
               <CommentBtn />
-              <span>+{review.commentList.length}</span>
+              <span>+{review.comments}</span>
             </div>
           </div>
           <ul className="comments">
-            {review.commentList.map((comment) => (
-              <Comment key={comment.id} data={comment} />
-            ))}
+            <Comment reviewId={review.id} />
           </ul>
-          <CommentForm />
+          <CommentForm storeId={id} reviewId={review.id} />
         </div>
       ))}
     </Wrap>

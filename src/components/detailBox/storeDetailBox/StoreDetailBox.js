@@ -1,13 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 import ImgBox from '../ImgBox';
-import PostTextBox from './PostTextBox';
+import StoreTextBox from './StoreTextBox';
 import FavoriteHeart, { FavoriteWrap } from '../../favoriteHeart/FavoriteHeart';
 
-const PostDetailBox = ({ post }) => {
+const StoreDetailBox = () => {
+  const store = useSelector((state) => state.store.data);
   const {
-    store: { category, vegType, storeName },
-  } = post;
+    info: { category, vegType, storeName },
+  } = store;
+
   return (
     <Wrap>
       <div className="show">
@@ -17,16 +20,16 @@ const PostDetailBox = ({ post }) => {
         </div>
         <h2 className="store">{storeName}</h2>
       </div>
-      <ImgBox data={post.store} />
-      <PostTextBox post={post} />
+      <ImgBox data={store.info} />
+      <StoreTextBox storeData={store} />
       <div className="heartWrap">
-        <FavoriteHeart data={post} />
+        <FavoriteHeart data={store} />
       </div>
     </Wrap>
   );
 };
 
-export default PostDetailBox;
+export default StoreDetailBox;
 
 const Wrap = styled.section`
   position: relative;

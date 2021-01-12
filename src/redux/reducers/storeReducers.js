@@ -4,7 +4,6 @@ import {
   STORE_UN_FAVORITE_STORE,
   STORE_LIKE_REVIEW,
   STORE_UNLIKE_REVIEW,
-  STORE_GET_COMMENTS,
 } from '../types';
 
 const INIT_STATE = {
@@ -59,10 +58,7 @@ export const storeReducers = (state = INIT_STATE, action = {}) => {
           },
         },
       };
-    case STORE_GET_COMMENTS:
-      return {
-        data: action.payload,
-      };
+
     default:
       return state;
   }

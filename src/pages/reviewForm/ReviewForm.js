@@ -14,6 +14,7 @@ const INIT_REVIEW = {
 };
 
 const ReviewForm = ({ match }) => {
+  console.log(match);
   const storeId = match.params.storeId || 'YbvnHdy8lso5tTqzAXIn';
   const { inputs, setInputs, errors, onInputChange, onImageUpload, requiredValidate } = useInput(INIT_REVIEW);
 

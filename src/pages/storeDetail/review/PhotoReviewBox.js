@@ -1,28 +1,33 @@
 import React from 'react';
 import styled from 'styled-components';
-import Profile, { ProfileWrap } from '../../../components/profile/Profile';
+import WriterProfile, { WriterProfileWrap } from '../../../components/profile/WriterProfile';
 import ImgCarousel from '../../../components/carousel/imgCarousel/ImgCarousel';
 import Stars from '../../../components/stars/Stars';
 import useMoreContents from '../../../hooks/useMoreContents';
 
-const PhotoReviewBox = ({ review }) => {
+const PhotoReviewBox = ({ reviewData }) => {
   const { viewMore, handleToggleBtnClick } = useMoreContents();
+  const { starRating, title, contents, imgUrl, createdAt, writer } = reviewData;
 
   return (
     <Wrap>
       <div className="leftBox">
-        <Profile profileData={review.writer} createAt={review.createAt} />
+        <WriterProfile writer={writer} createdAt={createdAt} />
         <div className="starRating">
-          <Stars rate={review.starRating} starsW={100} />
+          <Stars rate={starRating} starsW={100} />
         </div>
-        <p className="title">{review.title}</p>
-        <p className={viewMore ? 'moreContents' : 'contents'}>{review.reviewContents}</p>
+        <p className="title">{title}</p>
+        <p className={viewMore ? 'moreContents' : 'contents'}>{contents}</p>
         <button className={viewMore ? 'hideBtn' : 'showBtn'} href="" onClick={handleToggleBtnClick}>
           ... 더보기
         </button>
       </div>
       <div className="rightBox">
-        <ImgCarousel carouselData={review.files} />
+        {Array.isArray(imgUrl) ? (
+          <ImgCarousel carouselData={imgUrl} />
+        ) : (
+          <img className="imgContainer" src={imgUrl} alt="" />
+        )}
       </div>
     </Wrap>
   );
@@ -36,7 +41,7 @@ const Wrap = styled.div`
     width: 65%;
     padding: 15px;
 
-    ${ProfileWrap} {
+    ${WriterProfileWrap} {
       border-bottom: 1px solid ${(props) => props.theme.background[2]};
     }
     .starRating {
@@ -75,6 +80,8 @@ const Wrap = styled.div`
     img {
       border-top-right-radius: 10px;
       width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
   }
 

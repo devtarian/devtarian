@@ -5,10 +5,11 @@ import { ReactComponent as FullHeartSvg } from '../../images/icons/heart-black.s
 import { useDispatch, useSelector } from 'react-redux';
 import storeActions from '../../redux/actions/storeActions';
 
-const FavoriteHeart = (data) => {
+const FavoriteHeart = ({ data }) => {
   const dispatch = useDispatch();
-  const favorite = useSelector((state) => state.store.favorite);
-
+  const favorite = useSelector((state) => state.store.data.favorite);
+  console.log(favorite);
+  console.log(data);
   const handleFavoriteBtnClick = (e) => {
     e.preventDefault();
     favorite ? dispatch(storeActions.favoriteStore(data.id)) : dispatch(storeActions.unFavoriteStore(data.id));

@@ -9,5 +9,3 @@ export const STORE_UN_FAVORITE_STORE = 'store/STORE_UN_FAVORITE_STORE';
 
 export const STORE_LIKE_REVIEW = 'store/STORE_LIKE_REVIEW';
 export const STORE_UNLIKE_REVIEW = 'store/STORE_UNLIKE_REVIEW';
-
-export const STORE_GET_COMMENTS = 'store/STORE_GET_COMMENTS';

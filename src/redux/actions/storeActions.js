@@ -4,7 +4,6 @@ import {
   STORE_UN_FAVORITE_STORE,
   STORE_LIKE_REVIEW,
   STORE_UNLIKE_REVIEW,
-  STORE_GET_COMMENTS,
 } from '../types';
 import apis from '../../Service/apis';
 
@@ -17,7 +16,6 @@ const getStore = (storeId) => async (dispatch) => {
       type: STORE_GET_STORE,
       payload: data,
     });
-    //history.push(`/detail/${storeId}`);
   } catch (err) {
     console.error(err);
     console.log(err.response && err.response.data);
@@ -77,20 +75,5 @@ const unLikeReview = ({ storeId, reviewId }) => async (dispatch) => {
   }
 };
 
-// comment
-const getComments = ({ storeId, reviewId, contents }) => async (dispatch) => {
-  try {
-    const data = await apis.storeApi.getComments({ storeId, reviewId, contents });
-
-    dispatch({
-      type: STORE_GET_COMMENTS,
-      payload: data,
-    });
-  } catch (err) {
-    console.error(err);
-    console.log(err.response && err.response.data);
-  }
-};
-
-const storeActions = { getStore, favoriteStore, unFavoriteStore, likeReview, unLikeReview, getComments };
+const storeActions = { getStore, favoriteStore, unFavoriteStore, likeReview, unLikeReview };
 export default storeActions;

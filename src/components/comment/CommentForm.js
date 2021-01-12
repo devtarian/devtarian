@@ -1,21 +1,24 @@
 import React from 'react';
 import styled from 'styled-components';
-import noProfile from '../../images/noProfile.png';
+import { useSelector } from 'react-redux';
 import apis from '../../Service/apis';
 import useInput from '../../hooks/useInput';
+import noProfile from '../../images/noProfile.png';
 
 const INIT_COMMENT = {
   comment: '',
 };
 
-const CommentForm = () => {
+const CommentForm = ({ storeId, reviewId }) => {
+  const userThumbNail = useSelector((state) => state.auth.thumbNail);
   const { inputs, setInputs, onInputChange } = useInput(INIT_COMMENT);
 
+  console.log(inputs);
   const handleSubmit = async (e) => {
     e.preventDerault();
 
     try {
-      await apis.storeApi.createComments(inputs);
+      await apis.storeApi.createComments({ storeId, reviewId, data: inputs });
       setInputs(INIT_COMMENT);
     } catch (err) {
       console.error(err.response ? err.response : err);
@@ -25,10 +28,10 @@ const CommentForm = () => {
   return (
     <CommentFormWrap>
       <div className="writeComments">
-        <img className="userThumbnail" src={noProfile} alt="" />
+        <img className="userThumbnail" src={userThumbNail || noProfile} alt="" />
         <form onSubmit={handleSubmit}>
           <label>댓글달기</label>
-          <input placeholder="댓글을 입력하세요." name="comment" value={inputs.comment} onInputChange={onInputChange} />
+          <input placeholder="댓글을 입력하세요." name="comment" value={inputs.comment} onChange={onInputChange} />
         </form>
       </div>
     </CommentFormWrap>

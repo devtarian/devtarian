@@ -8,11 +8,11 @@ const WikiComment = ({ commentList }) => {
     <Wrap>
       <strong className="totalComments">{commentList.length} 개의 댓글</strong>
       <div className="innerContainer">
-        <CommentForm />
+        {/* <CommentForm /> */}
         <ul className="comments">
-          {commentList.map((comment) => (
+          {/* {commentList.map((comment) => (
             <Comment key={comment.id} data={comment} />
-          ))}
+          ))} */}
         </ul>
       </div>
     </Wrap>

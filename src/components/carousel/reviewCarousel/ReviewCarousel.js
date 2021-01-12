@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Profile from '../../profile/Profile';
+import WriterProfile from '../../profile/WriterProfile';
 import ImgTextCard, { ImgTextCardWrap, ItemImg } from '../../card/ImgTextCard';
 import CarouselBtn, { CarouselBtnWrap } from '../CarouselBtn';
 import ViewAll from '../VeiwAll';
@@ -9,14 +9,14 @@ import useCarousel from '../../../hooks/useCarousel';
 const ReviewCarousel = ({ carouselData, mg }) => {
   const { value, onCarouselBtnClick } = useCarousel(mg);
   const { refCarouselUl, refCarouselLi } = value;
-  console.log(carouselData);
+
   return (
     <Wrap>
       <h2>새로운 리뷰</h2>
       <CarouselUl ref={refCarouselUl} value={value}>
         {carouselData.store.map((data, index) => (
           <li key={index} ref={refCarouselLi}>
-            <Profile profileData={carouselData.review[0]} />
+            <WriterProfile writer={carouselData.review[0].writer} createdAt={carouselData.review[0].createdAt} />
             <ImgTextCard storeData={data} reviewData={carouselData.review[0]} />
           </li>
         ))}
