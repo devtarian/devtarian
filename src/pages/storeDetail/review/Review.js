@@ -5,7 +5,6 @@ import storeActions from '../../../redux/actions/storeActions';
 import PhotoReviewBox from './PhotoReviewBox';
 import TextReviewBox from './TextReviewBox';
 import Comment from '../../../components/comment/Comment';
-import CommentForm from '../../../components/comment/CommentForm';
 import { ReactComponent as EmptyHeartSvg } from '../../../images/icons/heart_border-black.svg';
 import { ReactComponent as FullHeartSvg } from '../../../images/icons/heart-black.svg';
 import { ReactComponent as CommentSvg } from '../../../images/icons/insert_comment.svg';
@@ -13,6 +12,7 @@ import { ReactComponent as CommentSvg } from '../../../images/icons/insert_comme
 const Review = () => {
   const dispatch = useDispatch();
   const { id, reviews, reviewList, likes } = useSelector((state) => state.store.data);
+
   const handleLikesBtnClick = (e) => {
     e.preventDefault();
     dispatch(storeActions.likeReview());
@@ -39,10 +39,7 @@ const Review = () => {
               <span>+{review.comments}</span>
             </div>
           </div>
-          <ul className="comments">
-            <Comment reviewId={review.id} />
-          </ul>
-          <CommentForm storeId={id} reviewId={review.id} />
+          <Comment storeId={id} reviewId={review.id} />
         </div>
       ))}
     </Wrap>

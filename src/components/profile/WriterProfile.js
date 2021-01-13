@@ -5,7 +5,6 @@ import noProfile from '../../images/noProfile.png';
 const WriterProfile = ({ writer, createdAt }) => {
   const { thumbNail, username } = writer;
 
-  // console.log('writerData', writerData);
   return (
     <>
       <WriterProfileWrap>

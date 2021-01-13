@@ -24,11 +24,10 @@ const getStore = (storeId) => async (dispatch) => {
 
 const favoriteStore = (storeId) => async (dispatch) => {
   try {
-    const data = await apis.storeApi.favoriteStore(storeId);
+    await apis.storeApi.favoriteStore(storeId);
 
     dispatch({
       type: STORE_FAVORITE_STORE,
-      payload: data,
     });
   } catch (err) {
     console.log(err.response && err.response.data);
@@ -37,11 +36,10 @@ const favoriteStore = (storeId) => async (dispatch) => {
 
 const unFavoriteStore = (storeId) => async (dispatch) => {
   try {
-    const data = await apis.storeApi.unFavoriteStore(storeId);
+    await apis.storeApi.unFavoriteStore(storeId);
 
     dispatch({
       type: STORE_UN_FAVORITE_STORE,
-      payload: data,
     });
   } catch (err) {
     console.log(err.response && err.response.data);
@@ -51,11 +49,10 @@ const unFavoriteStore = (storeId) => async (dispatch) => {
 // review
 const likeReview = ({ storeId, reviewId }) => async (dispatch) => {
   try {
-    const data = await apis.storeApi.likeReview({ storeId, reviewId });
+    await apis.storeApi.likeReview({ storeId, reviewId });
 
     dispatch({
       type: STORE_LIKE_REVIEW,
-      payload: data,
     });
   } catch (err) {
     console.log(err.response && err.response.data);
@@ -64,11 +61,10 @@ const likeReview = ({ storeId, reviewId }) => async (dispatch) => {
 
 const unLikeReview = ({ storeId, reviewId }) => async (dispatch) => {
   try {
-    const data = await apis.storeApi.unLikeReview({ storeId, reviewId });
+    await apis.storeApi.unLikeReview({ storeId, reviewId });
 
     dispatch({
       type: STORE_UNLIKE_REVIEW,
-      payload: data,
     });
   } catch (err) {
     console.log(err.response && err.response.data);

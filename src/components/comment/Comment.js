@@ -1,24 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import apis from '../../Service/apis';
-import WriterProfile, { WriterProfileWrap } from '../profile/WriterProfile';
 import history from '../../history';
+import WriterProfile, { WriterProfileWrap } from '../profile/WriterProfile';
+import CommentForm from './CommentForm';
 
-const Comment = ({ reviewId }) => {
+const Comment = ({ storeId, reviewId }) => {
   const [comments, setComments] = useState([]);
+  const onCommentSubmit = (newComment) => {
+    setComments((state) => [...state, newComment]);
+  };
 
   useEffect(() => {
-    // const getApiData = async () => {
-    //   try {
-    //     const storeId = history.location.pathname.split('/')[2];
-    //     const reviewId = commentData.id;
-    //     const data = await apis.storeApi.getComments({ storeId, reviewId });
-    //     setComments(data);
-    //   } catch (err) {
-    //     console.log(err.response && err.response.data);
-    //   }
-    // };
-    // getApiData();
     const storeId = history.location.pathname.split('/')[2];
 
     apis.storeApi
@@ -29,16 +22,19 @@ const Comment = ({ reviewId }) => {
       .catch((err) => {
         console.log(err.response && err.response.data);
       });
-  }, [reviewId]);
+  }, [reviewId, setComments]);
 
   return (
     <>
-      {comments.map((comment) => (
-        <Wrap key={comment.id}>
-          <WriterProfile writer={comment.writer} createdAt={comment.createdAt} />
-          <p className="comment">{comment.contents}</p>
-        </Wrap>
-      ))}
+      <ul className="comments">
+        {comments.map((comment) => (
+          <Wrap key={comment.id}>
+            <WriterProfile writer={comment.writer} createdAt={comment.createdAt} />
+            <p className="comment">{comment.contents}</p>
+          </Wrap>
+        ))}
+      </ul>
+      <CommentForm storeId={storeId} reviewId={reviewId} onCommentSubmit={onCommentSubmit} />
     </>
   );
 };

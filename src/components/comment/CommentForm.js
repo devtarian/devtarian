@@ -6,20 +6,21 @@ import useInput from '../../hooks/useInput';
 import noProfile from '../../images/noProfile.png';
 
 const INIT_COMMENT = {
-  comment: '',
+  contents: '',
 };
 
-const CommentForm = ({ storeId, reviewId }) => {
+const CommentForm = ({ storeId, reviewId, onCommentSubmit }) => {
   const userThumbNail = useSelector((state) => state.auth.thumbNail);
   const { inputs, setInputs, onInputChange } = useInput(INIT_COMMENT);
 
-  console.log(inputs);
-  const handleSubmit = async (e) => {
-    e.preventDerault();
-
+  const handleKeyPress = async (e) => {
     try {
-      await apis.storeApi.createComments({ storeId, reviewId, data: inputs });
-      setInputs(INIT_COMMENT);
+      if (e.key === 'Enter') {
+        const res = await apis.storeApi.createComment({ storeId, reviewId, data: inputs });
+        const newComment = res.data;
+        onCommentSubmit(newComment);
+        setInputs(INIT_COMMENT);
+      }
     } catch (err) {
       console.error(err.response ? err.response : err);
     }
@@ -29,10 +30,16 @@ const CommentForm = ({ storeId, reviewId }) => {
     <CommentFormWrap>
       <div className="writeComments">
         <img className="userThumbnail" src={userThumbNail || noProfile} alt="" />
-        <form onSubmit={handleSubmit}>
+        <div className="form">
           <label>댓글달기</label>
-          <input placeholder="댓글을 입력하세요." name="comment" value={inputs.comment} onChange={onInputChange} />
-        </form>
+          <input
+            placeholder="댓글을 입력하세요."
+            name="contents"
+            value={inputs.contents}
+            onChange={onInputChange}
+            onKeyPress={handleKeyPress}
+          />
+        </div>
       </div>
     </CommentFormWrap>
   );
@@ -51,7 +58,7 @@ export const CommentFormWrap = styled.div`
       margin: 2px 8px 0 0;
       border-radius: 50%;
     }
-    form {
+    .form {
       float: left;
       width: calc(100% - 48px);
       padding: 5px 0;
