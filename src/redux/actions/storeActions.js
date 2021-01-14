@@ -47,21 +47,24 @@ const unFavoriteStore = (storeId) => async (dispatch) => {
 };
 
 // review
-const likeReview = ({ storeId, reviewId }) => async (dispatch) => {
+const likeReview = (storeId, reviewId) => async (dispatch) => {
+  console.log('storeAct', storeId, reviewId);
   try {
-    await apis.storeApi.likeReview({ storeId, reviewId });
+    await apis.storeApi.likeReview(storeId, reviewId);
 
     dispatch({
       type: STORE_LIKE_REVIEW,
     });
   } catch (err) {
+    console.log('storeAct', storeId, reviewId);
     console.log(err.response && err.response.data);
   }
 };
 
-const unLikeReview = ({ storeId, reviewId }) => async (dispatch) => {
+const unLikeReview = (storeId, reviewId) => async (dispatch) => {
+  console.log('storeAct', storeId, reviewId);
   try {
-    await apis.storeApi.unLikeReview({ storeId, reviewId });
+    await apis.storeApi.unLikeReview(storeId, reviewId);
 
     dispatch({
       type: STORE_UNLIKE_REVIEW,

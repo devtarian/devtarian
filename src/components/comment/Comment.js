@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import apis from '../../Service/apis';
-import history from '../../history';
 import WriterProfile, { WriterProfileWrap } from '../profile/WriterProfile';
 import CommentForm from './CommentForm';
 
@@ -12,17 +11,15 @@ const Comment = ({ storeId, reviewId }) => {
   };
 
   useEffect(() => {
-    const storeId = history.location.pathname.split('/')[2];
-
     apis.storeApi
-      .getComments({ storeId, reviewId })
+      .getComments(storeId, reviewId)
       .then((data) => {
         setComments(data);
       })
       .catch((err) => {
         console.log(err.response && err.response.data);
       });
-  }, [reviewId, setComments]);
+  }, [storeId, reviewId, setComments]);
 
   return (
     <>

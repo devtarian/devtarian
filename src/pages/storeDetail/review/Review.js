@@ -5,20 +5,16 @@ import storeActions from '../../../redux/actions/storeActions';
 import PhotoReviewBox from './PhotoReviewBox';
 import TextReviewBox from './TextReviewBox';
 import Comment from '../../../components/comment/Comment';
-import { ReactComponent as EmptyHeartSvg } from '../../../images/icons/heart_border-black.svg';
-import { ReactComponent as FullHeartSvg } from '../../../images/icons/heart-black.svg';
+import Likes from '../../../components/likes/Likes';
 import { ReactComponent as CommentSvg } from '../../../images/icons/insert_comment.svg';
 
 const Review = () => {
   const dispatch = useDispatch();
-  const { id, reviews, reviewList, likes } = useSelector((state) => state.store.data);
+  const { id, reviews, reviewList } = useSelector((state) => state.store.data);
 
   const handleLikesBtnClick = (e) => {
     e.preventDefault();
     dispatch(storeActions.likeReview());
-  };
-  const renderHeart = () => {
-    return likes ? <FullHeart /> : <EmptyHeart />;
   };
 
   return (
@@ -31,7 +27,7 @@ const Review = () => {
           </div>
           <div className="reactions">
             <div className="addLikes" onClick={handleLikesBtnClick}>
-              {renderHeart()}
+              <Likes storeId={id} reviewId={review.id} likes={review.likes} />
               <span>+{review.likes}</span>
             </div>
             <div className="addComments">
@@ -124,19 +120,6 @@ const Wrap = styled.section`
   @media (max-width: 767px) {
     margin-top: 170px;
   }
-`;
-
-const EmptyHeart = styled(EmptyHeartSvg)`
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-`;
-
-const FullHeart = styled(FullHeartSvg)`
-  width: 20px;
-  height: 20px;
-  fill: ${(props) => props.theme.brown[2]};
-  cursor: pointer;
 `;
 
 const CommentBtn = styled(CommentSvg)`

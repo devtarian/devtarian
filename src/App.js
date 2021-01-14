@@ -17,7 +17,7 @@ function App() {
           <DefaultLayout path="/wikiDetail" component={WikiDetail} />
           <DefaultLayout path="/vegwiki" component={VegWiki} />
           <DefaultLayout path="/feed" component={FeedForm} />
-          <DefaultLayout path="/review" component={ReviewForm} />
+          <DefaultLayout path="/review/:storeId" component={ReviewForm} />
           <DefaultLayout path="/wiki" component={WikiForm} />
           <DefaultLayout path="/" component={Main} />
         </Switch>
