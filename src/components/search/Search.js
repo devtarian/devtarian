@@ -4,7 +4,7 @@ import SearchForm from './SearchForm';
 import RecentKeyword from './RecentKeyword';
 import { loadRecentKeywords, saveRecentKeywords } from '../../Service/recentKeywordService';
 
-const Search = ({ posTop, bg }) => {
+const Search = ({ className, posTop, bg, width }) => {
   const [show, setShow] = useState(false);
   const [value, setValue] = useState('');
   const [recentKeywords, setRecentKeywords] = useState(loadRecentKeywords() || []);
@@ -34,8 +34,8 @@ const Search = ({ posTop, bg }) => {
   }, []);
 
   return (
-    <Wrap bg={bg}>
-      <InnerWrap posTop={posTop}>
+    <Wrap bg={bg} className={className}>
+      <InnerWrap posTop={posTop} width={width}>
         <SearchForm value={value} onInputChange={handleInputChange} onAddRecentKeywords={onAddRecentKeywords} />
         {show && <RecentKeyword recentKeywords={recentKeywords} />}
       </InnerWrap>
@@ -54,7 +54,7 @@ const Wrap = styled.div`
 
 const InnerWrap = styled.div`
   position: relative;
-  width: 55%;
+  width: ${(props) => (props.width ? props.width : '55%')};
   top: ${(props) => props.posTop};
   max-height: 239px;
   margin: 0 auto;
