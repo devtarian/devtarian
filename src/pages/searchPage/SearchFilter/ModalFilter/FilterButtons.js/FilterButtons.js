@@ -12,7 +12,7 @@ const FilterButtons = ({ title, type, value, onChangeFilter }) => {
           h="35px"
           clicked={value === key || value === Number(key)}
           onClick={() => onChangeFilter(type, key)}>
-          {filterConfig[type][key]}
+          {filterConfig[type][key].value}
         </Button>
       ))}
     </>

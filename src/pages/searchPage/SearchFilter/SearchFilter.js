@@ -12,32 +12,32 @@ const SearchFilter = () => {
 
   return (
     <>
-      <WrapperFilter>
-        <StyledButton onClick={handleOpenModal}>
+      <Wrap>
+        <StyledButton onClick={handleOpenModal} bg="#2f9e44">
           <Svg type="filter" color="white" />
         </StyledButton>
-        <Button>All</Button>
-        <Button>
+        <StyledButton>All</StyledButton>
+        <StyledButton>
           <Svg type="restaurant" />
           <span>식당</span>
-        </Button>
-        <Button>
+        </StyledButton>
+        <StyledButton>
           <Svg type="cafe" />
           <span>카페</span>
-        </Button>
-        <Button>
-          <Svg type="bread" />
+        </StyledButton>
+        <StyledButton>
+          <Svg type="bakery" />
           <span>베이커리</span>
-        </Button>
-        <Button>
-          <Svg type="bar" />
+        </StyledButton>
+        <StyledButton>
+          <CircleSvg type="bar" />
           <span>Bar</span>
-        </Button>
-        <Button>
-          <Svg type="more" />
-          <span>식당</span>
-        </Button>
-      </WrapperFilter>
+        </StyledButton>
+        <StyledButton>
+          <CircleSvg type="more" />
+          <span>기타</span>
+        </StyledButton>
+      </Wrap>
 
       {modal && <ModalFilter onCloseModal={handleCloseModal} />}
     </>
@@ -46,11 +46,9 @@ const SearchFilter = () => {
 
 export default SearchFilter;
 
-const StyledButton = styled(Button)`
-  background: #2f9e44;
-`;
-
-const WrapperFilter = styled.div`
+const Wrap = styled.div`
+  display: flex;
+  margin-bottom: 15px;
   span {
     margin-left: 10px;
   }
@@ -71,4 +69,22 @@ const WrapperFilter = styled.div`
       display: none;
     }
   }
+`;
+
+const StyledButton = styled(Button)`
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+`;
+
+const CircleSvg = styled(Svg)`
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: red;
+  padding: 5px;
 `;

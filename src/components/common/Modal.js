@@ -20,7 +20,7 @@ const Wraper = styled.div`
   right: 0px;
   bottom: 0px;
   left: 0px;
-  z-index: 100;
+  z-index: 101;
   background: rgba(0, 0, 0, 0.56);
   overflow: hidden scroll;
   text-align: center;
