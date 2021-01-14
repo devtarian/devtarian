@@ -31,10 +31,10 @@ const renderForm = ({ step, ...rest }) => {
 
 const INIT_VALUES = {
   step: 0,
-  category: '식당',
+  category: 'restaurant',
   lat: '',
   lng: '',
-  vegType: '',
+  vegType: 'vegan',
   storeName: '',
   contactNum: '',
   region: '',

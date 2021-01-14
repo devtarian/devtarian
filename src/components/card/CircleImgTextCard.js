@@ -2,6 +2,7 @@ import React, { forwardRef } from 'react';
 import styled from 'styled-components';
 import FavoriteHeart, { FavoriteWrap, EmptyHeart } from '../../components/favoriteHeart/FavoriteHeart';
 import noImg from '../../images/noImg.jpg';
+import { translate } from '../../utils/helper';
 
 const CircleImgTextCard = forwardRef((props, ref) => {
   const { data } = props;
@@ -13,7 +14,7 @@ const CircleImgTextCard = forwardRef((props, ref) => {
         <div className="cover"></div>
       </div>
       <div className="itemInfo">
-        <span className="category">{data.category}</span>
+        <span className="category">{translate(data.category)}</span>
         <h3>{data.product}</h3>
         <span className="ingredient">{data.ingredient}</span>
       </div>

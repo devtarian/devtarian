@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { translate } from '../../utils/helper';
 
 const RadioCategory = ({ name, label, info, category, onChange }) => {
   const handleChange = (e) => {
@@ -18,7 +19,7 @@ const RadioCategory = ({ name, label, info, category, onChange }) => {
             checked={category === item}
             onChange={handleChange}
           />
-          <label htmlFor={`item${index}`}>{item}</label>
+          <label htmlFor={`item${index}`}>{translate(item)}</label>
         </div>
       ))}
     </Wrap>

@@ -23,7 +23,7 @@ const FavoriteHeart = ({ data }) => {
 export default FavoriteHeart;
 
 export const FavoriteWrap = styled.button`
-  z-index: 101;
+  z-index: 3;
   position: absolute;
   top: 86px;
   right: 0px;
