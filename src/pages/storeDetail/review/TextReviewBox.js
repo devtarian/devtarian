@@ -1,20 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
-import Profile, { ProfileWrap } from '../../../components/profile/Profile';
+import WriterProfile, { WriterProfileWrap } from '../../../components/profile/WriterProfile';
 import Stars from '../../../components/stars/Stars';
 import useMoreContents from '../../../hooks/useMoreContents';
 
-const TextReviewBox = ({ review }) => {
+const TextReviewBox = ({ reviewData }) => {
   const { viewMore, handleToggleBtnClick } = useMoreContents();
+  const { writer, createdAt, starRating, title, contents } = reviewData;
 
   return (
     <Wrap>
-      <Profile userData={review.writer} createAt={review.createAt} />
+      <WriterProfile writer={writer} createdAt={createdAt} />
       <div className="starRating">
-        <Stars rate={review.starRating} starsW={100} />
+        <Stars rate={starRating} starsW={100} />
       </div>
-      <p className="title">{review.title}</p>
-      <p className={viewMore ? 'moreContents' : 'contents'}>{review.reviewContents}</p>
+      <p className="title">{title}</p>
+      <p className={viewMore ? 'moreContents' : 'contents'}>{contents}</p>
       <button className={viewMore ? 'hideBtn' : 'showBtn'} href="" onClick={handleToggleBtnClick}>
         ... 더보기
       </button>
@@ -29,7 +30,7 @@ const Wrap = styled.div`
   width: 100%;
   padding: 15px;
 
-  ${ProfileWrap} {
+  ${WriterProfileWrap} {
     border-bottom: 1px solid ${(props) => props.theme.background[2]};
   }
   .starRating {

@@ -1,31 +1,33 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import storeActions from '../../../redux/actions/storeActions';
 import PhotoReviewBox from './PhotoReviewBox';
 import TextReviewBox from './TextReviewBox';
 import Comment from '../../../components/comment/Comment';
-import CommentForm from '../../../components/comment/CommentForm';
 import { ReactComponent as EmptyHeartSvg } from '../../../images/icons/heart_border-black.svg';
 import { ReactComponent as FullHeartSvg } from '../../../images/icons/heart-black.svg';
 import { ReactComponent as CommentSvg } from '../../../images/icons/insert_comment.svg';
 
-const Review = ({ reviewList }) => {
-  const [likes, setLikes] = useState(false);
+const Review = () => {
+  const dispatch = useDispatch();
+  const { id, reviews, reviewList, likes } = useSelector((state) => state.store.data);
 
-  const handleLikesBtnClick = () => {
-    setLikes(!likes);
+  const handleLikesBtnClick = (e) => {
+    e.preventDefault();
+    dispatch(storeActions.likeReview());
   };
-
   const renderHeart = () => {
     return likes ? <FullHeart /> : <EmptyHeart />;
   };
 
   return (
     <Wrap>
-      <strong className="totalReviews">{reviewList.length} 개의 리뷰</strong>
+      <strong className="totalReviews">{reviews} 개의 리뷰</strong>
       {reviewList.map((review) => (
         <div className="review" key={review.id}>
           <div className="innerWrap">
-            {review.files ? <PhotoReviewBox review={review} /> : <TextReviewBox review={review} />}
+            {review.imgUrl ? <PhotoReviewBox reviewData={review} /> : <TextReviewBox reviewData={review} />}
           </div>
           <div className="reactions">
             <div className="addLikes" onClick={handleLikesBtnClick}>
@@ -34,15 +36,10 @@ const Review = ({ reviewList }) => {
             </div>
             <div className="addComments">
               <CommentBtn />
-              <span>+{review.commentList.length}</span>
+              <span>+{review.comments}</span>
             </div>
           </div>
-          <ul className="comments">
-            {review.commentList.map((comment) => (
-              <Comment key={comment.id} data={comment} />
-            ))}
-          </ul>
-          <CommentForm />
+          <Comment storeId={id} reviewId={review.id} />
         </div>
       ))}
     </Wrap>

@@ -4,13 +4,12 @@ import Stars from '../../stars/Stars';
 import KakaoMap from '../../Map/KakaoMap';
 import { ViewAllWrap } from '../../carousel/VeiwAll';
 import { ReactComponent as PlusSvg } from '../../../images/icons/add.svg';
-import { ReactComponent as MoreDotSvg } from '../../../images/icons/more_vert.svg';
 import useMoreDetail from '../../../hooks/useMoreDetail';
 
-const PostTextBox = ({ post }) => {
-  console.log('postDetailBox', post);
+const StoreTextBox = ({ storeData }) => {
   const {
-    store: {
+    coordinates: { __latitude, __longitude },
+    info: {
       category,
       vegType,
       starRating,
@@ -21,7 +20,7 @@ const PostTextBox = ({ post }) => {
       operatingHoursMemo,
       menuList,
     },
-  } = post;
+  } = storeData;
   const hours = useMoreDetail();
   const menu = useMoreDetail();
 
@@ -90,14 +89,14 @@ const PostTextBox = ({ post }) => {
         <div className="address textBox">
           <strong className="infoTitle">위치</strong>
           <span className="infoContents">{address}</span>
-          <StyledMap defaultCenter={{ lat: 33.450701, lng: 126.570667 }} />
+          <StyledMap defaultCenter={{ lat: __latitude, lng: __longitude }} />
         </div>
       </div>
     </Wrap>
   );
 };
 
-export default PostTextBox;
+export default StoreTextBox;
 
 const Wrap = styled.div`
   float: left;
@@ -219,10 +218,6 @@ const Wrap = styled.div`
       }
     }
 
-    .moreDot {
-      text-align: center;
-    }
-
     ${ViewAllWrap} {
       display: none;
     }
@@ -280,11 +275,6 @@ const ViewMoreBtn = styled(PlusSvg)`
   height: 20px;
   cursor: pointer;
   transition: all 0.1s ease-in;
-`;
-
-const MoreDot = styled(MoreDotSvg)`
-  width: 20px;
-  height: 20px;
 `;
 
 const StyledMap = styled(KakaoMap)`

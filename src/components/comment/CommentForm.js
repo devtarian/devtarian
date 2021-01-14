@@ -1,16 +1,45 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
+import apis from '../../Service/apis';
+import useInput from '../../hooks/useInput';
 import noProfile from '../../images/noProfile.png';
 
-const CommentForm = () => {
+const INIT_COMMENT = {
+  contents: '',
+};
+
+const CommentForm = ({ storeId, reviewId, onCommentSubmit }) => {
+  const userThumbNail = useSelector((state) => state.auth.thumbNail);
+  const { inputs, setInputs, onInputChange } = useInput(INIT_COMMENT);
+
+  const handleKeyPress = async (e) => {
+    try {
+      if (e.key === 'Enter') {
+        const res = await apis.storeApi.createComment({ storeId, reviewId, data: inputs });
+        const newComment = res.data;
+        onCommentSubmit(newComment);
+        setInputs(INIT_COMMENT);
+      }
+    } catch (err) {
+      console.error(err.response ? err.response : err);
+    }
+  };
+
   return (
     <CommentFormWrap>
       <div className="writeComments">
-        <img className="userThumbnail" src={noProfile} alt="" />
-        <form>
+        <img className="userThumbnail" src={userThumbNail || noProfile} alt="" />
+        <div className="form">
           <label>댓글달기</label>
-          <input placeholder="댓글을 입력하세요."></input>
-        </form>
+          <input
+            placeholder="댓글을 입력하세요."
+            name="contents"
+            value={inputs.contents}
+            onChange={onInputChange}
+            onKeyPress={handleKeyPress}
+          />
+        </div>
       </div>
     </CommentFormWrap>
   );
@@ -29,7 +58,7 @@ export const CommentFormWrap = styled.div`
       margin: 2px 8px 0 0;
       border-radius: 50%;
     }
-    form {
+    .form {
       float: left;
       width: calc(100% - 48px);
       padding: 5px 0;

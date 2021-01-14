@@ -6,7 +6,7 @@ import pages from './pages';
 import SearchPage from './pages/searchPage/SearchPage';
 
 function App() {
-  const { PostDetail, FeedForm, Login, Main, ReviewForm, SignUp, VegWiki, WikiDetail, WikiForm } = pages;
+  const { StoreDetail, FeedForm, Login, Main, ReviewForm, SignUp, VegWiki, WikiDetail, WikiForm } = pages;
 
   return (
     <div className="App">
@@ -14,8 +14,8 @@ function App() {
         <Switch>
           <PublicLayout path="/signup" component={SignUp} />
           <PublicLayout path="/login" component={Login} />
-          <DefaultLayout path="/detail" component={PostDetail} />
-          <DefaultLayout path="/wikidetail" component={WikiDetail} />
+          <DefaultLayout path="/storeDetail/:storeId" component={StoreDetail} />
+          <DefaultLayout path="/wikiDetail" component={WikiDetail} />
           <DefaultLayout path="/vegwiki" component={VegWiki} />
           <DefaultLayout path="/feed" component={FeedForm} />
           <DefaultLayout path="/review" component={ReviewForm} />
