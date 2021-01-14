@@ -13,7 +13,7 @@ import apis from '../../Service/apis';
 const pageConfig = [
   { id: 'store', title: '가게 정보', validate: ['category', 'vegType', 'storeName', 'contactNum', 'operatingHours'] },
   { id: 'menu', title: '메뉴 정보', validate: ['menuList'] },
-  { id: 'info', title: '나의 소개', validate: [] },
+  { id: 'info', title: '나의 소개', validate: ['starRating'] },
 ];
 
 const renderForm = ({ step, ...rest }) => {

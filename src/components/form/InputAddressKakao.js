@@ -28,7 +28,7 @@ const InputAddressKakao = ({ addr, lat, lng, addrDetail, onChange }) => {
 
       <StyledMap
         onChange={onChange}
-        defaultCenter={{ lat: lat || 33.450701, lng: lng || 126.570667 }}
+        defaultCenter={{ lat: lat || 37.573, lng: lng || 126.9794 }}
         defaultLevel="3"
         eventListenerSearch={true}
       />
