@@ -83,3 +83,16 @@ export const timeToString = (date) => {
   if (fromTime < year) return `${Math.floor(fromTime / month)}달 전`;
   return `${Math.floor(fromTime / year)}년 전`;
 };
+
+export const changeObjectToQuery = (object) => {
+  let result = '';
+  Object.keys(object).forEach((key, idx) => {
+    if (idx === 0) {
+      result += `?${key}=${object[key]}`;
+    } else {
+      result += `&${key}=${object[key]}`;
+    }
+  });
+
+  return result;
+};

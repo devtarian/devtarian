@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import queryString from 'query-string';
 import Search from '../../components/search/Search';
 import KakaoMap from '../../components/Map/KakaoMap';
-import Button from '../../Styles/Button';
+import SearchFilter from './SearchFilter/SearchFilter';
 
 const SearchPage = ({ location }) => {
   //const [state, setState] = useState({});
@@ -14,13 +14,7 @@ const SearchPage = ({ location }) => {
       <SectionContents>
         <h3>검색</h3>
         <StyledSearch width="100%" />
-        <Button>All</Button>
-        <Button>식당</Button>
-        <Button>카페</Button>
-        <Button>베이커리</Button>
-        <Button>Bar</Button>
-        <Button>기타</Button>
-        <div></div>
+        <SearchFilter />
       </SectionContents>
       <SectionMap>
         <StyledMap defaultCenter={{ lat: 33.450701, lng: 126.570667 }} />
@@ -41,6 +35,7 @@ const Wrap = styled.div`
 const StyledSearch = styled(Search)`
   height: auto;
   margin-bottom: 10px;
+  padding-right: 20px;
 `;
 
 const SectionContents = styled.div`
