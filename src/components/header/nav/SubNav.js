@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import UserProfile from '../../userProfile/UserProfile';
+import UserProfile from './UserAuth';
 import NaviItem from './NaviItem';
 
 const SubNav = () => {

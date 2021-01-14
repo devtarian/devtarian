@@ -74,6 +74,7 @@ export const timeToString = (date) => {
   const year = day * 365;
   const fromTime = Date.now() - new Date(date).getTime();
 
+  if (fromTime < 0) return `방금 전`;
   if (fromTime < min) return `${Math.floor(fromTime / sec)}초 전`;
   if (fromTime < hour) return `${Math.floor(fromTime / min)}분 전`;
   if (fromTime < day) return `${Math.floor(fromTime / hour)}시간 전`;

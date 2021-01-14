@@ -1,8 +1,8 @@
 import { defaultApi } from './default';
 
 export const api = {
-  async login({ email, pw }) {
-    const res = await defaultApi.post('/auth/signin', { email, pw });
+  async login(data) {
+    const res = await defaultApi.post('/auth/signin', data);
     return res.data;
   },
 

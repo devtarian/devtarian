@@ -1,27 +1,28 @@
 import styled from 'styled-components';
-import noProfile from '../../images/noProfile.png';
 import { timeToString } from '../../utils/helper';
-const Profile = ({ userData }) => {
-  const { thumbNail, writer, createdAt } = userData;
+import noProfile from '../../images/noProfile.png';
+
+const WriterProfile = ({ writer, createdAt }) => {
+  const { thumbNail, username } = writer;
 
   return (
     <>
-      <ProfileWrap>
+      <WriterProfileWrap>
         <div className="thumbNail">
           <img src={thumbNail ? thumbNail : noProfile} alt="" />
         </div>
         <div className="info">
-          <strong>{writer}</strong>
+          <strong>{username}</strong>
           <span>{timeToString(createdAt)}</span>
         </div>
-      </ProfileWrap>
+      </WriterProfileWrap>
     </>
   );
 };
 
-export default Profile;
+export default WriterProfile;
 
-export const ProfileWrap = styled.div`
+export const WriterProfileWrap = styled.div`
   position: relative;
   overflow: hidden;
 

@@ -33,7 +33,7 @@ const SignUp = () => {
     let isValid = requiredValidate(requiredList);
 
     if (!isValid) return;
-
+    console.log(inputs);
     try {
       const { username, email, pw, files } = inputs;
       const formData = new FormData();

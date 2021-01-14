@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import storeActions from '../../redux/actions/storeActions';
+import history from '../../history';
 import Stars from '../stars/Stars';
 import FavoriteHeart, { FavoriteWrap, EmptyHeart } from '../../components/favoriteHeart/FavoriteHeart';
 import noImg from '../../images/noImg.jpg';
@@ -8,17 +9,18 @@ import noImg from '../../images/noImg.jpg';
 const ImgTextCard = ({ storeData, reviewData }) => {
   const dispatch = useDispatch();
   const {
+    id,
     info: { imgUrls, vegType, storeName, region, starRating },
-    favorite,
   } = storeData;
   const { contents } = reviewData;
 
-  const GetStoreInfo = () => {
-    dispatch(storeActions.getStore(1));
+  const GetStoreDetail = () => {
+    dispatch(storeActions.getStore(id));
+    history.push(`/storeDetail/${id}`);
   };
 
   return (
-    <ImgTextCardWrap onClick={GetStoreInfo}>
+    <ImgTextCardWrap onClick={GetStoreDetail}>
       <ItemImg>
         <img src={imgUrls[0] ? imgUrls[0] : noImg} alt="" />
         <div className="cover"></div>
@@ -32,7 +34,7 @@ const ImgTextCard = ({ storeData, reviewData }) => {
         <Stars rate={starRating} starsW={80} />
       </div>
       <p className="contents">{contents}</p>
-      <FavoriteHeart data={favorite} />
+      <FavoriteHeart data={storeData} />
     </ImgTextCardWrap>
   );
 };
@@ -41,7 +43,7 @@ export default ImgTextCard;
 
 export const ImgTextCardWrap = styled.div`
   position: relative;
-
+  cursor: pointer;
   .vegType {
     display: inline-block;
     width: 70px;
