@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import mainActions from '../../../redux/actions/mainActions';
 import Loading from '../../../components/loading/Loding';
 
-const Section = (wikiPosts) => {
+const Section = () => {
   const dispatch = useDispatch();
   const { isFetching, data } = useSelector((state) => state.main);
   const mg = 9;
@@ -20,10 +20,10 @@ const Section = (wikiPosts) => {
 
   return (
     <Wrap>
-      <Carousel carouselData={data} mg={mg} />
-      <Carousel carouselData={data} mg={mg} />
-      <CoverCarousel carouselData={wikiPosts} mg={mg} />
-      <ReviewCarousel carouselData={data} mg={mg} />
+      <Carousel carouselData={data.store} mg={mg} />
+      <Carousel carouselData={data.rated} mg={mg} />
+      <CoverCarousel carouselData={data.wiki} mg={mg} />
+      <ReviewCarousel carouselData={data.review} mg={mg} />
     </Wrap>
   );
 };

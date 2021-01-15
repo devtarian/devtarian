@@ -1,32 +1,34 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import storeActions from '../../redux/actions/storeActions';
-import { ReactComponent as smileSvg } from '../../images/icons/emoji_smile.svg';
+import { ReactComponent as LikesSvg } from '../../images/icons/smile.svg';
 
-const Likes = ({ storeId, reviewId, likes }) => {
+const Likes = forwardRef((props, ref) => {
   const dispatch = useDispatch();
+  const { storeId, reviewId, likesOfMe } = props;
+
   const handleLikesClick = (e) => {
     e.preventDefault();
-    likes
+    likesOfMe
       ? dispatch(storeActions.unLikeReview(storeId, reviewId))
       : dispatch(storeActions.likeReview(storeId, reviewId));
   };
 
   return (
-    <Wrap>
-      <Smile likes={likes} onClick={handleLikesClick} />
-    </Wrap>
+    <LikesWrap>
+      <LikesBtn likesofme={likesOfMe ? 'likes' : 'unlikes'} ref={ref} onClick={handleLikesClick} />
+    </LikesWrap>
   );
-};
+});
 
 export default Likes;
 
-const Wrap = styled.div``;
+export const LikesWrap = styled.button``;
 
-const Smile = styled(smileSvg)`
-  width: 21px;
-  height: 21px;
-  fill: ${(props) => (props.likes ? props.theme.brown[2] : props.theme.color[0])};
+export const LikesBtn = styled(LikesSvg)`
+  width: 20px;
+  height: 20px;
+  fill: ${(props) => (props.likesofme === 'likes' ? props.theme.brown[2] : props.theme.color[0])};
   cursor: pointer;
 `;

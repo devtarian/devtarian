@@ -31,7 +31,7 @@ export const api = {
   },
 
   async unLikeReview(storeId, reviewId) {
-    await defaultApi.post(`/store/${storeId}/review/${reviewId}/unlike`);
+    await defaultApi.delete(`/store/${storeId}/review/${reviewId}/unlike`);
   },
 
   // comment

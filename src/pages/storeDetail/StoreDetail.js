@@ -24,7 +24,7 @@ const StoreDetail = ({ match }) => {
       <StoreDetailBox store={data} />
       <div className="review">
         <EditBtn to={`/review/${storeId}`} innerText="리뷰 작성" />
-        <Review reviewData={data} />
+        <Review />
       </div>
       <GoBackLink to="/main" innerText="메인으로" />
     </Wrap>

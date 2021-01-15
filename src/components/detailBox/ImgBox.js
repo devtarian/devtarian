@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import noImg from '../../images/noImg.jpg';
 
 const ImgBox = ({ data }) => {
+  console.log(data);
   return (
     <Wrap>
       <div className="largeImg">
