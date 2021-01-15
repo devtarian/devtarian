@@ -1,22 +1,34 @@
+import React, { useRef } from 'react';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 import history from '../../history';
 import Stars from '../stars/Stars';
-import FavoriteHeart, { FavoriteWrap, EmptyHeart } from '../../components/favoriteHeart/FavoriteHeart';
+import Likes, { LikesWrap, LikesBtn } from '../likes/Likes';
 import noImg from '../../images/noImg.jpg';
 
-const ImgTextCard = ({ className, cardData }) => {
+const ReviewCard = ({ cardData }) => {
+  const refLikes = useRef(null);
+  const { data, isFetching } = useSelector((state) => state.main);
+
+  if (isFetching) return;
+  const review = data.review;
+  //console.log(review);
   const {
+    storeId,
     id,
     imgUrl,
-    info: { imgUrls, vegType, storeName, region, starRating, contents },
+    likesOfMe,
+    info: { vegType, storeName, region, starRating },
   } = cardData;
 
-  const GetStoreDetail = () => {
-    history.push(`/storeDetail/${id}`);
-  };
+  const handleCardClick = (e) => {
+    // if (e.target === refLikes.current) return;
+    if (e.target.nodeName === 'SVG' || 'PATH' || 'CIRCLE') return;
 
+    history.push(`/storeDetail/${storeId}`);
+  };
   return (
-    <ImgTextCardWrap className={className} onClick={GetStoreDetail}>
+    <ReviewCardWrap onClick={handleCardClick}>
       <ItemImg>
         <img src={imgUrl ? imgUrl : noImg} alt="" />
         <div className="cover"></div>
@@ -28,17 +40,16 @@ const ImgTextCard = ({ className, cardData }) => {
         <Stars rate={starRating} starsW={80} />
       </div>
       <p className="contents">{cardData.contents ? cardData.contents : ''}</p>
-      <FavoriteHeart data={cardData} />
-    </ImgTextCardWrap>
+      <Likes storeId={storeId} reviewId={id} likesOfMe={likesOfMe} ref={refLikes} />
+    </ReviewCardWrap>
   );
 };
 
-export default ImgTextCard;
+export default ReviewCard;
 
-export const ImgTextCardWrap = styled.div`
+export const ReviewCardWrap = styled.div`
   position: relative;
   cursor: pointer;
-
   .vegType {
     display: inline-block;
     width: 70px;
@@ -80,19 +91,23 @@ export const ImgTextCardWrap = styled.div`
     text-overflow: ellipsis;
   }
 
-  ${FavoriteWrap} {
+  ${LikesWrap} {
+    z-index: 101;
+    position: absolute;
     top: 10px;
     right: 10px;
   }
-  ${EmptyHeart} {
-    fill: ${(props) => props.theme.color[2]};
+
+  ${LikesBtn} {
+    width: 25px;
+    height: 25px;
   }
 `;
 
 export const ItemImg = styled.div`
   position: relative;
-  width: 270px;
-  height: 175px;
+  width: 365px;
+  height: 235px;
   margin-bottom: 10px;
 
   img {
@@ -103,7 +118,7 @@ export const ItemImg = styled.div`
   }
 
   .cover {
-    z-index: 1;
+    z-index: 100;
     position: absolute;
     top: 0;
     width: 100%;
