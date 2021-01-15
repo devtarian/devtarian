@@ -3,10 +3,10 @@ import styled from 'styled-components';
 
 import { Input, InputSelect } from '../../../components/form';
 import useInput from '../../../hooks/useInput';
-import { changeNumberWithComma } from '../../../utils/helper';
+import { changeNumberWithComma, translate } from '../../../utils/helper';
 const initialValue = {
   menu: '',
-  vegtype: '비건',
+  vegtype: 'vegan',
   price: '',
 };
 const FeedFormMenu = ({ inputs, setInputs, errors, setErrors }) => {
@@ -47,13 +47,7 @@ const FeedFormMenu = ({ inputs, setInputs, errors, setErrors }) => {
             name="vegtype"
             value={menuList.vegtype}
             onChange={onChangeMenu}
-            options={[
-              { key: 'vegan', title: '비건' },
-              { key: 'lacto ', title: '락토' },
-              { key: 'ovo', title: '오보' },
-              { key: 'lacto-ovo', title: '락토오보' },
-              { key: 'pesco', title: '페스코' },
-            ]}
+            options={['vegan', 'lacto', 'ovo', 'lacto-ovo', 'pesco']}
           />
         </div>
         <div className="col">
@@ -92,7 +86,7 @@ const FeedFormMenu = ({ inputs, setInputs, errors, setErrors }) => {
             <div>
               <h3>
                 {item.menu}
-                <span>{item.vegtype}</span>
+                <span>{translate(item.vegtype)}</span>
               </h3>
             </div>
             <div>

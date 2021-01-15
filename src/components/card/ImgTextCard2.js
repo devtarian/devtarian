@@ -6,6 +6,7 @@ import Stars from '../stars/Stars';
 import FavoriteHeart, { FavoriteWrap, EmptyHeart } from '../../components/favoriteHeart/FavoriteHeart';
 import noImg from '../../images/noImg.jpg';
 import Svg from '../common/Svg';
+import { translate } from '../../utils/helper';
 
 const ImgTextCard = ({ className, storeData, config }) => {
   const { key, color } = config;
@@ -31,7 +32,7 @@ const ImgTextCard = ({ className, storeData, config }) => {
         </div>
       </ItemImg>
       <TitleWrap>
-        <span className="vegType">{vegType}</span>
+        <span className="vegType">{translate(vegType)}</span>
         <h3 className="title">
           <a href="/">{storeName}</a>
         </h3>

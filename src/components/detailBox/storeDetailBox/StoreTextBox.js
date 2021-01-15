@@ -5,6 +5,7 @@ import KakaoMap from '../../Map/KakaoMap';
 import { ViewAllWrap } from '../../carousel/VeiwAll';
 import { ReactComponent as PlusSvg } from '../../../images/icons/add.svg';
 import useMoreDetail from '../../../hooks/useMoreDetail';
+import { translate } from '../../../utils/helper';
 
 const StoreTextBox = ({ storeData }) => {
   const {
@@ -31,8 +32,8 @@ const StoreTextBox = ({ storeData }) => {
     <Wrap>
       <div className="innerWrap">
         <div className="tags">
-          <span className="storeCategory hide">{category}</span>
-          <span className="vegType hide">{vegType}</span>
+          <span className="storeCategory hide">{translate(category)}</span>
+          <span className="vegType hide">{translate(vegType)}</span>
         </div>
         <h2 className="store hide">{storeName}</h2>
         <div className="starRating textBox">
@@ -72,7 +73,7 @@ const StoreTextBox = ({ storeData }) => {
           <ul className="menuList infoContents">
             {MENULIST.map((menu) => (
               <li key={menu.menu}>
-                <span className="vegType">{menu.vegtype}</span>
+                <span className="vegType">{translate(menu.vegtype)}</span>
                 <span className="name">{menu.menu}</span>
                 <span className="price">{menu.price}원</span>
               </li>

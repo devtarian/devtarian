@@ -38,7 +38,7 @@ export const timeSelect = (startTime) => {
   const startTimeidx = startTime ? startTime.split('시')[0] : 0;
   for (let i = 0; i <= 24; i++) {
     if (i >= startTimeidx) {
-      result.push({ title: `${i}시 00분` });
+      result.push(`${i}시 00분`);
     }
   }
 
@@ -115,7 +115,12 @@ export const translate = (key) => {
     snack: '과자/간식',
     drink: '음료',
     createdAt: '최근등록순',
+    lacto: '락토',
+    ovo: '오보',
+    'lacto-ovo': '락토-오보',
+    pesco: '페스코',
   };
 
+  if (!object[key]) return key;
   return object[key];
 };

@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import ImgBox from '../ImgBox';
 import StoreTextBox from './StoreTextBox';
 import FavoriteHeart, { FavoriteWrap } from '../../favoriteHeart/FavoriteHeart';
+import { translate } from '../../../utils/helper';
 
 const StoreDetailBox = () => {
   const store = useSelector((state) => state.store.data);
@@ -15,8 +16,8 @@ const StoreDetailBox = () => {
     <Wrap>
       <div className="show">
         <div className="tags">
-          <span className="storeCategory hide">{category}</span>
-          <span className="vegType hide">{vegType}</span>
+          <span className="storeCategory hide">{translate(category)}</span>
+          <span className="vegType hide">{translate(vegType)}</span>
         </div>
         <h2 className="store">{storeName}</h2>
       </div>

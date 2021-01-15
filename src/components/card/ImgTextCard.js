@@ -5,6 +5,7 @@ import history from '../../history';
 import Stars from '../stars/Stars';
 import FavoriteHeart, { FavoriteWrap, EmptyHeart } from '../../components/favoriteHeart/FavoriteHeart';
 import noImg from '../../images/noImg.jpg';
+import { translate } from '../../utils/helper';
 
 const ImgTextCard = ({ className, storeData }) => {
   console.log(storeData);
@@ -25,7 +26,7 @@ const ImgTextCard = ({ className, storeData }) => {
         <img src={imgUrls[0] ? imgUrls[0] : noImg} alt="" />
         <div className="cover"></div>
       </ItemImg>
-      <span className="vegType">{vegType}</span>
+      <span className="vegType">{translate(vegType)}</span>
       <h3 className="title">
         <a href="/">{storeName}</a>
       </h3>
