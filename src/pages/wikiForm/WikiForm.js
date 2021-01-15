@@ -5,12 +5,12 @@ import useInput from '../../hooks/useInput';
 import BgImg from '../../images/pexels-karolina-grabowska-4197908.jpg';
 import apis from '../../Service/apis';
 
-const CATEGORIES = ['가공식품', '과자/간식', '제과/제빵', '음료', '기타'];
+const CATEGORIES = ['processed', 'snack', 'bakery', 'drink', 'etc'];
 
 const WikiForm = () => {
   const INIT_WIKIPOST = {
     id: 0,
-    category: '가공식품',
+    category: 'processed',
     product: '',
     ingredient: '',
     likesOfMe: false,

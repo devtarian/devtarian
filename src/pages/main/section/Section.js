@@ -11,7 +11,6 @@ const Section = () => {
   const dispatch = useDispatch();
   const { isFetching, data } = useSelector((state) => state.main);
   const mg = 9;
-
   useEffect(() => {
     dispatch(mainActions.getMain({ lat: 33.450701, lng: 126.570667 }));
   }, [dispatch]);

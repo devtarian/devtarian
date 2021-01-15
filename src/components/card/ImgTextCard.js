@@ -4,11 +4,11 @@ import Stars from '../stars/Stars';
 import FavoriteHeart, { FavoriteWrap, EmptyHeart } from '../../components/favoriteHeart/FavoriteHeart';
 import noImg from '../../images/noImg.jpg';
 
-const ImgTextCard = ({ cardData }) => {
+const ImgTextCard = ({ className, cardData }) => {
   const {
     id,
     imgUrl,
-    info: { vegType, storeName, region, starRating },
+    info: { imgUrls, vegType, storeName, region, starRating, contents },
   } = cardData;
 
   const GetStoreDetail = () => {
@@ -16,7 +16,7 @@ const ImgTextCard = ({ cardData }) => {
   };
 
   return (
-    <ImgTextCardWrap onClick={GetStoreDetail}>
+    <ImgTextCardWrap className={className} onClick={GetStoreDetail}>
       <ItemImg>
         <img src={imgUrl ? imgUrl : noImg} alt="" />
         <div className="cover"></div>
@@ -103,7 +103,7 @@ export const ItemImg = styled.div`
   }
 
   .cover {
-    z-index: 100;
+    z-index: 1;
     position: absolute;
     top: 0;
     width: 100%;

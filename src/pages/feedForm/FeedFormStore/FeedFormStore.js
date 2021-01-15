@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import { RadioInput, Input, Checkbox, InputAddressKakao, InputOperateHours, Textarea } from '../../../components/form';
 import useActivedBtn from '../../../hooks/useActivedBtn';
 
-const CATEGORIES = ['식당', '카페', '베이커리', 'Bar', '기타'];
-const VEG_TYPE = ['비건', '베지테리언', '비건 옵션'];
+const CATEGORIES = ['restaurant', 'cafe', 'bakery', 'bar', 'etc'];
+const VEG_TYPE = ['vegan', 'vegetarian', 'veganOption'];
 
 const FeedFormStore = ({ inputs, setInputs, errors, setErrors, onChange }) => {
   const { activedBtn, onCheckboxClick } = useActivedBtn();
-  console.log(inputs);
+
   const handleChangeAddr = (address) => {
     setInputs({ ...inputs, ...address });
   };

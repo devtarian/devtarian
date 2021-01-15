@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import history from '../../history';
 import FavoriteHeart, { FavoriteWrap, EmptyHeart } from '../../components/favoriteHeart/FavoriteHeart';
 import noImg from '../../images/noImg.jpg';
+import { translate } from '../../utils/helper';
 
 const ImgCard = forwardRef((props, ref) => {
   const { data, value } = props;
@@ -20,7 +21,7 @@ const ImgCard = forwardRef((props, ref) => {
       <img src={data.imgUrl ? data.imgUrl : noImg} alt="" />
       <div className="cover">
         <div className="itemInfo">
-          <span>{data.category}</span>
+          <span>{translate(data.category)}</span>
           <h3>{data.product}</h3>
         </div>
       </div>

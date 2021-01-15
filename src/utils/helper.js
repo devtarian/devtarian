@@ -83,3 +83,39 @@ export const timeToString = (date) => {
   if (fromTime < year) return `${Math.floor(fromTime / month)}달 전`;
   return `${Math.floor(fromTime / year)}년 전`;
 };
+
+export const changeObjectToQuery = (object) => {
+  let result = '';
+  Object.keys(object).forEach((key, idx) => {
+    if (idx === 0) {
+      result += `?${key}=${object[key]}`;
+    } else {
+      result += `&${key}=${object[key]}`;
+    }
+  });
+
+  return result;
+};
+
+export const translate = (key) => {
+  const object = {
+    all: 'All',
+    restaurant: '식당',
+    cafe: '카페',
+    bakery: '베이커리',
+    bar: 'Bar',
+    etc: '기타',
+    vegan: '비건',
+    vegetarian: '베지테리안',
+    veganOption: '비건 옵션',
+    distance: '거리',
+    asc: '오름차순',
+    desc: '내림차순',
+    processed: '가공식품',
+    snack: '과자/간식',
+    drink: '음료',
+    createdAt: '최근등록순',
+  };
+
+  return object[key];
+};

@@ -1,13 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
+import { translate } from '../../utils/helper';
 
 const Checkbox = ({ name, setInputs, label, info, activedBtn, onCheckboxClick, error }) => {
-  const handleBtnClick = (e) => {
+  const handleBtnClick = (name, value) => {
     setInputs((state) => ({
       ...state,
-      [name]: e.target.value,
+      [name]: value,
     }));
-    onCheckboxClick(e.target.value);
+    onCheckboxClick(value);
   };
 
   return (
@@ -18,9 +19,9 @@ const Checkbox = ({ name, setInputs, label, info, activedBtn, onCheckboxClick, e
           key={index}
           type="button"
           name={name}
-          value={item}
+          value={translate(item)}
           className={activedBtn === item ? 'active' : ''}
-          onClick={handleBtnClick}
+          onClick={() => handleBtnClick(name, item)}
         />
       ))}
       <p className={error ? 'err on' : 'err'}>{error}</p>

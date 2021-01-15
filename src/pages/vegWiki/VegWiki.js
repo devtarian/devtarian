@@ -207,6 +207,6 @@ const Wrap = styled.section`
   }
 `;
 
-const CATEGORIES = ['전체', '가공식품', '과자/간식', '제과/제빵', '음료', '기타'];
+const CATEGORIES = ['all', 'processed', 'snack', 'bakery', 'drink', 'etc'];
 
-const OPTIONS = ['최근등록순', '오름차순', '내림차순'];
+const OPTIONS = ['createdAt', 'asc', 'desc'];

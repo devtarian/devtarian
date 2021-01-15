@@ -3,6 +3,7 @@ import { Router, Switch } from 'react-router-dom';
 import history from './history';
 import { DefaultLayout, PublicLayout } from './layouts';
 import pages from './pages';
+import SearchPage from './pages/searchPage/SearchPage';
 
 function App() {
   const { StoreDetail, FeedForm, Login, Main, ReviewForm, SignUp, VegWiki, WikiDetail, WikiForm } = pages;
@@ -19,6 +20,7 @@ function App() {
           <DefaultLayout path="/feed" component={FeedForm} />
           <DefaultLayout path="/review/:storeId" component={ReviewForm} />
           <DefaultLayout path="/wiki" component={WikiForm} />
+          <DefaultLayout path="/search" component={SearchPage} />
           <DefaultLayout path="/" component={Main} />
         </Switch>
       </Router>
