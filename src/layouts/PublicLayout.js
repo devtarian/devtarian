@@ -5,22 +5,22 @@ import { SubmitBtnWrap } from '../components/form/SubmitBtn';
 import { GoBackWrap } from '../components/goBackLink/GoBackLink';
 import bgImg from '../images/pexels-ready-made-3850624.jpg';
 
-const initUserValues = {
-  userName: '',
+const INIT_USER_VALUES = {
+  username: '',
   email: '',
-  password: '',
-  passwordCheck: '',
+  pw: '',
+  pwCheck: '',
   avatar: '',
   files: [],
 };
 
-const PublicLayout = ({ component: Component, user, onGetUser, ...rest }) => {
+const PublicLayout = ({ component: Component, ...rest }) => {
   return (
     <Route
       {...rest}
       render={(props) => (
         <Wrap bg={bgImg}>
-          <Component {...props} user={user} onGetUser={onGetUser} initUserValues={initUserValues} />
+          <Component {...props} initUserValues={INIT_USER_VALUES} />
         </Wrap>
       )}
     />

@@ -23,5 +23,7 @@ yarn-debug.log*
 yarn-error.log*
 
 .eslintcache
-
+debug.log
+package-lock.json
+yarn.lock
 개발일지.md

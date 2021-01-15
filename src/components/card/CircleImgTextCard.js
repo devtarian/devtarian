@@ -2,22 +2,23 @@ import React, { forwardRef } from 'react';
 import styled from 'styled-components';
 import FavoriteHeart, { FavoriteWrap, EmptyHeart } from '../../components/favoriteHeart/FavoriteHeart';
 import noImg from '../../images/noImg.jpg';
+import { translate } from '../../utils/helper';
 
 const CircleImgTextCard = forwardRef((props, ref) => {
-  const { data } = props;
+  const { cardData } = props;
 
   return (
-    <CircleCardWrap key={data.id} ref={ref}>
+    <CircleCardWrap key={cardData.id} ref={ref}>
       <div className="imgInfo">
-        <img src={data.files[0] ? URL.createObjectURL(data.files[0]) : noImg} alt="" />
+        <img src={cardData.files[0] ? URL.createObjectURL(cardData.files[0]) : noImg} alt="" />
         <div className="cover"></div>
       </div>
       <div className="itemInfo">
-        <span className="category">{data.category}</span>
-        <h3>{data.product}</h3>
-        <span className="ingredient">{data.ingredient}</span>
+        <span className="category">{translate(cardData.category)}</span>
+        <h3>{cardData.product}</h3>
+        <span className="ingredient">{cardData.ingredient}</span>
       </div>
-      <FavoriteHeart data={data} />
+      <FavoriteHeart data={cardData} />
     </CircleCardWrap>
   );
 });

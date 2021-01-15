@@ -5,66 +5,49 @@ import SearchModal from '../SearchModal';
 import NaviItem from '../nav/NaviItem';
 import { ReactComponent as MenuSvg } from '../../../images/icons/menu.svg';
 import { ReactComponent as SearchSvg } from '../../../images/icons/search.svg';
+import UserAuth from './UserAuth';
+import SubNav from './SubNav';
 
-const Nav = ({ recentKeywords, onAddRecentKeywords, renderUserProfile, onSubNavShow }) => {
-  const [show, setShow] = useState(false);
+const Nav = () => {
+  const [modal, setModal] = useState('');
 
-  const onToggleShow = (isShow) => {
-    setShow(isShow);
-  };
-
-  const handleSearchNavClick = (e) => {
-    e.preventDefault();
-    onToggleShow(true);
-  };
-
-  const handleSubNavShow = (e) => {
-    onSubNavShow(e);
-  };
+  const handleCloseModal = () => setModal('');
+  const handleOpenModal = (modal) => setModal(modal);
 
   return (
-    <Wrap>
-      <FullNav>
-        <NaviItem to="/feed" innerText="피드 쓰기" />
-        <NaviItem to="/vegwiki" innerText="비건위키" />
-        <li className="navItem search" onClick={handleSearchNavClick}>
-          <Link className="navLink" to="">
-            <span>
-              <Search />
-            </span>
-          </Link>
-          {show && (
-            <SearchModal
-              recentKeywords={recentKeywords}
-              onAddRecentKeywords={onAddRecentKeywords}
-              onToggleShow={onToggleShow}
-            />
-          )}
-        </li>
-        {renderUserProfile()}
-      </FullNav>
-      <HBGNav>
-        <div className="navItem" onClick={handleSearchNavClick}>
-          <Link className="navLink" to="/">
-            <span>
-              <Search />
-            </span>
-          </Link>
-          {show && (
-            <SearchModal
-              recentKeywords={recentKeywords}
-              onAddRecentKeywords={onAddRecentKeywords}
-              onToggleShow={onToggleShow}
-            />
-          )}
-        </div>
-        <div className="navItem">
-          <button className="navLink" onClick={handleSubNavShow}>
-            <HBGBtn />
-          </button>
-        </div>
-      </HBGNav>
-    </Wrap>
+    <>
+      <Wrap>
+        <FullNav>
+          <NaviItem to="/feed" innerText="피드 쓰기" />
+          <NaviItem to="/vegwiki" innerText="비건위키" />
+          <li className="navItem search" onClick={() => handleOpenModal('search')}>
+            <Link className="navLink" to="">
+              <span>
+                <Search />
+              </span>
+            </Link>
+          </li>
+          <UserAuth />
+        </FullNav>
+        <HBGNav>
+          <div className="navItem" onClick={() => handleOpenModal('search')}>
+            <Link className="navLink" to="/">
+              <span>
+                <Search />
+              </span>
+            </Link>
+          </div>
+          <div className="navItem">
+            <button className="navLink" onClick={() => handleOpenModal('subnav')}>
+              <HBGBtn />
+            </button>
+          </div>
+        </HBGNav>
+      </Wrap>
+
+      {modal === 'search' && <SearchModal onCloseModal={handleCloseModal} />}
+      {modal === 'subnav' && <SubNav />}
+    </>
   );
 };
 
@@ -86,6 +69,7 @@ const Wrap = styled.nav`
       }
       span:after {
         content: '';
+        z-index: 100000;
         position: absolute;
         left: 50%;
         bottom: -17px;

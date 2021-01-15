@@ -1,15 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
+import { translate } from '../../utils/helper';
 
-const Checkbox = ({ name, label, info, activedBtn, onChange, error }) => {
-  const handleBtnClick = (e) => {
-    onChange({
-      preventDefault: () => {},
-      target: {
-        name, // vegLevel
-        value: e.target.value,
-      },
-    });
+const Checkbox = ({ name, setInputs, label, info, activedBtn, onCheckboxClick, error }) => {
+  const handleBtnClick = (name, value) => {
+    setInputs((state) => ({
+      ...state,
+      [name]: value,
+    }));
+    onCheckboxClick(value);
   };
 
   return (
@@ -19,10 +18,10 @@ const Checkbox = ({ name, label, info, activedBtn, onChange, error }) => {
         <input
           key={index}
           type="button"
-          name={item}
-          value={item}
+          name={name}
+          value={translate(item)}
           className={activedBtn === item ? 'active' : ''}
-          onClick={handleBtnClick}
+          onClick={() => handleBtnClick(name, item)}
         />
       ))}
       <p className={error ? 'err on' : 'err'}>{error}</p>
@@ -55,7 +54,6 @@ export const CheckboxWrap = styled.div`
       background-color: ${(props) => props.theme.brown[0]};
     }
   }
-
   .err {
     display: none;
     position: absolute;

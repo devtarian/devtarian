@@ -1,24 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import { Provider } from 'react-redux';
+import store from './redux/store';
 import { ThemeProvider } from 'styled-components';
 import GlobalStyles from './Styles/GlobalStyles';
 import { theme } from './config/config';
-import apis from './Service/apis';
+import authActions from './redux/actions/authActions';
 
-apis.authApi
-  .getMe()
-  .then((res) => {
-    console.log(res);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+store.dispatch(authActions.getMe());
 
 ReactDOM.render(
-  <ThemeProvider theme={theme}>
-    <GlobalStyles />
-    <App />
-  </ThemeProvider>,
+  <Provider store={store}>
+    <ThemeProvider theme={theme}>
+      <GlobalStyles />
+      <App />
+    </ThemeProvider>
+  </Provider>,
   document.getElementById('root')
 );

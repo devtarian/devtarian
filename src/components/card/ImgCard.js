@@ -1,17 +1,27 @@
 import React, { forwardRef } from 'react';
 import styled from 'styled-components';
+import history from '../../history';
 import FavoriteHeart, { FavoriteWrap, EmptyHeart } from '../../components/favoriteHeart/FavoriteHeart';
 import noImg from '../../images/noImg.jpg';
+import { translate } from '../../utils/helper';
 
 const ImgCard = forwardRef((props, ref) => {
   const { data, value } = props;
+  console.log('ImgCard', data);
+
+  const handleCardClick = (e) => {
+    console.log(e.target);
+    if (e.target.nodeName === 'SVG') return;
+
+    history.push(`/wikiDetail/${data.id}`);
+  };
 
   return (
-    <ImgCardWrap value={value} ref={ref}>
-      <img src={data.files[0] ? URL.createObjectURL(data.files[0]) : noImg} alt="" />
+    <ImgCardWrap value={value} ref={ref} onClick={handleCardClick}>
+      <img src={data.imgUrl ? data.imgUrl : noImg} alt="" />
       <div className="cover">
         <div className="itemInfo">
-          <span>{data.category}</span>
+          <span>{translate(data.category)}</span>
           <h3>{data.product}</h3>
         </div>
       </div>
@@ -27,6 +37,8 @@ export const ImgCardWrap = styled.li`
   float: left;
   width: 270px;
   margin: 0 ${(props) => props.value.liSideMargin}px 40px;
+  cursor: pointer;
+
   img {
     width: 270px;
     height: 300px;

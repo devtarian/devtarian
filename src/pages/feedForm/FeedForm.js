@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import BgImg from '../../images/pexels-karolina-grabowska-4197908.jpg';
-import apis from '../../Service/apis';
 
 import { SubmitBtn } from '../../components/form';
 import useInput from '../../hooks/useInput';
@@ -9,11 +8,12 @@ import useInput from '../../hooks/useInput';
 import FeedFormStore from './FeedFormStore/FeedFormStore';
 import FeedFormMenu from './FeedFormMenu/FeedFormMenu';
 import FeedFormInfo from './FeedFormInfo/FeedFormInfo';
+import apis from '../../Service/apis';
 
 const pageConfig = [
-  { id: 'store', title: '가게 정보', validate: ['vegType', 'storeName', 'contactNum', 'operatingHours'] },
+  { id: 'store', title: '가게 정보', validate: ['category', 'vegType', 'storeName', 'contactNum', 'operatingHours'] },
   { id: 'menu', title: '메뉴 정보', validate: ['menuList'] },
-  { id: 'info', title: '나의 소개', validate: [] },
+  { id: 'info', title: '나의 소개', validate: ['starRating'] },
 ];
 
 const renderForm = ({ step, ...rest }) => {
@@ -29,26 +29,30 @@ const renderForm = ({ step, ...rest }) => {
   }
 };
 
-const initialValue = {
+const INIT_VALUES = {
   step: 0,
-  vegType: [],
-  imgFiles: [],
-  imgFileURLs: [],
-  starRating: '',
+  category: 'restaurant',
+  lat: '',
+  lng: '',
+  vegType: 'vegan',
   storeName: '',
-  region: '',
-  address: '',
   contactNum: '',
+  region: '',
+  addr: '',
+  addrDetail: '',
   operatingHours: [],
+  operatingHoursMemo: '',
   menuList: [],
+  starRating: '',
+  contents: '',
   files: [],
 };
 
-const FeedForm = ({ onAddPost, history }) => {
+const FeedForm = ({ history }) => {
   const { inputs, setInputs, errors, setErrors, onInputChange, onImageUpload, requiredValidate } = useInput(
-    initialValue
+    INIT_VALUES
   );
-  console.log(errors);
+
   const handleClickGoBack = () => {
     if (inputs.step === 0) {
       return history.goBack();
@@ -61,24 +65,27 @@ const FeedForm = ({ onAddPost, history }) => {
   };
 
   const handleClickButton = async () => {
-    let requiredList = pageConfig[inputs.step].validate;
-    let isValid = requiredValidate(requiredList);
-    if (!isValid) return;
+    try {
+      let requiredList = pageConfig[inputs.step].validate;
+      let isValid = requiredValidate(requiredList);
+      if (!isValid) return;
 
-    if (inputs.step !== 2) {
-      setInputs({
-        ...inputs,
-        step: inputs.step + 1,
-      });
-    } else {
-      try {
-        const res = await apis.postsApi.createPost(inputs);
-        onAddPost(res);
-        console.log('res', res);
-      } catch (err) {
-        console.log(err.response);
-        // console.log(err.response.data);
+      if (inputs.step !== 2) {
+        return setInputs({ ...inputs, step: inputs.step + 1 });
       }
+
+      const { files, step, addr, addrDetail, ...body } = inputs;
+      body.address = addr + addrDetail;
+
+      const formData = new FormData();
+      files.forEach((file) => formData.append('file', file));
+      formData.append('body', JSON.stringify(body));
+
+      await apis.storeApi.createStore(formData);
+      alert('제출되었습니다.');
+      setInputs(INIT_VALUES);
+    } catch (err) {
+      console.log(err.response ? err.response : err);
     }
   };
 
@@ -108,7 +115,7 @@ const FeedForm = ({ onAddPost, history }) => {
           onImageUpload,
           onChange: onInputChange,
         })}
-        <SubmitBtn type="button" value="다음" onSubmit={handleClickButton} />
+        <SubmitBtn type="button" value={inputs.step === 2 ? '제출' : '다음'} onSubmit={handleClickButton} />
       </form>
     </Wrap>
   );

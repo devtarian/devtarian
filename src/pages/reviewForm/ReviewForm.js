@@ -1,31 +1,40 @@
 import React from 'react';
 import styled from 'styled-components';
-import { UploadImg, Checkbox, StarRating, Input, Textarea, SubmitBtn } from '../../components/form';
+import { UploadImg, StarRating, Input, Textarea, SubmitBtn } from '../../components/form';
+import history from '../../history';
 import useInput from '../../hooks/useInput';
 import BgImg from '../../images/pexels-karolina-grabowska-4197908.jpg';
+import apis from '../../Service/apis';
 
 const INIT_REVIEW = {
-  category: '가게',
-  files: [],
-  vegLevel: '',
   starRating: '',
   title: '',
   contents: '',
+  files: [],
 };
 
-const VEGLEVELS = ['비건', '락토', '오보', '락토오보', '페스코'];
-
-const ReviewForm = () => {
+const ReviewForm = ({ match }) => {
+  const storeId = match.params.storeId;
   const { inputs, setInputs, errors, onInputChange, onImageUpload, requiredValidate } = useInput(INIT_REVIEW);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const requiredList = ['vegLevel', 'title', 'contents'];
-    let isValid = requiredValidate(requiredList);
-    if (!isValid) return;
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      const requiredList = ['title', 'contents'];
+      let isValid = requiredValidate(requiredList);
+      if (!isValid) return;
 
-    console.log(inputs);
-    setInputs(INIT_REVIEW);
+      const { files, ...body } = inputs;
+
+      const formData = new FormData();
+      files.forEach((file) => formData.append('file', file));
+      formData.append('body', JSON.stringify(body));
+      await apis.storeApi.createReview(storeId, formData);
+      history.goBack();
+      setInputs(INIT_REVIEW);
+    } catch (err) {
+      console.log(err.response ? err.response : err);
+    }
   };
 
   return (
@@ -33,14 +42,6 @@ const ReviewForm = () => {
       <h2>리뷰 작성</h2>
       <form>
         <UploadImg name="imgFiles" files={inputs.files} onImageUpload={onImageUpload} />
-        <Checkbox
-          name="vegLevel"
-          label="채식 단계"
-          info={VEGLEVELS}
-          activedBtn={inputs.vegLevel}
-          onChange={onInputChange}
-          error={errors.vegLevel}
-        />
         <StarRating name="starRating" onChange={onInputChange} error={errors.starRating} />
         <Input
           label="제목"

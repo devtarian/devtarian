@@ -13,8 +13,8 @@ const Carousel = ({ carouselData, mg }) => {
     <Wrap>
       <h2>근처의 비건 식당</h2>
       <CarouselUl ref={refCarouselUl} value={value}>
-        {carouselData.map((data) => (
-          <li key={data.id} ref={refCarouselLi}>
+        {carouselData.map((data, index) => (
+          <li key={index} ref={refCarouselLi}>
             <ImgTextCard cardData={data} />
           </li>
         ))}

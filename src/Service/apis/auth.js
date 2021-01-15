@@ -1,12 +1,14 @@
 import { defaultApi } from './default';
 
 export const api = {
-  async login({ email, pw }) {
-    const res = await defaultApi.post('/auth/signin', { email, pw });
-    const token = `Bearer ${res.data.token}`;
-    localStorage.setItem('token', token);
-    defaultApi.defaults.headers.common['Authorization'] = token;
-    return res;
+  async login(data) {
+    const res = await defaultApi.post('/auth/signin', data);
+    return res.data;
+  },
+
+  async signUp(formData) {
+    const res = await defaultApi.post('/auth/signup', formData);
+    return res.data;
   },
 
   async getMe() {

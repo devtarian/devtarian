@@ -1,18 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
 import noImg from '../../images/noImg.jpg';
-import dummyImg from '../../images/pexels-vanessa-loring-5965952.jpg';
 
 const ImgBox = ({ data }) => {
+  console.log(data);
   return (
     <Wrap>
       <div className="largeImg">
-        <img src={data.files[0] ? URL.createObjectURL(data.files[0]) : dummyImg} alt="" />
+        <img src={data.imgUrls[0] ? data.imgUrls[0] : noImg} alt="" />
       </div>
       <ul className="smallImgs">
         {[...new Array(5)].map((_, index) => (
           <li key={index}>
-            <img src={data[index] ? URL.createObjectURL(data[index]) : noImg} alt="" />
+            <img src={data.imgUrls[index] ? data.imgUrls[index] : noImg} alt="" />
             <div className="cover"></div>
           </li>
         ))}
@@ -89,6 +89,7 @@ const Wrap = styled.section`
     max-width: 600px;
     margin: 0 auto;
     .largeImg {
+      max-height: 400px;
       img {
         width: 100%;
         max-width: 600px;

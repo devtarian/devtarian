@@ -1,15 +1,38 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import Profile, { ProfileWrap } from '../profile/Profile';
+import apis from '../../Service/apis';
+import WriterProfile, { WriterProfileWrap } from '../profile/WriterProfile';
+import CommentForm from './CommentForm';
 
-const Comment = ({ data }) => {
-  console.log('commentData', data);
-  const { writer, createAt, commentContents } = data;
+const Comment = ({ storeId, reviewId }) => {
+  const [comments, setComments] = useState([]);
+  const onCommentSubmit = (newComment) => {
+    setComments((state) => [...state, newComment]);
+  };
+
+  useEffect(() => {
+    apis.storeApi
+      .getComments(storeId, reviewId)
+      .then((data) => {
+        setComments(data);
+      })
+      .catch((err) => {
+        console.log(err.response && err.response.data);
+      });
+  }, [storeId, reviewId, setComments]);
+
   return (
-    <Wrap>
-      <Profile userData={writer} createAt={createAt} />
-      <p className="comment">{commentContents}</p>
-    </Wrap>
+    <>
+      <ul className="comments">
+        {comments.map((comment) => (
+          <Wrap key={comment.id}>
+            <WriterProfile writer={comment.writer} createdAt={comment.createdAt} />
+            <p className="comment">{comment.contents}</p>
+          </Wrap>
+        ))}
+      </ul>
+      <CommentForm storeId={storeId} reviewId={reviewId} onCommentSubmit={onCommentSubmit} />
+    </>
   );
 };
 
@@ -20,7 +43,7 @@ const Wrap = styled.li`
   overflow: hidden;
   border-bottom: 1px solid ${(props) => props.theme.background[2]};
 
-  ${ProfileWrap} {
+  ${WriterProfileWrap} {
     a {
       color: ${(props) => props.theme.color[0]};
     }

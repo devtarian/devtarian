@@ -1,7 +1,9 @@
 import { api as authApi } from './auth';
-import { api as usersApi } from './users';
-import { api as postsApi } from './posts';
+import { api as mainApi } from './main';
+import { api as storeApi } from './store';
+import { api as wikiApi } from './wiki';
 
-const apis = { authApi, usersApi, postsApi };
+const apis = { authApi, mainApi, storeApi, wikiApi };
+
 
 export default apis;
