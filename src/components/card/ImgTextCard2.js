@@ -7,15 +7,15 @@ import FavoriteHeart, { FavoriteWrap, EmptyHeart } from '../../components/favori
 import noImg from '../../images/noImg.jpg';
 import Svg from '../common/Svg';
 import { translate } from '../../utils/helper';
+import filterConfig from '../../config/filterConfig';
 
-const ImgTextCard = ({ className, storeData, config }) => {
-  const { key, color } = config;
+const ImgTextCard = ({ className, storeData }) => {
   const dispatch = useDispatch();
   const {
     id,
     info: { imgUrls, vegType, storeName, region, starRating, contents, category, address },
   } = storeData;
-
+  const bg = filterConfig.category[category].color;
   const GetStoreDetail = () => {
     dispatch(storeActions.getStore(id));
     history.push(`/storeDetail/${id}`);
@@ -23,10 +23,10 @@ const ImgTextCard = ({ className, storeData, config }) => {
 
   return (
     <ImgTextCardWrap className={className} onClick={GetStoreDetail}>
-      <ItemImg bg={color}>
+      <ItemImg bg={bg}>
         <img src={imgUrls[0] ? imgUrls[0] : noImg} alt="" />
         <div className="cover">
-          <CircleSvg type={key} color="white" />
+          <CircleSvg type={category} color="white" w="50px" h="50px" radius="50%" p="5px" />
           {category}
           <p>{address}</p>
         </div>
@@ -110,10 +110,12 @@ export const ItemImg = styled.div`
     display: flex;
     flex-direction: column;
     padding-top: 30px;
-    align-items: center;
     color: white;
     font-weight: bold;
 
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
     p {
       margin-top: 10px;
       font-size: 0.9rem;
@@ -161,10 +163,6 @@ const TitleWrap = styled.div`
 `;
 
 const CircleSvg = styled(Svg)`
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  padding: 5px;
   border: 3px solid white;
   margin-bottom: 5px;
 `;

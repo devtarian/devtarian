@@ -17,7 +17,7 @@ const store = [
         '금요일 0시 00분 - 0시 00분',
         '토요일 0시 00분 - 0시 00분',
       ],
-      category: 'Bar',
+      category: 'bar',
       menuList: [
         {
           price: '44',
@@ -90,7 +90,7 @@ const store = [
       ],
       region: '서울',
       operatingHoursMemo: '3333',
-      category: '베이커리',
+      category: 'bakery',
       address: '서울 중구 남창동 116-13333',
       storeName: '3333',
     },
@@ -131,7 +131,7 @@ const store = [
       ],
       imgUrls: ['https://firebasestorage.googleapis.com/v0/b/project-devtarian.appspot.com/o/835534.jpg?alt=media'],
       vegType: '비건',
-      category: '식당',
+      category: 'restaurant',
     },
     coordinates: {
       _latitude: 37.57034727909291,
@@ -159,7 +159,7 @@ const store = [
       contents: '2222',
       address: '서울 중구 다동 1682222',
       starRating: 4,
-      category: '카페',
+      category: 'cafe',
       region: '서울',
       imgUrls: ['https://firebasestorage.googleapis.com/v0/b/project-devtarian.appspot.com/o/442994.jpg?alt=media'],
       storeName: '222',

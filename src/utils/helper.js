@@ -119,6 +119,7 @@ export const translate = (key) => {
     ovo: '오보',
     'lacto-ovo': '락토-오보',
     pesco: '페스코',
+    rated: '별점순',
   };
 
   if (!object[key]) return key;

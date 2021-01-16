@@ -176,7 +176,10 @@ const MenuCard = styled.div`
   -ms-flex-pack: justify;
   justify-content: space-between;
 
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
+
   width: 100%;
   height: 80px;
   color: ${(props) => props.theme.color[0]};

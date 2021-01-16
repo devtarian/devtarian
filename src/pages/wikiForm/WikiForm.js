@@ -9,21 +9,10 @@ const CATEGORIES = ['processed', 'snack', 'bakery', 'drink', 'etc'];
 
 const WikiForm = () => {
   const INIT_WIKIPOST = {
-    id: 0,
     category: 'processed',
     product: '',
     ingredient: '',
-    likesOfMe: false,
     files: [],
-    commentList: [
-      {
-        id: 0,
-        wikiId: '',
-        writer: '',
-        createAt: '3초 전',
-        contents: '',
-      },
-    ],
   };
 
   const { inputs, errors, onInputChange, onImageUpload, requiredValidate } = useInput(INIT_WIKIPOST);

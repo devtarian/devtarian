@@ -34,23 +34,18 @@ const ModalFilter = ({ onCloseModal }) => {
 
   const handleClickApply = () => {
     history.push(`/search${changeObjectToQuery(filter)}`);
+    onCloseModal();
   };
 
   const handleClickReset = () => {
-    setFilter((state) => ({
-      ...state,
-      ...INITIAL_VALUE,
-    }));
-    history.push(
-      `/search${changeObjectToQuery({
-        ...filter,
-        ...INITIAL_VALUE,
-      })}`
-    );
+    setFilter((state) => ({ ...state, ...INITIAL_VALUE }));
+    const newQuery = changeObjectToQuery({ ...filter, ...INITIAL_VALUE });
+    history.push(`/search${newQuery}`);
+    onCloseModal();
   };
 
   return (
-    <StyledModal width="500px" height="500px" onCloseModal={onCloseModal}>
+    <StyledModal width="700px" height="500px" onCloseModal={onCloseModal}>
       <div className="title">
         <h3>필터</h3>
         <div className="title-buttons">
@@ -90,6 +85,8 @@ const StyledModal = styled(Modal)`
     -ms-flex-pack: justify;
     justify-content: space-between;
 
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
   }
 

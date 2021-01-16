@@ -207,6 +207,9 @@ const Breadcrumb = styled.div`
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   color: ${(props) => props.theme.gray[1]};
 

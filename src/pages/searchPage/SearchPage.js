@@ -1,34 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import queryString from 'query-string';
 import Search from '../../components/search/Search';
 import KakaoMap from '../../components/Map/KakaoMap';
 import SearchFilter from './SearchFilter/SearchFilter';
 import storeData from '../../config/storeData';
 import ImgTextCard2 from '../../components/card/ImgTextCard2';
+import SearchMap from './SearchMap/SeacrhMap';
 
-const map = {
-  식당: {
-    key: 'restaurant',
-    color: '#2b8a3e',
-  },
-  카페: {
-    key: 'cafe',
-    color: '#e08d60',
-  },
-  베이커리: {
-    key: 'bakery',
-    color: '#88dde6',
-  },
-  Bar: {
-    key: 'bar',
-    color: '#868e96',
-  },
-  기타: {
-    key: 'etc',
-    color: '#37b24d',
-  },
-};
 const SearchPage = () => {
   return (
     <Wrap>
@@ -39,13 +17,14 @@ const SearchPage = () => {
 
         <h3>검색결과</h3>
         <CardList>
-          {storeData.map((item) => (
-            <StyledCard storeData={item} config={map[item.info.category]} />
+          {storeData.map((item, idx) => (
+            <StyledCard key={idx} storeData={item} />
           ))}
         </CardList>
       </SectionContents>
       <SectionMap>
-        <StyledMap defaultCenter={{ lat: 33.450701, lng: 126.570667 }} />
+        {/* <StyledMap defaultCenter={{ lat: 33.450701, lng: 126.570667 }} /> */}
+        <SearchMap data={storeData} />
       </SectionMap>
     </Wrap>
   );
@@ -57,6 +36,7 @@ const Wrap = styled.div`
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  width: 100%;
 `;
 
 const StyledSearch = styled(Search)`
@@ -69,7 +49,7 @@ const SectionContents = styled.div`
   height: 100vh;
   overflow: scroll;
   padding: 20px;
-
+  margin: 0px;
   h3 {
     margin-bottom: 10px;
   }
@@ -89,7 +69,6 @@ const SectionMap = styled.div`
 `;
 
 const StyledMap = styled(KakaoMap)`
-  position: absolute;
   width: 100%;
   height: 100%;
 `;
@@ -110,6 +89,7 @@ const CardList = styled.div`
 
 const StyledCard = styled(ImgTextCard2)`
   width: 32%;
+  margin-bottom: 20px;
 
   @media (max-width: 1350px) {
     width: 49%;
