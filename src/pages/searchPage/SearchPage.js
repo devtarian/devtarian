@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import Search from '../../components/search/Search';
-import KakaoMap from '../../components/Map/KakaoMap';
 import SearchFilter from './SearchFilter/SearchFilter';
 import storeData from '../../config/storeData';
 import ImgTextCard2 from '../../components/card/ImgTextCard2';
@@ -23,7 +22,6 @@ const SearchPage = () => {
         </CardList>
       </SectionContents>
       <SectionMap>
-        {/* <StyledMap defaultCenter={{ lat: 33.450701, lng: 126.570667 }} /> */}
         <SearchMap data={storeData} />
       </SectionMap>
     </Wrap>
@@ -66,11 +64,6 @@ const SectionMap = styled.div`
   @media (max-width: 991px) {
     display: none;
   }
-`;
-
-const StyledMap = styled(KakaoMap)`
-  width: 100%;
-  height: 100%;
 `;
 
 const CardList = styled.div`

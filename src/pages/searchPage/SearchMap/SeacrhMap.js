@@ -2,55 +2,48 @@ import React, { useRef, useEffect, useCallback } from 'react';
 import Styled from 'styled-components';
 import queryString from 'query-string';
 import history from '../../../history';
-import filterConfig from '../../../config/filterConfig';
 import Svg from '../../../components/common/Svg';
+import { useDispatch, useSelector } from 'react-redux';
+import searchActions from '../../../redux/actions/searchActions';
 
-const SearchMap = ({ data }) => {
-  const query = queryString.parse(history.location.search);
-  const { lat, lng } = query;
+const SearchMap = () => {
   const mapRef = useRef();
+  const { q, lat, lng, limit, category, page, order } = queryString.parse(history.location.search);
 
-  const makeMarkers = useCallback(() => {
-    // components 이벤트 등록 => https://apis.map.kakao.com/web/sample/multipleMarkerEvent/
-    // overImg 처리 => https://apis.map.kakao.com/web/sample/multipleMarkerEvent2/
-    const imageSrc =
-      'https://user-images.githubusercontent.com/29701385/104799063-504e6200-580f-11eb-91da-171ce1e74f00.png';
-    const imageSize = new window.kakao.maps.Size(38, 47);
-    const markers = [];
-    data.forEach((store) => {
-      const imageOptions = {
-        spriteOrigin: new window.kakao.maps.Point(0, filterConfig.category[store.info.category].size),
-        spriteSize: new window.kakao.maps.Size(81, 257),
-      };
-
-      const { _latitude, _longitude } = store.coordinates;
-      const position = new window.kakao.maps.LatLng(_latitude, _longitude);
-      const image = new window.kakao.maps.MarkerImage(imageSrc, imageSize, imageOptions);
-
-      const marker = new window.kakao.maps.Marker({ position, image });
-      markers.push(marker);
-    });
-    return markers;
-  }, [data]);
+  const dispatch = useDispatch();
+  const { isFetching, data } = useSelector((state) => state.search);
 
   useEffect(() => {
-    const mapContainer = mapRef.current;
-    const center = new window.kakao.maps.LatLng(lat, lng);
-    const mapOption = { center, level: 3 };
+    dispatch(searchActions.getSearch({ q, lat, lng, limit, category, page, order }));
+  }, [dispatch, q, lat, lng, limit, category, page, order]);
 
-    const map = new window.kakao.maps.Map(mapContainer, mapOption);
+  useEffect(() => {
+    const mapElem = mapRef.current;
+    if (!mapElem) return;
+    const center = new window.kakao.maps.LatLng(lat, lng);
+    const mapOption = { center, level: 5 };
+    const map = new window.kakao.maps.Map(mapElem, mapOption);
     const marker = new window.kakao.maps.Marker({ map, position: center });
     marker.setMap(map);
+    drawMap(map, data);
+  }, [lat, lng, data]);
 
-    const markers = makeMarkers();
-    drawMap(map, markers);
-  }, [lat, lng, makeMarkers]);
-
-  const drawMap = (map, markers) => {
-    markers.forEach((marker) => {
+  const drawMap = (map, data) => {
+    data.store.forEach((store) => {
+      let { marker, imageNormal, imageOver, infoWindow } = store.map;
       marker.setMap(map);
+      window.kakao.maps.event.addListener(marker, 'mouseover', () => {
+        marker.setImage(imageOver);
+        infoWindow.open(map, marker);
+      });
+      window.kakao.maps.event.addListener(marker, 'mouseout', () => {
+        marker.setImage(imageNormal);
+        infoWindow.close();
+      });
     });
   };
+  console.log(data);
+  if (isFetching) return null;
 
   return (
     <Wrap>
@@ -71,6 +64,76 @@ const Wrap = Styled.div`
         width: 100%;
         height: 100%;
     }
+
+    .info {
+      width: 220px;
+      overflow: hidden;
+    }
+
+    .info-image {
+      width: 100%;
+      height: 100px;
+      border-bottom: 1px solid #eeeeee;
+      overflow: hidden;
+      img {
+        width: 99%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .info-body {
+      padding: 5px;
+      height: 72px;
+      border-bottom: 1px solid #eeeeee;
+      overflow: hidden;
+
+      .vegType {
+        display: inline-block;
+        width: 70px;
+        height: 20px;
+        line-height: 20px;
+        border-radius: 4px;
+        vertical-align: middle;
+        text-align: center;
+        font-size: 12px;
+        background: ${(props) => props.theme.brown[1]};
+        color: ${(props) => props.theme.background[0]};
+      }
+      .title {
+        display: inline-block;
+        width: 200px;
+        margin: 0px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        vertical-align: top;
+        color: ${(props) => props.theme.green[1]};
+      }
+      .title a {
+        margin-left: 0.3rem;
+        font-size: 16px;
+        color: ${(props) => props.theme.green[1]};
+      }
+    }
+
+    .info-body-title {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+    }
+
+    .info-footer {
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      font-size: 0.8rem;
+    }
+  
 `;
 
 const StyledSvg = Styled(Svg)`

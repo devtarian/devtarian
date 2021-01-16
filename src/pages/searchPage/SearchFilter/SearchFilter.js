@@ -23,7 +23,7 @@ const SearchFilter = () => {
         <Button>All</Button>
 
         {buttonList.map((item) => (
-          <Button>
+          <Button key={item}>
             <Svg
               type={item}
               w="24px"
