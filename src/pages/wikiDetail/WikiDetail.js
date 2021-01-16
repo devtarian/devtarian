@@ -24,7 +24,7 @@ export default WikiDetail;
 
 const Wrap = styled.div`
   width: 1200px;
-  margin: 0 auto;
+  margin: 58px auto 0;
   .comment {
     position: relative;
   }

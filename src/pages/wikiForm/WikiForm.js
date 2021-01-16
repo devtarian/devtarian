@@ -1,5 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useSelector, useDispatch } from 'react-redux';
+import wikiDetailActions from '../../redux/actions/wikiDetailActions';
+import history from '../../history';
 import { RadioInput, UploadImg, Input, Textarea, SubmitBtn } from '../../components/form';
 import useInput from '../../hooks/useInput';
 import BgImg from '../../images/pexels-karolina-grabowska-4197908.jpg';
@@ -8,6 +11,7 @@ import apis from '../../Service/apis';
 const CATEGORIES = ['processed', 'snack', 'bakery', 'drink', 'etc'];
 
 const WikiForm = () => {
+  const dispatch = useDispatch();
   const INIT_WIKIPOST = {
     category: 'processed',
     product: '',
@@ -30,8 +34,8 @@ const WikiForm = () => {
         formData.append('file', files[i]);
       }
       formData.append('body', JSON.stringify(body));
-      const res = await apis.wikiApi.createWiki(formData);
-      console.log(res);
+      await apis.wikiApi.createWiki(formData);
+      history.push('/vegwiki');
     } catch (err) {
       console.log(err.response ? err.response : err);
     }

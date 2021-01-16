@@ -10,11 +10,9 @@ import FavoriteHeart, { FavoriteWrap } from '../../favoriteHeart/FavoriteHeart';
 const WikiDetailBox = ({ wikiId }) => {
   const dispatch = useDispatch();
   const { isFetching, data } = useSelector((state) => state.wikiDetail);
-
+  console.log(data.id);
   useEffect(() => {
-    console.log('useEffect');
     dispatch(wikiDetailActions.getWikiDetail(wikiId));
-    console.log('useEffect done');
   }, [dispatch, wikiId]);
 
   console.log('WikiDetail', data);
@@ -74,7 +72,7 @@ const Wrap = styled.section`
       margin: 0 auto;
       ${FavoriteWrap} {
         top: 0px;
-        right: 10px;
+        right: 24px;
       }
     }
   }

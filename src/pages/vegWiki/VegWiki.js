@@ -7,6 +7,7 @@ import { Checkbox, Select } from '../../components/form';
 import { CheckboxWrap } from '../../components/form/Checkbox';
 import { SelectWrap } from '../../components/form/Select';
 import CircleImgTextCard, { CircleCardWrap } from '../../components/card/CircleImgTextCard';
+import EditBtn, { EditBtnWrap } from '../../components/editBtn/EditBtn';
 import useInput from '../../hooks/useInput';
 import useActivedBtn from '../../hooks/useActivedBtn';
 
@@ -129,6 +130,7 @@ const VegiWiki = ({ wikiPosts }) => {
         />
         <Select info={OPTIONS} />
       </div>
+      <EditBtn to="/wikiForm" innerText="위키 작성" />
       <div className="product">
         <strong>총 {data.length}개</strong>
         <ul>
@@ -145,11 +147,16 @@ const VegiWiki = ({ wikiPosts }) => {
 export default VegiWiki;
 
 const Wrap = styled.section`
+  position: relative;
   width: 100%;
   max-width: 1200px;
   margin: 0.6rem auto 0;
   padding: 1.5rem;
 
+  ${EditBtnWrap} {
+    top: 199px;
+    right: 24px;
+  }
   .filters {
     position: relative;
     padding-bottom: 2rem;
@@ -182,18 +189,22 @@ const Wrap = styled.section`
   }
 
   @media (max-width: 767px) {
+    ${EditBtnWrap} {
+      top: 256px;
+    }
     ${CircleCardWrap} {
       width: calc(33% - 1.6rem);
     }
     .filters {
-      ${SelectWrap} {
-        bottom: -61px;
-      }
+      padding-bottom: 5.5rem;
     }
   }
   @media (max-width: 639px) {
     ul {
-      padding: 3rem;
+      padding: 1rem;
+    }
+    ${EditBtnWrap} {
+      top: 298px;
     }
     ${CircleCardWrap} {
       width: calc(100% - 1.6rem);
