@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 const WikiTextBox = ({ wiki }) => {
-  console.log(wiki);
   const { category, product, ingredient } = wiki;
   return (
     <Wrap>

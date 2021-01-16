@@ -22,12 +22,12 @@ export const api = {
   },
 
   async favoriteWiki(wikiId) {
-    const res = await defaultApi.post(`/wiki/${wikiId}/favorite`, {});
+    const res = await defaultApi.post(`/wiki/${wikiId}/favorite`);
     return res.data;
   },
 
   async unFavoriteWiki(wikiId) {
-    const res = await defaultApi.delete(`/wiki/${wikiId}/unfavorite`, {});
+    const res = await defaultApi.delete(`/wiki/${wikiId}/unfavorite`);
     return res.data;
   },
 

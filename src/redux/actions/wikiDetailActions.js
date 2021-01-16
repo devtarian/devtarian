@@ -20,6 +20,7 @@ const getWikiDetail = (wikiId) => async (dispatch) => {
 };
 
 const favoriteWiki = (wikiId) => async (dispatch) => {
+  console.log(wikiId);
   try {
     await apis.wikiApi.favoriteWiki(wikiId);
 
@@ -33,6 +34,7 @@ const favoriteWiki = (wikiId) => async (dispatch) => {
 };
 
 const unFavoriteWiki = (wikiId) => async (dispatch) => {
+  console.log(wikiId);
   try {
     await apis.wikiApi.unFavoriteWiki(wikiId);
 

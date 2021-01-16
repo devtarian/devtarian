@@ -20,24 +20,18 @@ export const wikiDetailReducers = (state = INIT_STATE, action = {}) => {
     case WIKI_DETAIL_FAVORITE_WIKI:
       return {
         ...state,
-        data: state.data.map((wiki) => {
-          if (wiki.id !== action.payload) return wiki;
-          return {
-            ...wiki,
-            favorite: true,
-          };
-        }),
+        data: {
+          ...state.data,
+          favorite: true,
+        },
       };
     case WIKI_DETAIL_UN_FAVORITE_WIKI:
       return {
         ...state,
-        data: state.data.map((wiki) => {
-          if (wiki.id !== action.payload) return wiki;
-          return {
-            ...wiki,
-            favorite: false,
-          };
-        }),
+        data: {
+          ...state.data,
+          favorite: false,
+        },
       };
     case WIKI_DETAIL_DELETE_COMMENT:
       return {

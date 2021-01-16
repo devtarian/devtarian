@@ -10,15 +10,18 @@ import FavoriteHeart, { FavoriteWrap } from '../../favoriteHeart/FavoriteHeart';
 const WikiDetailBox = ({ wikiId }) => {
   const dispatch = useDispatch();
   const { isFetching, data } = useSelector((state) => state.wikiDetail);
-  console.log(data.id);
+  const { category, product, favorite } = data;
+
   useEffect(() => {
     dispatch(wikiDetailActions.getWikiDetail(wikiId));
   }, [dispatch, wikiId]);
 
-  console.log('WikiDetail', data);
   if (isFetching) return <Loading />;
 
-  const { id, category, product } = data;
+  const onFavoriteClick = () => {
+    favorite ? dispatch(wikiDetailActions.unFavoriteWiki(wikiId)) : dispatch(wikiDetailActions.favoriteWiki(wikiId));
+  };
+
   return (
     <Wrap>
       <div className="show">
@@ -26,9 +29,9 @@ const WikiDetailBox = ({ wikiId }) => {
         <h2 className="product">{product}</h2>
       </div>
       <ImgBox data={data} />
-      <WikiTextBox wiki={data} wikiId={id} />
+      <WikiTextBox wiki={data} wikiId={wikiId} />
       <div className="heartWrap">
-        <FavoriteHeart data={data} />
+        <FavoriteHeart onFavoriteClick={onFavoriteClick} favorite={favorite} />
       </div>
     </Wrap>
   );
