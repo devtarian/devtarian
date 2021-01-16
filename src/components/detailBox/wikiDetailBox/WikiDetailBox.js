@@ -1,21 +1,36 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import wikiDetailActions from '../../../redux/actions/wikiDetailActions';
+import Loading from '../../../components/loading/Loding';
 import ImgBox from '../ImgBox';
 import WikiTextBox from './WikiTextBox';
 import FavoriteHeart, { FavoriteWrap } from '../../favoriteHeart/FavoriteHeart';
 
-const WikiDetailBox = ({ wikiPosts }) => {
-  const { category, product } = wikiPosts;
+const WikiDetailBox = ({ wikiId }) => {
+  const dispatch = useDispatch();
+  const { isFetching, data } = useSelector((state) => state.wikiDetail);
+
+  useEffect(() => {
+    console.log('useEffect');
+    dispatch(wikiDetailActions.getWikiDetail(wikiId));
+    console.log('useEffect done');
+  }, [dispatch, wikiId]);
+
+  console.log('WikiDetail', data);
+  if (isFetching) return <Loading />;
+
+  const { id, category, product } = data;
   return (
     <Wrap>
       <div className="show">
         <span className="category">{category}</span>
         <h2 className="product">{product}</h2>
       </div>
-      <ImgBox data={wikiPosts} />
-      <WikiTextBox wikiPost={wikiPosts} />
+      <ImgBox data={data} />
+      <WikiTextBox wiki={data} wikiId={id} />
       <div className="heartWrap">
-        <FavoriteHeart data={wikiPosts} />
+        <FavoriteHeart data={data} />
       </div>
     </Wrap>
   );

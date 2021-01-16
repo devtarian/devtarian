@@ -12,7 +12,7 @@ const StoreDetail = ({ match }) => {
   const storeId = match.params.storeId;
   const dispatch = useDispatch();
   const { isFetching, data } = useSelector((state) => state.store);
-
+  console.log(data);
   useEffect(() => {
     dispatch(storeActions.getStore(storeId));
   }, [dispatch, storeId]);

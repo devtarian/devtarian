@@ -52,7 +52,6 @@ export const ImgTextCardWrap = styled.div`
   position: relative;
   cursor: pointer;
   width: 270px;
-
   .region {
     display: block;
     width: 100%;
@@ -72,7 +71,6 @@ export const ImgTextCardWrap = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
   }
-
   ${FavoriteWrap} {
     top: 10px;
     right: 10px;
@@ -87,14 +85,12 @@ export const ItemImg = styled.div`
   width: 100%;
   height: 175px;
   margin-bottom: 10px;
-
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: 10px;
   }
-
   .cover {
     z-index: 100;
     position: absolute;
@@ -112,14 +108,12 @@ export const ItemImg = styled.div`
     align-items: center;
     color: white;
     font-weight: bold;
-
     p {
       margin-top: 10px;
       font-size: 0.9rem;
       font-weight: normal;
     }
   }
-
   &:hover .cover {
     opacity: 0.9;
   }
@@ -129,7 +123,6 @@ const TitleWrap = styled.div`
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-
   .vegType {
     display: inline-block;
     width: 70px;

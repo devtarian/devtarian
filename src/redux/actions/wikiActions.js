@@ -1,11 +1,4 @@
-import {
-  WIKI_GET_WIKI,
-  WIKI_GET_DETAIL,
-  WIKI_DELETE_WIKI,
-  WIKI_FAVORITE_WIKI,
-  WIKI_UN_FAVORITE_WIKI,
-  WIKI_DELETE_COMMENT,
-} from '../types';
+import { WIKI_GET_WIKI, WIKI_DELETE_WIKI, WIKI_FAVORITE_WIKI, WIKI_UN_FAVORITE_WIKI } from '../types';
 import apis from '../../Service/apis';
 
 // wiki
@@ -15,20 +8,6 @@ const getWiki = () => async (dispatch) => {
 
     dispatch({
       type: WIKI_GET_WIKI,
-      payload: data,
-    });
-  } catch (err) {
-    console.error(err);
-    console.log(err.response && err.response.data);
-  }
-};
-
-const getWikiDetail = (wikiId) => async (dispatch) => {
-  try {
-    const data = await apis.wikiApi.getWikiDetail();
-
-    dispatch({
-      type: WIKI_GET_DETAIL,
       payload: data,
     });
   } catch (err) {
@@ -77,20 +56,5 @@ const unFavoriteWiki = (wikiId) => async (dispatch) => {
   }
 };
 
-// comment
-const deleteWikiComment = (wikiId, commentId) => async (dispatch) => {
-  try {
-    await apis.wikiApi.deleteWikiComment(wikiId, commentId);
-
-    dispatch({
-      type: WIKI_DELETE_COMMENT,
-      payload: commentId,
-    });
-  } catch (err) {
-    console.error(err);
-    console.log(err.response && err.response.data);
-  }
-};
-
-const wikiActions = { getWiki, getWikiDetail, deleteWiki, favoriteWiki, unFavoriteWiki, deleteWikiComment };
+const wikiActions = { getWiki, deleteWiki, favoriteWiki, unFavoriteWiki };
 export default wikiActions;

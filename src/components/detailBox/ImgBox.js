@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import noImg from '../../images/noImg.jpg';
 
 const ImgBox = ({ data }) => {
-  console.log(data);
+  console.log('ImgBox', data);
   return (
     <Wrap>
       <div className="largeImg">
-        <img src={data.imgUrls[0] ? data.imgUrls[0] : noImg} alt="" />
+        <img src={data.imgUrl ? data.imgUrl : noImg} alt="" />
       </div>
       <ul className="smallImgs">
         {[...new Array(5)].map((_, index) => (

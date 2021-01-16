@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const WikiTextBox = ({ wikiPost }) => {
-  console.log(wikiPost);
-  const { category, product, ingredient } = wikiPost;
+const WikiTextBox = ({ wiki }) => {
+  console.log(wiki);
+  const { category, product, ingredient } = wiki;
   return (
     <Wrap>
       <div className="innerWrap">

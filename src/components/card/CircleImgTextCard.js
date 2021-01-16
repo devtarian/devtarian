@@ -1,24 +1,41 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useRef } from 'react';
 import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
+import wikiActions from '../../redux/actions/wikiActions';
+import history from '../../history';
 import FavoriteHeart, { FavoriteWrap, EmptyHeart } from '../../components/favoriteHeart/FavoriteHeart';
 import noImg from '../../images/noImg.jpg';
 import { translate } from '../../utils/helper';
 
 const CircleImgTextCard = forwardRef((props, ref) => {
+  const dispatch = useDispatch();
   const { cardData } = props;
+  const { id, imgUrl, category, product, ingredient, favorite } = cardData;
+  const refFavorite = useRef(null);
+
+  const handleCardClick = (e) => {
+    //  console.log(e.target, refFavorite.current.childNodes);
+    if (e.target === refFavorite.curent) return;
+
+    history.push(`/wikiDetail/${id}`);
+  };
+
+  const onFavoriteClick = () => {
+    favorite ? dispatch(wikiActions.unFavoriteWiki(id)) : dispatch(wikiActions.favoriteWiki(id));
+  };
 
   return (
-    <CircleCardWrap key={cardData.id} ref={ref}>
+    <CircleCardWrap key={id} ref={ref} onClick={handleCardClick}>
       <div className="imgInfo">
-        <img src={cardData.files[0] ? URL.createObjectURL(cardData.files[0]) : noImg} alt="" />
+        <img src={imgUrl ? imgUrl : noImg} alt="" />
         <div className="cover"></div>
       </div>
       <div className="itemInfo">
-        <span className="category">{translate(cardData.category)}</span>
-        <h3>{cardData.product}</h3>
-        <span className="ingredient">{cardData.ingredient}</span>
+        <span className="category">{translate(category)}</span>
+        <h3>{product}</h3>
+        <span className="ingredient">{ingredient}</span>
       </div>
-      <FavoriteHeart data={cardData} />
+      <FavoriteHeart onFavoriteClick={onFavoriteClick} favorite={favorite} ref={refFavorite} />
     </CircleCardWrap>
   );
 });
@@ -35,6 +52,7 @@ export const CircleCardWrap = styled.li`
   border-radius: 10px;
   -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
 
   .imgInfo {
     &:hover .cover {

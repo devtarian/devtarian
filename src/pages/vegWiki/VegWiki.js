@@ -13,13 +13,11 @@ import useActivedBtn from '../../hooks/useActivedBtn';
 const VegiWiki = ({ wikiPosts }) => {
   const dispatch = useDispatch();
   const { isFetching, data } = useSelector((state) => state.wiki);
-  const [category, setCategory] = useState();
   const [products, setProducts] = useState(wikiPosts);
   const { inputs, setInputs, onInputChange } = useInput();
   const { activedBtn, setActivedBtn, onCheckboxClick } = useActivedBtn();
   const refTarget = useRef(null);
 
-  console.log('vegWiki', data);
   useEffect(() => {
     dispatch(wikiActions.getWiki());
   }, [dispatch]);
