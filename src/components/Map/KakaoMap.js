@@ -114,13 +114,13 @@ const KakaoMap = ({ className, onChange, defaultCenter, defaultLevel = 3, eventL
         <input value={keyword} onChange={handleChange} placeholder="주소를 검색하거나 지도를 클릭해주세요" />
       )}
       {state.isSearching && recommends.length > 0 && (
-        <SeachCardList>
+        <SearchCardList>
           {recommends.map((item, idx) => (
             <li key={idx} onClick={() => handleClickRecommend(item)}>
               {item.address_name}
             </li>
           ))}
-        </SeachCardList>
+        </SearchCardList>
       )}
       <div id="searchMap" ref={mapRef} />
     </Wrap>
@@ -151,7 +151,7 @@ const Wrap = styled.div`
   }
 `;
 
-const SeachCardList = styled.div`
+const SearchCardList = styled.div`
   position: absolute;
   top: 55px;
   left: 10px;

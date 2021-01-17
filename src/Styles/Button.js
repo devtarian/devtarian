@@ -4,6 +4,8 @@ const Button = styled.button`
   padding: 0 0.75rem;
   height: ${(props) => (props.h ? props.h : '40px')};
   line-height: ${(props) => (props.h ? props.h : '40px')};
+  vertical-align: center;
+
   border-radius: 4px;
   border: 1px solid ${(props) => props.theme.gray[1]};
   transition: all 0.3s ease;
