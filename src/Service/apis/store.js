@@ -26,20 +26,21 @@ export const api = {
     return res.data;
   },
 
-  async likeReview({ storeId, reviewId }) {
+  async likeReview(storeId, reviewId) {
     await defaultApi.post(`/store/${storeId}/review/${reviewId}/like`);
   },
 
-  async unLikeReview({ storeId, reviewId }) {
-    await defaultApi.post(`/store/${storeId}/review/${reviewId}/unlike`);
+  async unLikeReview(storeId, reviewId) {
+    await defaultApi.delete(`/store/${storeId}/review/${reviewId}/unlike`);
   },
 
   // comment
   async createComment({ storeId, reviewId, data }) {
+    console.log(storeId, reviewId, data);
     return await defaultApi.post(`/store/${storeId}/review/${reviewId}/comment`, data);
   },
 
-  async getComments({ storeId, reviewId }) {
+  async getComments(storeId, reviewId) {
     const res = await defaultApi.get(`/store/${storeId}/review/${reviewId}/comment`);
     return res.data;
   },

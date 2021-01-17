@@ -13,9 +13,9 @@ const CoverCarousel = ({ carouselData, mg }) => {
     <CoverCarouselWrap>
       <h2>비건위키</h2>
       <CarouselUl ref={refCarouselUl} value={value}>
-        {/* {carouselData.map((data, index) => (
+        {carouselData.map((data, index) => (
           <ImgCard key={index} data={data} value={value} ref={refCarouselLi} />
-        ))} */}
+        ))}
       </CarouselUl>
       <CarouselBtn value={value} onCarouselBtnClick={onCarouselBtnClick} />
       <ViewAll />

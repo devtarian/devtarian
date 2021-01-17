@@ -15,10 +15,10 @@ function App() {
           <PublicLayout path="/signup" component={SignUp} />
           <PublicLayout path="/login" component={Login} />
           <DefaultLayout path="/storeDetail/:storeId" component={StoreDetail} />
-          <DefaultLayout path="/wikiDetail" component={WikiDetail} />
+          <DefaultLayout path="/wikiDetail/:wikiId" component={WikiDetail} />
           <DefaultLayout path="/vegwiki" component={VegWiki} />
           <DefaultLayout path="/feed" component={FeedForm} />
-          <DefaultLayout path="/review" component={ReviewForm} />
+          <DefaultLayout path="/review/:storeId" component={ReviewForm} />
           <DefaultLayout path="/wiki" component={WikiForm} />
           <DefaultLayout path="/search" component={SearchPage} />
           <DefaultLayout path="/" component={Main} />

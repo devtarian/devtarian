@@ -16,28 +16,28 @@ export const api = {
     return res.data;
   },
 
+  async deleteWiki(wikiId) {
+    const res = await defaultApi.delete(`/wiki/${wikiId}`);
+    return res.data;
+  },
+
   async favoriteWiki(wikiId) {
     const res = await defaultApi.post(`/wiki/${wikiId}/favorite`, {});
     return res.data;
   },
 
-  async unfavoriteWiki(wikiId) {
+  async unFavoriteWiki(wikiId) {
     const res = await defaultApi.delete(`/wiki/${wikiId}/unfavorite`, {});
     return res.data;
   },
 
-  async createWikiComment(wikiId) {
-    const res = await defaultApi.post(`/wiki/${wikiId}/comment`, {});
+  async createWikiComment(wikiId, body) {
+    const res = await defaultApi.post(`/wiki/${wikiId}/comment`, body);
     return res.data;
   },
 
-  async likeWikiComment(wikiId, commentId) {
-    const res = await defaultApi.post(`/wiki/${wikiId}/comment/${commentId}/like`, {});
-    return res.data;
-  },
-
-  async unLikeWikiComment(wikiId, commentId) {
-    const res = await defaultApi.delete(`/wiki/${wikiId}/comment/${commentId}/unlike`, {});
+  async deleteWikiComment(wikiId, commentId) {
+    const res = await defaultApi.delete(`/wiki/${wikiId}/comment/${commentId}`, {});
     return res.data;
   },
 };

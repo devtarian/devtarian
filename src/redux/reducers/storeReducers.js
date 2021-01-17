@@ -39,11 +39,15 @@ export const storeReducers = (state = INIT_STATE, action = {}) => {
         ...state,
         data: {
           ...state.data,
-          reviewList: {
-            ...state.data.reviewList,
-            likesOfMe: true,
-            likes: state.data.reviewList.likes + 1,
-          },
+          reviewList: state.data.reviewList.map((review) => {
+            if (review.id !== action.payload) return review;
+
+            return {
+              ...review,
+              likesOfMe: true,
+              likes: review.likes + 1,
+            };
+          }),
         },
       };
     case STORE_UNLIKE_REVIEW:
@@ -51,11 +55,15 @@ export const storeReducers = (state = INIT_STATE, action = {}) => {
         ...state,
         data: {
           ...state.data,
-          reviewList: {
-            ...state.data.reviewList,
-            likesOfMe: false,
-            likes: state.data.reviewList.likes - 1,
-          },
+          reviewList: state.data.reviewList.map((review) => {
+            if (review.id !== action.payload) return review;
+
+            return {
+              ...review,
+              likesOfMe: false,
+              likes: review.likes - 1,
+            };
+          }),
         },
       };
 

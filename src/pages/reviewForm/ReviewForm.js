@@ -14,7 +14,7 @@ const INIT_REVIEW = {
 };
 
 const ReviewForm = ({ match }) => {
-  const storeId = match.params.storeId || 'YxRlt4Nm5d7I4VpoT6gl';
+  const storeId = match.params.storeId;
   const { inputs, setInputs, errors, onInputChange, onImageUpload, requiredValidate } = useInput(INIT_REVIEW);
 
   const handleSubmit = async (e) => {
