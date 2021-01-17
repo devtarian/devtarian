@@ -10,7 +10,7 @@ const RecentKeyword = ({ recentKeywords, onCloseRecentKeywords }) => {
         const lng = data[0].x;
         window.location = `/search?q=${keyword}&lat=${lat}&lng=${lng}`;
       } else {
-        window.location = `/search?q=${keyword}`;
+        window.location = `/search?q=${keyword}&lat=37.573&lng=126.9794&range=0`;
       }
       onCloseRecentKeywords();
     });

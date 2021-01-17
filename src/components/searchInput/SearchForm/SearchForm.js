@@ -15,7 +15,7 @@ const SearchForm = ({ value, onInputChange, onAddRecentKeywords }) => {
         const lng = data[0].x;
         window.location = `/search?q=${value}&lat=${lat}&lng=${lng}`;
       } else {
-        window.location = `/search?q=${value}`;
+        window.location = `/search?q=${value}&lat=37.573&lng=126.9794&range=0`;
       }
     });
     onAddRecentKeywords(value);

@@ -29,7 +29,7 @@ const SearchPage = () => {
     marker.setImage(imageNormal);
     infoWindow.close();
   };
-  // if (isFetching) return null;
+  if (isFetching) return null;
 
   return (
     <Wrap>
