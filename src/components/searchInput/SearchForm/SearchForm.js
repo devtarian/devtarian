@@ -1,7 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import history from '../../../history';
+import queryString from 'query-string';
+import { changeObjectToQuery } from '../../../utils/helper';
 
 const SearchForm = ({ value, onInputChange, onAddRecentKeywords }) => {
+  const { q, ...query } = queryString.parse(history.location.search);
   const handleInputChange = (e) => {
     onInputChange(e.target.value);
   };
@@ -13,7 +17,12 @@ const SearchForm = ({ value, onInputChange, onAddRecentKeywords }) => {
       if (status === window.kakao.maps.services.Status.OK) {
         const lat = data[0].y;
         const lng = data[0].x;
-        window.location = `/search?q=${value}&lat=${lat}&lng=${lng}`;
+        window.location = `/search${changeObjectToQuery({
+          ...query,
+          q: value,
+          lat,
+          lng,
+        })}`;
       } else {
         window.location = `/search?q=${value}&lat=37.573&lng=126.9794&range=0`;
       }
@@ -25,7 +34,7 @@ const SearchForm = ({ value, onInputChange, onAddRecentKeywords }) => {
   return (
     <Wrap>
       <SearchInput
-        placeholder="근처의 채식 식당을 찾아보세요!"
+        placeholder={q ? q + ' 검색결과' : '근처의 채식 식당을 찾아보세요!'}
         value={value}
         data-show="show"
         onChange={handleInputChange}></SearchInput>

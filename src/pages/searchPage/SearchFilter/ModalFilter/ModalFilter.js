@@ -33,14 +33,14 @@ const ModalFilter = ({ onCloseModal }) => {
   }, []);
 
   const handleClickApply = () => {
-    history.push(`/search${changeObjectToQuery(filter)}`);
+    window.location = `/search${changeObjectToQuery(filter)}`;
     onCloseModal();
   };
 
   const handleClickReset = () => {
     setFilter((state) => ({ ...state, ...INITIAL_VALUE }));
     const newQuery = changeObjectToQuery({ ...filter, ...INITIAL_VALUE });
-    history.push(`/search${newQuery}`);
+    window.location = `/search${newQuery}`;
     onCloseModal();
   };
 

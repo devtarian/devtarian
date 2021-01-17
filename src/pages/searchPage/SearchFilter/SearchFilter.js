@@ -1,16 +1,24 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
+import history from '../../../history';
+import queryString from 'query-string';
+
 import Button from '../../../Styles/Button';
 import Svg from '../../../components/common/Svg';
-import styled from 'styled-components';
 import ModalFilter from './ModalFilter/ModalFilter';
-import { translate } from '../../../utils/helper';
+import { changeObjectToQuery, translate } from '../../../utils/helper';
 import filterConfig from '../../../config/filterConfig';
 
 const SearchFilter = () => {
+  const { category, ...query } = queryString.parse(history.location.search);
+
   const [modal, setModal] = useState('');
 
   const handleOpenModal = () => setModal(true);
   const handleCloseModal = () => setModal(false);
+  const handleClickCategory = (category) => {
+    window.location = changeObjectToQuery({ ...query, category });
+  };
 
   const buttonList = ['restaurant', 'cafe', 'bakery', 'bar', 'etc'];
 
@@ -20,10 +28,12 @@ const SearchFilter = () => {
         <Button onClick={handleOpenModal} bg="#2f9e44">
           <Svg type="filter" w="20px" h="20px" color="white" onClick={handleOpenModal} />
         </Button>
-        <Button>All</Button>
+        <Button className={(category === 'all' || !category) && 'active'} onClick={() => handleClickCategory('all')}>
+          All
+        </Button>
 
         {buttonList.map((item) => (
-          <Button key={item}>
+          <Button key={item} className={category === item && 'active'} onClick={() => handleClickCategory(item)}>
             <Svg
               type={item}
               w="24px"
