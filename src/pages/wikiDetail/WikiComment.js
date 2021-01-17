@@ -14,17 +14,22 @@ const WikiComment = () => {
 
   if (isFetching) return <Loading />;
 
-  const onKeyPress = ({ contents }) => {
+  const onCreateComment = (contents) => {
     dispatch(wikiDetailActions.createWikiComment({ wikiId: id, contents }));
+  };
+
+  const onDeleteComment = (commentId) => {
+    console.log('here', commentId);
+    dispatch(wikiDetailActions.deleteWikiComment({ wikiId: id, commentId }));
   };
 
   return (
     <Wrap>
       <strong className="totalComments">{comments} 개의 댓글</strong>
       <div className="innerContainer">
-        <CommentForm onKeyPress={onKeyPress} />
+        <CommentForm onCreateComment={onCreateComment} />
         <ul className="comments">
-          <Comment commentData={commentList} />
+          <Comment commentData={commentList} onDeleteComment={onDeleteComment} />
         </ul>
       </div>
     </Wrap>

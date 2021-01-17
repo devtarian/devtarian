@@ -8,13 +8,13 @@ const INIT_COMMENT = {
   contents: '',
 };
 
-const CommentForm = ({ onKeyPress }) => {
+const CommentForm = ({ onCreateComment }) => {
   const userThumbNail = useSelector((state) => state.auth.thumbNail);
   const { inputs, setInputs, onInputChange } = useInput(INIT_COMMENT);
 
-  const handleKeyPress = (e) => {
+  const handleCreateComment = (e) => {
     if (e.key === 'Enter') {
-      onKeyPress(inputs);
+      onCreateComment(inputs);
       setInputs(INIT_COMMENT);
     }
   };
@@ -30,7 +30,7 @@ const CommentForm = ({ onKeyPress }) => {
             name="contents"
             value={inputs.contents}
             onChange={onInputChange}
-            onKeyPress={handleKeyPress}
+            onKeyPress={handleCreateComment}
           />
         </div>
       </div>

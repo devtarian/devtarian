@@ -49,7 +49,7 @@ const unFavoriteWiki = (wikiId) => async (dispatch) => {
 const createWikiComment = ({ wikiId, contents }) => async (dispatch) => {
   try {
     const data = await apis.wikiApi.createWikiComment({ wikiId, contents });
-
+    console.log(data);
     dispatch({
       type: WIKI_DETAIL_CREATE_COMMENT,
       payload: data.data,
@@ -60,7 +60,7 @@ const createWikiComment = ({ wikiId, contents }) => async (dispatch) => {
   }
 };
 
-const deleteWikiComment = (wikiId, commentId) => async (dispatch) => {
+const deleteWikiComment = ({ wikiId, commentId }) => async (dispatch) => {
   try {
     await apis.wikiApi.deleteWikiComment(wikiId, commentId);
 

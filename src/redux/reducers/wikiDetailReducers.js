@@ -43,7 +43,15 @@ export const wikiDetailReducers = (state = INIT_STATE, action = {}) => {
           comments: state.data.comments + 1,
         },
       };
-
+    case WIKI_DETAIL_DELETE_COMMENT:
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          commentList: state.data.commentList.filter((comment) => comment.id !== action.payload),
+          comments: state.data.comments - 1,
+        },
+      };
     default:
       return state;
   }
