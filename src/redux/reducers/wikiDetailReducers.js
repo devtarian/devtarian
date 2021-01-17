@@ -2,6 +2,7 @@ import {
   WIKI_DETAIL_GET_DETAIL,
   WIKI_DETAIL_FAVORITE_WIKI,
   WIKI_DETAIL_UN_FAVORITE_WIKI,
+  WIKI_DETAIL_CREATE_COMMENT,
   WIKI_DETAIL_DELETE_COMMENT,
 } from '../types';
 
@@ -33,15 +34,16 @@ export const wikiDetailReducers = (state = INIT_STATE, action = {}) => {
           favorite: false,
         },
       };
-    case WIKI_DETAIL_DELETE_COMMENT:
+    case WIKI_DETAIL_CREATE_COMMENT:
       return {
         ...state,
         data: {
           ...state.data,
-          commentList: state.data.commentList.filter((comment) => comment.id === action.payload),
-          comments: state.data.comments - 1,
+          commentList: state.data.commentList.concat(action.payload),
+          comments: state.data.comments + 1,
         },
       };
+
     default:
       return state;
   }

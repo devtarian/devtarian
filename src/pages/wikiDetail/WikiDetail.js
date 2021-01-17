@@ -13,7 +13,7 @@ const WikiDetail = ({ match }) => {
       <WikiDetailBox wikiId={wikiId} />
       <div className="comment">
         <EditBtn to={`/wikiForm/${wikiId}`} innerText="편집" />
-        {/* <WikiComment wikiId={wikiId}/> */}
+        <WikiComment wikiId={wikiId} />
       </div>
       <GoBackLink to="/vegwiki" innerText="목록으로" />
     </Wrap>

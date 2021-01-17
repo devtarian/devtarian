@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import apis from '../../Service/apis';
-import WriterProfile, { WriterProfileWrap } from '../profile/WriterProfile';
-import CommentForm from './CommentForm';
+import apis from '../../../Service/apis';
+import WriterProfile, { WriterProfileWrap } from '../../../components/profile/WriterProfile';
+import CommentForm from '../../../components/commentForm/CommentForm';
 
 const Comment = ({ storeId, reviewId }) => {
   const [comments, setComments] = useState([]);
-  const onCommentSubmit = (newComment) => {
-    setComments((state) => [...state, newComment]);
-  };
 
   useEffect(() => {
     apis.storeApi
@@ -21,6 +18,16 @@ const Comment = ({ storeId, reviewId }) => {
       });
   }, [storeId, reviewId, setComments]);
 
+  const onKeyPress = async (contents) => {
+    try {
+      const res = await apis.storeApi.createComment({ storeId, reviewId, data: contents });
+      const newComment = res.data;
+      setComments((state) => [...state, newComment]);
+    } catch (err) {
+      console.error(err.response ? err.response : err);
+    }
+  };
+
   return (
     <>
       <ul className="comments">
@@ -31,7 +38,7 @@ const Comment = ({ storeId, reviewId }) => {
           </Wrap>
         ))}
       </ul>
-      <CommentForm storeId={storeId} reviewId={reviewId} onCommentSubmit={onCommentSubmit} />
+      <CommentForm storeId={storeId} reviewId={reviewId} onKeyPress={onKeyPress} />
     </>
   );
 };

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import PhotoReviewBox from './PhotoReviewBox';
 import TextReviewBox from './TextReviewBox';
-import Comment from '../../../components/comment/Comment';
+import Comment from './Comment';
 import Likes from '../../../components/likes/Likes';
 import { ReactComponent as CommentSvg } from '../../../images/icons/insert_comment.svg';
 

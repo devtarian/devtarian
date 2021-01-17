@@ -36,7 +36,6 @@ export const api = {
 
   // comment
   async createComment({ storeId, reviewId, data }) {
-    console.log(storeId, reviewId, data);
     return await defaultApi.post(`/store/${storeId}/review/${reviewId}/comment`, data);
   },
 
