@@ -1,49 +1,19 @@
-import React, { useRef, useEffect, useCallback } from 'react';
+import React, { useRef, useEffect } from 'react';
 import Styled from 'styled-components';
-import queryString from 'query-string';
-import history from '../../../history';
 import Svg from '../../../components/common/Svg';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import searchActions from '../../../redux/actions/searchActions';
 
 const SearchMap = () => {
-  const mapRef = useRef();
-  const { q, lat, lng, limit, category, page, order } = queryString.parse(history.location.search);
-
   const dispatch = useDispatch();
-  const { isFetching, data } = useSelector((state) => state.search);
-
-  useEffect(() => {
-    dispatch(searchActions.getSearch({ q, lat, lng, limit, category, page, order }));
-  }, [dispatch, q, lat, lng, limit, category, page, order]);
+  const mapRef = useRef();
 
   useEffect(() => {
     const mapElem = mapRef.current;
     if (!mapElem) return;
-    const center = new window.kakao.maps.LatLng(lat, lng);
-    const mapOption = { center, level: 5 };
-    const map = new window.kakao.maps.Map(mapElem, mapOption);
-    const marker = new window.kakao.maps.Marker({ map, position: center });
-    marker.setMap(map);
-    drawMap(map, data);
-  }, [lat, lng, data]);
 
-  const drawMap = (map, data) => {
-    data.store.forEach((store) => {
-      let { marker, imageNormal, imageOver, infoWindow } = store.map;
-      marker.setMap(map);
-      window.kakao.maps.event.addListener(marker, 'mouseover', () => {
-        marker.setImage(imageOver);
-        infoWindow.open(map, marker);
-      });
-      window.kakao.maps.event.addListener(marker, 'mouseout', () => {
-        marker.setImage(imageNormal);
-        infoWindow.close();
-      });
-    });
-  };
-  console.log(data);
-  if (isFetching) return null;
+    dispatch(searchActions.initMap(mapElem));
+  }, [dispatch]);
 
   return (
     <Wrap>

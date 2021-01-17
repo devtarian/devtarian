@@ -9,7 +9,7 @@ import Svg from '../common/Svg';
 import { translate } from '../../utils/helper';
 import filterConfig from '../../config/filterConfig';
 
-const ImgTextCard = ({ className, storeData }) => {
+const ImgTextCard = ({ className, storeData, onMouseOver, onMouseOut }) => {
   const dispatch = useDispatch();
   const {
     id,
@@ -22,7 +22,7 @@ const ImgTextCard = ({ className, storeData }) => {
   };
 
   return (
-    <ImgTextCardWrap className={className} onClick={GetStoreDetail}>
+    <ImgTextCardWrap className={className} onClick={GetStoreDetail} onMouseOver={onMouseOver} onMouseOut={onMouseOut}>
       <ItemImg bg={bg}>
         <img src={imgUrls[0] ? imgUrls[0] : noImg} alt="" />
         <div className="cover">

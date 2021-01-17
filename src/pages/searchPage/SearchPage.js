@@ -1,12 +1,36 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import Search from '../../components/search/Search';
 import SearchFilter from './SearchFilter/SearchFilter';
-import storeData from '../../config/storeData';
 import ImgTextCard2 from '../../components/card/ImgTextCard2';
 import SearchMap from './SearchMap/SeacrhMap';
 
+import { useDispatch, useSelector } from 'react-redux';
+import searchActions from '../../redux/actions/searchActions';
+
 const SearchPage = () => {
+  const dispatch = useDispatch();
+  const { isFetching, data, map } = useSelector((state) => state.search);
+
+  useEffect(() => {
+    dispatch(searchActions.getSearch());
+  }, [dispatch]);
+
+  const handleMouseOver = (store) => {
+    if (!store) return;
+    let { marker, imageOver, infoWindow } = store.map;
+    marker.setImage(imageOver);
+    infoWindow.open(map, marker);
+  };
+
+  const handleMouseOut = (store) => {
+    if (!store) return;
+    let { marker, imageNormal, infoWindow } = store.map;
+    marker.setImage(imageNormal);
+    infoWindow.close();
+  };
+  if (isFetching) return null;
+
   return (
     <Wrap>
       <SectionContents>
@@ -16,13 +40,18 @@ const SearchPage = () => {
 
         <h3>검색결과</h3>
         <CardList>
-          {storeData.map((item, idx) => (
-            <StyledCard key={idx} storeData={item} />
+          {data.store.map((item, idx) => (
+            <StyledCard
+              key={idx}
+              storeData={item}
+              onMouseOver={() => handleMouseOver(item)}
+              onMouseOut={() => handleMouseOut(item)}
+            />
           ))}
         </CardList>
       </SectionContents>
       <SectionMap>
-        <SearchMap data={storeData} />
+        <SearchMap data={data} />
       </SectionMap>
     </Wrap>
   );

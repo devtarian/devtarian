@@ -15,9 +15,6 @@ defaultApi.interceptors.response.use(
     return response;
   },
   function (error) {
-    console.log('??', error.response);
-    console.log('??', error.response.status);
-
     if (error.response.status === 403 && error.response) {
       if (error.response.data.code === 'auth/id-token-expired') {
         localStorage.removeItem('token');
