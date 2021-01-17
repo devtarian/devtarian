@@ -2,7 +2,9 @@ import { SEARCH_INIT_DATA, SEARCH_INIT_MAP } from '../types';
 
 const INIT_STATE = {
   isFetching: true,
-  data: {},
+  data: {
+    store: [],
+  },
   map: null,
 };
 

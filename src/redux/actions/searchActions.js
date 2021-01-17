@@ -39,8 +39,8 @@ const initMap = (mapElem) => async (dispatch, getState) => {
     const data = getState().search.data;
     const { lat, lng } = queryString.parse(history.location.search);
 
-    const center = new window.kakao.maps.LatLng(lat, lng);
-    const mapOption = { center, level: 5 };
+    const center = new window.kakao.maps.LatLng(lat || 37.573, lng || 126.9794);
+    const mapOption = { center, level: 6 };
     const map = new window.kakao.maps.Map(mapElem, mapOption);
     const marker = new window.kakao.maps.Marker({ map, position: center });
     marker.setMap(map);
