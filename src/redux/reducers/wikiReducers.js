@@ -1,15 +1,8 @@
-import {
-  WIKI_GET_WIKI,
-  WIKI_GET_DETAIL,
-  WIKI_DELETE_WIKI,
-  WIKI_FAVORITE_WIKI,
-  WIKI_UN_FAVORITE_WIKI,
-  WIKI_DELETE_COMMENT,
-} from '../types';
+import { WIKI_GET_WIKI, WIKI_DELETE_WIKI, WIKI_FAVORITE_WIKI, WIKI_UN_FAVORITE_WIKI } from '../types';
 
 const INIT_STATE = {
   isFetching: true,
-  data: {},
+  data: [],
 };
 
 export const wikiReducers = (state = INIT_STATE, action = {}) => {
@@ -19,11 +12,6 @@ export const wikiReducers = (state = INIT_STATE, action = {}) => {
         data: action.payload,
         isFetching: false,
       };
-    case WIKI_GET_DETAIL:
-      return {
-        ...state,
-        data: action.payload,
-      };
     case WIKI_DELETE_WIKI:
       return {
         ...state,
@@ -32,27 +20,24 @@ export const wikiReducers = (state = INIT_STATE, action = {}) => {
     case WIKI_FAVORITE_WIKI:
       return {
         ...state,
-        data: {
-          ...state.data,
-          favorite: true,
-        },
+        data: state.data.map((wiki) => {
+          if (wiki.id !== action.payload) return wiki;
+          return {
+            ...wiki,
+            favorite: true,
+          };
+        }),
       };
     case WIKI_UN_FAVORITE_WIKI:
       return {
         ...state,
-        data: {
-          ...state.data,
-          favorite: false,
-        },
-      };
-    case WIKI_DELETE_COMMENT:
-      return {
-        ...state,
-        data: {
-          ...state.data,
-          commentList: state.data.commentList.filter((comment) => comment.id === action.payload),
-          comments: state.data.comments - 1,
-        },
+        data: state.data.map((wiki) => {
+          if (wiki.id !== action.payload) return wiki;
+          return {
+            ...wiki,
+            favorite: false,
+          };
+        }),
       };
     default:
       return state;

@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-import apis from '../../Service/apis';
 import useInput from '../../hooks/useInput';
 import noProfile from '../../images/noProfile.png';
 
@@ -9,20 +8,14 @@ const INIT_COMMENT = {
   contents: '',
 };
 
-const CommentForm = ({ storeId, reviewId, onCommentSubmit }) => {
+const CommentForm = ({ onCreateComment }) => {
   const userThumbNail = useSelector((state) => state.auth.thumbNail);
   const { inputs, setInputs, onInputChange } = useInput(INIT_COMMENT);
 
-  const handleKeyPress = async (e) => {
-    try {
-      if (e.key === 'Enter') {
-        const res = await apis.storeApi.createComment({ storeId, reviewId, data: inputs });
-        const newComment = res.data;
-        onCommentSubmit(newComment);
-        setInputs(INIT_COMMENT);
-      }
-    } catch (err) {
-      console.error(err.response ? err.response : err);
+  const handleCreateComment = (e) => {
+    if (e.key === 'Enter') {
+      onCreateComment(inputs);
+      setInputs(INIT_COMMENT);
     }
   };
 
@@ -37,7 +30,7 @@ const CommentForm = ({ storeId, reviewId, onCommentSubmit }) => {
             name="contents"
             value={inputs.contents}
             onChange={onInputChange}
-            onKeyPress={handleKeyPress}
+            onKeyPress={handleCreateComment}
           />
         </div>
       </div>

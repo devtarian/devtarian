@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import noImg from '../../images/noImg.jpg';
 
 const ImgBox = ({ data }) => {
-  console.log(data);
   return (
     <Wrap>
       <div className="largeImg">
@@ -64,8 +63,20 @@ const Wrap = styled.section`
         width: 100%;
         height: 100%;
         object-fit: cover;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
         border-radius: 10px;
       }
+
+      &:before {
+        content: '';
+        display: block;
+        padding-top: 100%;
+      }
+
       .cover {
         z-index: 100;
         position: absolute;
@@ -98,20 +109,6 @@ const Wrap = styled.section`
     .smallImgs {
       li {
         width: calc(20% - 6px);
-        max-width: 114px;
-        img {
-          position: absolute;
-          top: 0;
-          right: 0;
-          bottom: 0;
-          left: 0;
-        }
-
-        &:before {
-          content: '';
-          display: block;
-          padding-top: 100%;
-        }
       }
     }
   }

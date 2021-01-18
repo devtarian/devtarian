@@ -2,6 +2,7 @@ import React, { forwardRef } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import storeActions from '../../redux/actions/storeActions';
+import mainActions from '../../redux/actions/mainActions';
 import { ReactComponent as LikesSvg } from '../../images/icons/smile.svg';
 
 const Likes = forwardRef((props, ref) => {
@@ -13,6 +14,7 @@ const Likes = forwardRef((props, ref) => {
     likesOfMe
       ? dispatch(storeActions.unLikeReview(storeId, reviewId))
       : dispatch(storeActions.likeReview(storeId, reviewId));
+    dispatch(mainActions.getMain({ lat: 37.573, lng: 126.9794 }));
   };
 
   return (

@@ -24,7 +24,8 @@ function App() {
           <DefaultLayout path="/" exact component={Main} />
           <FormLayout isLoggedIn={isLoggedIn} path="/feed" component={FeedForm} />
           <FormLayout isLoggedIn={isLoggedIn} path="/review/:storeId" component={ReviewForm} />
-          <FormLayout isLoggedIn={isLoggedIn} path="/wiki" component={WikiForm} />
+          <FormLayout isLoggedIn={isLoggedIn} path="/wikiForm" component={WikiForm} />
+          <FormLayout isLoggedIn={isLoggedIn} path="/wikiForm/:wikiId" component={WikiForm} />
         </Switch>
       </Router>
     </div>

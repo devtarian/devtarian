@@ -5,18 +5,18 @@ import { ReactComponent as EditSvg } from '../../images/icons/edit.svg';
 
 const EditBtn = ({ to, innerText }) => {
   return (
-    <Wrap>
+    <EditBtnWrap>
       <Link to={to}>
         <Edit />
         <span>{innerText}</span>
       </Link>
-    </Wrap>
+    </EditBtnWrap>
   );
 };
 
 export default EditBtn;
 
-const Wrap = styled.div`
+export const EditBtnWrap = styled.div`
   position: absolute;
   top: 0;
   right: 0;

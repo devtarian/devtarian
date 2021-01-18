@@ -49,8 +49,8 @@ const StoreTextBox = ({ storeData }) => {
         <div className="openHours textBox" ref={hours.refMore}>
           <strong className="infoTitle">영업시간</strong>
           <ul className="infoContents">
-            {HOURSLIST.map((hour) => (
-              <li key={hour} className="open">
+            {HOURSLIST.map((hour, index) => (
+              <li key={index} className="open">
                 {hour}
               </li>
             ))}
@@ -71,8 +71,8 @@ const StoreTextBox = ({ storeData }) => {
         <div className="menu textBox" ref={menu.refMore}>
           <strong className="infoTitle">메뉴</strong>
           <ul className="menuList infoContents">
-            {MENULIST.map((menu) => (
-              <li key={menu.menu}>
+            {MENULIST.map((menu, index) => (
+              <li key={index}>
                 <span className="vegType">{translate(menu.vegtype)}</span>
                 <span className="name">{menu.menu}</span>
                 <span className="price">{menu.price}원</span>

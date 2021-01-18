@@ -34,6 +34,7 @@ const login = (inputs) => async (dispatch) => {
 
 const logout = () => {
   localStorage.removeItem('token');
+  defaultApi.defaults.headers.common['Authorization'] = null;
   return { type: AUTH_LOGOUT };
 };
 

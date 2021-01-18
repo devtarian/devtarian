@@ -1,21 +1,37 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import wikiDetailActions from '../../../redux/actions/wikiDetailActions';
+import Loading from '../../../components/loading/Loding';
 import ImgBox from '../ImgBox';
 import WikiTextBox from './WikiTextBox';
 import FavoriteHeart, { FavoriteWrap } from '../../favoriteHeart/FavoriteHeart';
 
-const WikiDetailBox = ({ wikiPosts }) => {
-  const { category, product } = wikiPosts;
+const WikiDetailBox = ({ wikiId }) => {
+  const dispatch = useDispatch();
+  const { isFetching, data } = useSelector((state) => state.wikiDetail);
+  const { category, product, favorite } = data;
+
+  useEffect(() => {
+    dispatch(wikiDetailActions.getWikiDetail(wikiId));
+  }, [dispatch, wikiId]);
+
+  if (isFetching) return <Loading />;
+
+  const onFavoriteClick = () => {
+    favorite ? dispatch(wikiDetailActions.unFavoriteWiki(wikiId)) : dispatch(wikiDetailActions.favoriteWiki(wikiId));
+  };
+
   return (
     <Wrap>
       <div className="show">
         <span className="category">{category}</span>
         <h2 className="product">{product}</h2>
       </div>
-      <ImgBox data={wikiPosts} />
-      <WikiTextBox wikiPost={wikiPosts} />
+      <ImgBox data={data} />
+      <WikiTextBox wiki={data} wikiId={wikiId} />
       <div className="heartWrap">
-        <FavoriteHeart data={wikiPosts} />
+        <FavoriteHeart onFavoriteClick={onFavoriteClick} favorite={favorite} />
       </div>
     </Wrap>
   );
@@ -59,7 +75,7 @@ const Wrap = styled.section`
       margin: 0 auto;
       ${FavoriteWrap} {
         top: 0px;
-        right: 10px;
+        right: 24px;
       }
     }
   }
