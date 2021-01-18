@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import Search from '../../components/search/Search';
+import SearchInput from '../../components/searchInput/SearchInput';
 import SearchFilter from './SearchFilter/SearchFilter';
 import ImgTextCard2 from '../../components/card/ImgTextCard2';
 import SearchMap from './SearchMap/SeacrhMap';
@@ -48,6 +48,7 @@ const SearchPage = () => {
               onMouseOut={() => handleMouseOut(item)}
             />
           ))}
+          {data.store.length === 0 && '검색결과가 없습니다.'}
         </CardList>
       </SectionContents>
       <SectionMap>
@@ -66,7 +67,7 @@ const Wrap = styled.div`
   width: 100%;
 `;
 
-const StyledSearch = styled(Search)`
+const StyledSearch = styled(SearchInput)`
   height: auto;
   margin-bottom: 10px;
 `;

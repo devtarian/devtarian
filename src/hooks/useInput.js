@@ -32,31 +32,29 @@ const useInput = (initInput) => {
 
       setErrors((errors) => ({ ...errors, [name]: error }));
       setInputs((state) => ({ ...state, [name]: value }));
-      console.log(inputs);
     },
     [inputs]
   );
 
   const requiredValidate = useCallback(
     (requiredList) => {
+      console.log(requiredList, errors);
       const errorValues = Object.values(errors);
       const isError = (error) => !!error;
       if (errorValues.some(isError)) return;
-
       let isValid = true;
       let requiredErrors = {};
 
       requiredList.forEach((name) => {
-        if (!inputs[name]?.length || errors[name]) {
+        if (!inputs[name] || errors[name]) {
           isValid = false;
         }
-        requiredErrors[name] = !inputs[name]?.length ? '필수 입력값 입니다.' : '';
+        requiredErrors[name] = !inputs[name] ? '필수 입력값 입니다.' : '';
       });
 
       if (!isValid) {
         return setErrors((state) => ({ ...state, ...requiredErrors }));
       }
-
       return isValid;
     },
     [inputs, errors]

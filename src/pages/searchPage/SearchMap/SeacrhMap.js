@@ -15,9 +15,17 @@ const SearchMap = () => {
     dispatch(searchActions.initMap(mapElem));
   }, [dispatch]);
 
+  const handleClickMyLocation = () => {
+    window.navigator.geolocation.getCurrentPosition((pos) => {
+      var lat = pos.coords.latitude;
+      var lng = pos.coords.longitude;
+      window.location = `/search?q=myLocation&lat=${lat}&lng=${lng}`;
+    });
+  };
+
   return (
     <Wrap>
-      <StyledSvg type="myLocation" color="black" p="3px" />
+      <StyledSvg type="myLocation" color="black" p="3px" onClick={handleClickMyLocation} />
       <div id="searchMap" ref={mapRef} />
     </Wrap>
   );
