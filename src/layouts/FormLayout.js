@@ -2,24 +2,16 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import styled from 'styled-components';
 
-import history from '../history';
-import { useSelector } from 'react-redux';
 import Header from '../components/header/Header';
 
-const FormLayout = ({ component: Component, ...rest }) => {
-  console.log('??????');
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  if (!isLoggedIn) {
-    history.push('/login');
-  }
-
+const FormLayout = ({ isLoggedIn, component: Component, ...rest }) => {
   return (
     <Route
       {...rest}
       render={(props) => (
         <Wrap>
           <Header />
-          <Component {...props} />
+          {isLoggedIn ? <Component {...props} /> : <h3>로그인이 필요합니다.</h3>}
         </Wrap>
       )}
     />
