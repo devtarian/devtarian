@@ -4,18 +4,25 @@ import history from '../../history';
 import apis from '../../Service/apis';
 import { makeMarkerImg, makeMarker, makeInfoWindow, drawMap } from '../../utils/mapFunctions';
 
-const getSearch = () => async (dispatch) => {
+const getSearch = () => async (dispatch, getState) => {
   try {
-    const query = queryString.parse(history.location.search);
-    const data = await apis.searchApi.getSearch(query);
-
-    data.store = data.store.map((store) => {
+    let { page, map } = getState().search;
+    let query = queryString.parse(history.location.search);
+    let data = await apis.searchApi.getSearch({ ...query, page: page + 1 });
+    let result = [];
+    result = data.map((store) => {
       const { _latitude, _longitude } = store.coordinates;
       const { imageNormal, imageOver } = makeMarkerImg(store.info.category);
-      const marker = makeMarker(_latitude, _longitude, imageNormal);
+      const point = new window.kakao.maps.LatLng(_latitude, _longitude);
+      const marker = makeMarker(point, imageNormal);
+
+      if (map) {
+        marker.setMap(map);
+      }
       return {
         ...store,
         map: {
+          point,
           marker,
           imageNormal,
           imageOver,
@@ -23,10 +30,10 @@ const getSearch = () => async (dispatch) => {
         },
       };
     });
-
+    console.log(result);
     dispatch({
       type: SEARCH_INIT_DATA,
-      payload: data,
+      payload: result,
     });
   } catch (err) {
     console.error(err);

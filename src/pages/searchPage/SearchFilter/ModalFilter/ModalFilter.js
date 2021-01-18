@@ -10,7 +10,7 @@ import FilterButtons from './FilterButtons.js/FilterButtons';
 const INITIAL_VALUE = {
   category: 'all',
   vegType: 'vegan',
-  sort: 'distance',
+  order: 'distance',
   size: 10,
 };
 
@@ -64,7 +64,7 @@ const ModalFilter = ({ onCloseModal }) => {
         onChangeFilter={handleChangeFilter}
       />
       <FilterButtons title="비건 옵션" type="vegType" value={filter.vegType} onChangeFilter={handleChangeFilter} />
-      <FilterButtons title="정렬" type="sort" value={filter.sort} onChangeFilter={handleChangeFilter} />
+      <FilterButtons title="정렬" type="order" value={filter.order} onChangeFilter={handleChangeFilter} />
       <FilterButtons title="개수" type="size" value={filter.size} onChangeFilter={handleChangeFilter} />
     </StyledModal>
   );

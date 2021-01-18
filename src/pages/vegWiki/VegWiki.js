@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import wikiActions from '../../redux/actions/wikiActions';
@@ -10,112 +10,86 @@ import CircleImgTextCard, { CircleCardWrap } from '../../components/card/CircleI
 import EditBtn, { EditBtnWrap } from '../../components/editBtn/EditBtn';
 import useInput from '../../hooks/useInput';
 import useActivedBtn from '../../hooks/useActivedBtn';
+import useObserver from '../../hooks/useObserver';
 
 const VegiWiki = ({ wikiPosts }) => {
-  const dispatch = useDispatch();
-  const { isFetching, data } = useSelector((state) => state.wiki);
+  //const [category, setCategory] = useState();
   const [products, setProducts] = useState(wikiPosts);
   const { inputs, setInputs, onInputChange } = useInput();
-  const { activedBtn, setActivedBtn, onCheckboxClick } = useActivedBtn();
-  const refTarget = useRef(null);
+  const { activedBtn, onCheckboxClick } = useActivedBtn();
 
-  useEffect(() => {
-    dispatch(wikiActions.getWiki());
-  }, [dispatch]);
+  const loadProducts = () => {
+    setProducts((prevState) => {
+      const nextProducts = [
+        {
+          id: 12,
+          category: '가공식품',
+          files: [],
+          product: '포테토칩',
+          ingredient: '밀/대두',
+          comments: '',
+          commentList: [
+            {
+              id: 0,
+              writer: { name: 'Harry', thumbNail: 'http://placehold.it/40x40.png?text=A' },
+              createAt: '3초 전',
+              contents: '',
+            },
+          ],
+        },
+        {
+          category: '가공식품',
+          files: [],
+          product: '포테토칩',
+          ingredient: '밀/대두',
+          comments: '',
+          commentList: [
+            {
+              id: 0,
+              writer: { name: 'Harry', thumbNail: 'http://placehold.it/40x40.png?text=A' },
+              createAt: '3초 전',
+              contents: '',
+            },
+          ],
+        },
+        {
+          id: 14,
+          category: '가공식품',
+          files: [],
+          product: '포테토칩',
+          ingredient: '밀/대두',
+          comments: '',
+          commentList: [
+            {
+              id: 0,
+              writer: { name: 'Harry', thumbNail: 'http://placehold.it/40x40.png?text=A' },
+              createAt: '3초 전',
+              contents: '',
+            },
+          ],
+        },
+        {
+          id: 15,
+          category: '가공식품',
+          files: [],
+          product: '포테토칩',
+          ingredient: '밀/대두',
+          comments: '',
+          commentList: [
+            {
+              id: 0,
+              writer: { name: 'Harry', thumbNail: 'http://placehold.it/40x40.png?text=A' },
+              createAt: '3초 전',
+              contents: '',
+            },
+          ],
+        },
+      ];
+      return [...prevState, ...nextProducts];
+    });
+  };
 
-  useEffect(() => {
-    const options = {
-      threshold: 0.5,
-    };
-
-    if (isFetching) return <Loading />;
-
-    const loadProducts = () => {
-      setProducts((prevState) => {
-        const nextProducts = [
-          {
-            id: 12,
-            category: '가공식품',
-            files: [],
-            product: '포테토칩',
-            ingredient: '밀/대두',
-            comments: '',
-            commentList: [
-              {
-                id: 0,
-                writer: { name: 'Harry', thumbNail: 'http://placehold.it/40x40.png?text=A' },
-                createAt: '3초 전',
-                contents: '',
-              },
-            ],
-          },
-          {
-            category: '가공식품',
-            files: [],
-            product: '포테토칩',
-            ingredient: '밀/대두',
-            comments: '',
-            commentList: [
-              {
-                id: 0,
-                writer: { name: 'Harry', thumbNail: 'http://placehold.it/40x40.png?text=A' },
-                createAt: '3초 전',
-                contents: '',
-              },
-            ],
-          },
-          {
-            id: 14,
-            category: '가공식품',
-            files: [],
-            product: '포테토칩',
-            ingredient: '밀/대두',
-            comments: '',
-            commentList: [
-              {
-                id: 0,
-                writer: { name: 'Harry', thumbNail: 'http://placehold.it/40x40.png?text=A' },
-                createAt: '3초 전',
-                contents: '',
-              },
-            ],
-          },
-          {
-            id: 15,
-            category: '가공식품',
-            files: [],
-            product: '포테토칩',
-            ingredient: '밀/대두',
-            comments: '',
-            commentList: [
-              {
-                id: 0,
-                writer: { name: 'Harry', thumbNail: 'http://placehold.it/40x40.png?text=A' },
-                createAt: '3초 전',
-                contents: '',
-              },
-            ],
-          },
-        ];
-        return [...prevState, ...nextProducts];
-      });
-    };
-
-    const handleObserver = (entries, observer) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        loadProducts();
-        observer.unobserve(entry.target);
-        observer.observe(refTarget.current);
-      });
-    };
-    const io = new IntersectionObserver(handleObserver, options);
-
-    if (refTarget.current) {
-      io.observe(refTarget.current);
-    }
-    return () => io && io.disconnect();
-  }, [refTarget]);
+  const refTarget = useObserver(loadProducts);
 
   return (
     <Wrap>
@@ -136,7 +110,8 @@ const VegiWiki = ({ wikiPosts }) => {
         <ul>
           {data.map((data, index) => {
             const lastEl = index === products.length - 1;
-            return <CircleImgTextCard key={data.id} cardData={data} ref={lastEl ? refTarget : null} />;
+
+            return <CircleImgTextCard key={index} data={data} ref={lastEl ? refTarget : null} />;
           })}
         </ul>
       </div>

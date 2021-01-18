@@ -12,7 +12,7 @@ const filterConfig = {
     vegetarian: { title: '베지테리안' },
     veganOption: { title: '비건 옵션' },
   },
-  sort: {
+  order: {
     distance: { title: '거리' },
     rated: { title: '별점순' },
   },
