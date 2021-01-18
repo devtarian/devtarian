@@ -8,7 +8,7 @@ import useMoreContent from '../../../hooks/useMoreContent';
 const PhotoReviewBox = ({ reviewData }) => {
   const { starRating, title, contents, imgUrls, createdAt, writer } = reviewData;
   const { content, isTextOver, handleViewMoreClick } = useMoreContent(contents, 70);
-  console.log(reviewData);
+
   return (
     <Wrap>
       <div className="leftBox">
@@ -23,11 +23,7 @@ const PhotoReviewBox = ({ reviewData }) => {
         </button>
       </div>
       <div className="rightBox">
-        {Array.isArray(imgUrls) ? (
-          <ImgCarousel carouselData={imgUrls} />
-        ) : (
-          <img className="imgContainer" src={imgUrls} alt="" />
-        )}
+        <ImgCarousel carouselData={imgUrls} />
       </div>
     </Wrap>
   );

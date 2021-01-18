@@ -32,14 +32,14 @@ const ImgCarousel = ({ carouselData }) => {
 
   useLayoutEffect(() => {
     setCarouselValue((state) => ({
-      ...state.carouselValue,
+      ...state,
       liClientWidth: wrapW,
       liLength: refCarouselUl.current?.childElementCount,
     }));
   }, [wrapW]);
 
   const onCarouselBtnClick = (newIndex, newLeftPosition) => {
-    setCarouselValue({ ...carouselValue, currentIndex: newIndex, leftPosition: newLeftPosition });
+    setCarouselValue((state) => ({ ...state, currentIndex: newIndex, leftPosition: newLeftPosition }));
   };
 
   return (
@@ -51,7 +51,7 @@ const ImgCarousel = ({ carouselData }) => {
           </li>
         ))}
       </CarouselUl>
-      <CarouselBtn value={carouselValue} onCarouselBtnClick={onCarouselBtnClick} />
+      {wrapW && <CarouselBtn value={carouselValue} onCarouselBtnClick={onCarouselBtnClick} />}
     </Wrap>
   );
 };
