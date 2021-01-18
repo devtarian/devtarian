@@ -6,6 +6,7 @@ import mainActions from '../../redux/actions/mainActions';
 import Stars from '../stars/Stars';
 import FavoriteHeart, { FavoriteWrap, EmptyHeart } from '../../components/favoriteHeart/FavoriteHeart';
 import noImg from '../../images/noImg.jpg';
+import { translate } from '../../utils/helper';
 
 const ImgTextCard = ({ className, cardData }) => {
   const dispatch = useDispatch();
@@ -32,8 +33,10 @@ const ImgTextCard = ({ className, cardData }) => {
         <img src={imgUrl ? imgUrl : noImg} alt="" />
         <div className="cover"></div>
       </ItemImg>
-      <span className="vegType">{vegType}</span>
-      <h3 className="title">{storeName}</h3>
+      <span className="vegType">{translate(vegType)}</span>
+      <h3 className="title">
+        <a href="/">{storeName}</a>
+      </h3>
       <strong className="region">{region}</strong>
       <div className="starRating">
         <Stars rate={starRating} starsW={80} />
