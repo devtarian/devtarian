@@ -7,7 +7,6 @@ import { translate } from '../../utils/helper';
 
 const ImgCard = forwardRef((props, ref) => {
   const { data, value } = props;
-  console.log('ImgCard', data);
 
   const handleCardClick = (e) => {
     console.log(e.target);

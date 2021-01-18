@@ -32,7 +32,6 @@ const useInput = (initInput) => {
 
       setErrors((errors) => ({ ...errors, [name]: error }));
       setInputs((state) => ({ ...state, [name]: value }));
-      console.log(inputs);
     },
     [inputs]
   );
@@ -47,10 +46,11 @@ const useInput = (initInput) => {
       let requiredErrors = {};
 
       requiredList.forEach((name) => {
+        console.log(inputs[name], inputs[name].length, errors[name]);
         if (!inputs[name]?.length || errors[name]) {
           isValid = false;
         }
-        requiredErrors[name] = !inputs[name]?.length ? '필수 입력값 입니다.' : '';
+        requiredErrors[name] = !inputs[name] ? '필수 입력값 입니다.' : '';
       });
 
       if (!isValid) {
