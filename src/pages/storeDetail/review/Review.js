@@ -9,7 +9,7 @@ import { ReactComponent as CommentSvg } from '../../../images/icons/insert_comme
 
 const Review = () => {
   const { id, reviews, reviewList } = useSelector((state) => state.store.data);
-  console.log(reviewList);
+
   return (
     <Wrap>
       <strong className="totalReviews">{reviews} 개의 리뷰</strong>

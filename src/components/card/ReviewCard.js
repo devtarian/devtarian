@@ -27,7 +27,7 @@ const ReviewCard = ({ cardData }) => {
 
     // history.push(`/storeDetail/${storeId}`);
   };
-  console.log(storeId, id, likesOfMe);
+
   return (
     <ReviewCardWrap onClick={handleCardClick}>
       <ItemImg>
