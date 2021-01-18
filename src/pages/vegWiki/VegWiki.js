@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Checkbox, Select } from '../../components/form';
 import { CheckboxWrap } from '../../components/form/Checkbox';
@@ -12,22 +12,7 @@ const VegiWiki = ({ wikiPosts }) => {
   //const [category, setCategory] = useState();
   const [products, setProducts] = useState(wikiPosts);
   const { inputs, setInputs, onInputChange } = useInput();
-  const { activedBtn, setActivedBtn, onCheckboxClick } = useActivedBtn();
-
-  // const onReviewChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setCategory({
-  //     ...category,
-  //     [name]: value,
-  //   });
-  // };
-
-  // const handleSubmit = (e) => {
-  //   console.log(category);
-  //   e.preventDefault();
-  //   setActivedBtn('');
-  //   setCategory('');
-  // };
+  const { activedBtn, onCheckboxClick } = useActivedBtn();
 
   const loadProducts = () => {
     setProducts((prevState) => {
@@ -100,28 +85,7 @@ const VegiWiki = ({ wikiPosts }) => {
     });
   };
 
-  //const refTarget = useRef(null);
   const refTarget = useObserver(loadProducts);
-  // useEffect(() => {
-  //   const options = {
-  //     threshold: 0.5,
-  //   };
-
-  //   const handleObserver = (entries, observer) => {
-  //     entries.forEach((entry) => {
-  //       if (!entry.isIntersecting) return;
-  //       loadProducts();
-  //       observer.unobserve(entry.target);
-  //       observer.observe(refTarget.current);
-  //     });
-  //   };
-  //   const io = new IntersectionObserver(handleObserver, options);
-
-  //   if (refTarget.current) {
-  //     io.observe(refTarget.current);
-  //   }
-  //   return () => io && io.disconnect();
-  // }, [refTarget]);
 
   return (
     <Wrap>

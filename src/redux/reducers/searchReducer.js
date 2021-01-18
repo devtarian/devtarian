@@ -1,11 +1,12 @@
 import { SEARCH_INIT_DATA, SEARCH_INIT_MAP } from '../types';
 
 const INIT_STATE = {
-  isFetching: true,
-  data: {
-    store: [],
-  },
   map: null,
+  data: [],
+  isFetching: true,
+  fetchMore: true,
+  page: 0,
+  size: 4,
 };
 
 export const searchReducers = (state = INIT_STATE, action = {}) => {
@@ -13,8 +14,10 @@ export const searchReducers = (state = INIT_STATE, action = {}) => {
     case SEARCH_INIT_DATA:
       return {
         ...state,
-        data: action.payload,
+        data: [...state.data, ...action.payload],
         isFetching: false,
+        page: state.page + 1,
+        fetchMore: action.payload.length < state.size ? false : true,
       };
 
     case SEARCH_INIT_MAP:

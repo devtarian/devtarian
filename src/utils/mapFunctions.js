@@ -67,7 +67,7 @@ export const makeInfoWindow = (store) => {
 
 export const drawMap = (map, data) => {
   //let bounds = new window.kakao.maps.LatLngBounds();
-  data.store.forEach((store) => {
+  data.forEach((store) => {
     let { marker, imageNormal, imageOver, infoWindow } = store.map;
     marker.setMap(map);
     //bounds.extend(point);
