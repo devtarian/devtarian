@@ -1,24 +1,26 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import WriterProfile, { WriterProfileWrap } from '../../components/profile/WriterProfile';
 
 const Comment = ({ commentData, onDeleteComment }) => {
   const userId = useSelector((state) => state.auth.userId);
-  const refComment = useRef(null);
 
-  const handleDeleteComment = () => {
+  const handleDeleteComment = (commentId) => {
     let result = window.confirm('댓글을 삭제하시겠습니까?');
-    if (result) onDeleteComment(refComment.current.id);
+    if (!result) return;
+    onDeleteComment(commentId);
   };
   return (
     <>
       <ul className="comments">
         {commentData.map((comment, index) => (
-          <Wrap key={index} id={comment.id} ref={refComment}>
+          <Wrap key={index} id={comment.id}>
             <WriterProfile writer={comment.writer} createdAt={comment.createdAt} />
             <p className="comment">{comment.contents}</p>
-            {userId === comment.writer.userId && <button className="deleteBtn" onClick={handleDeleteComment} />}
+            {userId === comment.writer.userId && (
+              <button className="deleteBtn" onClick={() => handleDeleteComment(comment.id)} />
+            )}
           </Wrap>
         ))}
       </ul>

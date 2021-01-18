@@ -9,14 +9,14 @@ import { ReactComponent as CommentSvg } from '../../../images/icons/insert_comme
 
 const Review = () => {
   const { id, reviews, reviewList } = useSelector((state) => state.store.data);
-
+  console.log(reviewList);
   return (
     <Wrap>
       <strong className="totalReviews">{reviews} 개의 리뷰</strong>
       {reviewList.map((review) => (
         <div className="review" key={review.id}>
           <div className="innerWrap">
-            {review.imgUrl ? <PhotoReviewBox reviewData={review} /> : <TextReviewBox reviewData={review} />}
+            {review.imgUrls.length > 0 ? <PhotoReviewBox reviewData={review} /> : <TextReviewBox reviewData={review} />}
           </div>
           <div className="reactions">
             <div className="addLikes">

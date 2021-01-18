@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import WriterProfile, { WriterProfileWrap } from '../../../components/profile/WriterProfile';
 import ImgCarousel from '../../../components/carousel/imgCarousel/ImgCarousel';
 import Stars from '../../../components/stars/Stars';
-import useMoreContents from '../../../hooks/useMoreContents';
+import useMoreContent from '../../../hooks/useMoreContent';
 
 const PhotoReviewBox = ({ reviewData }) => {
-  const { viewMore, handleToggleBtnClick } = useMoreContents();
-  const { starRating, title, contents, imgUrl, createdAt, writer } = reviewData;
-
+  const { starRating, title, contents, imgUrls, createdAt, writer } = reviewData;
+  const { content, isTextOver, handleViewMoreClick } = useMoreContent(contents, 70);
+  console.log(reviewData);
   return (
     <Wrap>
       <div className="leftBox">
@@ -17,16 +17,16 @@ const PhotoReviewBox = ({ reviewData }) => {
           <Stars rate={starRating} starsW={100} />
         </div>
         <p className="title">{title}</p>
-        <p className={viewMore ? 'moreContents' : 'contents'}>{contents}</p>
-        <button className={viewMore ? 'hideBtn' : 'showBtn'} href="" onClick={handleToggleBtnClick}>
-          ... 더보기
+        <p className="contents">{content}</p>
+        <button className={isTextOver ? 'showBtn' : 'hideBtn'} href="" onClick={handleViewMoreClick}>
+          더보기
         </button>
       </div>
       <div className="rightBox">
-        {Array.isArray(imgUrl) ? (
-          <ImgCarousel carouselData={imgUrl} />
+        {Array.isArray(imgUrls) ? (
+          <ImgCarousel carouselData={imgUrls} />
         ) : (
-          <img className="imgContainer" src={imgUrl} alt="" />
+          <img className="imgContainer" src={imgUrls} alt="" />
         )}
       </div>
     </Wrap>
@@ -54,14 +54,7 @@ const Wrap = styled.div`
     }
     .contents {
       line-height: 1.7rem;
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 2;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .moreContents {
-      line-height: 1.7rem;
+      word-break: break-all;
     }
     .showBtn {
       line-height: 1.6rem;

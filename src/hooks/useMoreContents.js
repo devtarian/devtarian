@@ -6,7 +6,7 @@ const useMoreContents = () => {
   const handleToggleBtnClick = (e) => {
     setViewMore(!viewMore);
   };
-  return { viewMore, handleToggleBtnClick };
+  return { viewMore, setViewMore, handleToggleBtnClick };
 };
 
 export default useMoreContents;

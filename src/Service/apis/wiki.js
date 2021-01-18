@@ -32,7 +32,8 @@ export const api = {
   },
 
   async createWikiComment({ wikiId, contents }) {
-    return await defaultApi.post(`/wiki/${wikiId}/comment`, contents);
+    const res = await defaultApi.post(`/wiki/${wikiId}/comment`, contents);
+    return res.data;
   },
 
   async deleteWikiComment(wikiId, commentId) {

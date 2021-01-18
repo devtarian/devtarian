@@ -31,11 +31,11 @@ const Comment = ({ storeId, reviewId }) => {
     }
   };
 
-  const handleDeleteComment = async () => {
+  const handleDeleteComment = async (commentId) => {
     try {
       let result = window.confirm('댓글을 삭제하시겠습니까?');
       if (result) {
-        await apis.storeApi.deleteComment({ storeId, reviewId, commentId: refComment.current.id });
+        await apis.storeApi.deleteComment({ storeId, reviewId, commentId });
         await apis.storeApi.getComments(storeId, reviewId).then((data) => {
           setComments(data);
         });
@@ -44,7 +44,7 @@ const Comment = ({ storeId, reviewId }) => {
       console.error(err.response ? err.response : err);
     }
   };
-  console.log(comments);
+
   return (
     <>
       <ul className="comments">
@@ -52,7 +52,9 @@ const Comment = ({ storeId, reviewId }) => {
           <Wrap key={comment.id} id={comment.id} ref={refComment}>
             <WriterProfile writer={comment.writer} createdAt={comment.createdAt} />
             <p className="comment">{comment.contents}</p>
-            {userId === comment.writer.userId && <button className="deleteBtn" onClick={handleDeleteComment} />}
+            {userId === comment.writer.userId && (
+              <button className="deleteBtn" onClick={() => handleDeleteComment(comment.id)} />
+            )}
           </Wrap>
         ))}
       </ul>

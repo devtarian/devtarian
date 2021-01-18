@@ -29,8 +29,8 @@ const Login = () => {
     if (!isValid) return;
 
     dispatch(authActions.login(inputs));
-    history.push('/');
     setInputs(INIT_USER_VALUES);
+    history.push('/');
   };
 
   return (

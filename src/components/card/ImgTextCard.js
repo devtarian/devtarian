@@ -1,18 +1,29 @@
 import styled from 'styled-components';
 import history from '../../history';
+import { useDispatch } from 'react-redux';
+import storeActions from '../../redux/actions/storeActions';
+import mainActions from '../../redux/actions/mainActions';
 import Stars from '../stars/Stars';
 import FavoriteHeart, { FavoriteWrap, EmptyHeart } from '../../components/favoriteHeart/FavoriteHeart';
 import noImg from '../../images/noImg.jpg';
 
 const ImgTextCard = ({ className, cardData }) => {
+  const dispatch = useDispatch();
   const {
     id,
+    favorite,
     imgUrl,
     info: { imgUrls, vegType, storeName, region, starRating, contents },
+    coordinates: { _latitude, _longitude },
   } = cardData;
 
   const GetStoreDetail = () => {
     history.push(`/storeDetail/${id}`);
+  };
+
+  const onFavoriteClick = () => {
+    favorite ? dispatch(storeActions.unFavoriteStore(id)) : dispatch(storeActions.favoriteStore(id));
+    dispatch(mainActions.getMain({ lat: _latitude, lng: _longitude }));
   };
 
   return (
@@ -28,7 +39,7 @@ const ImgTextCard = ({ className, cardData }) => {
         <Stars rate={starRating} starsW={80} />
       </div>
       <p className="contents">{cardData.contents ? cardData.contents : ''}</p>
-      <FavoriteHeart data={cardData} />
+      <FavoriteHeart onFavoriteClick={onFavoriteClick} favorite={favorite} />
     </ImgTextCardWrap>
   );
 };

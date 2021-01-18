@@ -49,10 +49,10 @@ const unFavoriteWiki = (wikiId) => async (dispatch) => {
 const createWikiComment = ({ wikiId, contents }) => async (dispatch) => {
   try {
     const data = await apis.wikiApi.createWikiComment({ wikiId, contents });
-    console.log(data);
+
     dispatch({
       type: WIKI_DETAIL_CREATE_COMMENT,
-      payload: data.data,
+      payload: data,
     });
   } catch (err) {
     console.error(err);

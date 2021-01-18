@@ -20,7 +20,7 @@ const ReviewForm = ({ match }) => {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      const requiredList = ['title', 'contents'];
+      const requiredList = ['starRating', 'title', 'contents'];
       let isValid = requiredValidate(requiredList);
       if (!isValid) return;
 

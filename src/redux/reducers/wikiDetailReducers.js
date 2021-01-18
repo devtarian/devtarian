@@ -39,7 +39,7 @@ export const wikiDetailReducers = (state = INIT_STATE, action = {}) => {
         ...state,
         data: {
           ...state.data,
-          commentList: state.data.commentList.concat(action.payload),
+          commentList: [...state.data.commentList, action.payload],
           comments: state.data.comments + 1,
         },
       };

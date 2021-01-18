@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { translate } from '../../utils/helper';
 
 const InputSelect = ({ className, label, name, value, onChange, options }) => {
   return (
@@ -7,8 +8,8 @@ const InputSelect = ({ className, label, name, value, onChange, options }) => {
       {label && <label>{label}</label>}
       <select name={name} value={value} onChange={onChange}>
         {options.map((item, idx) => (
-          <option key={idx} value={item.title}>
-            {item.title}
+          <option key={idx} value={item}>
+            {translate(item)}
           </option>
         ))}
       </select>

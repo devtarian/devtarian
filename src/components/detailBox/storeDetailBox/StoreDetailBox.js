@@ -1,29 +1,38 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import storeActions from '../../../redux/actions/storeActions';
 import ImgBox from '../ImgBox';
 import StoreTextBox from './StoreTextBox';
 import FavoriteHeart, { FavoriteWrap } from '../../favoriteHeart/FavoriteHeart';
+import { translate } from '../../../utils/helper';
 
 const StoreDetailBox = () => {
+  const dispatch = useDispatch();
   const store = useSelector((state) => state.store.data);
   const {
+    id,
+    favorite,
     info: { category, vegType, storeName },
   } = store;
+
+  const onFavoriteClick = () => {
+    favorite ? dispatch(storeActions.unFavoriteStore(id)) : dispatch(storeActions.favoriteStore(id));
+  };
 
   return (
     <Wrap>
       <div className="show">
         <div className="tags">
-          <span className="storeCategory hide">{category}</span>
-          <span className="vegType hide">{vegType}</span>
+          <span className="storeCategory hide">{translate(category)}</span>
+          <span className="vegType hide">{translate(vegType)}</span>
         </div>
         <h2 className="store">{storeName}</h2>
       </div>
       <ImgBox data={store.info} />
       <StoreTextBox storeData={store} />
       <div className="heartWrap">
-        <FavoriteHeart data={store} />
+        <FavoriteHeart onFavoriteClick={onFavoriteClick} favorite={favorite} />
       </div>
     </Wrap>
   );
