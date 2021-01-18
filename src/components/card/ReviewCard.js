@@ -12,7 +12,7 @@ const ReviewCard = ({ cardData }) => {
 
   if (isFetching) return;
   const review = data.review;
-  //console.log(review);
+
   const {
     storeId,
     id,
@@ -25,8 +25,9 @@ const ReviewCard = ({ cardData }) => {
     // if (e.target === refLikes.current) return;
     if (e.target.nodeName === 'SVG' || 'PATH' || 'CIRCLE') return;
 
-    history.push(`/storeDetail/${storeId}`);
+    // history.push(`/storeDetail/${storeId}`);
   };
+  console.log(storeId, id, likesOfMe);
   return (
     <ReviewCardWrap onClick={handleCardClick}>
       <ItemImg>

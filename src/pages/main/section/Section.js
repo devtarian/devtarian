@@ -10,10 +10,17 @@ import Loading from '../../../components/loading/Loding';
 const Section = () => {
   const dispatch = useDispatch();
   const { isFetching, data } = useSelector((state) => state.main);
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+
   const mg = 9;
   useEffect(() => {
-    dispatch(mainActions.getMain({ lat: 33.450701, lng: 126.570667 }));
-  }, [dispatch]);
+    let lat, lng;
+    window.navigator.geolocation.getCurrentPosition((pos) => {
+      lat = pos.coords.latitude;
+      lng = pos.coords.longitude;
+    });
+    dispatch(mainActions.getMain({ lat, lng }));
+  }, [dispatch, isLoggedIn]);
 
   if (isFetching) return <Loading />;
 

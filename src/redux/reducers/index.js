@@ -4,6 +4,7 @@ import { mainReducers } from './mainReducers';
 import { storeReducers } from './storeReducers';
 import { searchReducers } from './searchReducer';
 import { wikiReducers } from './wikiReducers';
+import { wikiDetailReducers } from './wikiDetailReducers';
 
 export default combineReducers({
   auth: authReducers,
@@ -11,5 +12,5 @@ export default combineReducers({
   store: storeReducers,
   search: searchReducers,
   wiki: wikiReducers,
-
+  wikiDetail: wikiDetailReducers,
 });

@@ -36,12 +36,17 @@ export const api = {
 
   // comment
   async createComment({ storeId, reviewId, data }) {
-    console.log(storeId, reviewId, data);
     return await defaultApi.post(`/store/${storeId}/review/${reviewId}/comment`, data);
   },
 
   async getComments(storeId, reviewId) {
     const res = await defaultApi.get(`/store/${storeId}/review/${reviewId}/comment`);
     return res.data;
+  },
+
+  async deleteComment({ storeId, reviewId, commentId }) {
+    // commentId 맞게 넘어옴
+    console.log({ storeId, reviewId, commentId });
+    return await defaultApi.delete(`/store/${storeId}/review/${reviewId}/comment/${commentId}`);
   },
 };
