@@ -28,9 +28,8 @@ export const makeMarkerImg = (category) => {
   return { imageNormal, imageOver };
 };
 
-export const makeMarker = (lat, lng, image) => {
-  const position = new window.kakao.maps.LatLng(lat, lng);
-  return new window.kakao.maps.Marker({ position, image });
+export const makeMarker = (point, image) => {
+  return new window.kakao.maps.Marker({ position: point, image });
 };
 
 export const makeInfoWindow = (store) => {
@@ -67,9 +66,11 @@ export const makeInfoWindow = (store) => {
 };
 
 export const drawMap = (map, data) => {
+  //let bounds = new window.kakao.maps.LatLngBounds();
   data.store.forEach((store) => {
     let { marker, imageNormal, imageOver, infoWindow } = store.map;
     marker.setMap(map);
+    //bounds.extend(point);
     window.kakao.maps.event.addListener(
       marker,
       'mouseover',

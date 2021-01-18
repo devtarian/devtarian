@@ -12,10 +12,12 @@ const getSearch = () => async (dispatch) => {
     data.store = data.store.map((store) => {
       const { _latitude, _longitude } = store.coordinates;
       const { imageNormal, imageOver } = makeMarkerImg(store.info.category);
-      const marker = makeMarker(_latitude, _longitude, imageNormal);
+      const point = new window.kakao.maps.LatLng(_latitude, _longitude);
+      const marker = makeMarker(point, imageNormal);
       return {
         ...store,
         map: {
+          point,
           marker,
           imageNormal,
           imageOver,

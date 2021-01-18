@@ -19,7 +19,7 @@ const SearchMap = () => {
     window.navigator.geolocation.getCurrentPosition((pos) => {
       var lat = pos.coords.latitude;
       var lng = pos.coords.longitude;
-      window.location = `/search?q=myLocation&lat=${lat}&lng=${lng}`;
+      window.location = `/search?q=내위치&lat=${lat}&lng=${lng}`;
     });
   };
 

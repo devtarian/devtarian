@@ -6,27 +6,28 @@ import { SelectWrap } from '../../components/form/Select';
 import CircleImgTextCard, { CircleCardWrap } from '../../components/card/CircleImgTextCard';
 import useInput from '../../hooks/useInput';
 import useActivedBtn from '../../hooks/useActivedBtn';
+import useObserver from '../../hooks/useObserver';
 
 const VegiWiki = ({ wikiPosts }) => {
-  const [category, setCategory] = useState();
+  //const [category, setCategory] = useState();
   const [products, setProducts] = useState(wikiPosts);
   const { inputs, setInputs, onInputChange } = useInput();
   const { activedBtn, setActivedBtn, onCheckboxClick } = useActivedBtn();
 
-  const onReviewChange = (e) => {
-    const { name, value } = e.target;
-    setCategory({
-      ...category,
-      [name]: value,
-    });
-  };
+  // const onReviewChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setCategory({
+  //     ...category,
+  //     [name]: value,
+  //   });
+  // };
 
-  const handleSubmit = (e) => {
-    console.log(category);
-    e.preventDefault();
-    setActivedBtn('');
-    setCategory('');
-  };
+  // const handleSubmit = (e) => {
+  //   console.log(category);
+  //   e.preventDefault();
+  //   setActivedBtn('');
+  //   setCategory('');
+  // };
 
   const loadProducts = () => {
     setProducts((prevState) => {
@@ -99,28 +100,28 @@ const VegiWiki = ({ wikiPosts }) => {
     });
   };
 
-  const refTarget = useRef(null);
+  //const refTarget = useRef(null);
+  const refTarget = useObserver(loadProducts);
+  // useEffect(() => {
+  //   const options = {
+  //     threshold: 0.5,
+  //   };
 
-  useEffect(() => {
-    const options = {
-      threshold: 0.5,
-    };
+  //   const handleObserver = (entries, observer) => {
+  //     entries.forEach((entry) => {
+  //       if (!entry.isIntersecting) return;
+  //       loadProducts();
+  //       observer.unobserve(entry.target);
+  //       observer.observe(refTarget.current);
+  //     });
+  //   };
+  //   const io = new IntersectionObserver(handleObserver, options);
 
-    const handleObserver = (entries, observer) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        loadProducts();
-        observer.unobserve(entry.target);
-        observer.observe(refTarget.current);
-      });
-    };
-    const io = new IntersectionObserver(handleObserver, options);
-
-    if (refTarget.current) {
-      io.observe(refTarget.current);
-    }
-    return () => io && io.disconnect();
-  }, [refTarget]);
+  //   if (refTarget.current) {
+  //     io.observe(refTarget.current);
+  //   }
+  //   return () => io && io.disconnect();
+  // }, [refTarget]);
 
   return (
     <Wrap>
@@ -140,7 +141,7 @@ const VegiWiki = ({ wikiPosts }) => {
         <ul>
           {products.map((data, index) => {
             const lastEl = index === products.length - 1;
-            return <CircleImgTextCard key={data.id} data={data} ref={lastEl ? refTarget : null} />;
+            return <CircleImgTextCard key={index} data={data} ref={lastEl ? refTarget : null} />;
           })}
         </ul>
       </div>
