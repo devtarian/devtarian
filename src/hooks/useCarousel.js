@@ -15,7 +15,6 @@ const useCarousel = (mg) => {
   }, [liClientWidth]);
 
   const onCarouselBtnClick = (newIndex, newLeftPosition) => {
-    console.log(newIndex, newLeftPosition);
     setCurrentIndex(newIndex);
     setLeftPosition(newLeftPosition);
   };

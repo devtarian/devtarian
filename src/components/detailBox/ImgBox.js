@@ -1,16 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import noImg from '../../images/noImg.jpg';
 
 const ImgBox = ({ data }) => {
+  const [imgIndex, setImgIndex] = useState(0);
+
+  const onImgClick = (index) => {
+    setImgIndex(index);
+  };
+
   return (
     <Wrap>
       <div className="largeImg">
-        <img src={data.imgUrls[0] ? data.imgUrls[0] : noImg} alt="" />
+        <img src={data.imgUrls[imgIndex] ? data.imgUrls[imgIndex] : noImg} alt="" />
       </div>
       <ul className="smallImgs">
         {[...new Array(5)].map((_, index) => (
-          <li key={index}>
+          <li key={index} onClick={() => onImgClick(index)}>
             <img src={data.imgUrls[index] ? data.imgUrls[index] : noImg} alt="" />
             <div className="cover"></div>
           </li>

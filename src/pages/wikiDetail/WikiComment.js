@@ -10,7 +10,6 @@ const WikiComment = () => {
   const dispatch = useDispatch();
   const { isFetching, data } = useSelector((state) => state.wikiDetail);
   const { id, comments, commentList } = data;
-  console.log(data.commentList);
 
   if (isFetching) return <Loading />;
 
