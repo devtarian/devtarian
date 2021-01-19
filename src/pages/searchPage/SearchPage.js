@@ -8,10 +8,12 @@ import SearchMap from './SearchMap/SeacrhMap';
 import { useDispatch, useSelector } from 'react-redux';
 import searchActions from '../../redux/actions/searchActions';
 import useObserver from '../../hooks/useObserver';
+import history from '../../history';
 
 const SearchPage = () => {
   const dispatch = useDispatch();
   const { isFetching, data, map, fetchMore } = useSelector((state) => state.search);
+  const { isLoggedIn } = useSelector((state) => state.auth);
 
   const handleFetchMore = () => {
     if (!fetchMore) return;
@@ -34,7 +36,17 @@ const SearchPage = () => {
     infoWindow.close();
   }, []);
 
+  const handleClickFavorite = useCallback(
+    (store) => {
+      if (!isLoggedIn) {
+        history.push('/login');
+      }
+      store.favorite ? dispatch(searchActions.unFavorite(store.id)) : dispatch(searchActions.favorite(store.id));
+    },
+    [isLoggedIn, dispatch]
+  );
   const ref = useObserver(handleFetchMore);
+
   useEffect(() => {
     dispatch(searchActions.getSearch());
   }, [dispatch]);
@@ -58,6 +70,7 @@ const SearchPage = () => {
                 storeData={item}
                 onMouseOver={() => handleMouseOver(item)}
                 onMouseOut={() => handleMouseOut(item)}
+                onClickFavorite={() => handleClickFavorite(item)}
                 ref={lastEl ? ref : null}
               />
             );

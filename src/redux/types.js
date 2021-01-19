@@ -14,6 +14,8 @@ export const STORE_UNLIKE_REVIEW = 'store/STORE_UNLIKE_REVIEW';
 
 export const SEARCH_INIT_DATA = 'search/SEARCH_INIT_DATA';
 export const SEARCH_INIT_MAP = 'search/SEARCH_INIT_MAP';
+export const SEARCH_FAVORITE = 'search/SEARCH_FAVORITE';
+export const SEARCH_UNFAVORITE = 'searhc/SEARCH_UNFAVORITE';
 
 export const WIKI_GET_WIKI = 'wiki/WIKI_GET_WIKI';
 export const WIKI_DELETE_WIKI = 'wiki/WIKI_DELETE_WIKI';

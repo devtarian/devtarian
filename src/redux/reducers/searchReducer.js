@@ -1,4 +1,4 @@
-import { SEARCH_INIT_DATA, SEARCH_INIT_MAP } from '../types';
+import { SEARCH_INIT_DATA, SEARCH_INIT_MAP, SEARCH_FAVORITE, SEARCH_UNFAVORITE } from '../types';
 
 const INIT_STATE = {
   map: null,
@@ -24,6 +24,36 @@ export const searchReducers = (state = INIT_STATE, action = {}) => {
       return {
         ...state,
         map: action.payload,
+      };
+
+    case SEARCH_FAVORITE:
+      return {
+        ...state,
+        data: state.data.map((item) => {
+          if (item.id === action.payload) {
+            return {
+              ...item,
+              favorite: true,
+            };
+          } else {
+            return item;
+          }
+        }),
+      };
+
+    case SEARCH_UNFAVORITE:
+      return {
+        ...state,
+        data: state.data.map((item) => {
+          if (item.id === action.payload) {
+            return {
+              ...item,
+              favorite: false,
+            };
+          } else {
+            return item;
+          }
+        }),
       };
 
     default:

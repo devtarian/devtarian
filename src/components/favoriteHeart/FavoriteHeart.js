@@ -3,9 +3,7 @@ import styled from 'styled-components';
 import { ReactComponent as EmptyHeartSvg } from '../../images/icons/heart_border-black.svg';
 import { ReactComponent as FullHeartSvg } from '../../images/icons/heart-black.svg';
 
-const FavoriteHeart = forwardRef((props, ref) => {
-  const { onFavoriteClick, favorite } = props;
-
+const FavoriteHeart = forwardRef(({ onFavoriteClick, favorite }, ref) => {
   const handleFavoriteClick = (e) => {
     e.preventDefault();
     onFavoriteClick();
