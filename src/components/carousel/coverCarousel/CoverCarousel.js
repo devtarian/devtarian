@@ -18,7 +18,7 @@ const CoverCarousel = ({ carouselData, mg }) => {
         ))}
       </CarouselUl>
       <CarouselBtn value={value} onCarouselBtnClick={onCarouselBtnClick} />
-      <ViewAll />
+      <ViewAll to="/vegWiki" />
     </CoverCarouselWrap>
   );
 };

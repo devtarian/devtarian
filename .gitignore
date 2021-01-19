@@ -10,7 +10,6 @@
 
 # production
 /build
-
 # misc
 .DS_Store
 .env.local
@@ -27,4 +26,3 @@ debug.log
 package-lock.json
 yarn.lock
 개발일지.md
-fewfewfewfewfewfewfewfeweeee

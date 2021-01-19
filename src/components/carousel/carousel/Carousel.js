@@ -20,7 +20,7 @@ const Carousel = ({ carouselData, mg }) => {
         ))}
       </CarouselUl>
       <CarouselBtn value={value} onCarouselBtnClick={onCarouselBtnClick} />
-      <ViewAll />
+      <ViewAll to="/" />
     </Wrap>
   );
 };
