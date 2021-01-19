@@ -8,13 +8,14 @@ export const MAIN_STORE_FAVORITE = 'search/MAIN_STORE_FAVORITE';
 export const MAIN_STORE_UNFAVORITE = 'search/MAIN_STORE_UNFAVORITE';
 export const MAIN_WIKI_FAVORITE = 'search/MAIN_WIKI_FAVORITE';
 export const MAIN_WIKI_UNFAVORITE = 'search/MAIN_WIKI_UNFAVORITE';
+export const MAIN_REVIEW_LIKE = 'search/MAIN_REVIEW_LIKE';
+export const MAIN_REVIEW_UNLIKE = 'search/MAIN_REVIEW_UNLIKE';
 
 export const STORE_GET_STORE = 'store/STORE_GET_STORE';
 export const STORE_FAVORITE_STORE = 'store/STORE_FAVORITE_STORE';
 export const STORE_UN_FAVORITE_STORE = 'store/STORE_UN_FAVORITE_STORE';
-
-export const STORE_LIKE_REVIEW = 'store/STORE_LIKE_REVIEW';
-export const STORE_UNLIKE_REVIEW = 'store/STORE_UNLIKE_REVIEW';
+export const STORE_REVIEW_LIKE = 'store/STORE_REVIEW_LIKE';
+export const STORE_REVIEW_UNLIKE = 'store/STORE_REVIEW_UNLIKE';
 
 export const SEARCH_INIT_DATA = 'search/SEARCH_INIT_DATA';
 export const SEARCH_INIT_MAP = 'search/SEARCH_INIT_MAP';

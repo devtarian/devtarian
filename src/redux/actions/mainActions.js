@@ -4,6 +4,8 @@ import {
   MAIN_STORE_UNFAVORITE,
   MAIN_WIKI_FAVORITE,
   MAIN_WIKI_UNFAVORITE,
+  MAIN_REVIEW_LIKE,
+  MAIN_REVIEW_UNLIKE,
 } from '../types';
 import apis from '../../Service/apis';
 
@@ -69,5 +71,29 @@ const unFavoriteWiki = (wikiId) => async (dispatch) => {
   }
 };
 
-const mainActions = { getMain, favorite, unFavorite, favoriteWiki, unFavoriteWiki };
+const likeReview = (storeId, reviewId) => async (dispatch) => {
+  try {
+    await apis.storeApi.likeReview(storeId, reviewId);
+    dispatch({
+      type: MAIN_REVIEW_LIKE,
+      payload: reviewId,
+    });
+  } catch (err) {
+    console.log(err.response);
+  }
+};
+
+const unLikeReview = (storeId, reviewId) => async (dispatch) => {
+  try {
+    await apis.storeApi.unLikeReview(storeId, reviewId);
+    dispatch({
+      type: MAIN_REVIEW_UNLIKE,
+      payload: reviewId,
+    });
+  } catch (err) {
+    console.log(err.response);
+  }
+};
+
+const mainActions = { getMain, favorite, unFavorite, favoriteWiki, unFavoriteWiki, likeReview, unLikeReview };
 export default mainActions;

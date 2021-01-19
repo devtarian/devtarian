@@ -4,6 +4,8 @@ import {
   MAIN_STORE_UNFAVORITE,
   MAIN_WIKI_FAVORITE,
   MAIN_WIKI_UNFAVORITE,
+  MAIN_REVIEW_LIKE,
+  MAIN_REVIEW_UNLIKE,
 } from '../types';
 
 const INIT_STATE = {
@@ -110,6 +112,43 @@ export const mainReducers = (state = INIT_STATE, action = {}) => {
           }),
         },
       };
+
+    case MAIN_REVIEW_LIKE:
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          review: state.data.review.map((item) => {
+            if (item.id === action.payload) {
+              return {
+                ...item,
+                likesOfMe: true,
+              };
+            } else {
+              return item;
+            }
+          }),
+        },
+      };
+
+    case MAIN_REVIEW_UNLIKE:
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          review: state.data.review.map((item) => {
+            if (item.id === action.payload) {
+              return {
+                ...item,
+                likesOfMe: false,
+              };
+            } else {
+              return item;
+            }
+          }),
+        },
+      };
+
     default:
       return state;
   }

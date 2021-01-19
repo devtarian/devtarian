@@ -2,8 +2,8 @@ import {
   STORE_GET_STORE,
   STORE_FAVORITE_STORE,
   STORE_UN_FAVORITE_STORE,
-  STORE_LIKE_REVIEW,
-  STORE_UNLIKE_REVIEW,
+  STORE_REVIEW_LIKE,
+  STORE_REVIEW_UNLIKE,
 } from '../types';
 
 const INIT_STATE = {
@@ -34,7 +34,7 @@ export const storeReducers = (state = INIT_STATE, action = {}) => {
           favorite: false,
         },
       };
-    case STORE_LIKE_REVIEW:
+    case STORE_REVIEW_LIKE:
       return {
         ...state,
         data: {
@@ -50,7 +50,7 @@ export const storeReducers = (state = INIT_STATE, action = {}) => {
           }),
         },
       };
-    case STORE_UNLIKE_REVIEW:
+    case STORE_REVIEW_UNLIKE:
       return {
         ...state,
         data: {
