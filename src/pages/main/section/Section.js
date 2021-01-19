@@ -26,8 +26,8 @@ const Section = () => {
 
   return (
     <Wrap>
-      <Carousel carouselData={data.store} mg={mg} />
-      <Carousel carouselData={data.rated} mg={mg} />
+      <Carousel carouselData={data.store} mg={mg} title="근처의 비건식당" />
+      <Carousel carouselData={data.rated} mg={mg} title="비건식당 Top 10" />
       <CoverCarousel carouselData={data.wiki} mg={mg} />
       <ReviewCarousel carouselData={data.review} mg={mg} />
     </Wrap>
