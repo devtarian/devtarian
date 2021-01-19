@@ -1,4 +1,10 @@
-import { MAIN_GET_MAIN } from '../types';
+import {
+  MAIN_GET_MAIN,
+  MAIN_STORE_FAVORITE,
+  MAIN_STORE_UNFAVORITE,
+  MAIN_WIKI_FAVORITE,
+  MAIN_WIKI_UNFAVORITE,
+} from '../types';
 
 const INIT_STATE = {
   isFetching: true,
@@ -13,6 +19,97 @@ export const mainReducers = (state = INIT_STATE, action = {}) => {
         isFetching: false,
       };
 
+    case MAIN_STORE_FAVORITE:
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          store: state.data.store.map((item) => {
+            if (item.id === action.payload) {
+              return {
+                ...item,
+                favorite: true,
+              };
+            } else {
+              return item;
+            }
+          }),
+          rated: state.data.rated.map((item) => {
+            if (item.id === action.payload) {
+              return {
+                ...item,
+                favorite: true,
+              };
+            } else {
+              return item;
+            }
+          }),
+        },
+      };
+
+    case MAIN_STORE_UNFAVORITE:
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          store: state.data.store.map((item) => {
+            if (item.id === action.payload) {
+              return {
+                ...item,
+                favorite: false,
+              };
+            } else {
+              return item;
+            }
+          }),
+          rated: state.data.rated.map((item) => {
+            if (item.id === action.payload) {
+              return {
+                ...item,
+                favorite: false,
+              };
+            } else {
+              return item;
+            }
+          }),
+        },
+      };
+
+    case MAIN_WIKI_FAVORITE:
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          wiki: state.data.wiki.map((item) => {
+            if (item.id === action.payload) {
+              return {
+                ...item,
+                favorite: true,
+              };
+            } else {
+              return item;
+            }
+          }),
+        },
+      };
+
+    case MAIN_WIKI_UNFAVORITE:
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          wiki: state.data.wiki.map((item) => {
+            if (item.id === action.payload) {
+              return {
+                ...item,
+                favorite: false,
+              };
+            } else {
+              return item;
+            }
+          }),
+        },
+      };
     default:
       return state;
   }

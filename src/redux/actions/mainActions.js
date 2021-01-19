@@ -1,4 +1,10 @@
-import { MAIN_GET_MAIN, MAIN_LIKE_REVIEW, MAIN_UNLIKE_REVIEW } from '../types';
+import {
+  MAIN_GET_MAIN,
+  MAIN_STORE_FAVORITE,
+  MAIN_STORE_UNFAVORITE,
+  MAIN_WIKI_FAVORITE,
+  MAIN_WIKI_UNFAVORITE,
+} from '../types';
 import apis from '../../Service/apis';
 
 const getMain = ({ lat, lng }) => async (dispatch) => {
@@ -15,5 +21,53 @@ const getMain = ({ lat, lng }) => async (dispatch) => {
   }
 };
 
-const mainActions = { getMain };
+const favorite = (storeId) => async (dispatch) => {
+  try {
+    await apis.storeApi.favoriteStore(storeId);
+    dispatch({
+      type: MAIN_STORE_FAVORITE,
+      payload: storeId,
+    });
+  } catch (err) {
+    console.log(err.response);
+  }
+};
+
+const unFavorite = (storeId) => async (dispatch) => {
+  try {
+    await apis.storeApi.unFavoriteStore(storeId);
+    dispatch({
+      type: MAIN_STORE_UNFAVORITE,
+      payload: storeId,
+    });
+  } catch (err) {
+    console.log(err.response);
+  }
+};
+
+const favoriteWiki = (wikiId) => async (dispatch) => {
+  try {
+    await apis.wikiApi.favoriteWiki(wikiId);
+    dispatch({
+      type: MAIN_WIKI_FAVORITE,
+      payload: wikiId,
+    });
+  } catch (err) {
+    console.log(err.response);
+  }
+};
+
+const unFavoriteWiki = (wikiId) => async (dispatch) => {
+  try {
+    await apis.wikiApi.unFavoriteWiki(wikiId);
+    dispatch({
+      type: MAIN_WIKI_UNFAVORITE,
+      payload: wikiId,
+    });
+  } catch (err) {
+    console.log(err.response);
+  }
+};
+
+const mainActions = { getMain, favorite, unFavorite, favoriteWiki, unFavoriteWiki };
 export default mainActions;

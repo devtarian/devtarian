@@ -4,11 +4,11 @@ import Section from './section/Section';
 import Footer from './footer/Footer';
 import BackGroundImg from '../../images/pexels-ready-made-3850607.jpg';
 
-const Main = ({ wikiPosts }) => {
+const Main = () => {
   return (
     <>
       <SearchInput posTop="180px" bg={BackGroundImg} />
-      <Section wikiPosts={wikiPosts} />
+      <Section />
       <Footer />
     </>
   );

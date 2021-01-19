@@ -4,6 +4,10 @@ export const AUTH_LOGOUT = 'auth/AUTH_LOGOUT';
 export const MAIN_GET_MAIN = 'main/MAIN_GET_MAIN';
 export const MAIN_LIKE_REVIEW = 'main/MAIN_LIKE_REVIEW';
 export const MAIN_UNLIKE_REVIEW = 'main/MAIN_UNLIKE_REVIEW';
+export const MAIN_STORE_FAVORITE = 'search/MAIN_STORE_FAVORITE';
+export const MAIN_STORE_UNFAVORITE = 'search/MAIN_STORE_UNFAVORITE';
+export const MAIN_WIKI_FAVORITE = 'search/MAIN_WIKI_FAVORITE';
+export const MAIN_WIKI_UNFAVORITE = 'search/MAIN_WIKI_UNFAVORITE';
 
 export const STORE_GET_STORE = 'store/STORE_GET_STORE';
 export const STORE_FAVORITE_STORE = 'store/STORE_FAVORITE_STORE';
@@ -15,7 +19,7 @@ export const STORE_UNLIKE_REVIEW = 'store/STORE_UNLIKE_REVIEW';
 export const SEARCH_INIT_DATA = 'search/SEARCH_INIT_DATA';
 export const SEARCH_INIT_MAP = 'search/SEARCH_INIT_MAP';
 export const SEARCH_FAVORITE = 'search/SEARCH_FAVORITE';
-export const SEARCH_UNFAVORITE = 'searhc/SEARCH_UNFAVORITE';
+export const SEARCH_UNFAVORITE = 'search/SEARCH_UNFAVORITE';
 
 export const WIKI_GET_WIKI = 'wiki/WIKI_GET_WIKI';
 export const WIKI_DELETE_WIKI = 'wiki/WIKI_DELETE_WIKI';

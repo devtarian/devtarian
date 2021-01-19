@@ -11,7 +11,7 @@ const Section = () => {
   const dispatch = useDispatch();
   const { isFetching, data } = useSelector((state) => state.main);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-
+  console.log(data);
   const mg = 9;
   useEffect(() => {
     let lat, lng;
@@ -26,10 +26,10 @@ const Section = () => {
 
   return (
     <Wrap>
-      <Carousel carouselData={data.store} mg={mg} />
-      <Carousel carouselData={data.rated} mg={mg} />
-      <CoverCarousel carouselData={data.wiki} mg={mg} />
-      <ReviewCarousel carouselData={data.review} mg={mg} />
+      <Carousel carouselData={data.store} mg={mg} isLoggedIn={isLoggedIn} />
+      <Carousel carouselData={data.rated} mg={mg} isLoggedIn={isLoggedIn} />
+      <CoverCarousel carouselData={data.wiki} mg={mg} isLoggedIn={isLoggedIn} />
+      <ReviewCarousel carouselData={data.review} mg={mg} isLoggedIn={isLoggedIn} />
     </Wrap>
   );
 };
