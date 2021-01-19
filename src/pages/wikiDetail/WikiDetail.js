@@ -5,12 +5,14 @@ import WikiComment from './WikiComment';
 import EditBtn from '../../components/editBtn/EditBtn';
 import GoBackLink from '../../components/goBackLink/GoBackLink';
 
+import { useSelector } from 'react-redux';
+
 const WikiDetail = ({ match }) => {
   const wikiId = match.params.wikiId;
-
+  const { isLoggedIn } = useSelector((state) => state.auth);
   return (
     <Wrap>
-      <WikiDetailBox wikiId={wikiId} />
+      <WikiDetailBox wikiId={wikiId} isLoggedIn={isLoggedIn} />
       <div className="comment">
         <EditBtn to={`/wikiForm/${wikiId}`} innerText="편집" />
         <WikiComment wikiId={wikiId} />

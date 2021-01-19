@@ -1,4 +1,4 @@
-import { SEARCH_INIT_DATA, SEARCH_INIT_MAP } from '../types';
+import { SEARCH_INIT_DATA, SEARCH_INIT_MAP, SEARCH_FAVORITE, SEARCH_UNFAVORITE } from '../types';
 import queryString from 'query-string';
 import history from '../../history';
 import apis from '../../Service/apis';
@@ -55,10 +55,33 @@ const initMap = (mapElem) => async (dispatch, getState) => {
 
     dispatch({ type: SEARCH_INIT_MAP, payload: map });
   } catch (err) {
-    console.error(err);
-    console.log(err.response && err.response.data);
+    console.log(err.response);
   }
 };
 
-const mainActions = { getSearch, initMap };
+const favorite = (storeId) => async (dispatch) => {
+  try {
+    await apis.storeApi.favoriteStore(storeId);
+    dispatch({
+      type: SEARCH_FAVORITE,
+      payload: storeId,
+    });
+  } catch (err) {
+    console.log(err.response);
+  }
+};
+
+const unFavorite = (storeId) => async (dispatch) => {
+  try {
+    await apis.storeApi.unFavoriteStore(storeId);
+    dispatch({
+      type: SEARCH_UNFAVORITE,
+      payload: storeId,
+    });
+  } catch (err) {
+    console.log(err.response);
+  }
+};
+
+const mainActions = { getSearch, initMap, favorite, unFavorite };
 export default mainActions;

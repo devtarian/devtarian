@@ -1,18 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Route } from 'react-router-dom';
 import styled from 'styled-components';
 import Header from '../components/header/Header';
 
 const DefaultLayout = ({ component: Component, ...rest }) => {
-  const [wikiPosts, setWikiPosts] = useState(DUMMY_WIKIPOST);
-
   return (
     <Route
       {...rest}
       render={(props) => (
         <Wrap>
           <Header />
-          <Component {...props} wikiPosts={wikiPosts} />
+          <Component {...props} wikiPosts={DUMMY_WIKIPOST} />
         </Wrap>
       )}
     />

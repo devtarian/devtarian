@@ -12,6 +12,7 @@ const StoreDetail = ({ match }) => {
   const storeId = match.params.storeId;
   const dispatch = useDispatch();
   const { isFetching, data } = useSelector((state) => state.store);
+  const { isLoggedIn } = useSelector((state) => state.auth);
 
   useEffect(() => {
     dispatch(storeActions.getStore(storeId));
@@ -21,10 +22,10 @@ const StoreDetail = ({ match }) => {
 
   return (
     <Wrap>
-      <StoreDetailBox store={data} />
+      <StoreDetailBox store={data} isLoggedIn={isLoggedIn} />
       <div className="review">
         <EditBtn to={`/review/${storeId}`} innerText="리뷰 작성" />
-        <Review />
+        <Review isLoggedIn={isLoggedIn} />
       </div>
       <GoBackLink to="/" innerText="메인으로" />
     </Wrap>

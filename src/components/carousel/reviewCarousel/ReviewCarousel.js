@@ -1,14 +1,29 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import WriterProfile from '../../profile/WriterProfile';
 import ReviewCard, { ReviewCardWrap, ItemImg } from '../../card/ReviewCard';
 import CarouselBtn, { CarouselBtnWrap } from '../CarouselBtn';
 import ViewAll from '../VeiwAll';
 import useCarousel from '../../../hooks/useCarousel';
+import { useDispatch } from 'react-redux';
+import mainActions from '../../../redux/actions/mainActions';
 
-const ReviewCarousel = ({ carouselData, mg }) => {
+const ReviewCarousel = ({ carouselData, mg, isLoggedIn }) => {
+  const dispatch = useDispatch();
   const { value, onCarouselBtnClick } = useCarousel(mg);
   const { refCarouselUl, refCarouselLi } = value;
+
+  const handleClickLike = useCallback(
+    (review) => {
+      const { storeId, id, likesOfMe } = review;
+      if (!isLoggedIn) {
+        window.location = '/login';
+      }
+
+      likesOfMe ? dispatch(mainActions.unLikeReview(storeId, id)) : dispatch(mainActions.likeReview(storeId, id));
+    },
+    [dispatch, isLoggedIn]
+  );
 
   return (
     <Wrap>
@@ -17,7 +32,7 @@ const ReviewCarousel = ({ carouselData, mg }) => {
         {carouselData.map((data, index) => (
           <li key={index} ref={refCarouselLi}>
             <WriterProfile writer={data.writer} createdAt={data.createdAt} />
-            <ReviewCard cardData={data} />
+            <ReviewCard cardData={data} onClickLike={() => handleClickLike(data)} />
           </li>
         ))}
       </CarouselUl>

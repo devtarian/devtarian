@@ -1,11 +1,9 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { ReactComponent as EmptyHeartSvg } from '../../images/icons/heart_border-black.svg';
 import { ReactComponent as FullHeartSvg } from '../../images/icons/heart-black.svg';
 
-const FavoriteHeart = forwardRef((props, ref) => {
-  const { onFavoriteClick, favorite } = props;
-
+const FavoriteHeart = ({ onFavoriteClick, favorite }) => {
   const handleFavoriteClick = (e) => {
     e.preventDefault();
     onFavoriteClick();
@@ -14,14 +12,10 @@ const FavoriteHeart = forwardRef((props, ref) => {
   const renderHeart = () => {
     return favorite ? <FullHeart /> : <EmptyHeart />;
   };
-  return (
-    <FavoriteWrap ref={ref} onClick={handleFavoriteClick}>
-      {renderHeart()}
-    </FavoriteWrap>
-  );
-});
+  return <FavoriteWrap onClick={handleFavoriteClick}>{renderHeart()}</FavoriteWrap>;
+};
 
-export default FavoriteHeart;
+export default React.memo(FavoriteHeart);
 
 export const FavoriteWrap = styled.button`
   z-index: 101;

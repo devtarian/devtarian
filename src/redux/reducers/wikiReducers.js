@@ -1,16 +1,22 @@
 import { WIKI_GET_WIKI, WIKI_DELETE_WIKI, WIKI_FAVORITE_WIKI, WIKI_UN_FAVORITE_WIKI } from '../types';
 
 const INIT_STATE = {
-  isFetching: true,
   data: [],
+  isFetching: true,
+  fetchMore: true,
+  page: 0,
+  size: 8,
 };
 
 export const wikiReducers = (state = INIT_STATE, action = {}) => {
   switch (action.type) {
     case WIKI_GET_WIKI:
       return {
-        data: action.payload,
+        ...state,
+        data: [...state.data, ...action.payload],
         isFetching: false,
+        page: state.page + 1,
+        fetchMore: action.payload.length < state.size ? false : true,
       };
     case WIKI_DELETE_WIKI:
       return {

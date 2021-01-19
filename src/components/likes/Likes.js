@@ -1,30 +1,16 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
-import storeActions from '../../redux/actions/storeActions';
-import mainActions from '../../redux/actions/mainActions';
 import { ReactComponent as LikesSvg } from '../../images/icons/smile.svg';
 
-const Likes = forwardRef((props, ref) => {
-  const dispatch = useDispatch();
-  const { storeId, reviewId, likesOfMe } = props;
-
-  const handleLikesClick = (e) => {
-    e.preventDefault();
-    likesOfMe
-      ? dispatch(storeActions.unLikeReview(storeId, reviewId))
-      : dispatch(storeActions.likeReview(storeId, reviewId));
-    dispatch(mainActions.getMain({ lat: 37.573, lng: 126.9794 }));
-  };
-
+const Likes = ({ likesOfMe, onClickLike }) => {
   return (
     <LikesWrap>
-      <LikesBtn likesofme={likesOfMe ? 'likes' : 'unlikes'} ref={ref} onClick={handleLikesClick} />
+      <LikesBtn likesofme={likesOfMe ? 'likes' : 'unlikes'} onClick={onClickLike} />
     </LikesWrap>
   );
-});
+};
 
-export default Likes;
+export default React.memo(Likes);
 
 export const LikesWrap = styled.button``;
 

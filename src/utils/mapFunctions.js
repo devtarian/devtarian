@@ -45,19 +45,19 @@ export const makeInfoWindow = (store) => {
       '    <div class="info-body-title">' +
       '      <span class="vegType">' +
       translate(store.info.vegType) +
-      '</span>' +
+      '      </span>' +
       '      <h3 class="title">' +
       '        <a href="/">' +
       store.info.storeName +
-      '</a>' +
+      '        </a>' +
       '      </h3>' +
       '    </div>' +
       '    <strong class="region">' +
       store.info.region +
-      '</strong>' +
+      '    </strong>' +
       '    <p class="contents">' +
       store.info.contents +
-      '</p>' +
+      '    </p>' +
       '  </div>' +
       '  <div class="info-footer">거리: ' +
       store.distance +
