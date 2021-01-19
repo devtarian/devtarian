@@ -4,16 +4,6 @@ import styled from 'styled-components';
 import { timeSelect } from '../../utils/helper';
 import { InputSelect } from '.';
 
-const weekDayOptions = [
-  { title: '월요일' },
-  { title: '화요일' },
-  { title: '수요일' },
-  { title: '목요일' },
-  { title: '금요일' },
-  { title: '토요일' },
-  { title: '일요일' },
-];
-
 const initialValue = {
   weekDay: '월요일',
   start: '0시 00분',
@@ -21,6 +11,7 @@ const initialValue = {
 };
 const InputOperateHours = ({ value, setInputs, error, setErrors }) => {
   const [time, setTime] = useState(initialValue);
+  const weekDayOptions = useMemo(() => ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'], []);
   const startTimeOptions = useMemo(() => timeSelect(), []);
   const endTimeOptions = useMemo(() => timeSelect(time.start), [time.start]);
 
@@ -47,7 +38,7 @@ const InputOperateHours = ({ value, setInputs, error, setErrors }) => {
 
       setTime({
         ...initialValue,
-        weekDay: weekDayOptions[value.length + 1] ? weekDayOptions[value.length + 1].title : '일요일',
+        weekDay: weekDayOptions[value.length + 1] ? weekDayOptions[value.length + 1] : '일요일',
       });
     }
   };
@@ -64,9 +55,9 @@ const InputOperateHours = ({ value, setInputs, error, setErrors }) => {
   useEffect(() => {
     setTime({
       ...initialValue,
-      weekDay: weekDayOptions[value.length] ? weekDayOptions[value.length].title : '일요일',
+      weekDay: weekDayOptions[value.length] ? weekDayOptions[value.length] : '일요일',
     });
-  }, [setTime, value]);
+  }, [setTime, value, weekDayOptions]);
 
   return (
     <Wrap className="wrap">

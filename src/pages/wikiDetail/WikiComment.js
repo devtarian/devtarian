@@ -1,18 +1,34 @@
 import React from 'react';
 import styled from 'styled-components';
-import CommentForm, { CommentFormWrap } from '../../components/comment/CommentForm';
-import Comment from '../../components/comment/Comment';
+import { useSelector, useDispatch } from 'react-redux';
+import wikiDetailActions from '../../redux/actions/wikiDetailActions';
+import Loading from '../../components/loading/Loding';
+import CommentForm, { CommentFormWrap } from '../../components/commentForm/CommentForm';
+import Comment from './Comment';
 
-const WikiComment = ({ commentList }) => {
+const WikiComment = () => {
+  const dispatch = useDispatch();
+  const { isFetching, data } = useSelector((state) => state.wikiDetail);
+  const { id, comments, commentList } = data;
+
+  if (isFetching) return <Loading />;
+
+  const onCreateComment = (contents) => {
+    dispatch(wikiDetailActions.createWikiComment({ wikiId: id, contents }));
+  };
+
+  const onDeleteComment = (commentId) => {
+    console.log('here', commentId);
+    dispatch(wikiDetailActions.deleteWikiComment({ wikiId: id, commentId }));
+  };
+
   return (
     <Wrap>
-      <strong className="totalComments">{commentList.length} 개의 댓글</strong>
+      <strong className="totalComments">{comments} 개의 댓글</strong>
       <div className="innerContainer">
-        <CommentForm />
+        <CommentForm onCreateComment={onCreateComment} />
         <ul className="comments">
-          {commentList.map((comment) => (
-            <Comment key={comment.id} data={comment} />
-          ))}
+          <Comment commentData={commentList} onDeleteComment={onDeleteComment} />
         </ul>
       </div>
     </Wrap>
@@ -45,6 +61,11 @@ const Wrap = styled.div`
     }
 
     ${CommentFormWrap} {
+      .userThumbnail {
+        width: 30px;
+        height: 30px;
+        margin: 8px 8px 0 0;
+      }
       form {
         input {
           height: 40px;

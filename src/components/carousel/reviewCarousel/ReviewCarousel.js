@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import Profile from '../../profile/Profile';
-import ImgTextCard, { ImgTextCardWrap, ItemImg } from '../../card/ImgTextCard';
+import WriterProfile from '../../profile/WriterProfile';
+import ReviewCard, { ReviewCardWrap, ItemImg } from '../../card/ReviewCard';
 import CarouselBtn, { CarouselBtnWrap } from '../CarouselBtn';
 import ViewAll from '../VeiwAll';
 import useCarousel from '../../../hooks/useCarousel';
@@ -9,15 +9,15 @@ import useCarousel from '../../../hooks/useCarousel';
 const ReviewCarousel = ({ carouselData, mg }) => {
   const { value, onCarouselBtnClick } = useCarousel(mg);
   const { refCarouselUl, refCarouselLi } = value;
-  console.log(carouselData);
+
   return (
     <Wrap>
       <h2>새로운 리뷰</h2>
       <CarouselUl ref={refCarouselUl} value={value}>
-        {carouselData.store.map((data, index) => (
+        {carouselData.map((data, index) => (
           <li key={index} ref={refCarouselLi}>
-            <Profile userData={carouselData.review[0]} />
-            <ImgTextCard storeData={data} reviewData={carouselData.review[0]} />
+            <WriterProfile writer={data.writer} createdAt={data.createdAt} />
+            <ReviewCard cardData={data} />
           </li>
         ))}
       </CarouselUl>
@@ -44,7 +44,7 @@ const Wrap = styled.section`
     width: 365px;
     height: 235px;
   }
-  ${ImgTextCardWrap} {
+  ${ReviewCardWrap} {
     p {
       -webkit-line-clamp: 2;
     }

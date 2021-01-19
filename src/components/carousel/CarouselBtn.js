@@ -4,7 +4,7 @@ import { ReactComponent as PrevSvg } from '../../images/icons/arrow_left.svg';
 import { ReactComponent as NextSvg } from '../../images/icons/arrow_right.svg';
 
 const CarouselBtn = ({ value, onCarouselBtnClick }) => {
-  const { currentIndex, leftPosition, liClientWidth, liSideMargin } = value;
+  const { currentIndex, leftPosition, liClientWidth, liSideMargin, liLength } = value;
 
   const HandleCarouselBtnClick = (e) => {
     const liLRMargin = liSideMargin * 2;
@@ -29,12 +29,13 @@ const CarouselBtn = ({ value, onCarouselBtnClick }) => {
           </span>
         </button>
       )}
-
-      <button className="next" onClick={HandleCarouselBtnClick}>
-        <span>
-          <NextBtn />
-        </span>
-      </button>
+      {currentIndex !== liLength - 1 && (
+        <button className="next" onClick={HandleCarouselBtnClick}>
+          <span>
+            <NextBtn />
+          </span>
+        </button>
+      )}
     </CarouselBtnWrap>
   );
 };

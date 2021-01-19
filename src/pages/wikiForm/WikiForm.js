@@ -1,29 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useSelector, useDispatch } from 'react-redux';
+import wikiDetailActions from '../../redux/actions/wikiDetailActions';
+import history from '../../history';
 import { RadioInput, UploadImg, Input, Textarea, SubmitBtn } from '../../components/form';
 import useInput from '../../hooks/useInput';
 import BgImg from '../../images/pexels-karolina-grabowska-4197908.jpg';
 import apis from '../../Service/apis';
 
-const CATEGORIES = ['가공식품', '과자/간식', '제과/제빵', '음료', '기타'];
+const CATEGORIES = ['processed', 'snack', 'bakery', 'drink', 'etc'];
 
 const WikiForm = () => {
+  const dispatch = useDispatch();
   const INIT_WIKIPOST = {
-    id: 0,
-    category: '가공식품',
+    category: 'processed',
     product: '',
     ingredient: '',
-    likesOfMe: false,
     files: [],
-    commentList: [
-      {
-        id: 0,
-        wikiId: '',
-        writer: '',
-        createAt: '3초 전',
-        contents: '',
-      },
-    ],
   };
 
   const { inputs, errors, onInputChange, onImageUpload, requiredValidate } = useInput(INIT_WIKIPOST);
@@ -41,8 +34,8 @@ const WikiForm = () => {
         formData.append('file', files[i]);
       }
       formData.append('body', JSON.stringify(body));
-      const res = await apis.wikiApi.createWiki(formData);
-      console.log(res);
+      await apis.wikiApi.createWiki(formData);
+      history.push('/vegwiki');
     } catch (err) {
       console.log(err.response ? err.response : err);
     }

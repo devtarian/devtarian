@@ -13,7 +13,7 @@ import apis from '../../Service/apis';
 const pageConfig = [
   { id: 'store', title: '가게 정보', validate: ['category', 'vegType', 'storeName', 'contactNum', 'operatingHours'] },
   { id: 'menu', title: '메뉴 정보', validate: ['menuList'] },
-  { id: 'info', title: '나의 소개', validate: [] },
+  { id: 'info', title: '나의 소개', validate: ['starRating'] },
 ];
 
 const renderForm = ({ step, ...rest }) => {
@@ -31,10 +31,10 @@ const renderForm = ({ step, ...rest }) => {
 
 const INIT_VALUES = {
   step: 0,
-  category: '식당',
+  category: 'restaurant',
   lat: '',
   lng: '',
-  vegType: '',
+  vegType: 'vegan',
   storeName: '',
   contactNum: '',
   region: '',
@@ -207,6 +207,9 @@ const Breadcrumb = styled.div`
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   color: ${(props) => props.theme.gray[1]};
 

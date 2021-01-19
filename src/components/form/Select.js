@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import { translate } from '../../utils/helper';
 
 const Select = ({ info }) => {
   return (
     <SelectWrap>
       {info.map((item, index) => (
-        <option key={index}>{item}</option>
+        <option key={index}>{translate(item)}</option>
       ))}
     </SelectWrap>
   );

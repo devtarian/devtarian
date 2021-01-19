@@ -1,9 +1,9 @@
-import { MAIN_GET_MAIN } from '../types';
+import { MAIN_GET_MAIN, MAIN_LIKE_REVIEW, MAIN_UNLIKE_REVIEW } from '../types';
 import apis from '../../Service/apis';
 
 const getMain = ({ lat, lng }) => async (dispatch) => {
   try {
-    const data = await apis.mainApi.getMain({ lat, lng });
+    const data = await apis.mainApi.getMain({ lat: lat || 37.573, lng: lng || 126.9794 });
 
     dispatch({
       type: MAIN_GET_MAIN,

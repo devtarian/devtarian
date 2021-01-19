@@ -1,32 +1,23 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+// import { useSelector, useDispatch } from 'react-redux';
+// import wikiActions from '../../redux/actions/wikiActions';
+// import Loading from '../../components/loading/Loding';
 import { Checkbox, Select } from '../../components/form';
 import { CheckboxWrap } from '../../components/form/Checkbox';
 import { SelectWrap } from '../../components/form/Select';
 import CircleImgTextCard, { CircleCardWrap } from '../../components/card/CircleImgTextCard';
+import EditBtn, { EditBtnWrap } from '../../components/editBtn/EditBtn';
 import useInput from '../../hooks/useInput';
 import useActivedBtn from '../../hooks/useActivedBtn';
+import useObserver from '../../hooks/useObserver';
 
 const VegiWiki = ({ wikiPosts }) => {
-  const [category, setCategory] = useState();
+  //const [category, setCategory] = useState();
+
   const [products, setProducts] = useState(wikiPosts);
   const { inputs, setInputs, onInputChange } = useInput();
-  const { activedBtn, setActivedBtn, onCheckboxClick } = useActivedBtn();
-
-  const onReviewChange = (e) => {
-    const { name, value } = e.target;
-    setCategory({
-      ...category,
-      [name]: value,
-    });
-  };
-
-  const handleSubmit = (e) => {
-    console.log(category);
-    e.preventDefault();
-    setActivedBtn('');
-    setCategory('');
-  };
+  const { activedBtn, onCheckboxClick } = useActivedBtn();
 
   const loadProducts = () => {
     setProducts((prevState) => {
@@ -99,28 +90,7 @@ const VegiWiki = ({ wikiPosts }) => {
     });
   };
 
-  const refTarget = useRef(null);
-
-  useEffect(() => {
-    const options = {
-      threshold: 0.5,
-    };
-
-    const handleObserver = (entries, observer) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        loadProducts();
-        observer.unobserve(entry.target);
-        observer.observe(refTarget.current);
-      });
-    };
-    const io = new IntersectionObserver(handleObserver, options);
-
-    if (refTarget.current) {
-      io.observe(refTarget.current);
-    }
-    return () => io && io.disconnect();
-  }, [refTarget]);
+  const refTarget = useObserver(loadProducts);
 
   return (
     <Wrap>
@@ -135,12 +105,14 @@ const VegiWiki = ({ wikiPosts }) => {
         />
         <Select info={OPTIONS} />
       </div>
+      <EditBtn to="/wikiForm" innerText="위키 작성" />
       <div className="product">
         <strong>총 {products.length}개</strong>
         <ul>
           {products.map((data, index) => {
             const lastEl = index === products.length - 1;
-            return <CircleImgTextCard key={data.id} data={data} ref={lastEl ? refTarget : null} />;
+
+            return <CircleImgTextCard key={index} data={data} ref={lastEl ? refTarget : null} />;
           })}
         </ul>
       </div>
@@ -151,11 +123,16 @@ const VegiWiki = ({ wikiPosts }) => {
 export default VegiWiki;
 
 const Wrap = styled.section`
+  position: relative;
   width: 100%;
   max-width: 1200px;
   margin: 0.6rem auto 0;
   padding: 1.5rem;
 
+  ${EditBtnWrap} {
+    top: 199px;
+    right: 24px;
+  }
   .filters {
     position: relative;
     padding-bottom: 2rem;
@@ -188,18 +165,22 @@ const Wrap = styled.section`
   }
 
   @media (max-width: 767px) {
+    ${EditBtnWrap} {
+      top: 256px;
+    }
     ${CircleCardWrap} {
       width: calc(33% - 1.6rem);
     }
     .filters {
-      ${SelectWrap} {
-        bottom: -61px;
-      }
+      padding-bottom: 5.5rem;
     }
   }
   @media (max-width: 639px) {
     ul {
-      padding: 3rem;
+      padding: 1rem;
+    }
+    ${EditBtnWrap} {
+      top: 298px;
     }
     ${CircleCardWrap} {
       width: calc(100% - 1.6rem);
@@ -207,6 +188,6 @@ const Wrap = styled.section`
   }
 `;
 
-const CATEGORIES = ['전체', '가공식품', '과자/간식', '제과/제빵', '음료', '기타'];
+const CATEGORIES = ['all', 'processed', 'snack', 'bakery', 'drink', 'etc'];
 
-const OPTIONS = ['최근등록순', '오름차순', '내림차순'];
+const OPTIONS = ['createdAt', 'asc', 'desc'];

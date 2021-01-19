@@ -1,20 +1,25 @@
-import React, { useState } from 'react';
+import React, { forwardRef } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as EmptyHeartSvg } from '../../images/icons/heart_border-black.svg';
 import { ReactComponent as FullHeartSvg } from '../../images/icons/heart-black.svg';
 
-const FavoriteHeart = ({ data }) => {
-  const [favorite, setFavorite] = useState(false);
+const FavoriteHeart = forwardRef((props, ref) => {
+  const { onFavoriteClick, favorite } = props;
 
-  const handleFavoriteBtnClick = () => {
-    setFavorite(!favorite);
+  const handleFavoriteClick = (e) => {
+    e.preventDefault();
+    onFavoriteClick();
   };
 
   const renderHeart = () => {
     return favorite ? <FullHeart /> : <EmptyHeart />;
   };
-  return <FavoriteWrap onClick={handleFavoriteBtnClick}>{renderHeart()}</FavoriteWrap>;
-};
+  return (
+    <FavoriteWrap ref={ref} onClick={handleFavoriteClick}>
+      {renderHeart()}
+    </FavoriteWrap>
+  );
+});
 
 export default FavoriteHeart;
 

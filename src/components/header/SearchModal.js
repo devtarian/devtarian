@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import Search from '../search/Search';
-// import CloseBtn from '../closeBtn/CloseBtn';
+import SearchInput from '../searchInput/SearchInput';
 
 const SearchModal = ({ onCloseModal }) => {
   return (
@@ -16,7 +15,7 @@ const SearchModal = ({ onCloseModal }) => {
           <a href="/">제품</a>
         </li>
       </SearchCategory>
-      <Search posTop="80px" bg="none" />
+      <SearchInput posTop="80px" bg="none" />
       <CloseBtn onClick={onCloseModal}>
         <i>x</i>
       </CloseBtn>

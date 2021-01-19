@@ -1,6 +1,7 @@
 import { defaultApi } from './default';
 
 export const api = {
+  // store
   async createStore(formData) {
     const res = await defaultApi.post('/store', formData);
     return res.data;
@@ -11,25 +12,41 @@ export const api = {
     return res.data;
   },
 
+  async favoriteStore(storeId) {
+    await defaultApi.post(`/store/${storeId}/favorite`);
+  },
+
+  async unFavoriteStore(storeId) {
+    await defaultApi.delete(`/store/${storeId}/unfavorite`);
+  },
+
+  // review
   async createReview(storeId, formData) {
     const res = await defaultApi.post(`/store/${storeId}/review`, formData);
     return res.data;
   },
 
-  // async createComment({ userId, postId, reviewId, contents }) {
-  //   return await defaultApi.post(`/user/${userId}/post/${postId}/review/${reviewId}/comment`, { contents });
-  // },
+  async likeReview(storeId, reviewId) {
+    await defaultApi.post(`/store/${storeId}/review/${reviewId}/like`);
+  },
 
-  // async getComments({ userId, postId, reviewId }) {
-  //   const res = await defaultApi.get(`/user/${userId}/post/${postId}/review/${reviewId}/comment`);
-  //   return res.data;
-  // },
+  async unLikeReview(storeId, reviewId) {
+    await defaultApi.delete(`/store/${storeId}/review/${reviewId}/unlike`);
+  },
 
-  // async FavoritePost({ userId, postId }) {
-  //   await defaultApi.patch(`/user/${userId}/post/${postId}/favorite`);
-  // },
+  // comment
+  async createComment({ storeId, reviewId, data }) {
+    return await defaultApi.post(`/store/${storeId}/review/${reviewId}/comment`, data);
+  },
 
-  // async likeReview({ userId, postId, reviewId }) {
-  //   await defaultApi.patch(`/user/${userId}/post/${postId}/review/${reviewId}/like`);
-  // },
+  async getComments(storeId, reviewId) {
+    const res = await defaultApi.get(`/store/${storeId}/review/${reviewId}/comment`);
+    return res.data;
+  },
+
+  async deleteComment({ storeId, reviewId, commentId }) {
+    // commentId 맞게 넘어옴
+    console.log({ storeId, reviewId, commentId });
+    return await defaultApi.delete(`/store/${storeId}/review/${reviewId}/comment/${commentId}`);
+  },
 };

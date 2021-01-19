@@ -1,11 +1,15 @@
 import React from 'react';
 import { Router, Switch } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
 import history from './history';
-import { DefaultLayout, PublicLayout } from './layouts';
+import { DefaultLayout, FormLayout, PublicLayout } from './layouts';
 import pages from './pages';
+import SearchPage from './pages/searchPage/SearchPage';
 
 function App() {
-  const { PostDetail, FeedForm, Login, Main, ReviewForm, SignUp, VegWiki, WikiDetail, WikiForm } = pages;
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const { StoreDetail, FeedForm, Login, Main, ReviewForm, SignUp, VegWiki, WikiDetail, WikiForm } = pages;
 
   return (
     <div className="App">
@@ -13,13 +17,15 @@ function App() {
         <Switch>
           <PublicLayout path="/signup" component={SignUp} />
           <PublicLayout path="/login" component={Login} />
-          <DefaultLayout path="/detail" component={PostDetail} />
-          <DefaultLayout path="/wikidetail" component={WikiDetail} />
+          <DefaultLayout path="/storeDetail/:storeId" component={StoreDetail} />
+          <DefaultLayout path="/wikiDetail/:wikiId" component={WikiDetail} />
           <DefaultLayout path="/vegwiki" component={VegWiki} />
-          <DefaultLayout path="/feed" component={FeedForm} />
-          <DefaultLayout path="/review" component={ReviewForm} />
-          <DefaultLayout path="/wiki" component={WikiForm} />
-          <DefaultLayout path="/" component={Main} />
+          <DefaultLayout path="/search" component={SearchPage} />
+          <DefaultLayout path="/" exact component={Main} />
+          <FormLayout isLoggedIn={isLoggedIn} path="/feed" component={FeedForm} />
+          <FormLayout isLoggedIn={isLoggedIn} path="/review/:storeId" component={ReviewForm} />
+          <FormLayout isLoggedIn={isLoggedIn} path="/wikiForm" component={WikiForm} />
+          <FormLayout isLoggedIn={isLoggedIn} path="/wikiForm/:wikiId" component={WikiForm} />
         </Switch>
       </Router>
     </div>

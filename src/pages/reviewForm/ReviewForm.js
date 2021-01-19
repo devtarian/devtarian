@@ -14,13 +14,13 @@ const INIT_REVIEW = {
 };
 
 const ReviewForm = ({ match }) => {
-  const storeId = match.params.storeId || 'YbvnHdy8lso5tTqzAXIn';
+  const storeId = match.params.storeId;
   const { inputs, setInputs, errors, onInputChange, onImageUpload, requiredValidate } = useInput(INIT_REVIEW);
 
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      const requiredList = ['title', 'contents'];
+      const requiredList = ['starRating', 'title', 'contents'];
       let isValid = requiredValidate(requiredList);
       if (!isValid) return;
 
