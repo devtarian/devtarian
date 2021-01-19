@@ -7,10 +7,9 @@ import FavoriteHeart, { FavoriteWrap, EmptyHeart } from '../../components/favori
 import noImg from '../../images/noImg.jpg';
 import { translate } from '../../utils/helper';
 
-const CircleImgTextCard = forwardRef((props, ref) => {
+const CircleImgTextCard = forwardRef(({ data }, ref) => {
   const dispatch = useDispatch();
-  const { cardData } = props;
-  const { id, imgUrl, category, product, ingredient, favorite } = cardData;
+  const { id, imgUrl, category, product, ingredient, favorite } = data;
   const refFavorite = useRef(null);
 
   const handleCardClick = (e) => {

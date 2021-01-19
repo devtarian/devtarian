@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useSelector, useDispatch } from 'react-redux';
-import wikiActions from '../../redux/actions/wikiActions';
-import Loading from '../../components/loading/Loding';
+// import { useSelector, useDispatch } from 'react-redux';
+// import wikiActions from '../../redux/actions/wikiActions';
+// import Loading from '../../components/loading/Loding';
 import { Checkbox, Select } from '../../components/form';
 import { CheckboxWrap } from '../../components/form/Checkbox';
 import { SelectWrap } from '../../components/form/Select';
@@ -14,6 +14,7 @@ import useObserver from '../../hooks/useObserver';
 
 const VegiWiki = ({ wikiPosts }) => {
   //const [category, setCategory] = useState();
+
   const [products, setProducts] = useState(wikiPosts);
   const { inputs, setInputs, onInputChange } = useInput();
   const { activedBtn, onCheckboxClick } = useActivedBtn();
@@ -106,9 +107,9 @@ const VegiWiki = ({ wikiPosts }) => {
       </div>
       <EditBtn to="/wikiForm" innerText="위키 작성" />
       <div className="product">
-        <strong>총 {data.length}개</strong>
+        <strong>총 {products.length}개</strong>
         <ul>
-          {data.map((data, index) => {
+          {products.map((data, index) => {
             const lastEl = index === products.length - 1;
 
             return <CircleImgTextCard key={index} data={data} ref={lastEl ? refTarget : null} />;
