@@ -22,7 +22,7 @@ const StoreDetail = ({ match }) => {
 
   return (
     <Wrap>
-      <StoreDetailBox store={data} />
+      <StoreDetailBox store={data} isLoggedIn={isLoggedIn} />
       <div className="review">
         <EditBtn to={`/review/${storeId}`} innerText="리뷰 작성" />
         <Review isLoggedIn={isLoggedIn} />

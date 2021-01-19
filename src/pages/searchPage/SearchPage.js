@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import searchActions from '../../redux/actions/searchActions';
 import useObserver from '../../hooks/useObserver';
 import history from '../../history';
+import Loading from '../../components/loading/Loding';
 
 const SearchPage = () => {
   const dispatch = useDispatch();
@@ -51,7 +52,7 @@ const SearchPage = () => {
     dispatch(searchActions.getSearch());
   }, [dispatch]);
 
-  if (isFetching) return null;
+  if (isFetching) return <Loading />;
 
   return (
     <Wrap>

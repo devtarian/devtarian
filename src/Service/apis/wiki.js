@@ -1,8 +1,10 @@
 import { defaultApi } from './default';
+import { changeObjectToQuery } from '../../utils/helper';
 
 export const api = {
-  async getWiki() {
-    const res = await defaultApi.get('/wiki');
+  async getWiki(query) {
+    console.log(query);
+    const res = await defaultApi.get(`/wiki${changeObjectToQuery(query)}`);
     return res.data;
   },
 
