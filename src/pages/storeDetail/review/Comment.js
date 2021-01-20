@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-import apis from '../../../Service/apis';
+import apis from '../../../service/apis';
 import WriterProfile, { WriterProfileWrap } from '../../../components/profile/WriterProfile';
 import CommentForm from '../../../components/commentForm/CommentForm';
 

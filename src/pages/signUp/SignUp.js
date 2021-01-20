@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import apis from '../../Service/apis';
-import { defaultApi } from '../../Service/apis/default';
+import apis from '../../service/apis';
+import { defaultApi } from '../../service/apis/default';
 
 import useInput from '../../hooks/useInput';
 import UploadProfileImg from './UploadProfileImg';

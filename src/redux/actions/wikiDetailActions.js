@@ -5,7 +5,7 @@ import {
   WIKI_DETAIL_CREATE_COMMENT,
   WIKI_DETAIL_DELETE_COMMENT,
 } from '../types';
-import apis from '../../Service/apis';
+import apis from '../../service/apis';
 
 const getWikiDetail = (wikiId) => async (dispatch) => {
   try {

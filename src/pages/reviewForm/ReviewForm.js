@@ -4,7 +4,7 @@ import { UploadImg, StarRating, Input, Textarea, SubmitBtn } from '../../compone
 import history from '../../history';
 import useInput from '../../hooks/useInput';
 import BgImg from '../../images/pexels-karolina-grabowska-4197908.jpg';
-import apis from '../../Service/apis';
+import apis from '../../service/apis';
 
 const INIT_REVIEW = {
   starRating: '',

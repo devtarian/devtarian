@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import KakaoMap from '../Map/KakaoMap';
+import KakaoMap from '../map/KakaoMap';
 import Input from './Input';
 
 const InputAddressKakao = ({ addr, lat, lng, addrDetail, onChange }) => {

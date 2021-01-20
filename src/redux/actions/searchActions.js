@@ -1,7 +1,7 @@
 import { SEARCH_INIT_DATA, SEARCH_INIT_MAP, SEARCH_FAVORITE, SEARCH_UNFAVORITE } from '../types';
 import queryString from 'query-string';
 import history from '../../history';
-import apis from '../../Service/apis';
+import apis from '../../service/apis';
 import { makeMarkerImg, makeMarker, makeInfoWindow, drawMap } from '../../utils/mapFunctions';
 
 const getSearch = () => async (dispatch, getState) => {

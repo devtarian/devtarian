@@ -1,5 +1,5 @@
 import { WIKI_GET_WIKI, WIKI_DELETE_WIKI, WIKI_FAVORITE_WIKI, WIKI_UN_FAVORITE_WIKI } from '../types';
-import apis from '../../Service/apis';
+import apis from '../../service/apis';
 import queryString from 'query-string';
 import history from '../../history';
 

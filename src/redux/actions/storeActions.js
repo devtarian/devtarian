@@ -5,7 +5,7 @@ import {
   STORE_REVIEW_LIKE,
   STORE_REVIEW_UNLIKE,
 } from '../types';
-import apis from '../../Service/apis';
+import apis from '../../service/apis';
 
 // store
 const getStore = (storeId) => async (dispatch) => {

@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import history from '../../../history';
 import queryString from 'query-string';
 
-import Button from '../../../Styles/Button';
+import Button from '../../../styles/Button';
 import Svg from '../../../components/common/Svg';
-import ModalFilter from './ModalFilter/ModalFilter';
+import ModalFilter from './modalFilter/ModalFilter';
 import { changeObjectToQuery, translate } from '../../../utils/helper';
 import filterConfig from '../../../config/filterConfig';
 

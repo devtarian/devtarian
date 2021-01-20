@@ -1,9 +1,9 @@
 import React, { useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import SearchInput from '../../components/searchInput/SearchInput';
-import SearchFilter from './SearchFilter/SearchFilter';
+import SearchFilter from './searchFilter/SearchFilter';
 import ImgTextCard from '../../components/card/ImgTextCard';
-import SearchMap from './SearchMap/SeacrhMap';
+import SearchMap from './searchMap/SeacrhMap';
 
 import { useDispatch, useSelector } from 'react-redux';
 import searchActions from '../../redux/actions/searchActions';
@@ -132,16 +132,12 @@ const CardList = styled.div`
   -webkit-box-lines: multiple;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
 `;
 
 const StyledCard = styled(ImgTextCard)`
   width: 32%;
   margin-bottom: 20px;
-
+  margin-right: 1%;
   @media (max-width: 1350px) {
     width: 49%;
   }

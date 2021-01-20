@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useSelector, useDispatch } from 'react-redux';
-import wikiDetailActions from '../../redux/actions/wikiDetailActions';
+import { useDispatch } from 'react-redux';
+// import wikiDetailActions from '../../redux/actions/wikiDetailActions';
 import history from '../../history';
 import { RadioInput, UploadImg, Input, Textarea, SubmitBtn } from '../../components/form';
 import useInput from '../../hooks/useInput';
 import BgImg from '../../images/pexels-karolina-grabowska-4197908.jpg';
-import apis from '../../Service/apis';
+import apis from '../../service/apis';
 
 const CATEGORIES = ['processed', 'snack', 'bakery', 'drink', 'etc'];
 
