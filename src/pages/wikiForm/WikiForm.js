@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 import history from '../../history';
 import { RadioInput, UploadImg, Input, Textarea, SubmitBtn } from '../../components/form';
@@ -18,7 +18,7 @@ const INIT_WIKIPOST = {
 const WikiForm = ({ match }) => {
   const wikiId = match.params.wikiId;
   const { inputs, setInputs, errors, onInputChange, onImageUpload, requiredValidate } = useInput(INIT_WIKIPOST);
-
+  const imgUrls = useMemo(() => changeFileToImgUrl(inputs.files, inputs.imgUrls), [inputs.files, inputs.imgUrls]);
   useEffect(() => {
     if (!wikiId) return;
     apis.wikiApi.getWikiDetail(wikiId).then((res) => {
@@ -62,11 +62,7 @@ const WikiForm = ({ match }) => {
           category={inputs.category}
           onChange={onInputChange}
         />
-        <UploadImg
-          name="imgFiles"
-          imgUrls={changeFileToImgUrl(inputs.files, inputs.imgUrls)}
-          onImageUpload={onImageUpload}
-        />
+        <UploadImg name="imgFiles" imgUrls={imgUrls} onImageUpload={onImageUpload} />
         <Input
           label="상품명"
           name="product"

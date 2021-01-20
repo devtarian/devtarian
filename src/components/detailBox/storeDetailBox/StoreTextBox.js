@@ -6,6 +6,7 @@ import { ViewAllWrap } from '../../carousel/VeiwAll';
 import { ReactComponent as PlusSvg } from '../../../images/icons/add.svg';
 import useMoreDetail from '../../../hooks/useMoreDetail';
 import { translate } from '../../../utils/helper';
+import Svg from '../../common/Svg';
 
 const StoreTextBox = ({ storeData }) => {
   const {
@@ -60,6 +61,16 @@ const StoreTextBox = ({ storeData }) => {
               </div>
             )}
             {operatingHours.length > 3 && (
+              // <Svg
+              //   type="add"
+              //   w="20px"
+              //   h="20px"
+              //   radius="50%"
+              //   zIndex="100"
+              //   ref={hours.refBtn}
+              //   onMouseOver={hours.handleMoreBtnHover}
+              //   onMouseOut={hours.handleMoreBtnHover}
+              // />
               <ViewMoreBtn
                 ref={hours.refBtn}
                 onMouseOver={hours.handleMoreBtnHover}

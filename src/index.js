@@ -8,7 +8,10 @@ import GlobalStyles from './styles/GlobalStyles';
 import { theme } from './config/config';
 import { authActions } from './redux/actions';
 
-store.dispatch(authActions.getMe());
+const token = localStorage.getItem('token');
+if (token) {
+  store.dispatch(authActions.getMe());
+}
 
 ReactDOM.render(
   <Provider store={store}>
