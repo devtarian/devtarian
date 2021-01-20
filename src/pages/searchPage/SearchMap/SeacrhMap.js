@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import Styled from 'styled-components';
 import Svg from '../../../components/common/Svg';
 import { useDispatch } from 'react-redux';
-import searchActions from '../../../redux/actions/searchActions';
+import { searchActions } from '../../../redux/actions';
 
 const SearchMap = () => {
   const dispatch = useDispatch();

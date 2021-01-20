@@ -5,7 +5,7 @@ const INIT_STATE = {
   isFetching: true,
   fetchMore: true,
   page: 0,
-  size: 8,
+  size: 6,
 };
 
 export const wikiReducers = (state = INIT_STATE, action = {}) => {

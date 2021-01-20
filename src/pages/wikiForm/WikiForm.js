@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
-// import wikiDetailActions from '../../redux/actions/wikiDetailActions';
+// import {wikiDetailActions} from '../../redux/actions';
 import history from '../../history';
 import { RadioInput, UploadImg, Input, Textarea, SubmitBtn } from '../../components/form';
 import useInput from '../../hooks/useInput';

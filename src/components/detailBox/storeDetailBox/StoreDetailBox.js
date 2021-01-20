@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
-import storeActions from '../../../redux/actions/storeActions';
+import { storeActions } from '../../../redux/actions';
 import ImgBox from '../ImgBox';
 import StoreTextBox from './StoreTextBox';
 import FavoriteHeart, { FavoriteWrap } from '../../favoriteHeart/FavoriteHeart';

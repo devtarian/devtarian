@@ -1,7 +1,7 @@
 import React, { forwardRef, useRef, useCallback } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
-import wikiActions from '../../redux/actions/wikiActions';
+import { wikiActions } from '../../redux/actions';
 import history from '../../history';
 import FavoriteHeart, { FavoriteWrap, EmptyHeart } from '../../components/favoriteHeart/FavoriteHeart';
 import noImg from '../../images/noImg.jpg';

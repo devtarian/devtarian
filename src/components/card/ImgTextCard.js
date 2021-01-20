@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
-import storeActions from '../../redux/actions/storeActions';
+import { storeActions } from '../../redux/actions';
 import history from '../../history';
 import Stars from '../stars/Stars';
 import FavoriteHeart, { FavoriteWrap, EmptyHeart } from '../../components/favoriteHeart/FavoriteHeart';

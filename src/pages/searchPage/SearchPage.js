@@ -6,7 +6,7 @@ import ImgTextCard from '../../components/card/ImgTextCard';
 import SearchMap from './searchMap/SeacrhMap';
 
 import { useDispatch, useSelector } from 'react-redux';
-import searchActions from '../../redux/actions/searchActions';
+import { searchActions } from '../../redux/actions';
 import useObserver from '../../hooks/useObserver';
 import history from '../../history';
 import Loading from '../../components/loading/Loding';

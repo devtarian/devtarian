@@ -8,7 +8,7 @@ import Likes from '../../../components/likes/Likes';
 import { ReactComponent as CommentSvg } from '../../../images/icons/insert_comment.svg';
 
 import { useDispatch } from 'react-redux';
-import storeActions from '../../../redux/actions/storeActions';
+import { storeActions } from '../../../redux/actions';
 
 const Review = ({ isLoggedIn }) => {
   const dispatch = useDispatch();

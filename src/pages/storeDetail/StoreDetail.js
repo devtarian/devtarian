@@ -5,7 +5,7 @@ import Review from './review/Review';
 import EditBtn from '../../components/editBtn/EditBtn';
 import GoBackLink from '../../components/goBackLink/GoBackLink';
 import { useSelector, useDispatch } from 'react-redux';
-import storeActions from '../../redux/actions/storeActions';
+import { storeActions } from '../../redux/actions';
 import Loading from '../../components/loading/Loding';
 
 const StoreDetail = ({ match }) => {

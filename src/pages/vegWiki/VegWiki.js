@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
-import wikiActions from '../../redux/actions/wikiActions';
+import { wikiActions } from '../../redux/actions';
 import { CheckboxWrap } from '../../components/form/Checkbox';
 import { SelectWrap } from '../../components/form/Select';
 import CircleImgTextCard, { CircleCardWrap } from '../../components/card/CircleImgTextCard';
@@ -14,9 +14,9 @@ const VegiWiki = () => {
   const dispatch = useDispatch();
   const { isFetching, data, fetchMore } = useSelector((state) => state.wiki);
   const { isLoggedIn } = useSelector((state) => state.auth);
-
   const handleFetchMore = () => {
     if (!fetchMore) return;
+
     dispatch(wikiActions.getWiki());
   };
 
