@@ -2,6 +2,7 @@ import { WIKI_GET_WIKI, WIKI_DELETE_WIKI, WIKI_FAVORITE_WIKI, WIKI_UN_FAVORITE_W
 
 const INIT_STATE = {
   data: [],
+  totalCount: 0,
   isFetching: true,
   fetchMore: true,
   page: 0,
@@ -13,10 +14,11 @@ export const wikiReducers = (state = INIT_STATE, action = {}) => {
     case WIKI_GET_WIKI:
       return {
         ...state,
-        data: [...state.data, ...action.payload],
+        data: [...state.data, ...action.payload.data],
+        totalCount: action.payload.totalCount,
         isFetching: false,
         page: state.page + 1,
-        fetchMore: action.payload.length < state.size ? false : true,
+        fetchMore: action.payload.data.length < state.size ? false : true,
       };
     case WIKI_DELETE_WIKI:
       return {

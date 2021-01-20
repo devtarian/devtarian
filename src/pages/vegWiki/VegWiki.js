@@ -12,7 +12,7 @@ import VegWikiFilter from './vegWikiFilter/vegWikiFilter';
 
 const VegiWiki = () => {
   const dispatch = useDispatch();
-  const { isFetching, data, fetchMore } = useSelector((state) => state.wiki);
+  const { isFetching, totalCount, data, fetchMore } = useSelector((state) => state.wiki);
   const { isLoggedIn } = useSelector((state) => state.auth);
   const handleFetchMore = () => {
     if (!fetchMore) return;
@@ -32,7 +32,7 @@ const VegiWiki = () => {
       <VegWikiFilter />
       <EditBtn to="/wikiForm" innerText="위키 작성" />
       <div className="product">
-        <strong>총 {data.length}개</strong>
+        <strong>총 {totalCount}개</strong>
         <ul>
           {data.map((item, index) => {
             const lastEl = index === data.length - 1;
