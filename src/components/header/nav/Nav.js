@@ -72,7 +72,7 @@ const Wrap = styled.nav`
       }
       span:after {
         content: '';
-        z-index: 100000;
+        z-index: 10000;
         position: absolute;
         left: 50%;
         bottom: -10px;

@@ -1,6 +1,6 @@
 import React, { useEffect, useCallback } from 'react';
 import styled from 'styled-components';
-import SearchInput from '../../components/searchInput/SearchInput';
+import Search, { SearchWrap, InnerWrap } from '../../components/search/Search';
 import SearchFilter from './SearchFilter/SearchFilter';
 import ImgTextCard from '../../components/card/ImgTextCard';
 import SearchMap from './SearchMap/SeacrhMap';
@@ -45,7 +45,7 @@ const SearchPage = () => {
     <Wrap>
       <SectionContents>
         <h3>검색</h3>
-        <StyledSearch width="100%" />
+        <Search />
         <SearchFilter />
 
         <h3>검색결과</h3>
@@ -79,11 +79,14 @@ const Wrap = styled.div`
   display: -ms-flexbox;
   display: flex;
   width: 100%;
-`;
 
-const StyledSearch = styled(SearchInput)`
-  height: auto;
-  margin-bottom: 10px;
+  ${SearchWrap} {
+    margin-bottom: 10px;
+  }
+  ${InnerWrap} {
+    top: 0;
+    width: 100%;
+  }
 `;
 
 const SectionContents = styled.div`
