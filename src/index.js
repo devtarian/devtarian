@@ -4,11 +4,14 @@ import App from './App';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import { ThemeProvider } from 'styled-components';
-import GlobalStyles from './Styles/GlobalStyles';
+import GlobalStyles from './styles/GlobalStyles';
 import { theme } from './config/config';
-import authActions from './redux/actions/authActions';
+import { authActions } from './redux/actions';
 
-store.dispatch(authActions.getMe());
+const token = localStorage.getItem('token');
+if (token) {
+  store.dispatch(authActions.getMe());
+}
 
 ReactDOM.render(
   <Provider store={store}>

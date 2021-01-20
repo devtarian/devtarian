@@ -11,6 +11,11 @@ const FavoriteHeart = ({ onFavoriteClick, favorite }) => {
 
   const renderHeart = () => {
     return favorite ? <FullHeart /> : <EmptyHeart />;
+    // return favorite ? (
+    //   <Svg type="fullHeart" w="25px" h="25px" color="#e29f76" />
+    // ) : (
+    //   <Svg type="emptyHeart" w="25px" h="25px" coloc="#b6b6b6" />
+    // );
   };
   return <FavoriteWrap onClick={handleFavoriteClick}>{renderHeart()}</FavoriteWrap>;
 };

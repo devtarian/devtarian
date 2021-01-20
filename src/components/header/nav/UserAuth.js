@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import authActions from '../../../redux/actions/authActions';
+import { authActions } from '../../../redux/actions';
 import NaviItem from './NaviItem';
 import UserProfile from '../../profile/UserProfile';
 

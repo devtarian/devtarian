@@ -1,20 +1,8 @@
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 import Styled from 'styled-components';
 import Svg from '../../../components/common/Svg';
-import { useDispatch } from 'react-redux';
-import searchActions from '../../../redux/actions/searchActions';
 
-const SearchMap = () => {
-  const dispatch = useDispatch();
-  const mapRef = useRef();
-
-  useEffect(() => {
-    const mapElem = mapRef.current;
-    if (!mapElem) return;
-
-    dispatch(searchActions.initMap(mapElem));
-  }, [dispatch]);
-
+const SearchMap = React.forwardRef((props, ref) => {
   const handleClickMyLocation = () => {
     window.navigator.geolocation.getCurrentPosition((pos) => {
       var lat = pos.coords.latitude;
@@ -26,10 +14,10 @@ const SearchMap = () => {
   return (
     <Wrap>
       <StyledSvg type="myLocation" color="black" p="3px" onClick={handleClickMyLocation} />
-      <div id="searchMap" ref={mapRef} />
+      <div id="searchMap" ref={ref} />
     </Wrap>
   );
-};
+});
 
 export default SearchMap;
 

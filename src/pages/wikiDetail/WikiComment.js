@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
-import wikiDetailActions from '../../redux/actions/wikiDetailActions';
+import { wikiDetailActions } from '../../redux/actions';
 import Loading from '../../components/loading/Loding';
 import CommentForm, { CommentFormWrap } from '../../components/commentForm/CommentForm';
 import Comment from './Comment';

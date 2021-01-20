@@ -18,7 +18,6 @@ export const STORE_REVIEW_LIKE = 'store/STORE_REVIEW_LIKE';
 export const STORE_REVIEW_UNLIKE = 'store/STORE_REVIEW_UNLIKE';
 
 export const SEARCH_INIT_DATA = 'search/SEARCH_INIT_DATA';
-export const SEARCH_INIT_MAP = 'search/SEARCH_INIT_MAP';
 export const SEARCH_FAVORITE = 'search/SEARCH_FAVORITE';
 export const SEARCH_UNFAVORITE = 'search/SEARCH_UNFAVORITE';
 

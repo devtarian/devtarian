@@ -1,25 +1,36 @@
-import React from 'react';
+import React, { useEffect, useMemo } from 'react';
 import styled from 'styled-components';
-import { useSelector, useDispatch } from 'react-redux';
-import wikiDetailActions from '../../redux/actions/wikiDetailActions';
 import history from '../../history';
 import { RadioInput, UploadImg, Input, Textarea, SubmitBtn } from '../../components/form';
 import useInput from '../../hooks/useInput';
 import BgImg from '../../images/pexels-karolina-grabowska-4197908.jpg';
-import apis from '../../Service/apis';
+import apis from '../../service/apis';
+import { changeFileToImgUrl } from '../../utils/helper';
 
 const CATEGORIES = ['processed', 'snack', 'bakery', 'drink', 'etc'];
+const INIT_WIKIPOST = {
+  category: 'processed',
+  product: '',
+  ingredient: '',
+  files: [],
+};
 
-const WikiForm = () => {
-  const dispatch = useDispatch();
-  const INIT_WIKIPOST = {
-    category: 'processed',
-    product: '',
-    ingredient: '',
-    files: [],
-  };
-
-  const { inputs, errors, onInputChange, onImageUpload, requiredValidate } = useInput(INIT_WIKIPOST);
+const WikiForm = ({ match }) => {
+  const wikiId = match.params.wikiId;
+  const { inputs, setInputs, errors, onInputChange, onImageUpload, requiredValidate } = useInput(INIT_WIKIPOST);
+  const imgUrls = useMemo(() => changeFileToImgUrl(inputs.files, inputs.imgUrls), [inputs.files, inputs.imgUrls]);
+  useEffect(() => {
+    if (!wikiId) return;
+    apis.wikiApi.getWikiDetail(wikiId).then((res) => {
+      setInputs({
+        category: res.category,
+        product: res.product,
+        ingredient: res.ingredient,
+        imgUrls: res.imgUrls,
+        files: [],
+      });
+    });
+  }, [setInputs, wikiId]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,11 +41,10 @@ const WikiForm = () => {
     try {
       const { files, ...body } = inputs;
       const formData = new FormData();
-      for (let i = 0; i < files.length; i++) {
-        formData.append('file', files[i]);
-      }
+      files.forEach((file) => formData.append('file', file));
       formData.append('body', JSON.stringify(body));
-      await apis.wikiApi.createWiki(formData);
+
+      wikiId ? await apis.wikiApi.editWiki(wikiId, formData) : await apis.wikiApi.createWiki(formData);
       history.push('/vegwiki');
     } catch (err) {
       console.log(err.response ? err.response : err);
@@ -52,7 +62,7 @@ const WikiForm = () => {
           category={inputs.category}
           onChange={onInputChange}
         />
-        <UploadImg name="imgFiles" files={inputs.files} onImageUpload={onImageUpload} />
+        <UploadImg name="imgFiles" imgUrls={imgUrls} onImageUpload={onImageUpload} />
         <Input
           label="상품명"
           name="product"

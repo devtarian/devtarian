@@ -1,6 +1,6 @@
 import React from 'react';
 import filterConfig from '../../../../../config/filterConfig';
-import Button from '../../../../../Styles/Button';
+import Button from '../../../../../styles/Button';
 import styled from 'styled-components';
 import Svg from '../../../../../components/common/Svg';
 

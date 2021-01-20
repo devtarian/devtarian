@@ -5,10 +5,10 @@ import BgImg from '../../images/pexels-karolina-grabowska-4197908.jpg';
 import { SubmitBtn } from '../../components/form';
 import useInput from '../../hooks/useInput';
 
-import FeedFormStore from './FeedFormStore/FeedFormStore';
-import FeedFormMenu from './FeedFormMenu/FeedFormMenu';
-import FeedFormInfo from './FeedFormInfo/FeedFormInfo';
-import apis from '../../Service/apis';
+import FeedFormStore from './feedFormStore/FeedFormStore';
+import FeedFormMenu from './feedFormMenu/FeedFormMenu';
+import FeedFormInfo from './feedFormInfo/FeedFormInfo';
+import apis from '../../service/apis';
 
 const pageConfig = [
   { id: 'store', title: '가게 정보', validate: ['category', 'vegType', 'storeName', 'contactNum', 'operatingHours'] },

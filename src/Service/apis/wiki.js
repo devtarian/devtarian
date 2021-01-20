@@ -13,6 +13,13 @@ export const api = {
     return res.data;
   },
 
+  async editWiki(wikiId, formData) {
+    console.log('???????');
+    const res = await defaultApi.patch(`/wiki/${wikiId}`, formData);
+    console.log({ res });
+    return res.data;
+  },
+
   async getWikiDetail(wikiId) {
     const res = await defaultApi.get(`/wiki/${wikiId}`);
     return res.data;

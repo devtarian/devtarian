@@ -5,7 +5,7 @@ import CarouselBtn from '../CarouselBtn';
 import ViewAll from '../VeiwAll';
 import useCarousel from '../../../hooks/useCarousel';
 import { useDispatch } from 'react-redux';
-import mainActions from '../../../redux/actions/mainActions';
+import { mainActions } from '../../../redux/actions';
 
 const Carousel = ({ carouselData, isLoggedIn, mg }) => {
   const dispatch = useDispatch();

@@ -1,7 +1,7 @@
 import React, { useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import wikiDetailActions from '../../../redux/actions/wikiDetailActions';
+import { wikiDetailActions } from '../../../redux/actions';
 import Loading from '../../../components/loading/Loding';
 import ImgBox from '../ImgBox';
 import WikiTextBox from './WikiTextBox';

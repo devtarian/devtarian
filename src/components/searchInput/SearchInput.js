@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import SearchForm from './SearchForm/SearchForm';
-import RecentKeyword from './RecentKeyword/RecentKeyword';
-import { loadRecentKeywords, saveRecentKeywords } from '../../Service/recentKeywordService';
+import SearchForm from './searchForm/SearchForm';
+import RecentKeyword from './recentKeyword/RecentKeyword';
+import { loadRecentKeywords, saveRecentKeywords } from '../../service/recentKeywordService';
 
 const SearchInput = ({ className, posTop, bg, width }) => {
   const [show, setShow] = useState(false);

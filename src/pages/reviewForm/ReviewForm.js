@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import { UploadImg, StarRating, Input, Textarea, SubmitBtn } from '../../components/form';
 import history from '../../history';
 import useInput from '../../hooks/useInput';
 import BgImg from '../../images/pexels-karolina-grabowska-4197908.jpg';
-import apis from '../../Service/apis';
+import apis from '../../service/apis';
+import { changeFileToImgUrl } from '../../utils/helper';
 
 const INIT_REVIEW = {
   starRating: '',
@@ -16,7 +17,7 @@ const INIT_REVIEW = {
 const ReviewForm = ({ match }) => {
   const storeId = match.params.storeId;
   const { inputs, setInputs, errors, onInputChange, onImageUpload, requiredValidate } = useInput(INIT_REVIEW);
-
+  const imgUrls = useMemo(() => changeFileToImgUrl(inputs.files), [inputs.files]);
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
@@ -41,7 +42,7 @@ const ReviewForm = ({ match }) => {
     <Wrap bg={BgImg}>
       <h2>리뷰 작성</h2>
       <form>
-        <UploadImg name="imgFiles" files={inputs.files} onImageUpload={onImageUpload} />
+        <UploadImg name="imgFiles" imgUrls={imgUrls} onImageUpload={onImageUpload} />
         <StarRating name="starRating" onChange={onInputChange} error={errors.starRating} />
         <Input
           label="제목"

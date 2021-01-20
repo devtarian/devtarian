@@ -7,7 +7,7 @@ import {
   MAIN_REVIEW_LIKE,
   MAIN_REVIEW_UNLIKE,
 } from '../types';
-import apis from '../../Service/apis';
+import apis from '../../service/apis';
 
 const getMain = ({ lat, lng }) => async (dispatch) => {
   try {

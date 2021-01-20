@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { ReactComponent as EditSvg } from '../../images/icons/edit.svg';
+import Svg from '../common/Svg';
 
 const EditBtn = ({ to, innerText }) => {
   return (
     <EditBtnWrap>
       <Link to={to}>
-        <Edit />
+        <Svg type="edit" w="24px" h="24px" radius="50%" color="white" />
         <span>{innerText}</span>
       </Link>
     </EditBtnWrap>
@@ -44,11 +44,4 @@ export const EditBtnWrap = styled.div`
   @media (max-width: 767px) {
     right: 1.5rem;
   }
-`;
-
-const Edit = styled(EditSvg)`
-  width: 20px;
-  height: 20px;
-  vertical-align: top;
-  fill: ${(props) => props.theme.background[0]};
 `;
