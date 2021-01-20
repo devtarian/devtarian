@@ -19,7 +19,7 @@ const Wrap = styled.li`
 
   .navLink {
     display: block;
-    padding: 15px 20px;
+    padding: 20px;
     span {
       position: relative;
     }

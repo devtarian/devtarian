@@ -9,13 +9,10 @@ import UserAuth from './UserAuth';
 import SubNav from './SubNav';
 
 const Nav = () => {
-  const [show, setShow] = useState(false);
   const [modal, setModal] = useState('');
 
-  const handleShowModal = (modal) => {
-    setModal(modal);
-    setShow(!show);
-  };
+  const handleCloseModal = () => setModal('');
+  const handleOpenModal = (modal) => setModal(modal);
 
   return (
     <>
@@ -23,7 +20,7 @@ const Nav = () => {
         <FullNav>
           <NaviItem to="/feed" innerText="피드 쓰기" />
           <NaviItem to="/vegwiki" innerText="비건위키" />
-          <li className="navItem search" onClick={() => handleShowModal('search')}>
+          <li className="navItem search" onClick={() => handleOpenModal('search')}>
             <Link className="navLink" to="">
               <span>
                 <Search />
@@ -33,7 +30,7 @@ const Nav = () => {
           <UserAuth />
         </FullNav>
         <HBGNav>
-          <div className="navItem" onClick={() => handleShowModal('search')}>
+          <div className="navItem" onClick={() => handleOpenModal('search')}>
             <Link className="navLink" to="/">
               <span>
                 <Search />
@@ -41,15 +38,15 @@ const Nav = () => {
             </Link>
           </div>
           <div className="navItem">
-            <button className="navLink" onClick={() => handleShowModal('subnav')}>
+            <button className="navLink" onClick={() => handleOpenModal('subnav')} onCloseModal={handleCloseModal}>
               <HBGBtn />
             </button>
           </div>
         </HBGNav>
       </Wrap>
 
-      {show && modal === 'search' && <SearchModal onShowModal={handleShowModal} />}
-      {show && modal === 'subnav' && <SubNav />}
+      {modal === 'search' && <SearchModal onCloseModal={handleCloseModal} />}
+      {modal === 'subnav' && <SubNav />}
     </>
   );
 };

@@ -22,7 +22,7 @@ export default UserProfile;
 export const UserProfileWrap = styled.div`
   overflow: hidden;
   display: block;
-  padding: 0 20px;
+  padding: 3px 20px;
 
   .thumbNail {
     float: left;
@@ -42,7 +42,7 @@ export const UserProfileWrap = styled.div`
   strong {
     float: left;
     margin-left: 0.5rem;
-    margin-top: 17px;
+    margin-top: 15px;
     font-size: 15px;
     color: ${(props) => props.theme.green[1]};
   }

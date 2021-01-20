@@ -1,7 +1,10 @@
 import styled from 'styled-components';
 import SearchInput from '../searchInput/SearchInput';
 
-const SearchModal = ({ onCloseModal }) => {
+const SearchModal = ({ onShowModal }) => {
+  const handleShowModal = (modal) => {
+    onShowModal(modal);
+  };
   return (
     <Wrap>
       <SearchCategory>
@@ -16,7 +19,7 @@ const SearchModal = ({ onCloseModal }) => {
         </li>
       </SearchCategory>
       <SearchInput posTop="80px" bg="none" />
-      <CloseBtn onClick={onCloseModal}>
+      <CloseBtn onClick={() => handleShowModal('')}>
         <i>x</i>
       </CloseBtn>
     </Wrap>
