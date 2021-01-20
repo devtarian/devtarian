@@ -104,12 +104,14 @@ const Wrap = styled.section`
     float: none;
     width: 100%;
     max-width: 600px;
+
     margin: 0 auto;
     .largeImg {
-      max-height: 400px;
+      max-height: 350px;
       img {
-        width: 100%;
-        max-width: 600px;
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: cover;
       }
     }
     .smallImgs {

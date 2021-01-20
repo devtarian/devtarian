@@ -5,7 +5,7 @@ import KakaoMap from '../../Map/KakaoMap';
 import { ViewAllWrap } from '../../carousel/VeiwAll';
 import { ReactComponent as PlusSvg } from '../../../images/icons/add.svg';
 import useMoreDetail from '../../../hooks/useMoreDetail';
-import { translate } from '../../../utils/helper';
+import { autoHypenContactNum, changeNumberWithComma, translate } from '../../../utils/helper';
 
 const StoreTextBox = ({ storeData }) => {
   const {
@@ -44,7 +44,7 @@ const StoreTextBox = ({ storeData }) => {
         </div>
         <div className="contactNum textBox">
           <strong className="infoTitle">전화번호</strong>
-          <span className="infoContents">{contactNum}</span>
+          <span className="infoContents">{autoHypenContactNum(contactNum)}</span>
         </div>
         <div className="openHours textBox" ref={hours.refMore}>
           <strong className="infoTitle">영업시간</strong>
@@ -75,7 +75,7 @@ const StoreTextBox = ({ storeData }) => {
               <li key={index}>
                 <span className="vegType">{translate(menu.vegtype)}</span>
                 <span className="name">{menu.menu}</span>
-                <span className="price">{menu.price}원</span>
+                <span className="price">{changeNumberWithComma(menu.price)}원</span>
               </li>
             ))}
             {menuList.length > 3 && (
@@ -168,6 +168,7 @@ const Wrap = styled.div`
     .openHours {
       z-index: 0;
       position: relative;
+      padding-bottom: 15px;
       background-color: ${(props) => props.theme.background[0]};
       overflow: hidden;
       .open {
@@ -194,10 +195,17 @@ const Wrap = styled.div`
           .vegType {
             float: left;
             width: 67px;
+            padding: 1px 4px;
+            margin-left: 0.4rem;
+            border-radius: 4px;
+            border: 1px solid ${(props) => props.theme.brown[1]};
+            text-align: center;
+            font-size: 13px;
+            color: ${(props) => props.theme.brown[1]};
           }
           .name {
             float: left;
-            width: calc(100% - 172px);
+            width: calc(100% - 179px);
             margin-left: 5px;
           }
           .price {
@@ -237,9 +245,6 @@ const Wrap = styled.div`
         .infoContents {
           float: none;
           display: block;
-        }
-
-        .infoContents {
           margin-top: 0.4rem;
         }
       }

@@ -8,8 +8,9 @@ import Likes from '../../../components/likes/Likes';
 import { ReactComponent as CommentSvg } from '../../../images/icons/insert_comment.svg';
 
 const Review = () => {
+  const data = useSelector((state) => state.store.data);
   const { id, reviews, reviewList } = useSelector((state) => state.store.data);
-
+  console.log(data);
   return (
     <Wrap>
       <strong className="totalReviews">{reviews} 개의 리뷰</strong>
