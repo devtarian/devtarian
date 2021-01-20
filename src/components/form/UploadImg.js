@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
 
-const UploadImg = ({ name, files, onImageUpload }) => {
+const UploadImg = ({ name, imgUrls, onImageUpload }) => {
   const refHiddenInput = useRef();
 
   const handleUploadBtnClick = (e) => {
@@ -12,17 +12,16 @@ const UploadImg = ({ name, files, onImageUpload }) => {
   const handleImageUpload = (e) => {
     onImageUpload(e);
   };
-
   return (
     <Wrap className="wrap">
-      <label>사진 선택 {files?.length}/5</label>
+      <label>사진 선택 {imgUrls.length}/5</label>
       <input type="file" name={name} accept="image/*" multiple onChange={handleImageUpload} ref={refHiddenInput} />
       <button className="uploadBtn" onClick={handleUploadBtnClick}>
         사진 추가
       </button>
       <ul className="previewImgs">
         {[...new Array(5)].map((_, index) => (
-          <ImgContainer key={index} src={files[index] && URL.createObjectURL(files[index])} />
+          <ImgContainer key={index} src={imgUrls[index]} />
         ))}
       </ul>
     </Wrap>

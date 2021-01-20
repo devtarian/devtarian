@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import { UploadImg, StarRating, Textarea } from '../../../components/form';
+import { changeFileToImgUrl } from '../../../utils/helper';
 
 const FeedFormInfo = ({ inputs, errors, onChange, onImageUpload }) => {
   console.log(errors);
   return (
     <Wrap>
-      <UploadImg name="imgFiles" files={inputs.files} onImageUpload={onImageUpload} />
+      <UploadImg name="imgFiles" imgUrls={changeFileToImgUrl(inputs.files)} onImageUpload={onImageUpload} />
       <StarRating name="starRating" onChange={onChange} error={errors.starRating} />
       <Textarea
         label="소개"

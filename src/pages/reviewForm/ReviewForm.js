@@ -5,6 +5,7 @@ import history from '../../history';
 import useInput from '../../hooks/useInput';
 import BgImg from '../../images/pexels-karolina-grabowska-4197908.jpg';
 import apis from '../../service/apis';
+import { changeFileToImgUrl } from '../../utils/helper';
 
 const INIT_REVIEW = {
   starRating: '',
@@ -41,7 +42,7 @@ const ReviewForm = ({ match }) => {
     <Wrap bg={BgImg}>
       <h2>리뷰 작성</h2>
       <form>
-        <UploadImg name="imgFiles" files={inputs.files} onImageUpload={onImageUpload} />
+        <UploadImg name="imgFiles" imgUrls={changeFileToImgUrl(inputs.files)} onImageUpload={onImageUpload} />
         <StarRating name="starRating" onChange={onInputChange} error={errors.starRating} />
         <Input
           label="제목"

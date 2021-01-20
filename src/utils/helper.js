@@ -97,6 +97,14 @@ export const changeObjectToQuery = (object) => {
   return result;
 };
 
+export const changeFileToImgUrl = (files, imgUrls) => {
+  if (files.length === 0) {
+    return imgUrls ? imgUrls : [];
+  } else {
+    return files.map((file) => URL.createObjectURL(file));
+  }
+};
+
 export const translate = (key) => {
   const object = {
     all: 'All',
