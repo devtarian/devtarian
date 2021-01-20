@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useRef } from 'react';
 import styled from 'styled-components';
 import SearchInput from '../../components/searchInput/SearchInput';
 import SearchFilter from './searchFilter/SearchFilter';
@@ -12,18 +12,19 @@ import history from '../../history';
 import Loading from '../../components/loading/Loding';
 
 const SearchPage = () => {
+  const mapRef = useRef();
   const dispatch = useDispatch();
   const { isFetching, data, map, fetchMore } = useSelector((state) => state.search);
   const { isLoggedIn } = useSelector((state) => state.auth);
 
   const handleFetchMore = () => {
     if (!fetchMore) return;
-    dispatch(searchActions.getSearch());
+    dispatch(searchActions.getSeach());
   };
   const handleMouseOver = useCallback(
     (store) => {
       if (!store) return;
-      let { marker, imageOver, infoWindow } = store.map;
+      let { marker, imageOver, infoWindow } = store.mapData;
       marker.setImage(imageOver);
       infoWindow.open(map, marker);
     },
@@ -32,7 +33,7 @@ const SearchPage = () => {
 
   const handleMouseOut = useCallback((store) => {
     if (!store) return;
-    let { marker, imageNormal, infoWindow } = store.map;
+    let { marker, imageNormal, infoWindow } = store.mapData;
     marker.setImage(imageNormal);
     infoWindow.close();
   }, []);
@@ -49,10 +50,12 @@ const SearchPage = () => {
   const ref = useObserver(handleFetchMore);
 
   useEffect(() => {
-    dispatch(searchActions.getSearch());
-  }, [dispatch]);
+    const mapElem = mapRef.current;
+    if (!mapElem) return;
+    dispatch(searchActions.getSeach(mapElem));
+  }, [dispatch, mapRef]);
 
-  if (isFetching) return <Loading />;
+  if (isFetching && map) return <Loading />;
 
   return (
     <Wrap>
@@ -80,7 +83,7 @@ const SearchPage = () => {
         </CardList>
       </SectionContents>
       <SectionMap>
-        <SearchMap />
+        <SearchMap ref={mapRef} />
       </SectionMap>
     </Wrap>
   );
