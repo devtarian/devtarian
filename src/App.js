@@ -5,11 +5,22 @@ import { useSelector } from 'react-redux';
 import history from './history';
 import { DefaultLayout, FormLayout, PublicLayout } from './layouts';
 import pages from './pages';
-import SearchPage from './pages/searchPage/SearchPage';
 
 function App() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  const { StoreDetail, FeedForm, Login, Main, ReviewForm, SignUp, VegWiki, WikiDetail, WikiForm } = pages;
+  const {
+    StoreDetail,
+    FeedForm,
+    Login,
+    Main,
+    ReviewForm,
+    SignUp,
+    VegWiki,
+    WikiDetail,
+    WikiForm,
+    SearchPage,
+    NotFound,
+  } = pages;
 
   return (
     <div className="App">
@@ -26,6 +37,7 @@ function App() {
           <FormLayout isLoggedIn={isLoggedIn} path="/review/:storeId" component={ReviewForm} />
           <FormLayout isLoggedIn={isLoggedIn} path="/wikiForm" component={WikiForm} />
           <FormLayout isLoggedIn={isLoggedIn} path="/wikiForm/:wikiId" component={WikiForm} />
+          <DefaultLayout path="*" component={NotFound} />
         </Switch>
       </Router>
     </div>
