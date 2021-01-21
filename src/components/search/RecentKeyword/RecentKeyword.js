@@ -49,7 +49,7 @@ const Wrap = styled.div`
   border-radius: 4px;
   border: 1px solid ${(props) => props.theme.gray[1]};
   background-color: ${(props) => props.theme.background[0]};
-  opacity: 0.85;
+  opacity: 0.9;
 
   strong {
     display: block;

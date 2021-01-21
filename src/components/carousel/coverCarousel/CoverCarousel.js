@@ -38,7 +38,7 @@ const CoverCarousel = ({ carouselData, mg, isLoggedIn }) => {
         ))}
       </CarouselUl>
       <CarouselBtn value={value} onCarouselBtnClick={onCarouselBtnClick} />
-      <ViewAll />
+      <ViewAll to="/vegWiki" />
     </CoverCarouselWrap>
   );
 };
@@ -49,6 +49,7 @@ export const CoverCarouselWrap = styled.section`
   position: relative;
   width: 100%;
   height: 421px;
+  margin-top: 40px;
   overflow: hidden;
 
   h2 {

@@ -14,7 +14,7 @@ const CarouselBtn = ({ value, onCarouselBtnClick }) => {
     }
 
     if (e.target.classList.contains('next')) {
-      if (currentIndex === 7) return;
+      if (currentIndex === liLength) return;
       onCarouselBtnClick(currentIndex + 1, leftPosition - liLRMargin - liClientWidth);
     }
   };

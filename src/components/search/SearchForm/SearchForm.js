@@ -38,9 +38,9 @@ const SearchForm = ({ value, onInputChange, onAddRecentKeywords }) => {
         value={value}
         data-show="show"
         onChange={handleInputChange}></SearchInput>
-      <SearchButton type="submit" data-show="show" onClick={handleInputClick}>
+      <SearchBtn type="submit" data-show="show" onClick={handleInputClick}>
         검색
-      </SearchButton>
+      </SearchBtn>
     </Wrap>
   );
 };
@@ -49,10 +49,10 @@ export default SearchForm;
 
 const Wrap = styled.form`
   position: relative;
-  height: 50px;
+  height: 49px;
 `;
 
-const SearchInput = styled.input`
+export const SearchInput = styled.input`
   z-index: 1;
   position: absolute;
   float: left;
@@ -60,10 +60,11 @@ const SearchInput = styled.input`
   padding: 14px 10px;
   border-radius: 4px;
   background-color: ${(props) => props.theme.background[0]};
-  border: 1px solid ${(props) => props.theme.gray[1]};
+  border: 1px solid ${(props) => props.theme.gray[0]};
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 `;
 
-const SearchButton = styled.button`
+const SearchBtn = styled.button`
   z-index: 1;
   position: absolute;
   right: 0;
@@ -74,4 +75,8 @@ const SearchButton = styled.button`
   border-bottom-right-radius: 4px;
   background-color: ${(props) => props.theme.green[1]};
   color: ${(props) => props.theme.background[0]};
+
+  &:hover {
+    background-color: ${(props) => props.theme.green[0]};
+  }
 `;

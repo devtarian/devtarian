@@ -68,14 +68,18 @@ export const CircleCardWrap = styled.div`
   cursor: pointer;
   width: 100% !important;
   .imgInfo {
+    width: 140px;
+    height: 140px;
+    margin: 0 auto;
     &:hover .cover {
       opacity: 0.8;
     }
     img {
       display: block;
-      width: 140px;
-      height: 140px;
-      margin: 34px auto 10px;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      margin: 34px 0 10px;
       border-radius: 50%;
     }
     .cover {

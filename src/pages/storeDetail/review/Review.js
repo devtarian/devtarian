@@ -1,13 +1,12 @@
 import React, { useCallback } from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
 import PhotoReviewBox from './PhotoReviewBox';
 import TextReviewBox from './TextReviewBox';
 import Comment from './Comment';
 import Likes from '../../../components/likes/Likes';
 import { ReactComponent as CommentSvg } from '../../../images/icons/insert_comment.svg';
 
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { storeActions } from '../../../redux/actions';
 
 const Review = ({ isLoggedIn }) => {

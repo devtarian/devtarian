@@ -31,7 +31,8 @@ const Wrap = styled.li`
   position: relative;
   float: left;
   width: 270px;
-  margin: 0 ${(props) => props.value.liSideMargin}px 40px;
+  height: 300px;
+  margin: 0 ${(props) => props.value.liSideMargin}px;
   cursor: pointer;
 
   ${FavoriteWrap} {
@@ -43,9 +44,11 @@ const Wrap = styled.li`
   }
 `;
 const ImgCardWrap = styled.div`
+  height: 300px;
   img {
-    width: 270px;
-    height: 300px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     border-radius: 10px;
   }
   .cover {
@@ -53,10 +56,10 @@ const ImgCardWrap = styled.div`
     position: absolute;
     top: 0;
     width: 270px;
-
     height: 300px;
     border-radius: 10px;
     background-color: ${(props) => props.theme.green[1]};
+    color: ${(props) => props.theme.background[0]};
     opacity: 0;
     transition: all 0.3s ease-in-out;
 

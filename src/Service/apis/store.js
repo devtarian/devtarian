@@ -45,8 +45,6 @@ export const api = {
   },
 
   async deleteComment({ storeId, reviewId, commentId }) {
-    // commentId 맞게 넘어옴
-    console.log({ storeId, reviewId, commentId });
     return await defaultApi.delete(`/store/${storeId}/review/${reviewId}/comment/${commentId}`);
   },
 };

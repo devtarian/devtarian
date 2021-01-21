@@ -84,6 +84,7 @@ const FeedForm = ({ history }) => {
       await apis.storeApi.createStore(formData);
       alert('제출되었습니다.');
       setInputs(INIT_VALUES);
+      history.push('/');
     } catch (err) {
       console.log(err.response ? err.response : err);
     }

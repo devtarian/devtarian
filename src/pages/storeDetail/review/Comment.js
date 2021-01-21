@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import apis from '../../../service/apis';
 import WriterProfile, { WriterProfileWrap } from '../../../components/profile/WriterProfile';
 import CommentForm from '../../../components/commentForm/CommentForm';
+import { STORE_CREATE_COMMENT, STORE_DELETE_COMMENT } from '../../../redux/types';
 
 const Comment = ({ storeId, reviewId }) => {
+  const dispatch = useDispatch();
   const userId = useSelector((state) => state.auth.userId);
   const [comments, setComments] = useState([]);
   const refComment = useRef(null);
@@ -29,20 +31,21 @@ const Comment = ({ storeId, reviewId }) => {
     } catch (err) {
       console.error(err.response ? err.response : err);
     }
+    dispatch({ type: STORE_CREATE_COMMENT, payload: reviewId });
   };
 
   const handleDeleteComment = async (commentId) => {
     try {
       let result = window.confirm('댓글을 삭제하시겠습니까?');
-      if (result) {
-        await apis.storeApi.deleteComment({ storeId, reviewId, commentId });
-        await apis.storeApi.getComments(storeId, reviewId).then((data) => {
-          setComments(data);
-        });
-      }
+      if (!result) return;
+      await apis.storeApi.deleteComment({ storeId, reviewId, commentId });
+      await apis.storeApi.getComments(storeId, reviewId).then((data) => {
+        setComments(data);
+      });
     } catch (err) {
       console.error(err.response ? err.response : err);
     }
+    dispatch({ type: STORE_DELETE_COMMENT, payload: reviewId });
   };
 
   return (

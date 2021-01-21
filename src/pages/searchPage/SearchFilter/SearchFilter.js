@@ -5,7 +5,7 @@ import queryString from 'query-string';
 
 import Button from '../../../styles/Button';
 import Svg from '../../../components/common/Svg';
-import ModalFilter from './modalFilter/ModalFilter';
+import ModalFilter from '../searchFilter/modalFilter/ModalFilter';
 import { changeObjectToQuery, translate } from '../../../utils/helper';
 import filterConfig from '../../../config/filterConfig';
 

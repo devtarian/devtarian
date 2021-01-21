@@ -2,8 +2,8 @@ import {
   STORE_GET_STORE,
   STORE_FAVORITE_STORE,
   STORE_UN_FAVORITE_STORE,
-  STORE_REVIEW_LIKE,
-  STORE_REVIEW_UNLIKE,
+  STORE_LIKE_REVIEW,
+  STORE_UNLIKE_REVIEW,
 } from '../types';
 import apis from '../../service/apis';
 
@@ -52,7 +52,7 @@ const likeReview = (storeId, reviewId) => async (dispatch) => {
     await apis.storeApi.likeReview(storeId, reviewId);
 
     dispatch({
-      type: STORE_REVIEW_LIKE,
+      type: STORE_LIKE_REVIEW,
       payload: reviewId,
     });
   } catch (err) {
@@ -65,7 +65,7 @@ const unLikeReview = (storeId, reviewId) => async (dispatch) => {
     await apis.storeApi.unLikeReview(storeId, reviewId);
 
     dispatch({
-      type: STORE_REVIEW_UNLIKE,
+      type: STORE_UNLIKE_REVIEW,
       payload: reviewId,
     });
   } catch (err) {

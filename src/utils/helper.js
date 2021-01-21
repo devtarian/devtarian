@@ -20,12 +20,9 @@ export const validate = (name, value, users) => {
       const extensions = /(\.jpg|\.jpeg|\.png|\.gif|\.bmp)$/i;
       return value.length !== 0 && !extensions.exec(value) && '이미지 파일(.jpg .jpeg .png .gif .bmp)만 올려주세요.';
     case 'contactNum':
-      const regExp = /[0-9]/;
-      // const regExp = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
-      return value.length !== 0 && !value.match(regExp) && '번호만 입력해주세요.';
     case 'price':
-      const numberExp = /[0-9]/;
-      return value.length !== 0 && !numberExp.test(value) && '숫자만 입력해 주세요.';
+      const numRegExp = /^[0-9]+$/;
+      return value.length !== 0 && !value.match(numRegExp) && '숫자만 입력해주세요.';
     case 'files':
       return value.length === 0 && '파일을 선택해주세요.';
     default:
@@ -82,6 +79,13 @@ export const timeToString = (date) => {
   if (fromTime < month) return `${Math.floor(fromTime / week)}주 전`;
   if (fromTime < year) return `${Math.floor(fromTime / month)}달 전`;
   return `${Math.floor(fromTime / year)}년 전`;
+};
+
+export const autoHypenContactNum = function (num) {
+  return num
+    .replace(/[^0-9]/g, '')
+    .replace(/(^02|^0505|^1[0-9]{3}|^0[0-9]{2})([0-9]+)?([0-9]{4})$/, '$1-$2-$3')
+    .replace('--', '-');
 };
 
 export const changeObjectToQuery = (object) => {

@@ -7,7 +7,7 @@ import useCarousel from '../../../hooks/useCarousel';
 import { useDispatch } from 'react-redux';
 import { mainActions } from '../../../redux/actions';
 
-const Carousel = ({ carouselData, isLoggedIn, mg }) => {
+const Carousel = ({ carouselData, isLoggedIn, title, mg }) => {
   const dispatch = useDispatch();
   const { value, onCarouselBtnClick } = useCarousel(mg);
   const { refCarouselUl, refCarouselLi } = value;
@@ -24,7 +24,7 @@ const Carousel = ({ carouselData, isLoggedIn, mg }) => {
 
   return (
     <Wrap>
-      <h2>근처의 비건 식당</h2>
+      <h2>{title}</h2>
       <CarouselUl ref={refCarouselUl} value={value}>
         {carouselData.map((data, index) => (
           <li key={index} ref={refCarouselLi}>
@@ -33,7 +33,7 @@ const Carousel = ({ carouselData, isLoggedIn, mg }) => {
         ))}
       </CarouselUl>
       <CarouselBtn value={value} onCarouselBtnClick={onCarouselBtnClick} />
-      <ViewAll />
+      <ViewAll to="/" />
     </Wrap>
   );
 };
@@ -43,8 +43,8 @@ export default Carousel;
 const Wrap = styled.section`
   position: relative;
   width: 100%;
-  height: 426px;
-  margin: 0 auto;
+  height: 374px;
+  margin-top: 40px;
   overflow: hidden;
 
   h2 {
@@ -62,6 +62,6 @@ const CarouselUl = styled.ul`
   li {
     float: left;
     width: 270px;
-    margin: 0 ${(props) => props.value.liSideMargin}px 40px;
+    margin: 0 ${(props) => props.value.liSideMargin}px;
   }
 `;

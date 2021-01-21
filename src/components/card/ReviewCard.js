@@ -58,27 +58,31 @@ export const ReviewCardWrap = styled.div`
   .vegType {
     display: inline-block;
     width: 70px;
-    padding: 2px 4px;
+    height: 20px;
+    line-height: 20px;
     border-radius: 4px;
     text-align: center;
     font-size: 12px;
-    background: ${(props) => props.theme.brown[1]};
+    background: ${(props) => props.theme.green[1]};
     color: ${(props) => props.theme.background[0]};
   }
   .title {
     display: inline-block;
+    margin-top: -1px;
     margin-left: 0.3rem;
     overflow: hidden;
     font-size: 18px;
     text-overflow: ellipsis;
     white-space: nowrap;
     vertical-align: top;
-    color: ${(props) => props.theme.green[1]};
+    color: ${(props) => props.theme.color[0]};
   }
 
   .region {
     display: block;
     width: 100%;
+    margin: 2px 0;
+    font-size: 14px;
     color: ${(props) => props.theme.color[1]};
   }
   .starRating {

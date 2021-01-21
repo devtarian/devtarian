@@ -9,10 +9,13 @@ import UserAuth from './UserAuth';
 import SubNav from './SubNav';
 
 const Nav = () => {
+  const [show, setShow] = useState(false);
   const [modal, setModal] = useState('');
 
-  const handleCloseModal = () => setModal('');
-  const handleOpenModal = (modal) => setModal(modal);
+  const handleShowModal = (modal) => {
+    setModal(modal);
+    setShow(!show);
+  };
 
   return (
     <>
@@ -20,7 +23,7 @@ const Nav = () => {
         <FullNav>
           <NaviItem to="/feed" innerText="피드 쓰기" />
           <NaviItem to="/vegwiki" innerText="비건위키" />
-          <li className="navItem search" onClick={() => handleOpenModal('search')}>
+          <li className="navItem search" onClick={() => handleShowModal('search')}>
             <Link className="navLink" to="">
               <span>
                 <Search />
@@ -30,7 +33,7 @@ const Nav = () => {
           <UserAuth />
         </FullNav>
         <HBGNav>
-          <div className="navItem" onClick={() => handleOpenModal('search')}>
+          <div className="navItem" onClick={() => handleShowModal('search')}>
             <Link className="navLink" to="/">
               <span>
                 <Search />
@@ -38,15 +41,15 @@ const Nav = () => {
             </Link>
           </div>
           <div className="navItem">
-            <button className="navLink" onClick={() => handleOpenModal('subnav')}>
+            <button className="navLink" onClick={() => handleShowModal('subnav')}>
               <HBGBtn />
             </button>
           </div>
         </HBGNav>
       </Wrap>
 
-      {modal === 'search' && <SearchModal onCloseModal={handleCloseModal} />}
-      {modal === 'subnav' && <SubNav />}
+      {show && modal === 'search' && <SearchModal onShowModal={handleShowModal} />}
+      {show && modal === 'subnav' && <SubNav />}
     </>
   );
 };
@@ -55,7 +58,7 @@ export default Nav;
 
 const Wrap = styled.nav`
   position: relative;
-  top: -10px;
+  top: -12px;
   float: right;
 
   .navItem {
@@ -63,16 +66,16 @@ const Wrap = styled.nav`
 
     .navLink {
       display: block;
-      padding: 15px 20px;
+      padding: 20px;
       span {
         position: relative;
       }
       span:after {
         content: '';
-        z-index: 100000;
+        z-index: 10000;
         position: absolute;
         left: 50%;
-        bottom: -17px;
+        bottom: -10px;
         width: 0px;
         height: 4px;
         background-color: ${(props) => props.theme.green[1]};
@@ -84,11 +87,8 @@ const Wrap = styled.nav`
       }
     }
   }
-
-  .search .navLink span:after {
-    bottom: -10px;
-  }
 `;
+
 const FullNav = styled.ul`
   @media (max-width: 767px) {
     display: none;
