@@ -1,15 +1,14 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
 import history from '../../history';
 import Stars from '../stars/Stars';
 import Likes, { LikesWrap, LikesBtn } from '../likes/Likes';
 import noImg from '../../images/noImg.jpg';
+import { translate } from '../../utils/helper';
 
 const ReviewCard = ({ cardData, onClickLike }) => {
   const {
     storeId,
-    id,
     imgUrl,
     likesOfMe,
     info: { vegType, storeName, region, starRating },
@@ -22,7 +21,7 @@ const ReviewCard = ({ cardData, onClickLike }) => {
           <img src={imgUrl ? imgUrl : noImg} alt="" />
           <div className="cover"></div>
         </ItemImg>
-        <span className="vegType">{vegType}</span>
+        <span className="vegType">{translate(vegType)}</span>
         <h3 className="title">{storeName}</h3>
         <strong className="region">{region}</strong>
         <div className="starRating">

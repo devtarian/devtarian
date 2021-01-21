@@ -6,6 +6,7 @@ import Loading from '../../../components/loading/Loding';
 import ImgBox from '../ImgBox';
 import WikiTextBox from './WikiTextBox';
 import FavoriteHeart, { FavoriteWrap } from '../../favoriteHeart/FavoriteHeart';
+import { translate } from '../../../utils/helper';
 
 const WikiDetailBox = ({ wikiId, isLoggedIn }) => {
   const dispatch = useDispatch();
@@ -27,7 +28,7 @@ const WikiDetailBox = ({ wikiId, isLoggedIn }) => {
   return (
     <Wrap>
       <div className="show">
-        <span className="category">{category}</span>
+        <span className="category">{translate(category)}</span>
         <h2 className="product">{product}</h2>
       </div>
       <ImgBox data={data} />
