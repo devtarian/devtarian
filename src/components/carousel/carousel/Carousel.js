@@ -30,8 +30,8 @@ export default Carousel;
 const Wrap = styled.section`
   position: relative;
   width: 100%;
-  height: 426px;
-  margin: 0 auto;
+  height: 374px;
+  margin-top: 40px;
   overflow: hidden;
 
   h2 {
@@ -49,6 +49,6 @@ const CarouselUl = styled.ul`
   li {
     float: left;
     width: 270px;
-    margin: 0 ${(props) => props.value.liSideMargin}px 40px;
+    margin: 0 ${(props) => props.value.liSideMargin}px;
   }
 `;

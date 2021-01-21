@@ -22,7 +22,7 @@ const ReviewCarousel = ({ carouselData, mg }) => {
         ))}
       </CarouselUl>
       <CarouselBtn value={value} onCarouselBtnClick={onCarouselBtnClick} />
-      <ViewAll />
+      <ViewAll to="/" />
     </Wrap>
   );
 };
@@ -33,10 +33,10 @@ const Wrap = styled.section`
   position: relative;
   width: 100%;
   height: 520px;
+  margin-top: 40px;
   overflow: hidden;
 
   h2 {
-    margin-bottom: 40px;
     font-size: 30px;
   }
 
@@ -65,6 +65,6 @@ const CarouselUl = styled.ul`
   li {
     float: left;
     width: 366px;
-    margin: 0 ${(props) => props.value.liSideMargin}px 40px;
+    margin: 0 ${(props) => props.value.liSideMargin}px;
   }
 `;

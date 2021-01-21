@@ -63,6 +63,8 @@ export const ImgTextCardWrap = styled.div`
   .region {
     display: block;
     width: 100%;
+    margin: 2px 0;
+    font-size: 14px;
     color: ${(props) => props.theme.color[1]};
   }
   .starRating {
@@ -142,29 +144,25 @@ const TitleWrap = styled.div`
   .vegType {
     display: inline-block;
     width: 70px;
-    height: 25px;
-    line-height: 25px;
+    height: 20px;
+    line-height: 20px;
+    margin-top: 5px;
     border-radius: 4px;
-    vertical-align: middle;
     text-align: center;
     font-size: 12px;
-    background: ${(props) => props.theme.brown[1]};
+    background: ${(props) => props.theme.green[1]};
     color: ${(props) => props.theme.background[0]};
   }
   .title {
     display: inline-block;
     width: 200px;
     margin: 0px;
+    margin-left: 0.3rem;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     vertical-align: top;
-    color: ${(props) => props.theme.green[1]};
-  }
-  .title a {
-    margin-left: 0.3rem;
     font-size: 18px;
-    color: ${(props) => props.theme.green[1]};
   }
 `;
 

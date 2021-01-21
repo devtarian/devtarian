@@ -11,7 +11,7 @@ const Section = () => {
   const dispatch = useDispatch();
   const { isFetching, data } = useSelector((state) => state.main);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-
+  console.log(data);
   const mg = 9;
   useEffect(() => {
     let lat, lng;
