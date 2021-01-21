@@ -65,8 +65,8 @@ export const makeInfoWindow = (store) => {
       '    <strong class="region">' +
       store.info.region +
       '    </strong>' +
-      '    <p class="contents">' +
-      store.info.contents +
+      '    <p class="address">' +
+      store.info.address +
       '    </p>' +
       '  </div>' +
       '  <div class="info-footer">거리: ' +

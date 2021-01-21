@@ -1,11 +1,11 @@
 const filterConfig = {
   category: {
     all: { title: 'All' },
-    restaurant: { title: '식당', color: '#2b8a3e', size: 0 },
-    cafe: { title: '카페', color: '#e08d60', size: 47 },
+    restaurant: { title: '식당', color: '#2f9e44', size: 0 },
+    cafe: { title: '카페', color: '#e29f76', size: 47 },
     bakery: { title: '베이커리', color: '#88dde6', size: 95 },
-    bar: { title: 'Bar', color: '#868e96', size: 142 },
-    etc: { title: '기타', color: '#37b24d', size: 191 },
+    bar: { title: 'Bar', color: '#c92a2a', size: 142 },
+    etc: { title: '기타', color: '#868e96', size: 191 },
   },
   vegType: {
     vegan: { title: '비건' },

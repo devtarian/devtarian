@@ -146,7 +146,7 @@ const TitleWrap = styled.div`
     width: 70px;
     height: 20px;
     line-height: 20px;
-    margin-top: 5px;
+    margin-top: 3px;
     border-radius: 4px;
     text-align: center;
     font-size: 12px;

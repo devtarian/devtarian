@@ -8,6 +8,7 @@ import Svg from '../../../components/common/Svg';
 import ModalFilter from '../searchFilter/modalFilter/ModalFilter';
 import { changeObjectToQuery, translate } from '../../../utils/helper';
 import filterConfig from '../../../config/filterConfig';
+import { theme } from '../../../config/config';
 
 const SearchFilter = () => {
   const { category, ...query } = queryString.parse(history.location.search);
@@ -25,7 +26,7 @@ const SearchFilter = () => {
   return (
     <>
       <Wrap>
-        <Button onClick={handleOpenModal} bg="#2f9e44">
+        <Button onClick={handleOpenModal} bg={theme.color[0]}>
           <Svg type="filter" w="20px" h="20px" color="white" onClick={handleOpenModal} />
         </Button>
         <Button className={(category === 'all' || !category) && 'active'} onClick={() => handleClickCategory('all')}>
@@ -58,9 +59,12 @@ export default SearchFilter;
 const Wrap = styled.div`
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 15px;
+  margin: 15px 0;
   span {
-    margin-left: 10px;
+    display: inline-block;
+    margin-top: -2px;
+    margin-left: 0.3rem;
+    vertical-align: top;
   }
 
   @media (max-width: 1350px) {

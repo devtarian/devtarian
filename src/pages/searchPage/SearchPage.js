@@ -64,7 +64,7 @@ const SearchPage = () => {
         <Search />
         <SearchFilter />
 
-        <h3>검색결과</h3>
+        <h3 className="searchResult">검색결과</h3>
         <CardList>
           {data.map((item, idx) => {
             const lastEl = idx === data.length - 1;
@@ -79,6 +79,7 @@ const SearchPage = () => {
               />
             );
           })}
+
           {data.length === 0 && '검색결과가 없습니다.'}
         </CardList>
       </SectionContents>
@@ -96,9 +97,12 @@ const Wrap = styled.div`
   display: -ms-flexbox;
   display: flex;
   width: 100%;
+  height: 100vh;
+  margin-top: 40px;
 
   ${SearchWrap} {
     margin-bottom: 10px;
+    margin: 0 auto;
   }
   ${InnerWrap} {
     top: 0;
@@ -108,17 +112,18 @@ const Wrap = styled.div`
 
 const SectionContents = styled.div`
   width: 50%;
-  height: 100vh;
   overflow: scroll;
   padding: 20px;
   margin: 0px;
   h3 {
     margin-bottom: 10px;
   }
+  .searchResult {
+    margin: 30px 0 20px;
+  }
 
   @media (max-width: 991px) {
     width: 100%;
-    overflow: hidden;
   }
 `;
 
@@ -142,21 +147,25 @@ const CardList = styled.div`
 
 const StyledCard = styled(ImgTextCard)`
   width: 32%;
-  margin-bottom: 20px;
-  margin-right: 1%;
+  margin: 0 0.5% 20px;
+
   @media (max-width: 1350px) {
-    width: 49%;
+    width: 48%;
+    margin: 0 1% 20px;
   }
 
   @media (max-width: 1091px) {
-    width: 49%;
+    width: 48%;
+    margin: 0 1% 20px;
   }
 
   @media (max-width: 991px) {
-    width: 32%;
+    width: 48%;
+    margin: 0 1% 20px;
   }
 
   @media (max-width: 719px) {
-    width: 49%;
+    width: 84%;
+    margin: 0 8% 20px;
   }
 `;

@@ -117,7 +117,7 @@ const Wrap = styled.div`
       .vegType {
         float: left;
         max-width: 80px;
-        padding: 1px 4px;
+        padding: 0px 4px;
         margin-left: 0.4rem;
         border-radius: 4px;
         border: 1px solid ${(props) => props.theme.brown[1]};
@@ -128,7 +128,7 @@ const Wrap = styled.div`
       .storeCategory {
         float: left;
         max-width: 70px;
-        padding: 1px 4px;
+        padding: 0px 4px;
         border-radius: 4px;
         border: 1px solid ${(props) => props.theme.color[1]};
         text-align: center;
@@ -196,7 +196,8 @@ const Wrap = styled.div`
           .vegType {
             float: left;
             width: 67px;
-            padding: 1px 4px;
+            padding: 0px 4px;
+            margin-top: 2px;
             margin-left: 0.4rem;
             border-radius: 4px;
             border: 1px solid ${(props) => props.theme.brown[1]};
@@ -258,7 +259,7 @@ const Wrap = styled.div`
           width: 100%;
           li {
             .name {
-              width: calc(100% - 157px);
+              width: calc(100% - 164px);
             }
             .price {
               width: 85px;

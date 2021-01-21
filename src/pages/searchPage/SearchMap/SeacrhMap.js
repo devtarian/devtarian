@@ -32,7 +32,7 @@ const Wrap = styled.div`
   }
 
   .info {
-    width: 220px;
+    width: 200px;
     overflow: hidden;
   }
 
@@ -50,36 +50,39 @@ const Wrap = styled.div`
 
   .info-body {
     padding: 5px;
-    height: 72px;
+    height: 82px;
     border-bottom: 1px solid #eeeeee;
     overflow: hidden;
 
     .vegType {
       display: inline-block;
       width: 70px;
-      height: 20px;
-      line-height: 20px;
+      height: 18px;
+      line-height: 18px;
       border-radius: 4px;
       vertical-align: middle;
       text-align: center;
       font-size: 12px;
-      background: ${(props) => props.theme.brown[1]};
+      background: ${(props) => props.theme.green[1]};
       color: ${(props) => props.theme.background[0]};
     }
     .title {
       display: inline-block;
       width: 200px;
       margin: 0px;
+      margin-left: 0.3rem;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
       vertical-align: top;
-      color: ${(props) => props.theme.green[1]};
-    }
-    .title a {
-      margin-left: 0.3rem;
       font-size: 16px;
-      color: ${(props) => props.theme.green[1]};
+    }
+    .region {
+      font-size: 14px;
+      color: ${(props) => props.theme.color[1]};
+    }
+    .address {
+      font-size: 12px;
     }
   }
 
@@ -109,5 +112,4 @@ const StyledSvg = styled(Svg)`
   width: 30px;
   height: 30px;
   background: white;
-  border: 3px solid ${(props) => props.theme.green[2]};
 `;

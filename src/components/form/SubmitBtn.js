@@ -36,6 +36,6 @@ export const SubmitBtnWrap = styled.div`
     background-color: ${(props) => props.theme.green[0]};
   }
   @media (max-width: 767px) {
-    width: 38%;
+    width: 40%;
   }
 `;
