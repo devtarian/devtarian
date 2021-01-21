@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
-import apis from '../../../Service/apis';
+import apis from '../../../service/apis';
 import WriterProfile, { WriterProfileWrap } from '../../../components/profile/WriterProfile';
 import CommentForm from '../../../components/commentForm/CommentForm';
 import { STORE_CREATE_COMMENT, STORE_DELETE_COMMENT } from '../../../redux/types';

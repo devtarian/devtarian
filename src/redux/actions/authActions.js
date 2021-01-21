@@ -1,7 +1,7 @@
 import { AUTH_GET_ME, AUTH_LOGOUT } from '../types';
 import history from '../../history';
-import { defaultApi } from '../../Service/apis/default';
-import apis from '../../Service/apis';
+import { defaultApi } from '../../service/apis/default';
+import apis from '../../service/apis';
 
 const getMe = () => async (dispatch) => {
   try {

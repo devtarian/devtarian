@@ -6,13 +6,7 @@ import Stars from '../stars/Stars';
 import Likes, { LikesWrap, LikesBtn } from '../likes/Likes';
 import noImg from '../../images/noImg.jpg';
 
-const ReviewCard = ({ cardData }) => {
-  const refLikes = useRef(null);
-  const { data, isFetching } = useSelector((state) => state.main);
-
-  if (isFetching) return;
-  const review = data.review;
-
+const ReviewCard = ({ cardData, onClickLike }) => {
   const {
     storeId,
     id,
@@ -21,36 +15,46 @@ const ReviewCard = ({ cardData }) => {
     info: { vegType, storeName, region, starRating },
   } = cardData;
 
-  const handleCardClick = (e) => {
-    // if (e.target === refLikes.current) return;
-    if (e.target.nodeName === 'SVG' || 'PATH' || 'CIRCLE') return;
-
-    // history.push(`/storeDetail/${storeId}`);
-  };
-
   return (
-    <ReviewCardWrap onClick={handleCardClick}>
-      <ItemImg>
-        <img src={imgUrl ? imgUrl : noImg} alt="" />
-        <div className="cover"></div>
-      </ItemImg>
-      <span className="vegType">{vegType}</span>
-      <h3 className="title">{storeName}</h3>
-      <strong className="region">{region}</strong>
-      <div className="starRating">
-        <Stars rate={starRating} starsW={80} />
-      </div>
-      <p className="contents">{cardData.contents ? cardData.contents : ''}</p>
-      <Likes storeId={storeId} reviewId={id} likesOfMe={likesOfMe} ref={refLikes} />
-    </ReviewCardWrap>
+    <Wrap>
+      <ReviewCardWrap onClick={() => history.push(`/storeDetail/${storeId}`)}>
+        <ItemImg>
+          <img src={imgUrl ? imgUrl : noImg} alt="" />
+          <div className="cover"></div>
+        </ItemImg>
+        <span className="vegType">{vegType}</span>
+        <h3 className="title">{storeName}</h3>
+        <strong className="region">{region}</strong>
+        <div className="starRating">
+          <Stars rate={starRating} starsW={80} />
+        </div>
+        <p className="contents">{cardData.contents ? cardData.contents : ''}</p>
+      </ReviewCardWrap>
+      <Likes likesOfMe={likesOfMe} onClickLike={onClickLike} />
+    </Wrap>
   );
 };
 
 export default ReviewCard;
 
-export const ReviewCardWrap = styled.div`
+const Wrap = styled.div`
   position: relative;
   cursor: pointer;
+
+  ${LikesWrap} {
+    z-index: 101;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+
+  ${LikesBtn} {
+    width: 25px;
+    height: 25px;
+  }
+`;
+
+export const ReviewCardWrap = styled.div`
   .vegType {
     display: inline-block;
     width: 70px;
@@ -94,18 +98,6 @@ export const ReviewCardWrap = styled.div`
     margin-top: 0.25rem;
     overflow: hidden;
     text-overflow: ellipsis;
-  }
-
-  ${LikesWrap} {
-    z-index: 101;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-  }
-
-  ${LikesBtn} {
-    width: 25px;
-    height: 25px;
   }
 `;
 

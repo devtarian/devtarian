@@ -1,18 +1,32 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
+import { wikiDetailActions } from '../../redux/actions';
+
 import WikiDetailBox from '../../components/detailBox/wikiDetailBox/WikiDetailBox';
 import WikiComment from './WikiComment';
 import EditBtn from '../../components/editBtn/EditBtn';
 import GoBackLink from '../../components/goBackLink/GoBackLink';
 
+import Loading from '../../components/loading/Loding';
+
 const WikiDetail = ({ match }) => {
+  const dispatch = useDispatch();
   const wikiId = match.params.wikiId;
+  const { isLoggedIn, userId } = useSelector((state) => state.auth);
+  const { isFetching, data } = useSelector((state) => state.wikiDetail);
+
+  useEffect(() => {
+    dispatch(wikiDetailActions.getWikiDetail(wikiId));
+  }, [dispatch, wikiId]);
+
+  if (isFetching) return <Loading />;
 
   return (
     <Wrap>
-      <WikiDetailBox wikiId={wikiId} />
+      <WikiDetailBox wikiId={wikiId} isLoggedIn={isLoggedIn} />
       <div className="comment">
-        <EditBtn to={`/wikiForm/${wikiId}`} innerText="편집" />
+        {userId === data.writer.userId && <EditBtn to={`/wikiForm/${wikiId}`} innerText="편집" />}
         <WikiComment wikiId={wikiId} />
       </div>
       <GoBackLink to="/vegwiki" innerText="목록으로" />

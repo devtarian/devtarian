@@ -1,20 +1,40 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
+import history from '../../../history';
 import ImgCard from '../../card/ImgCard';
 import CarouselBtn, { CarouselBtnWrap } from '../CarouselBtn';
 import ViewAll from '../VeiwAll';
 import useCarousel from '../../../hooks/useCarousel';
 
-const CoverCarousel = ({ carouselData, mg }) => {
+import { useDispatch } from 'react-redux';
+import { mainActions } from '../../../redux/actions';
+
+const CoverCarousel = ({ carouselData, mg, isLoggedIn }) => {
+  const dispatch = useDispatch();
   const { value, onCarouselBtnClick } = useCarousel(mg);
   const { refCarouselUl, refCarouselLi } = value;
 
+  const handleFavoriteClick = useCallback(
+    (wiki) => {
+      if (!isLoggedIn) {
+        window.location = '/login';
+      }
+      wiki.favorite ? dispatch(mainActions.unFavoriteWiki(wiki.id)) : dispatch(mainActions.favoriteWiki(wiki.id));
+    },
+    [dispatch, isLoggedIn]
+  );
   return (
     <CoverCarouselWrap>
       <h2>비건위키</h2>
       <CarouselUl ref={refCarouselUl} value={value}>
         {carouselData.map((data, index) => (
-          <ImgCard key={index} data={data} value={value} ref={refCarouselLi} />
+          <ImgCard
+            key={index}
+            data={data}
+            value={value}
+            ref={refCarouselLi}
+            onFavoriteClick={() => handleFavoriteClick(data)}
+          />
         ))}
       </CarouselUl>
       <CarouselBtn value={value} onCarouselBtnClick={onCarouselBtnClick} />

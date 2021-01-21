@@ -1,13 +1,15 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { ReactComponent as MoreSvg } from '../../images/icons/arrow_right.svg';
+// import { ReactComponent as MoreSvg } from '../../images/icons/arrow_right.svg';
+import Svg from '../common/Svg';
 
 const ViewAll = ({ to }) => {
   return (
     <ViewAllWrap>
       <Link to={to}>
         <span>
-          더 보기 <MoreBtn />
+          더 보기
+          {/* 더 보기 <MoreBtn /> */}
         </span>
       </Link>
     </ViewAllWrap>
@@ -25,7 +27,7 @@ export const ViewAllWrap = styled.div`
   }
 `;
 
-const MoreBtn = styled(MoreSvg)`
+const MoreBtn = styled(Svg)`
   width: 23px;
   height: 23px;
   vertical-align: top;

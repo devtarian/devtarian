@@ -1,5 +1,15 @@
 import { translate } from './helper';
 
+export const initMap = (mapElem, query) => {
+  let { lat, lng } = query;
+  let center = new window.kakao.maps.LatLng(lat || 37.573, lng || 126.9794);
+  let mapOption = { center, level: 6 };
+  let map = new window.kakao.maps.Map(mapElem, mapOption);
+  let marker = new window.kakao.maps.Marker({ map, position: center });
+  marker.setMap(map);
+  return map;
+};
+
 export const makeMarkerImg = (category) => {
   const map = {
     restaurant: [0, 0],
@@ -45,19 +55,19 @@ export const makeInfoWindow = (store) => {
       '    <div class="info-body-title">' +
       '      <span class="vegType">' +
       translate(store.info.vegType) +
-      '</span>' +
+      '      </span>' +
       '      <h3 class="title">' +
       '        <a href="/">' +
       store.info.storeName +
-      '</a>' +
+      '        </a>' +
       '      </h3>' +
       '    </div>' +
       '    <strong class="region">' +
       store.info.region +
-      '</strong>' +
+      '    </strong>' +
       '    <p class="contents">' +
       store.info.contents +
-      '</p>' +
+      '    </p>' +
       '  </div>' +
       '  <div class="info-footer">거리: ' +
       store.distance +
@@ -65,29 +75,25 @@ export const makeInfoWindow = (store) => {
   });
 };
 
-export const drawMap = (map, data) => {
-  //let bounds = new window.kakao.maps.LatLngBounds();
-  data.forEach((store) => {
-    let { marker, imageNormal, imageOver, infoWindow } = store.map;
-    marker.setMap(map);
-    //bounds.extend(point);
-    window.kakao.maps.event.addListener(
-      marker,
-      'mouseover',
-      () => {
-        marker.setImage(imageOver);
-        infoWindow.open(map, marker);
-      },
-      { passive: true }
-    );
-    window.kakao.maps.event.addListener(
-      marker,
-      'mouseout',
-      () => {
-        marker.setImage(imageNormal);
-        infoWindow.close();
-      },
-      { passive: true }
-    );
-  });
+export const drawMap = (map, mapData) => {
+  let { marker, imageNormal, imageOver, infoWindow } = mapData;
+  marker.setMap(map);
+  window.kakao.maps.event.addListener(
+    marker,
+    'mouseover',
+    () => {
+      marker.setImage(imageOver);
+      infoWindow.open(map, marker);
+    },
+    { passive: true }
+  );
+  window.kakao.maps.event.addListener(
+    marker,
+    'mouseout',
+    () => {
+      marker.setImage(imageNormal);
+      infoWindow.close();
+    },
+    { passive: true }
+  );
 };

@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import queryString from 'query-string';
 import history from '../../../../history';
 import Modal from '../../../../components/common/Modal';
-import Button from '../../../../Styles/Button';
+import Button from '../../../../styles/Button';
 import { changeObjectToQuery } from '../../../../utils/helper';
-import FilterButtons from './FilterButtons.js/FilterButtons';
+import FilterButtons from './filterButtons.js/FilterButtons';
 
 const INITIAL_VALUE = {
   category: 'all',

@@ -4,7 +4,7 @@ import Carousel from '../../../components/carousel/carousel/Carousel';
 import CoverCarousel from '../../../components/carousel/coverCarousel/CoverCarousel';
 import ReviewCarousel from '../../../components/carousel/reviewCarousel/ReviewCarousel';
 import { useDispatch, useSelector } from 'react-redux';
-import mainActions from '../../../redux/actions/mainActions';
+import { mainActions } from '../../../redux/actions';
 import Loading from '../../../components/loading/Loding';
 
 const Section = () => {
@@ -26,10 +26,10 @@ const Section = () => {
 
   return (
     <Wrap>
-      <Carousel carouselData={data.store} mg={mg} title="근처의 비건식당" />
-      <Carousel carouselData={data.rated} mg={mg} title="비건식당 Top 10" />
-      <CoverCarousel carouselData={data.wiki} mg={mg} />
-      <ReviewCarousel carouselData={data.review} mg={mg} />
+      <Carousel carouselData={data.store} mg={mg} isLoggedIn={isLoggedIn} title="근처의 비건식당" />
+      <Carousel carouselData={data.rated} mg={mg} isLoggedIn={isLoggedIn} title="비건식당 Top 10" />
+      <CoverCarousel carouselData={data.wiki} mg={mg} isLoggedIn={isLoggedIn} />
+      <ReviewCarousel carouselData={data.review} mg={mg} isLoggedIn={isLoggedIn} />
     </Wrap>
   );
 };

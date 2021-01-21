@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import Stars from '../../stars/Stars';
-import KakaoMap from '../../Map/KakaoMap';
+import KakaoMap from '../../map/KakaoMap';
 import { ViewAllWrap } from '../../carousel/VeiwAll';
 import { ReactComponent as PlusSvg } from '../../../images/icons/add.svg';
 import useMoreDetail from '../../../hooks/useMoreDetail';
 import { autoHypenContactNum, changeNumberWithComma, translate } from '../../../utils/helper';
+import Svg from '../../common/Svg';
 
 const StoreTextBox = ({ storeData }) => {
   const {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import authActions from '../../redux/actions/authActions';
+import { authActions } from '../../redux/actions';
 import history from '../../history';
 import useInput from '../../hooks/useInput';
 import SignInput from '../../components/form/SignInput';

@@ -1,26 +1,30 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useRef } from 'react';
 import styled from 'styled-components';
 import Search, { SearchWrap, InnerWrap } from '../../components/search/Search';
-import SearchFilter from './SearchFilter/SearchFilter';
+import SearchFilter from './searchFilter/SearchFilter';
 import ImgTextCard from '../../components/card/ImgTextCard';
-import SearchMap from './SearchMap/SeacrhMap';
+import SearchMap from './searchMap/SeacrhMap';
 
 import { useDispatch, useSelector } from 'react-redux';
-import searchActions from '../../redux/actions/searchActions';
+import { searchActions } from '../../redux/actions';
 import useObserver from '../../hooks/useObserver';
+import history from '../../history';
+import Loading from '../../components/loading/Loding';
 
 const SearchPage = () => {
+  const mapRef = useRef();
   const dispatch = useDispatch();
   const { isFetching, data, map, fetchMore } = useSelector((state) => state.search);
+  const { isLoggedIn } = useSelector((state) => state.auth);
 
   const handleFetchMore = () => {
     if (!fetchMore) return;
-    dispatch(searchActions.getSearch());
+    dispatch(searchActions.getSeach());
   };
   const handleMouseOver = useCallback(
     (store) => {
       if (!store) return;
-      let { marker, imageOver, infoWindow } = store.map;
+      let { marker, imageOver, infoWindow } = store.mapData;
       marker.setImage(imageOver);
       infoWindow.open(map, marker);
     },
@@ -29,17 +33,29 @@ const SearchPage = () => {
 
   const handleMouseOut = useCallback((store) => {
     if (!store) return;
-    let { marker, imageNormal, infoWindow } = store.map;
+    let { marker, imageNormal, infoWindow } = store.mapData;
     marker.setImage(imageNormal);
     infoWindow.close();
   }, []);
 
+  const handleClickFavorite = useCallback(
+    (store) => {
+      if (!isLoggedIn) {
+        history.push('/login');
+      }
+      store.favorite ? dispatch(searchActions.unFavorite(store.id)) : dispatch(searchActions.favorite(store.id));
+    },
+    [isLoggedIn, dispatch]
+  );
   const ref = useObserver(handleFetchMore);
-  useEffect(() => {
-    dispatch(searchActions.getSearch());
-  }, [dispatch]);
 
-  if (isFetching) return null;
+  useEffect(() => {
+    const mapElem = mapRef.current;
+    if (!mapElem) return;
+    dispatch(searchActions.getSeach(mapElem));
+  }, [dispatch, mapRef]);
+
+  if (isFetching && map) return <Loading />;
 
   return (
     <Wrap>
@@ -58,6 +74,7 @@ const SearchPage = () => {
                 storeData={item}
                 onMouseOver={() => handleMouseOver(item)}
                 onMouseOut={() => handleMouseOut(item)}
+                onClickFavorite={() => handleClickFavorite(item)}
                 ref={lastEl ? ref : null}
               />
             );
@@ -66,7 +83,7 @@ const SearchPage = () => {
         </CardList>
       </SectionContents>
       <SectionMap>
-        <SearchMap />
+        <SearchMap ref={mapRef} />
       </SectionMap>
     </Wrap>
   );
@@ -121,16 +138,12 @@ const CardList = styled.div`
   -webkit-box-lines: multiple;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
 `;
 
 const StyledCard = styled(ImgTextCard)`
   width: 32%;
   margin-bottom: 20px;
-
+  margin-right: 1%;
   @media (max-width: 1350px) {
     width: 49%;
   }

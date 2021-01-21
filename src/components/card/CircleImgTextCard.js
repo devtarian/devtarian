@@ -1,67 +1,85 @@
-import React, { forwardRef, useRef } from 'react';
+import React, { forwardRef, useRef, useCallback } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
-import wikiActions from '../../redux/actions/wikiActions';
+import { wikiActions } from '../../redux/actions';
 import history from '../../history';
 import FavoriteHeart, { FavoriteWrap, EmptyHeart } from '../../components/favoriteHeart/FavoriteHeart';
 import noImg from '../../images/noImg.jpg';
 import { translate } from '../../utils/helper';
 
-const CircleImgTextCard = forwardRef(({ data }, ref) => {
+const CircleImgTextCard = forwardRef(({ data, isLoggedIn }, ref) => {
   const dispatch = useDispatch();
   const { id, imgUrl, category, product, ingredient, favorite } = data;
   const refFavorite = useRef(null);
 
   const handleCardClick = (e) => {
-    //  console.log(e.target, refFavorite.current.childNodes);
     if (e.target === refFavorite.curent) return;
 
     history.push(`/wikiDetail/${id}`);
   };
 
-  const onFavoriteClick = () => {
+  const handleClickFavorite = useCallback(() => {
+    if (!isLoggedIn) {
+      window.location = '/login';
+    }
     favorite ? dispatch(wikiActions.unFavoriteWiki(id)) : dispatch(wikiActions.favoriteWiki(id));
-  };
+  }, [isLoggedIn, dispatch, id, favorite]);
 
   return (
-    <CircleCardWrap key={id} ref={ref} onClick={handleCardClick}>
-      <div className="imgInfo">
-        <img src={imgUrl ? imgUrl : noImg} alt="" />
-        <div className="cover"></div>
-      </div>
-      <div className="itemInfo">
-        <span className="category">{translate(category)}</span>
-        <h3>{product}</h3>
-        <span className="ingredient">{ingredient}</span>
-      </div>
-      <FavoriteHeart onFavoriteClick={onFavoriteClick} favorite={favorite} ref={refFavorite} />
-    </CircleCardWrap>
+    <Wrap>
+      <CircleCardWrap key={id} ref={ref} onClick={handleCardClick}>
+        <div className="imgInfo">
+          <img src={imgUrl ? imgUrl : noImg} alt="" />
+          <div className="cover"></div>
+        </div>
+        <div className="itemInfo">
+          <span className="category">{translate(category)}</span>
+          <h3>{product}</h3>
+          <span className="ingredient">{ingredient}</span>
+        </div>
+      </CircleCardWrap>
+      <FavoriteHeart favorite={favorite} onFavoriteClick={handleClickFavorite} />
+    </Wrap>
   );
 });
 
 export default CircleImgTextCard;
 
-export const CircleCardWrap = styled.li`
-  background: ${(props) => props.theme.background[1]};
+const Wrap = styled.div`
   position: relative;
   float: left;
   width: 270px;
   height: 300px;
   margin: 0 0.8rem 1.4rem;
-  border-radius: 10px;
+  background: ${(props) => props.theme.background[1]};
   -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  cursor: pointer;
+  border-radius: 10px;
 
+  ${FavoriteWrap} {
+    top: 10px;
+    right: 10px;
+  }
+  ${EmptyHeart} {
+    fill: ${(props) => props.theme.color[2]};
+  }
+`;
+export const CircleCardWrap = styled.div`
+  cursor: pointer;
+  width: 100% !important;
   .imgInfo {
+    width: 140px;
+    height: 140px;
+    margin: 0 auto;
     &:hover .cover {
       opacity: 0.8;
     }
     img {
       display: block;
-      width: 140px;
-      height: 140px;
-      margin: 34px auto 10px;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      margin: 34px 0 10px;
       border-radius: 50%;
     }
     .cover {
@@ -94,13 +112,5 @@ export const CircleCardWrap = styled.li`
     .ingredient {
       margin-top: 0.7rem;
     }
-  }
-
-  ${FavoriteWrap} {
-    top: 10px;
-    right: 10px;
-  }
-  ${EmptyHeart} {
-    fill: ${(props) => props.theme.color[2]};
   }
 `;

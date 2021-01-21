@@ -1,16 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 import Search, { SearchWrap, InnerWrap } from '../../components/search/Search';
-import { SearchInput } from '../../components/search/SearchForm/SearchForm';
+import { SearchInput } from '../../components/search/searchForm/SearchForm';
 import Section from './section/Section';
 import Footer from './footer/Footer';
 import BackGroundImg from '../../images/pexels-ready-made-3850607.jpg';
 
-const Main = ({ wikiPosts }) => {
+const Main = () => {
   return (
     <MainWrap>
       <Search />
-      <Section wikiPosts={wikiPosts} />
+      <Section />
       <Footer />
     </MainWrap>
   );

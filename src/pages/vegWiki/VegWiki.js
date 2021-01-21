@@ -1,118 +1,45 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
-// import { useSelector, useDispatch } from 'react-redux';
-// import wikiActions from '../../redux/actions/wikiActions';
-// import Loading from '../../components/loading/Loding';
-import { Checkbox, Select } from '../../components/form';
+import { useSelector, useDispatch } from 'react-redux';
+import { wikiActions } from '../../redux/actions';
 import { CheckboxWrap } from '../../components/form/Checkbox';
 import { SelectWrap } from '../../components/form/Select';
 import CircleImgTextCard, { CircleCardWrap } from '../../components/card/CircleImgTextCard';
 import EditBtn, { EditBtnWrap } from '../../components/editBtn/EditBtn';
-import useInput from '../../hooks/useInput';
-import useActivedBtn from '../../hooks/useActivedBtn';
 import useObserver from '../../hooks/useObserver';
+import Loading from '../../components/loading/Loding';
+import VegWikiFilter from './vegWikiFilter/vegWikiFilter';
 
-const VegiWiki = ({ wikiPosts }) => {
-  //const [category, setCategory] = useState();
+const VegiWiki = () => {
+  const dispatch = useDispatch();
+  const { isFetching, totalCount, data, fetchMore } = useSelector((state) => state.wiki);
+  const { isLoggedIn } = useSelector((state) => state.auth);
+  const handleFetchMore = () => {
+    if (!fetchMore) return;
 
-  const [products, setProducts] = useState(wikiPosts);
-  const { inputs, setInputs, onInputChange } = useInput();
-  const { activedBtn, onCheckboxClick } = useActivedBtn();
-
-  const loadProducts = () => {
-    setProducts((prevState) => {
-      const nextProducts = [
-        {
-          id: 12,
-          category: '가공식품',
-          files: [],
-          product: '포테토칩',
-          ingredient: '밀/대두',
-          comments: '',
-          commentList: [
-            {
-              id: 0,
-              writer: { name: 'Harry', thumbNail: 'http://placehold.it/40x40.png?text=A' },
-              createAt: '3초 전',
-              contents: '',
-            },
-          ],
-        },
-        {
-          category: '가공식품',
-          files: [],
-          product: '포테토칩',
-          ingredient: '밀/대두',
-          comments: '',
-          commentList: [
-            {
-              id: 0,
-              writer: { name: 'Harry', thumbNail: 'http://placehold.it/40x40.png?text=A' },
-              createAt: '3초 전',
-              contents: '',
-            },
-          ],
-        },
-        {
-          id: 14,
-          category: '가공식품',
-          files: [],
-          product: '포테토칩',
-          ingredient: '밀/대두',
-          comments: '',
-          commentList: [
-            {
-              id: 0,
-              writer: { name: 'Harry', thumbNail: 'http://placehold.it/40x40.png?text=A' },
-              createAt: '3초 전',
-              contents: '',
-            },
-          ],
-        },
-        {
-          id: 15,
-          category: '가공식품',
-          files: [],
-          product: '포테토칩',
-          ingredient: '밀/대두',
-          comments: '',
-          commentList: [
-            {
-              id: 0,
-              writer: { name: 'Harry', thumbNail: 'http://placehold.it/40x40.png?text=A' },
-              createAt: '3초 전',
-              contents: '',
-            },
-          ],
-        },
-      ];
-      return [...prevState, ...nextProducts];
-    });
+    dispatch(wikiActions.getWiki());
   };
 
-  const refTarget = useObserver(loadProducts);
+  useEffect(() => {
+    dispatch(wikiActions.getWiki());
+  }, [dispatch]);
+  const refTarget = useObserver(handleFetchMore);
+
+  if (isFetching) return <Loading />;
 
   return (
     <Wrap>
-      <div className="filters">
-        <Checkbox
-          name="category"
-          label="카테고리"
-          info={CATEGORIES}
-          activedBtn={activedBtn}
-          setInputs={setInputs}
-          onCheckboxClick={onCheckboxClick}
-        />
-        <Select info={OPTIONS} />
-      </div>
+      <VegWikiFilter />
       <EditBtn to="/wikiForm" innerText="위키 작성" />
       <div className="product">
-        <strong>총 {products.length}개</strong>
+        <strong>총 {totalCount}개</strong>
         <ul>
-          {products.map((data, index) => {
-            const lastEl = index === products.length - 1;
+          {data.map((item, index) => {
+            const lastEl = index === data.length - 1;
 
-            return <CircleImgTextCard key={index} data={data} ref={lastEl ? refTarget : null} />;
+            return (
+              <CircleImgTextCard key={index} data={item} ref={lastEl ? refTarget : null} isLoggedIn={isLoggedIn} />
+            );
           })}
         </ul>
       </div>

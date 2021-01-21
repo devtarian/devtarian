@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
-import storeActions from '../../redux/actions/storeActions';
+import { storeActions } from '../../redux/actions';
 import history from '../../history';
 import Stars from '../stars/Stars';
 import FavoriteHeart, { FavoriteWrap, EmptyHeart } from '../../components/favoriteHeart/FavoriteHeart';
@@ -10,56 +10,64 @@ import Svg from '../common/Svg';
 import { translate } from '../../utils/helper';
 import filterConfig from '../../config/filterConfig';
 
-const ImgTextCard = React.forwardRef(({ className, storeData, onMouseOver, onMouseOut }, ref) => {
+const ImgTextCard = React.forwardRef(({ className, storeData, onMouseOver, onMouseOut, onClickFavorite }, ref) => {
   const dispatch = useDispatch();
   const {
     id,
+    favorite,
     info: { imgUrls, vegType, storeName, region, starRating, contents, category, address },
   } = storeData;
   const bg = filterConfig.category[category].color;
+
   const GetStoreDetail = () => {
     dispatch(storeActions.getStore(id));
     history.push(`/storeDetail/${id}`);
   };
 
   return (
-    <ImgTextCardWrap
-      className={className}
-      onClick={GetStoreDetail}
-      onMouseOver={onMouseOver}
-      onMouseOut={onMouseOut}
-      ref={ref}>
-      <ItemImg bg={bg}>
-        <img src={imgUrls[0] ? imgUrls[0] : noImg} alt="" />
-        <div className="cover">
-          <CircleSvg type={category} color="white" w="50px" h="50px" radius="50%" p="5px" />
-          {category}
-          <p>{address}</p>
+    <Wrap className={className}>
+      <ContentWrap onClick={GetStoreDetail} onMouseOver={onMouseOver} onMouseOut={onMouseOut} ref={ref}>
+        <ItemImg bg={bg}>
+          <img src={imgUrls[0] ? imgUrls[0] : noImg} alt="" />
+          <div className="cover">
+            <CircleSvg type={category} color="white" w="50px" h="50px" radius="50%" p="5px" />
+            {category}
+            <p>{address}</p>
+          </div>
+        </ItemImg>
+        <TitleWrap>
+          <span className="vegType">{translate(vegType)}</span>
+          <h3 className="title">
+            <a href="/">{storeName}</a>
+          </h3>
+        </TitleWrap>
+        <strong className="region">{region}</strong>
+        <div className="starRating">
+          <Stars rate={starRating} starsW={80} />
         </div>
-      </ItemImg>
-      <TitleWrap>
-        <span className="vegType">{translate(vegType)}</span>
-        <h3 className="title">
-          <a href="/">{storeName}</a>
-        </h3>
-      </TitleWrap>
-      <strong className="region">{region}</strong>
-      <div className="starRating">
-        <Stars rate={starRating} starsW={80} />
-      </div>
-      <p className="contents">{contents}</p>
-      <FavoriteHeart data={storeData} />
-    </ImgTextCardWrap>
+        <p className="contents">{contents}</p>
+      </ContentWrap>
+      <FavoriteHeart favorite={favorite} onFavoriteClick={onClickFavorite} />
+    </Wrap>
   );
 });
 
 export default React.memo(ImgTextCard);
 
-export const ImgTextCardWrap = styled.div`
+const Wrap = styled.div`
   position: relative;
   cursor: pointer;
-  width: 270px;
 
+  ${FavoriteWrap} {
+    top: 10px;
+    right: 10px;
+  }
+  ${EmptyHeart} {
+    fill: ${(props) => props.theme.color[2]};
+  }
+`;
+
+export const ContentWrap = styled.div`
   .region {
     display: block;
     width: 100%;
@@ -80,14 +88,6 @@ export const ImgTextCardWrap = styled.div`
     margin-top: 0.25rem;
     overflow: hidden;
     text-overflow: ellipsis;
-  }
-
-  ${FavoriteWrap} {
-    top: 10px;
-    right: 10px;
-  }
-  ${EmptyHeart} {
-    fill: ${(props) => props.theme.color[2]};
   }
 `;
 

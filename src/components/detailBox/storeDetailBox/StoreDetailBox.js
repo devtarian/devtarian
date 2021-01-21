@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
-import storeActions from '../../../redux/actions/storeActions';
+import { storeActions } from '../../../redux/actions';
 import ImgBox from '../ImgBox';
 import StoreTextBox from './StoreTextBox';
 import FavoriteHeart, { FavoriteWrap } from '../../favoriteHeart/FavoriteHeart';
 import { translate } from '../../../utils/helper';
 
-const StoreDetailBox = () => {
+const StoreDetailBox = ({ isLoggedIn }) => {
   const dispatch = useDispatch();
   const store = useSelector((state) => state.store.data);
   const {
@@ -16,9 +16,13 @@ const StoreDetailBox = () => {
     info: { category, vegType, storeName },
   } = store;
 
-  const onFavoriteClick = () => {
+  const handleClickFavorite = useCallback(() => {
+    if (!isLoggedIn) {
+      window.location = '/login';
+    }
+
     favorite ? dispatch(storeActions.unFavoriteStore(id)) : dispatch(storeActions.favoriteStore(id));
-  };
+  }, [isLoggedIn, dispatch, favorite, id]);
 
   return (
     <Wrap>
@@ -32,7 +36,7 @@ const StoreDetailBox = () => {
       <ImgBox data={store.info} />
       <StoreTextBox storeData={store} />
       <div className="heartWrap">
-        <FavoriteHeart onFavoriteClick={onFavoriteClick} favorite={favorite} />
+        <FavoriteHeart favorite={favorite} onFavoriteClick={handleClickFavorite} />
       </div>
     </Wrap>
   );

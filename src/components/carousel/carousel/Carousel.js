@@ -1,13 +1,26 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import ImgTextCard from '../../card/ImgTextCard';
 import CarouselBtn from '../CarouselBtn';
 import ViewAll from '../VeiwAll';
 import useCarousel from '../../../hooks/useCarousel';
+import { useDispatch } from 'react-redux';
+import { mainActions } from '../../../redux/actions';
 
-const Carousel = ({ carouselData, mg, title }) => {
+const Carousel = ({ carouselData, isLoggedIn, title, mg }) => {
+  const dispatch = useDispatch();
   const { value, onCarouselBtnClick } = useCarousel(mg);
   const { refCarouselUl, refCarouselLi } = value;
+
+  const handleClickFavorite = useCallback(
+    (store) => {
+      if (!isLoggedIn) {
+        window.location = '/login';
+      }
+      store.favorite ? dispatch(mainActions.unFavorite(store.id)) : dispatch(mainActions.favorite(store.id));
+    },
+    [isLoggedIn, dispatch]
+  );
 
   return (
     <Wrap>
@@ -15,7 +28,7 @@ const Carousel = ({ carouselData, mg, title }) => {
       <CarouselUl ref={refCarouselUl} value={value}>
         {carouselData.map((data, index) => (
           <li key={index} ref={refCarouselLi}>
-            <ImgTextCard storeData={data} />
+            <ImgTextCard storeData={data} onClickFavorite={() => handleClickFavorite(data)} />
           </li>
         ))}
       </CarouselUl>

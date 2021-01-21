@@ -2,11 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 import { translate } from '../../utils/helper';
 
-const Select = ({ info }) => {
+const Select = ({ className, info, onChange }) => {
+  const handleChange = (e) => {
+    onChange(e.target.value);
+  };
+
   return (
-    <SelectWrap>
+    <SelectWrap className={className} onChange={handleChange}>
       {info.map((item, index) => (
-        <option key={index}>{translate(item)}</option>
+        <option key={index} value={item}>
+          {translate(item)}
+        </option>
       ))}
     </SelectWrap>
   );

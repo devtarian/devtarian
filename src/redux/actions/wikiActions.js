@@ -1,10 +1,14 @@
 import { WIKI_GET_WIKI, WIKI_DELETE_WIKI, WIKI_FAVORITE_WIKI, WIKI_UN_FAVORITE_WIKI } from '../types';
-import apis from '../../Service/apis';
+import apis from '../../service/apis';
+import queryString from 'query-string';
+import history from '../../history';
 
 // wiki
-const getWiki = () => async (dispatch) => {
+const getWiki = () => async (dispatch, getState) => {
   try {
-    const data = await apis.wikiApi.getWiki();
+    const page = getState().wiki.page;
+    let query = queryString.parse(history.location.search);
+    const data = await apis.wikiApi.getWiki({ ...query, page: page + 1 });
 
     dispatch({
       type: WIKI_GET_WIKI,

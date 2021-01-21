@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import wikiDetailActions from '../../../redux/actions/wikiDetailActions';
+import { wikiDetailActions } from '../../../redux/actions';
 import Loading from '../../../components/loading/Loding';
 import ImgBox from '../ImgBox';
 import WikiTextBox from './WikiTextBox';
 import FavoriteHeart, { FavoriteWrap } from '../../favoriteHeart/FavoriteHeart';
 
-const WikiDetailBox = ({ wikiId }) => {
+const WikiDetailBox = ({ wikiId, isLoggedIn }) => {
   const dispatch = useDispatch();
   const { isFetching, data } = useSelector((state) => state.wikiDetail);
   const { category, product, favorite } = data;
@@ -16,12 +16,14 @@ const WikiDetailBox = ({ wikiId }) => {
     dispatch(wikiDetailActions.getWikiDetail(wikiId));
   }, [dispatch, wikiId]);
 
-  if (isFetching) return <Loading />;
-
-  const onFavoriteClick = () => {
+  const handleClickFavorite = useCallback(() => {
+    if (!isLoggedIn) {
+      window.location = '/login';
+    }
     favorite ? dispatch(wikiDetailActions.unFavoriteWiki(wikiId)) : dispatch(wikiDetailActions.favoriteWiki(wikiId));
-  };
+  }, [isLoggedIn, dispatch, favorite, wikiId]);
 
+  if (isFetching) return <Loading />;
   return (
     <Wrap>
       <div className="show">
@@ -31,7 +33,7 @@ const WikiDetailBox = ({ wikiId }) => {
       <ImgBox data={data} />
       <WikiTextBox wiki={data} wikiId={wikiId} />
       <div className="heartWrap">
-        <FavoriteHeart onFavoriteClick={onFavoriteClick} favorite={favorite} />
+        <FavoriteHeart favorite={favorite} onFavoriteClick={handleClickFavorite} />
       </div>
     </Wrap>
   );

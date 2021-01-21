@@ -1,16 +1,30 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
 import PhotoReviewBox from './PhotoReviewBox';
 import TextReviewBox from './TextReviewBox';
 import Comment from './Comment';
 import Likes from '../../../components/likes/Likes';
 import { ReactComponent as CommentSvg } from '../../../images/icons/insert_comment.svg';
 
-const Review = () => {
-  const data = useSelector((state) => state.store.data);
+import { useSelector, useDispatch } from 'react-redux';
+import { storeActions } from '../../../redux/actions';
+
+const Review = ({ isLoggedIn }) => {
+  const dispatch = useDispatch();
   const { id, reviews, reviewList } = useSelector((state) => state.store.data);
-  console.log(data);
+
+  const handleClickLike = useCallback(
+    (review) => {
+      const { storeId, id, likesOfMe } = review;
+      if (!isLoggedIn) {
+        window.location = '/login';
+      }
+
+      likesOfMe ? dispatch(storeActions.unLikeReview(storeId, id)) : dispatch(storeActions.likeReview(storeId, id));
+    },
+    [dispatch, isLoggedIn]
+  );
+
   return (
     <Wrap>
       <strong className="totalReviews">{reviews} 개의 리뷰</strong>
@@ -21,7 +35,7 @@ const Review = () => {
           </div>
           <div className="reactions">
             <div className="addLikes">
-              <Likes storeId={id} reviewId={review.id} likesOfMe={review.likesOfMe} />
+              <Likes likesOfMe={review.likesOfMe} onClickLike={() => handleClickLike(review)} />
               <span>+{review.likes}</span>
             </div>
             <div className="addComments">

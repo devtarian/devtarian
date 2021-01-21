@@ -5,42 +5,50 @@ import FavoriteHeart, { FavoriteWrap, EmptyHeart } from '../../components/favori
 import noImg from '../../images/noImg.jpg';
 import { translate } from '../../utils/helper';
 
-const ImgCard = forwardRef((props, ref) => {
-  const { data, value } = props;
-
+const ImgCard = forwardRef(({ data, value, onFavoriteClick }, ref) => {
   const handleCardClick = (e) => {
-    console.log(e.target);
-    if (e.target.nodeName === 'SVG') return;
-
     history.push(`/wikiDetail/${data.id}`);
   };
-
   return (
-    <ImgCardWrap value={value} ref={ref} onClick={handleCardClick}>
-      <img src={data.imgUrl ? data.imgUrl : noImg} alt="" />
-      <div className="cover">
-        <div className="itemInfo">
-          <span>{translate(data.category)}</span>
-          <h3>{data.product}</h3>
+    <Wrap value={value}>
+      <ImgCardWrap ref={ref} onClick={handleCardClick}>
+        <img src={data.imgUrl ? data.imgUrl : noImg} alt="" />
+        <div className="cover">
+          <div className="itemInfo">
+            <span>{translate(data.category)}</span>
+            <h3>{data.product}</h3>
+          </div>
         </div>
-      </div>
-      <FavoriteHeart data={data} />
-    </ImgCardWrap>
+      </ImgCardWrap>
+      <FavoriteHeart favorite={data.favorite} onFavoriteClick={onFavoriteClick} />
+    </Wrap>
   );
 });
 
 export default ImgCard;
 
-export const ImgCardWrap = styled.li`
+const Wrap = styled.li`
   position: relative;
   float: left;
   width: 270px;
+  height: 300px;
   margin: 0 ${(props) => props.value.liSideMargin}px;
   cursor: pointer;
 
+  ${FavoriteWrap} {
+    top: 10px;
+    right: 10px;
+  }
+  ${EmptyHeart} {
+    fill: ${(props) => props.theme.color[2]};
+  }
+`;
+const ImgCardWrap = styled.div`
+  height: 300px;
   img {
-    width: 270px;
-    height: 300px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     border-radius: 10px;
   }
   .cover {
@@ -68,13 +76,5 @@ export const ImgCardWrap = styled.li`
   }
   &:hover .cover {
     opacity: 0.8;
-  }
-
-  ${FavoriteWrap} {
-    top: 10px;
-    right: 10px;
-  }
-  ${EmptyHeart} {
-    fill: ${(props) => props.theme.color[2]};
   }
 `;

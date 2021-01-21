@@ -1,13 +1,22 @@
 import { defaultApi } from './default';
+import { changeObjectToQuery } from '../../utils/helper';
 
 export const api = {
-  async getWiki() {
-    const res = await defaultApi.get('/wiki');
+  async getWiki(query) {
+    console.log(query);
+    const res = await defaultApi.get(`/wiki${changeObjectToQuery(query)}`);
     return res.data;
   },
 
   async createWiki(formData) {
     const res = await defaultApi.post('/wiki', formData);
+    return res.data;
+  },
+
+  async editWiki(wikiId, formData) {
+    console.log('???????');
+    const res = await defaultApi.patch(`/wiki/${wikiId}`, formData);
+    console.log({ res });
     return res.data;
   },
 
