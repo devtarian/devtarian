@@ -2,13 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import { translate } from '../../utils/helper';
 
-const Select = ({ className, info, onChange }) => {
+const Select = ({ className, info, sort, onChange }) => {
   const handleChange = (e) => {
     onChange(e.target.value);
   };
 
   return (
-    <SelectWrap className={className} onChange={handleChange}>
+    <SelectWrap value={sort} className={className} onChange={handleChange}>
       {info.map((item, index) => (
         <option key={index} value={item}>
           {translate(item)}
@@ -21,9 +21,8 @@ const Select = ({ className, info, onChange }) => {
 export default Select;
 
 export const SelectWrap = styled.select`
-  float: right;
+  display: flex;
   padding: 5px 10px;
-  margin-top: 3.5rem;
   border-radius: 4px;
   border: 1px solid ${(props) => props.theme.color[1]};
   font-size: 16px;

@@ -93,17 +93,21 @@ const Wrap = styled.div`
   position: relative;
   .btn-add {
     position: relative;
-    width: 40px;
-    height: 40px;
+    top: 7px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     background: ${(props) => props.theme.green[2]};
 
     &:after {
       content: '+';
       text-align: center;
-      line-height: 20px;
-      font-size: 2rem;
-      color: white;
+      line-height: 15px;
+      font-size: 1.4rem;
+      color: ${(props) => props.theme.background[0]};
+    }
+    @media (max-width: 767px) {
+      margin: 10px auto 0;
     }
   }
 
@@ -134,6 +138,12 @@ const FormRow = styled.div`
 
     &:last-child {
       margin-right: 0px;
+    }
+  }
+  @media (max-width: 767px) {
+    flex-direction: column;
+    select {
+      margin-bottom: 7px;
     }
   }
 `;

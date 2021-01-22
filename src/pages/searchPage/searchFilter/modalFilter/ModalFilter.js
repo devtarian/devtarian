@@ -37,15 +37,13 @@ const ModalFilter = ({ onCloseModal }) => {
     onCloseModal();
   };
 
-  const handleClickReset = () => {
+  const handleClickReset = (e) => {
     setFilter((state) => ({ ...state, ...INITIAL_VALUE }));
-    const newQuery = changeObjectToQuery({ ...filter, ...INITIAL_VALUE });
-    window.location = `/search${newQuery}`;
-    onCloseModal();
+    // onCloseModal();
   };
 
   return (
-    <StyledModal width="700px" height="500px" onCloseModal={onCloseModal}>
+    <StyledModal width="607px" height="470px">
       <div className="title">
         <h3>필터</h3>
         <div className="title-buttons">
@@ -73,8 +71,9 @@ const ModalFilter = ({ onCloseModal }) => {
 export default ModalFilter;
 
 const StyledModal = styled(Modal)`
+  z-index: 102;
   .title {
-    margin-top: 10px;
+    margin: 35px 0 25px;
     border-bottom: 1px solid ${(props) => props.theme.gray[0]};
 
     display: -webkit-box;

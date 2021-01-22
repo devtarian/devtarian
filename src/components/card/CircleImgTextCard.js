@@ -48,9 +48,9 @@ export default CircleImgTextCard;
 const Wrap = styled.div`
   position: relative;
   float: left;
-  width: 270px;
+  width: 23%;
   height: 300px;
-  margin: 0 0.8rem 1.4rem;
+  margin: 0 1% 1.4rem;
   background: ${(props) => props.theme.background[1]};
   -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
@@ -60,6 +60,7 @@ const Wrap = styled.div`
     top: 10px;
     right: 10px;
   }
+
 `;
 export const CircleCardWrap = styled.div`
   cursor: pointer;
@@ -83,6 +84,7 @@ export const CircleCardWrap = styled.div`
       z-index: 100;
       position: absolute;
       top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
       border-radius: 10px;

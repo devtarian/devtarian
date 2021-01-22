@@ -26,14 +26,21 @@ const Button = styled.button`
   ${(props) =>
     props.clicked &&
     css`
-      background: ${(props) => props.theme.brown[0]};
+      background: ${(props) => props.theme.color[1]};
+      color: ${(props) => props.theme.background[0]};
     `}
 
   ${(props) =>
     props.type === 'green' &&
     css`
-      background: ${(props) => props.theme.green[0]};
-      color: white;
+      background: ${(props) => props.theme.green[1]};
+      color: ${(props) => props.theme.background[0]};
+      &:hover {
+        background: ${(props) => props.theme.green[0]};
+      }
+      &.active {
+        background: ${(props) => props.theme.green[0]};
+      }
     `}
 
     @media (max-width: 767px) {

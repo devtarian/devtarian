@@ -110,9 +110,7 @@ const KakaoMap = ({ className, onChange, defaultCenter, defaultLevel = 3, eventL
 
   return (
     <Wrap className={className}>
-      {eventListenerSearch && (
-        <input value={keyword} onChange={handleChange} placeholder="주소를 검색하거나 지도를 클릭해주세요" />
-      )}
+      {eventListenerSearch && <input value={keyword} onChange={handleChange} placeholder="주소를 검색 또는 클릭" />}
       {state.isSearching && recommends.length > 0 && (
         <SearchCardList>
           {recommends.map((item, idx) => (
@@ -136,12 +134,17 @@ const Wrap = styled.div`
     position: absolute;
     top: 10px;
     left: 10px;
-    background: white;
+    background: ${(props) => props.theme.background[0]};
     width: 80%;
     padding: 10px;
     border-radius: 4px;
     border: 1px solid ${(props) => props.theme.gray[1]};
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    @media only screen and (max-width: 767px) {
+      left: 0;
+      width: 94%;
+      margin: 0 3%;
+    }
   }
 
   #searchMap {

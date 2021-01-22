@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Input, InputSelect } from '../../../components/form';
 import useInput from '../../../hooks/useInput';
 import { changeNumberWithComma, translate } from '../../../utils/helper';
+
 const initialValue = {
   menu: '',
   vegtype: 'vegan',
@@ -91,9 +92,7 @@ const FeedFormMenu = ({ inputs, setInputs, errors, setErrors }) => {
             </div>
             <div>
               {changeNumberWithComma(item.price)} 원
-              <button className="btn-delete" type="button" onClick={() => handleClickDelete(idx)}>
-                삭제
-              </button>
+              <button className="btn-delete" type="button" onClick={() => handleClickDelete(idx)} />
             </div>
           </MenuCard>
         ))}
@@ -105,6 +104,9 @@ const FeedFormMenu = ({ inputs, setInputs, errors, setErrors }) => {
 export default FeedFormMenu;
 
 const Wrap = styled.div`
+  .wrap {
+    margin-top: 2rem;
+  }
   h2 {
     margin: 0px !important;
     padding: 0px !important;
@@ -130,33 +132,32 @@ const FormRow = styled.div`
       margin-right: 0px;
     }
   }
+  @media (max-width: 767px) {
+    flex-direction: column;
+  }
 `;
 
 const AddMenuBtn = styled.button`
   position: relative;
-  bottom: 0px;
-  display: block;
-  width: 40px;
+  top: 7px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: ${(props) => props.theme.green[2]};
 
   &:after {
     content: '+';
-    position: absolute;
-    bottom: 0px;
-    display: block;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: ${(props) => props.theme.green[2]};
     text-align: center;
-    line-height: 34px;
-    font-size: 2rem;
-    color: white;
+    line-height: 15px;
+    font-size: 1.4rem;
+    color: ${(props) => props.theme.background[0]};
+  }
+  @media (max-width: 767px) {
+    margin: 25px auto 0;
   }
 `;
 
-const StyledSelect = styled(InputSelect)`
-  margin-top: 2rem;
-`;
+const StyledSelect = styled(InputSelect)``;
 
 const CardList = styled.div`
   display: -webkit-box;
@@ -188,7 +189,7 @@ const MenuCard = styled.div`
   border-radius: 4px;
   box-shadow: ${(props) => props.theme.gray[0]} 0px 2px 2px 0px;
   margin-bottom: 15px;
-  font-size: 1.1rem;
+  font-size: 1rem;
 
   h3 {
     margin: 0px 0 5px !important;
@@ -197,7 +198,7 @@ const MenuCard = styled.div`
   span {
     display: inline-block;
     background: ${(props) => props.theme.brown[2]};
-    font-size: 1rem;
+    font-size: 12px;
     font-weight: normal;
     color: ${(props) => props.theme.background[0]};
     width: 50px;
@@ -209,13 +210,11 @@ const MenuCard = styled.div`
 
   .btn-delete {
     margin-left: 20px;
-    height: 40px;
-    width: 60px;
-    color: white;
-    background: ${(props) => props.theme.gray[0]};
-    border-radius: 10%;
+    background: ${(props) => `url(${props.theme.svg.close})`} center center / contain no-repeat;
+    width: 15px;
+    height: 12px;
     &:hover {
-      background-color: ${(props) => props.theme.green[0]};
+      color: ${(props) => props.theme.gray[0]};
     }
   }
 
