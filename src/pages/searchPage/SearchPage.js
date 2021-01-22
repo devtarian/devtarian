@@ -55,8 +55,6 @@ const SearchPage = () => {
     dispatch(searchActions.getSeach(mapElem));
   }, [dispatch, mapRef]);
 
-  if (isFetching && map) return <Loading />;
-
   return (
     <Wrap>
       <SectionContents>
@@ -65,23 +63,27 @@ const SearchPage = () => {
         <SearchFilter />
 
         <h3 className="searchResult">검색결과</h3>
-        <CardList>
-          {data.map((item, idx) => {
-            const lastEl = idx === data.length - 1;
-            return (
-              <StyledCard
-                key={idx}
-                storeData={item}
-                onMouseOver={() => handleMouseOver(item)}
-                onMouseOut={() => handleMouseOut(item)}
-                onClickFavorite={() => handleClickFavorite(item)}
-                ref={lastEl ? ref : null}
-              />
-            );
-          })}
+        {isFetching ? (
+          <Loading />
+        ) : (
+          <CardList>
+            {data.map((item, idx) => {
+              const lastEl = idx === data.length - 1;
+              return (
+                <StyledCard
+                  key={idx}
+                  storeData={item}
+                  onMouseOver={() => handleMouseOver(item)}
+                  onMouseOut={() => handleMouseOut(item)}
+                  onClickFavorite={() => handleClickFavorite(item)}
+                  ref={lastEl ? ref : null}
+                />
+              );
+            })}
 
-          {data.length === 0 && '검색결과가 없습니다.'}
-        </CardList>
+            {data.length === 0 && '검색결과가 없습니다.'}
+          </CardList>
+        )}
       </SectionContents>
       <SectionMap>
         <SearchMap ref={mapRef} />

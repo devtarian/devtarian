@@ -3,6 +3,14 @@ import styled from 'styled-components';
 
 const WikiTextBox = ({ wiki }) => {
   const { category, product, ingredient } = wiki;
+  const text = ingredient.split('\n').map((line, idx) => {
+    return (
+      <span key={idx}>
+        {line}
+        <br />
+      </span>
+    );
+  });
   return (
     <Wrap>
       <div className="innerWrap">
@@ -10,7 +18,7 @@ const WikiTextBox = ({ wiki }) => {
         <h3 className="product hide">{product}</h3>
         <div className="ingredient textBox">
           <strong className="infoTitle">성분</strong>
-          <span className="infoContents">{ingredient}</span>
+          <span className="infoContents">{text}</span>
         </div>
       </div>
     </Wrap>

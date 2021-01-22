@@ -2,6 +2,7 @@ import { AUTH_GET_ME, AUTH_LOGOUT } from '../types';
 
 const INIT_AUTH = {
   isLoggedIn: false,
+  isFetched: false,
   createdAt: '',
   userId: '',
   email: '',
@@ -15,6 +16,7 @@ export const authReducers = (state = INIT_AUTH, action = {}) => {
       return {
         ...action.payload,
         isLoggedIn: true,
+        false: true,
       };
 
     case AUTH_LOGOUT:
