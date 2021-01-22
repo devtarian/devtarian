@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import SearchForm from '../search/searchForm/SearchForm';
+import SearchForm from './searchForm/SearchForm';
 import RecentKeyword from './recentKeyword/RecentKeyword';
 import { loadRecentKeywords, saveRecentKeywords } from '../../service/recentKeywordService';
 

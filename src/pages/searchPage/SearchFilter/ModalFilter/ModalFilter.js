@@ -5,7 +5,7 @@ import history from '../../../../history';
 import Modal from '../../../../components/common/Modal';
 import Button from '../../../../styles/Button';
 import { changeObjectToQuery } from '../../../../utils/helper';
-import FilterButtons from './filterButtons.js/FilterButtons';
+import FilterButtons from './filterButtons/FilterButtons';
 
 const INITIAL_VALUE = {
   category: 'all',
