@@ -1,7 +1,7 @@
 import React, { forwardRef } from 'react';
 import styled from 'styled-components';
 import history from '../../history';
-import FavoriteHeart, { FavoriteWrap, EmptyHeart } from '../../components/favoriteHeart/FavoriteHeart';
+import FavoriteHeart, { FavoriteWrap } from '../../components/favoriteHeart/FavoriteHeart';
 import noImg from '../../images/noImg.jpg';
 import { translate } from '../../utils/helper';
 
@@ -38,9 +38,6 @@ const Wrap = styled.li`
   ${FavoriteWrap} {
     top: 10px;
     right: 10px;
-  }
-  ${EmptyHeart} {
-    fill: ${(props) => props.theme.color[2]};
   }
 `;
 const ImgCardWrap = styled.div`

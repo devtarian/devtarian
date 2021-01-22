@@ -3,10 +3,9 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import SearchModal from '../SearchModal';
 import NaviItem from '../nav/NaviItem';
-import { ReactComponent as MenuSvg } from '../../../images/icons/menu.svg';
-import { ReactComponent as SearchSvg } from '../../../images/icons/search.svg';
 import UserAuth from './UserAuth';
 import SubNav from './SubNav';
+import Svg from '../../common/Svg';
 
 const Nav = () => {
   const [show, setShow] = useState(false);
@@ -26,7 +25,7 @@ const Nav = () => {
           <li className="navItem search" onClick={() => handleShowModal('search')}>
             <Link className="navLink" to="">
               <span>
-                <Search />
+                <Svg type="search" h="24px" w="24px" color="#777" />
               </span>
             </Link>
           </li>
@@ -36,13 +35,13 @@ const Nav = () => {
           <div className="navItem" onClick={() => handleShowModal('search')}>
             <Link className="navLink" to="/">
               <span>
-                <Search />
+                <Svg type="search" h="24px" w="24px" color="#777" />
               </span>
             </Link>
           </div>
           <div className="navItem">
             <button className="navLink" onClick={() => handleShowModal('subnav')}>
-              <HBGBtn />
+              <Svg type="menu" h="24px" w="24px" />
             </button>
           </div>
         </HBGNav>
@@ -100,15 +99,4 @@ const HBGNav = styled.ul`
   @media (max-width: 767px) {
     display: block;
   }
-`;
-
-const Search = styled(SearchSvg)`
-  width: 24px;
-  height: 24px;
-  fill: ${(props) => props.theme.color[1]};
-`;
-
-const HBGBtn = styled(MenuSvg)`
-  width: 24px;
-  height: 24px;
 `;

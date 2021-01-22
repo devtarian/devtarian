@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { svg } from '../../config/config';
 
 const ratedTextMap = {
   0.0: '평가하기',
@@ -50,7 +49,7 @@ const StarRating = ({ name, onChange, error }) => {
   };
 
   return (
-    <Wrap className="wrap" rate={rate} starsW={starsWidth} oneStarW={oneStarWidth} svg={svg}>
+    <Wrap className="wrap" rate={rate} starsW={starsWidth} oneStarW={oneStarWidth}>
       <h3>별점</h3>
       <div className="innerWrap">
         <ul className="stars" onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} onClick={handleClick}>
@@ -99,7 +98,7 @@ const Wrap = styled.div`
 
   .star {
     display: inline-block;
-    background: ${(props) => `url(${props.svg.star})`} center center / contain no-repeat;
+    background: ${(props) => `url(${props.theme.svg.star})`} center center / contain no-repeat;
     vertical-align: top;
     width: ${(props) => props.oneStarW}px;
     height: ${(props) => props.oneStarW}px;
@@ -107,7 +106,7 @@ const Wrap = styled.div`
 
   .starRated {
     display: inline-block;
-    background: ${(props) => `url(${props.svg.ratedStar})`} center center / contain no-repeat;
+    background: ${(props) => `url(${props.theme.svg.ratedStar})`} center center / contain no-repeat;
     vertical-align: top;
     width: ${(props) => props.oneStarW}px;
     height: ${(props) => props.oneStarW}px;

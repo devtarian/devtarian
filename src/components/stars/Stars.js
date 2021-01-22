@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { svg } from '../../config/config';
 
 const Stars = ({ rate, starsW }) => {
   const starsWidth = starsW;
@@ -11,7 +10,7 @@ const Stars = ({ rate, starsW }) => {
   };
 
   return (
-    <Wrap className="wrap" rate={rate} starsW={starsWidth} oneStarW={oneStarWidth} svg={svg}>
+    <Wrap className="wrap" rate={rate} starsW={starsWidth} oneStarW={oneStarWidth}>
       <ul className="stars">
         {[...new Array(5)].map((_, index) => (
           <Star key={index} />
@@ -45,7 +44,7 @@ const Wrap = styled.div`
 
   .star {
     display: inline-block;
-    background: ${(props) => `url(${props.svg.star})`} center center / contain no-repeat;
+    background: ${(props) => `url(${props.theme.svg.star})`} center center / contain no-repeat;
     vertical-align: top;
     width: ${(props) => props.oneStarW}px;
     height: ${(props) => props.oneStarW}px;
@@ -53,7 +52,7 @@ const Wrap = styled.div`
 
   .starRated {
     display: inline-block;
-    background: ${(props) => `url(${props.svg.ratedStar})`} center center / contain no-repeat;
+    background: ${(props) => `url(${props.theme.svg.ratedStar})`} center center / contain no-repeat;
     vertical-align: top;
     width: ${(props) => props.oneStarW}px;
     height: ${(props) => props.oneStarW}px;

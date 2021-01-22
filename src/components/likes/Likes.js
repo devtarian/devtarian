@@ -1,22 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ReactComponent as LikesSvg } from '../../images/icons/smile.svg';
+import Svg from '../common/Svg';
 
-const Likes = ({ likesOfMe, onClickLike }) => {
+const Likes = ({ className, likesOfMe, onClickLike }) => {
   return (
-    <LikesWrap>
-      <LikesBtn likesofme={likesOfMe ? 'likes' : 'unlikes'} onClick={onClickLike} />
+    <LikesWrap className={className}>
+      <Svg type="smile" w="20px" h="20px" color={likesOfMe ? '#e08d60' : '#111'} onClick={onClickLike} />
     </LikesWrap>
   );
 };
 
 export default React.memo(Likes);
 
-export const LikesWrap = styled.button``;
-
-export const LikesBtn = styled(LikesSvg)`
-  width: 20px;
-  height: 20px;
-  fill: ${(props) => (props.likesofme === 'likes' ? props.theme.brown[2] : props.theme.color[0])};
-  cursor: pointer;
-`;
+const LikesWrap = styled.button``;
