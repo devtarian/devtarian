@@ -16,7 +16,7 @@ defaultApi.interceptors.response.use(
   },
   function (error) {
     if (error.response.status === 403 && error.response) {
-      if (error.response.data.code === 'auth/id-token-expired') {
+      if (error.response.data.code === 'auth/id-token-expired' || error.response.data.code === 'auth/argument-error') {
         localStorage.removeItem('token');
         axios.defaults.headers.common['Authorization'] = '';
       }

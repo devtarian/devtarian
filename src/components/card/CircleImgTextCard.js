@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { wikiActions } from '../../redux/actions';
 import history from '../../history';
-import FavoriteHeart, { FavoriteWrap, EmptyHeart } from '../../components/favoriteHeart/FavoriteHeart';
+import FavoriteHeart, { FavoriteWrap } from '../../components/favoriteHeart/FavoriteHeart';
 import noImg from '../../images/noImg.jpg';
 import { translate } from '../../utils/helper';
 
@@ -60,22 +60,7 @@ const Wrap = styled.div`
     top: 10px;
     right: 10px;
   }
-  ${EmptyHeart} {
-    fill: ${(props) => props.theme.color[2]};
-  }
 
-  @media (max-width: 1091px) {
-    width: 31.3%;
-    margin: 0 1% 20px;
-  }
-  @media (max-width: 991px) {
-    width: 47%;
-    margin: 0 1.5% 20px;
-  }
-  @media (max-width: 719px) {
-    width: 82%;
-    margin: 0 9% 20px;
-  }
 `;
 export const CircleCardWrap = styled.div`
   cursor: pointer;

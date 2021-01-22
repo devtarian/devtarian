@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import Stars from '../../stars/Stars';
 import KakaoMap from '../../map/KakaoMap';
 import { ViewAllWrap } from '../../carousel/VeiwAll';
-import { ReactComponent as PlusSvg } from '../../../images/icons/add.svg';
 import useMoreDetail from '../../../hooks/useMoreDetail';
 import { autoHypenContactNum, changeNumberWithComma, translate } from '../../../utils/helper';
 import Svg from '../../common/Svg';
@@ -62,6 +61,9 @@ const StoreTextBox = ({ storeData }) => {
             )}
             {operatingHours.length > 3 && (
               <ViewMoreBtn
+                type="add"
+                w="20px"
+                h="20px"
                 ref={hours.refBtn}
                 onMouseOver={hours.handleMoreBtnHover}
                 onMouseOut={hours.handleMoreBtnHover}
@@ -274,7 +276,7 @@ const Wrap = styled.div`
   }
 `;
 
-const ViewMoreBtn = styled(PlusSvg)`
+const ViewMoreBtn = styled(Svg)`
   z-index: 100;
   position: absolute;
   top: 0;
