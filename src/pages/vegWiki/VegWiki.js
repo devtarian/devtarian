@@ -30,18 +30,20 @@ const VegiWiki = () => {
   return (
     <Wrap>
       <VegWikiFilter />
-      <EditBtn to="/wikiForm" innerText="위키 작성" />
-      <div className="product">
-        <strong>총 {totalCount}개</strong>
-        <ul>
-          {data.map((item, index) => {
-            const lastEl = index === data.length - 1;
+      <div className="innerWrap">
+        <EditBtn to="/wikiForm" innerText="위키 작성" />
+        <div className="product">
+          <strong>총 {totalCount}개</strong>
+          <ul>
+            {data.map((item, index) => {
+              const lastEl = index === data.length - 1;
 
-            return (
-              <CircleImgTextCard key={index} data={item} ref={lastEl ? refTarget : null} isLoggedIn={isLoggedIn} />
-            );
-          })}
-        </ul>
+              return (
+                <CircleImgTextCard key={index} data={item} ref={lastEl ? refTarget : null} isLoggedIn={isLoggedIn} />
+              );
+            })}
+          </ul>
+        </div>
       </div>
     </Wrap>
   );
@@ -56,45 +58,46 @@ const Wrap = styled.section`
   margin: 0.6rem auto 0;
   padding: 1.5rem;
 
-  ${EditBtnWrap} {
-    top: 199px;
-    right: 24px;
-  }
-  .filters {
+  .innerWrap {
     position: relative;
-    padding-bottom: 2rem;
-    margin: 2rem 0;
-    border-bottom: 1px solid ${(props) => props.theme.gray[0]};
 
-    ${CheckboxWrap} {
-      input {
-        padding: 0.35rem 0.75rem;
-      }
-    }
-    ${SelectWrap} {
-      position: absolute;
-      bottom: 39px;
+    ${EditBtnWrap} {
+      top: 0;
       right: 0;
     }
-  }
-  .product {
-    strong {
-      font-size: 0.95rem;
-    }
-  }
+    .filters {
+      position: relative;
+      padding-bottom: 2rem;
+      margin: 2rem 0;
+      border-bottom: 1px solid ${(props) => props.theme.gray[0]};
 
-  ul {
-    overflow: hidden;
-    margin: 2.5rem auto 0;
-  }
-  ${CircleCardWrap} {
-    width: calc(25% - 1.6rem);
+      ${CheckboxWrap} {
+        input {
+          padding: 0.35rem 0.75rem;
+        }
+      }
+      ${SelectWrap} {
+        position: absolute;
+        bottom: 39px;
+        right: 0;
+      }
+    }
+    .product {
+      strong {
+        font-size: 0.95rem;
+      }
+    }
+
+    ul {
+      overflow: hidden;
+      margin: 2.5rem auto 0;
+    }
+    ${CircleCardWrap} {
+      width: calc(25% - 1.6rem);
+    }
   }
 
   @media (max-width: 767px) {
-    ${EditBtnWrap} {
-      top: 256px;
-    }
     ${CircleCardWrap} {
       width: calc(33% - 1.6rem);
     }
@@ -106,15 +109,9 @@ const Wrap = styled.section`
     ul {
       padding: 1rem;
     }
-    ${EditBtnWrap} {
-      top: 298px;
-    }
+
     ${CircleCardWrap} {
       width: calc(100% - 1.6rem);
     }
   }
 `;
-
-const CATEGORIES = ['all', 'processed', 'snack', 'bakery', 'drink', 'etc'];
-
-const OPTIONS = ['createdAt', 'asc', 'desc'];
