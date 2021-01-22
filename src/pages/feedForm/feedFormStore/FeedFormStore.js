@@ -85,6 +85,8 @@ const FormRow = styled.div`
   -ms-flex-pack: justify;
   justify-content: space-between;
 
+  /* flex-direction: column; */
+
   .col {
     flex: 1px;
     margin-right: 10px;
