@@ -85,7 +85,9 @@ const FormRow = styled.div`
   -ms-flex-pack: justify;
   justify-content: space-between;
 
-  /* flex-direction: column; */
+  @media (max-width: 767px) {
+    flex-direction: column;
+  }
 
   .col {
     flex: 1px;

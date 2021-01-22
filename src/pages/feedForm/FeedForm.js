@@ -126,7 +126,8 @@ export default FeedForm;
 
 const Wrap = styled.section`
   position: relative;
-  width: 1000px;
+  width: 100%;
+  max-width: 1000px;
   height: 100%;
   margin: 0 auto 40px;
   padding: 3rem 1.5rem 0;
@@ -142,10 +143,10 @@ const Wrap = styled.section`
     position: relative;
     padding: 1rem 2rem 2rem;
     border-radius: 10px;
-    border: 1px solid ${(props) => props.theme.gray[1]};
+    border: 1px solid ${(props) => props.theme.color[1]};
     -webkit-box-shadow: 0 3px 5px ${(props) => props.theme.gray[0]};
     box-shadow: 0 2px 5px ${(props) => props.theme.gray[0]};
-    background-color: ${(props) => props.theme.background[0]};
+    background: rgba(255, 255, 255, 0.85);
 
     * {
       z-index: 1;
@@ -169,6 +170,9 @@ const Wrap = styled.section`
       background-size: cover;
     }
   }
+  select {
+    background-color: transparent;
+  }
 `;
 
 const FormHeader = styled.div`
@@ -179,25 +183,26 @@ const FormHeader = styled.div`
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
-  border-bottom: 1px solid ${(props) => props.theme.gray[0]};
-  margin-top: 10px;
-  margin-bottom: 30px;
-  padding-bottom: 30px;
+  border-bottom: 1px solid ${(props) => props.theme.color[1]};
+  margin-top: 30px;
+  padding-bottom: 15px;
 
   button {
     height: 40px;
+    min-width: 90px;
     padding: 0.5rem 0.75rem;
     border-radius: 4px;
-    color: white;
-    font-weight: bold;
-    background-color: ${(props) => props.theme.gray[0]};
+    border: 1px solid ${(props) => props.theme.color[1]};
+    color: ${(props) => props.theme.color[1]};
     transition: all 0.3s ease;
     margin-right: 0.5rem;
     &:hover {
-      background-color: ${(props) => props.theme.green[1]};
+      border: 1px solid ${(props) => props.theme.gray[0]};
+      color: ${(props) => props.theme.gray[0]};
     }
     &.active {
-      background-color: ${(props) => props.theme.green[1]};
+      border: 1px solid ${(props) => props.theme.color[2]};
+      color: ${(props) => props.theme.color[2]};
       transition: none;
     }
   }
@@ -212,20 +217,19 @@ const Breadcrumb = styled.div`
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  color: ${(props) => props.theme.gray[1]};
+  color: ${(props) => props.theme.color[1]};
 
   .item {
     .num {
       display: inline-block;
-      width: 35px;
-      height: 35px;
-      line-height: 35px;
-      border-radius: 50%;
-      text-align: center;
-      font-weight: bold;
-      color: ${(props) => props.theme.gray[1]};
-      border: 1px solid ${(props) => props.theme.gray[1]};
+      width: 28px;
+      height: 28px;
+      line-height: 27px;
       margin-left: 10px;
+      border-radius: 50%;
+      border: 1px solid ${(props) => props.theme.color[1]};
+      text-align: center;
+      color: ${(props) => props.theme.color[1]};
     }
     span {
       margin-left: 10px;
@@ -233,13 +237,26 @@ const Breadcrumb = styled.div`
   }
   .item.on {
     .num {
-      border: ${(props) => props.theme.green[2]};
-      background: ${(props) => props.theme.green[2]};
-      color: white;
+      border: ${(props) => props.theme.green[1]};
+      background: ${(props) => props.theme.green[1]};
+      color: ${(props) => props.theme.background[0]};
+      font-weight: bold;
     }
     span {
-      color: ${(props) => props.theme.green[2]};
+      color: ${(props) => props.theme.green[1]};
       font-weight: bold;
+    }
+  }
+  @media (max-width: 767px) {
+    flex-direction: column;
+    .item {
+      margin-bottom: 5px;
+      font-size: 14px;
+      .num {
+        width: 20px;
+        height: 20px;
+        line-height: 17px;
+      }
     }
   }
 `;

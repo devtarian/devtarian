@@ -31,5 +31,8 @@ export const MainWrap = styled.div`
   ${InnerWrap} {
     width: 55%;
     top: 180px;
+    @media (max-width: 767px) {
+      width: 82%;
+    }
   }
 `;

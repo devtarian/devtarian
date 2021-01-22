@@ -65,7 +65,7 @@ const ButtonsWrap = styled.div`
 
   margin-bottom: 15px;
 
-  @media only screen and (max-width: 767px) {
+  @media (max-width: 767px) {
     flex-direction: column;
   }
 `;
@@ -74,7 +74,7 @@ const StyledSelect = styled(Select)`
   display: inline-block;
   height: 35px;
 
-  @media only screen and (max-width: 767px) {
+  @media (max-width: 767px) {
     align-self: flex-end;
     margin-top: 10px;
   }

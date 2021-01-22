@@ -58,8 +58,7 @@ export const InnerWrap = styled.div`
   top: 80px;
   max-height: 239px;
   margin: 0 auto;
-
   @media (max-width: 767px) {
-    width: 95%;
+    width: 82%;
   }
 `;
