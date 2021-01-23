@@ -47,6 +47,7 @@ const favorite = (storeId) => async (dispatch) => {
       payload: storeId,
     });
   } catch (err) {
+    console.log(err);
     console.log(err.response);
   }
 };

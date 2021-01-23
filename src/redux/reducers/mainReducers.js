@@ -57,57 +57,51 @@ export const mainReducers = (state = INIT_STATE, action = {}) => {
     case MAIN_STORE_FAVORITE:
       return {
         ...state,
-        data: {
-          ...state.data,
-          store: state.data.store.map((item) => {
-            if (item.id === action.payload) {
-              return {
-                ...item,
-                favorite: true,
-              };
-            } else {
-              return item;
-            }
-          }),
-          rated: state.data.rated.map((item) => {
-            if (item.id === action.payload) {
-              return {
-                ...item,
-                favorite: true,
-              };
-            } else {
-              return item;
-            }
-          }),
-        },
+        store: state.store.map((item) => {
+          if (item.id === action.payload) {
+            return {
+              ...item,
+              favorite: true,
+            };
+          } else {
+            return item;
+          }
+        }),
+        rated: state.rated.map((item) => {
+          if (item.id === action.payload) {
+            return {
+              ...item,
+              favorite: true,
+            };
+          } else {
+            return item;
+          }
+        }),
       };
 
     case MAIN_STORE_UNFAVORITE:
       return {
         ...state,
-        data: {
-          ...state.data,
-          store: state.data.store.map((item) => {
-            if (item.id === action.payload) {
-              return {
-                ...item,
-                favorite: false,
-              };
-            } else {
-              return item;
-            }
-          }),
-          rated: state.data.rated.map((item) => {
-            if (item.id === action.payload) {
-              return {
-                ...item,
-                favorite: false,
-              };
-            } else {
-              return item;
-            }
-          }),
-        },
+        store: state.store.map((item) => {
+          if (item.id === action.payload) {
+            return {
+              ...item,
+              favorite: false,
+            };
+          } else {
+            return item;
+          }
+        }),
+        rated: state.rated.map((item) => {
+          if (item.id === action.payload) {
+            return {
+              ...item,
+              favorite: false,
+            };
+          } else {
+            return item;
+          }
+        }),
       };
 
     case MAIN_WIKI_FAVORITE:
