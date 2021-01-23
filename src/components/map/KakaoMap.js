@@ -96,7 +96,6 @@ const KakaoMap = ({ className, onChange, defaultCenter, defaultLevel = 3, eventL
   useEffect(() => {
     if (!map || !marker) return;
     const coords = new window.kakao.maps.LatLng(lat, lng);
-    console.log('?????');
     marker.setPosition(coords);
     map.setCenter(coords);
     marker.setMap(map);
@@ -150,7 +149,7 @@ const Wrap = styled.div`
   #searchMap {
     width: 100%;
     height: 100%;
-    z-index: 0;
+    z-index: 4;
   }
 `;
 

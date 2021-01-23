@@ -229,9 +229,6 @@ const Wrap = styled.div`
       top: 479px;
       min-height: 123px;
       background-color: ${(props) => props.theme.background[0]};
-      div {
-        overflow: hidden;
-      }
     }
 
     ${ViewAllWrap} {
