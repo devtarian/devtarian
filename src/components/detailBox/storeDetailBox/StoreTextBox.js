@@ -24,7 +24,6 @@ const StoreTextBox = ({ storeData }) => {
   } = storeData;
   const hours = useMoreDetail();
   const menu = useMoreDetail();
-  console.log(_longitude);
   const HOURSLIST = hours.more ? operatingHours : operatingHours.slice(0, 3);
   const MENULIST = menu.more ? menuList : menuList.slice(0, 3);
 

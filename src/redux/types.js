@@ -27,6 +27,8 @@ export const SEARCH_FAVORITE = 'search/SEARCH_FAVORITE';
 export const SEARCH_UNFAVORITE = 'search/SEARCH_UNFAVORITE';
 
 export const WIKI_GET_WIKI = 'wiki/WIKI_GET_WIKI';
+export const WIKI_CREATE_WIKI = 'wiki/WIKI_CREATE_WIKI';
+export const WIKI_EDIT_WIKI = 'wiki/WIKI_EDIT_WIKI';
 export const WIKI_DELETE_WIKI = 'wiki/WIKI_DELETE_WIKI';
 export const WIKI_FAVORITE_WIKI = 'wiki/WIKI_FAVORITE_WIKI';
 export const WIKI_UN_FAVORITE_WIKI = 'wiki/WIKI_UN_FAVORITE_WIKI';

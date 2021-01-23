@@ -31,7 +31,6 @@ const Login = () => {
     setInputs(INIT_USER_VALUES);
 
     if (error && Object.keys(error).length) {
-      console.log(error);
       setErrors({
         ...error,
       });
