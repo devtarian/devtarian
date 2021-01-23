@@ -6,6 +6,7 @@ import {
   MAIN_WIKI_UNFAVORITE,
   MAIN_REVIEW_LIKE,
   MAIN_REVIEW_UNLIKE,
+  MAIN_FETCH_MORE,
 } from '../types';
 import apis from '../../service/apis';
 
@@ -20,6 +21,21 @@ const getMain = ({ lat, lng }) => async (dispatch) => {
   } catch (err) {
     console.error(err);
     console.log(err.response && err.response.data);
+  }
+};
+
+const fetchMore = (query) => async (dispatch, getState) => {
+  try {
+    const page = getState().main[query.type].page;
+    const data = await apis.mainApi.fetchMore({ ...query, page: page + 1 });
+
+    dispatch({
+      type: MAIN_FETCH_MORE,
+      payload: { type: query.type, data },
+    });
+  } catch (err) {
+    console.log(err);
+    console.log(err.response ? err.response : err);
   }
 };
 
@@ -95,5 +111,14 @@ const unLikeReview = (storeId, reviewId) => async (dispatch) => {
   }
 };
 
-const mainActions = { getMain, favorite, unFavorite, favoriteWiki, unFavoriteWiki, likeReview, unLikeReview };
+const mainActions = {
+  getMain,
+  fetchMore,
+  favorite,
+  unFavorite,
+  favoriteWiki,
+  unFavoriteWiki,
+  likeReview,
+  unLikeReview,
+};
 export default mainActions;

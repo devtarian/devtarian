@@ -30,7 +30,7 @@ export default ImgCard;
 const Wrap = styled.li`
   position: relative;
   float: left;
-  width: 270px;
+  width: 270px !important;
   height: 300px;
   margin: 0 ${(props) => props.value.liSideMargin}px;
   cursor: pointer;

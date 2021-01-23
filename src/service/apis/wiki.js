@@ -3,7 +3,6 @@ import { changeObjectToQuery } from '../../utils/helper';
 
 export const api = {
   async getWiki(query) {
-    console.log(query);
     const res = await defaultApi.get(`/wiki${changeObjectToQuery(query)}`);
     return res.data;
   },
@@ -14,7 +13,6 @@ export const api = {
   },
 
   async editWiki(wikiId, formData) {
-    console.log('???????');
     const res = await defaultApi.patch(`/wiki/${wikiId}`, formData);
     console.log({ res });
     return res.data;
