@@ -6,12 +6,16 @@ import useInput from '../../hooks/useInput';
 import BgImg from '../../images/pexels-karolina-grabowska-4197908.jpg';
 import apis from '../../service/apis';
 import { changeFileToImgUrl } from '../../utils/helper';
+import EditorForm from '../../components/form/EditorForm';
+import { EditorState, convertToRaw, ContentState, convertFromHTML } from 'draft-js';
+import draftToHtml from 'draftjs-to-html';
 
 const CATEGORIES = ['processed', 'snack', 'bakery', 'drink', 'etc'];
 const INIT_WIKIPOST = {
   category: 'processed',
   product: '',
   ingredient: '',
+  info: EditorState.createEmpty(),
   files: [],
 };
 
@@ -27,6 +31,7 @@ const WikiForm = ({ match }) => {
         product: res.product,
         ingredient: res.ingredient,
         imgUrls: res.imgUrls,
+        info: EditorState.createWithContent(ContentState.createFromBlockArray(convertFromHTML(res.info))),
         files: [],
       });
     });
@@ -39,10 +44,11 @@ const WikiForm = ({ match }) => {
     if (!isValid) return;
 
     try {
-      const { files, ...body } = inputs;
+      const { files, info, ...body } = inputs;
+      const infoHTML = draftToHtml(convertToRaw(info.getCurrentContent()));
       const formData = new FormData();
       files.forEach((file) => formData.append('file', file));
-      formData.append('body', JSON.stringify(body));
+      formData.append('body', JSON.stringify({ ...body, info: infoHTML, info2: info }));
 
       wikiId ? await apis.wikiApi.editWiki(wikiId, formData) : await apis.wikiApi.createWiki(formData);
       history.push('/vegwiki');
@@ -79,6 +85,7 @@ const WikiForm = ({ match }) => {
           onChange={onInputChange}
           error={errors.ingredient}
         />
+        <EditorForm name="info" value={inputs.info} onChange={(info) => setInputs((prev) => ({ ...prev, info }))} />
         <SubmitBtn value="위키 제출" onSubmit={handleSubmit} />
       </form>
     </Wrap>
