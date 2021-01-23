@@ -6,11 +6,14 @@ import history from '../../history';
 import FavoriteHeart, { FavoriteWrap } from '../../components/favoriteHeart/FavoriteHeart';
 import noImg from '../../images/noImg.jpg';
 import { translate } from '../../utils/helper';
+import useMoreContent from '../../hooks/useMoreContent';
 
 const CircleImgTextCard = forwardRef(({ data, isLoggedIn }, ref) => {
   const dispatch = useDispatch();
   const { id, imgUrl, category, product, ingredient, favorite } = data;
   const refFavorite = useRef(null);
+  const productShorthand = useMoreContent(product, 8);
+  const ingredientShorthand = useMoreContent(ingredient, 10);
 
   const handleCardClick = (e) => {
     if (e.target === refFavorite.curent) return;
@@ -34,8 +37,8 @@ const CircleImgTextCard = forwardRef(({ data, isLoggedIn }, ref) => {
         </div>
         <div className="itemInfo">
           <span className="category">{translate(category)}</span>
-          <h3>{product}</h3>
-          <span className="ingredient">{ingredient}</span>
+          <h3>{productShorthand.content}</h3>
+          <span className="ingredient">{ingredientShorthand.content}</span>
         </div>
       </CircleCardWrap>
       <FavoriteHeart favorite={favorite} onFavoriteClick={handleClickFavorite} />
@@ -50,6 +53,7 @@ const Wrap = styled.div`
   float: left;
   width: 23%;
   height: 300px;
+  padding: 0 1.2rem;
   margin: 0 1% 1.4rem;
   background: ${(props) => props.theme.background[1]};
   -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
@@ -60,7 +64,6 @@ const Wrap = styled.div`
     top: 10px;
     right: 10px;
   }
-
 `;
 export const CircleCardWrap = styled.div`
   cursor: pointer;

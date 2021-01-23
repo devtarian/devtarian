@@ -9,7 +9,7 @@ import Svg from '../../common/Svg';
 
 const StoreTextBox = ({ storeData }) => {
   const {
-    coordinates: { __latitude, __longitude },
+    coordinates: { _latitude, _longitude },
     info: {
       category,
       vegType,
@@ -24,7 +24,7 @@ const StoreTextBox = ({ storeData }) => {
   } = storeData;
   const hours = useMoreDetail();
   const menu = useMoreDetail();
-
+  console.log(_longitude);
   const HOURSLIST = hours.more ? operatingHours : operatingHours.slice(0, 3);
   const MENULIST = menu.more ? menuList : menuList.slice(0, 3);
 
@@ -83,6 +83,9 @@ const StoreTextBox = ({ storeData }) => {
             ))}
             {menuList.length > 3 && (
               <ViewMoreBtn
+                type="add"
+                w="20px"
+                h="20px"
                 ref={menu.refBtn}
                 onMouseOver={menu.handleMoreBtnHover}
                 onMouseOut={menu.handleMoreBtnHover}
@@ -93,7 +96,7 @@ const StoreTextBox = ({ storeData }) => {
         <div className="address textBox">
           <strong className="infoTitle">위치</strong>
           <span className="infoContents">{address}</span>
-          <StyledMap defaultCenter={{ lat: __latitude, lng: __longitude }} />
+          <StyledMap defaultCenter={{ lat: _latitude, lng: _longitude }} />
         </div>
       </div>
     </Wrap>
@@ -200,7 +203,6 @@ const Wrap = styled.div`
             width: 67px;
             padding: 0px 4px;
             margin-top: 2px;
-            margin-left: 0.4rem;
             border-radius: 4px;
             border: 1px solid ${(props) => props.theme.brown[1]};
             text-align: center;
@@ -209,12 +211,13 @@ const Wrap = styled.div`
           }
           .name {
             float: left;
-            width: calc(100% - 179px);
+            width: calc(100% - 200px);
             margin-left: 5px;
           }
           .price {
             float: left;
             width: 100px;
+            text-align: right;
           }
         }
       }
@@ -289,9 +292,9 @@ const ViewMoreBtn = styled(Svg)`
 
 const StyledMap = styled(KakaoMap)`
   z-index: 3;
-  position: absolute;
-  bottom: -140px;
-  left: 0px;
+  /* position: absolute; */
+  //bottom: -140px;
+  /* left: 0px; */
   width: 100%;
   height: 200px;
   margin-top: 30px;

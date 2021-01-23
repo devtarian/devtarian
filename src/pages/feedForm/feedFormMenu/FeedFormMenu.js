@@ -106,8 +106,7 @@ const Wrap = styled.div`
     margin: 0px !important;
     padding: 0px !important;
   }
-
-  ${InputWrap} {
+  .wrap {
     margin-top: 0;
   }
 `;

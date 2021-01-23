@@ -16,7 +16,6 @@ const KakaoMap = ({ className, onChange, defaultCenter, defaultLevel = 3, eventL
     isSearching: false,
   });
   const { lat, lng, keyword, map, marker, recommends, isSearching } = state;
-
   const eventSearchKeyword = useCallback(() => {
     const ps = new window.kakao.maps.services.Places();
     ps.keywordSearch(keyword, (data, status) => {
@@ -97,9 +96,10 @@ const KakaoMap = ({ className, onChange, defaultCenter, defaultLevel = 3, eventL
   useEffect(() => {
     if (!map || !marker) return;
     const coords = new window.kakao.maps.LatLng(lat, lng);
-
+    console.log('?????');
     marker.setPosition(coords);
     map.setCenter(coords);
+    marker.setMap(map);
   }, [lat, lng, marker, map]);
 
   const handleClickRecommend = (item) => {
