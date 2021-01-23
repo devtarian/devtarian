@@ -7,7 +7,7 @@ import useCarousel from '../../../hooks/useCarousel';
 import { useDispatch } from 'react-redux';
 import { mainActions } from '../../../redux/actions';
 
-const Carousel = ({ carouselData, isLoggedIn, title, mg }) => {
+const Carousel = ({ carouselData, isLoggedIn, title, mg, handleFetchMoreData, fetchMore }) => {
   const dispatch = useDispatch();
   const { value, onCarouselBtnClick } = useCarousel(mg);
   const { refCarouselUl, refCarouselLi } = value;
@@ -32,7 +32,13 @@ const Carousel = ({ carouselData, isLoggedIn, title, mg }) => {
           </li>
         ))}
       </CarouselUl>
-      <CarouselBtn value={value} onCarouselBtnClick={onCarouselBtnClick} />
+      <CarouselBtn
+        value={value}
+        dataLength={carouselData.length}
+        fetchMore={fetchMore}
+        onCarouselBtnClick={onCarouselBtnClick}
+        handleFetchMoreData={handleFetchMoreData}
+      />
       <ViewAll to="/" />
     </Wrap>
   );
@@ -42,7 +48,7 @@ export default Carousel;
 
 const Wrap = styled.section`
   position: relative;
-  width: 100%;
+  //width: 100%;
   height: 374px;
   margin-top: 40px;
   overflow: hidden;
@@ -54,10 +60,12 @@ const Wrap = styled.section`
 `;
 
 const CarouselUl = styled.ul`
-  width: ${(props) => (props.value.liClientWidth + props.value.liSideMargin * 2) * props.value.liLength}px;
+  width: 100%;
   position: absolute;
   left: ${(props) => props.value.leftPosition}px;
   transition: all 0.3s ease;
+  white-space: nowrap;
+  display: flex;
 
   li {
     float: left;

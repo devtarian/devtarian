@@ -4,10 +4,10 @@ import PhotoReviewBox from './PhotoReviewBox';
 import TextReviewBox from './TextReviewBox';
 import Comment from './Comment';
 import Likes from '../../../components/likes/Likes';
-import { ReactComponent as CommentSvg } from '../../../images/icons/insert_comment.svg';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { storeActions } from '../../../redux/actions';
+import Svg from '../../../components/common/Svg';
 
 const Review = ({ isLoggedIn }) => {
   const dispatch = useDispatch();
@@ -39,7 +39,7 @@ const Review = ({ isLoggedIn }) => {
               <span>+{review.likes}</span>
             </div>
             <div className="addComments">
-              <CommentBtn />
+              <Svg type="insertComment" w="20px" h="20px" />
               <span>+{review.comments}</span>
             </div>
           </div>
@@ -128,9 +128,4 @@ const Wrap = styled.section`
   @media (max-width: 767px) {
     margin-top: 170px;
   }
-`;
-
-const CommentBtn = styled(CommentSvg)`
-  width: 20px;
-  height: 20px;
 `;

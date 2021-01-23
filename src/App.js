@@ -1,13 +1,11 @@
 import React from 'react';
 import { Router, Switch } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 
 import history from './history';
 import { DefaultLayout, FormLayout, PublicLayout } from './layouts';
 import pages from './pages';
 
 function App() {
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const {
     StoreDetail,
     FeedForm,
@@ -33,10 +31,10 @@ function App() {
           <DefaultLayout path="/vegwiki" component={VegWiki} />
           <DefaultLayout path="/search" component={SearchPage} />
           <DefaultLayout path="/" exact component={Main} />
-          <FormLayout isLoggedIn={isLoggedIn} path="/feed" component={FeedForm} />
-          <FormLayout isLoggedIn={isLoggedIn} path="/review/:storeId" component={ReviewForm} />
-          <FormLayout isLoggedIn={isLoggedIn} exact path="/wikiForm" component={WikiForm} />
-          <FormLayout isLoggedIn={isLoggedIn} path="/wikiForm/:wikiId" component={WikiForm} />
+          <FormLayout path="/feed" component={FeedForm} />
+          <FormLayout path="/review/:storeId" component={ReviewForm} />
+          <FormLayout exact path="/wikiForm" component={WikiForm} />
+          <FormLayout path="/wikiForm/:wikiId" component={WikiForm} />
           <DefaultLayout path="*" component={NotFound} />
         </Switch>
       </Router>

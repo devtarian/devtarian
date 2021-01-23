@@ -30,7 +30,7 @@ const Login = () => {
 
     dispatch(authActions.login(inputs));
     setInputs(INIT_USER_VALUES);
-    history.push('/');
+    history.goBack();
   };
 
   return (

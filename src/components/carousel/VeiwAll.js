@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-// import { ReactComponent as MoreSvg } from '../../images/icons/arrow_right.svg';
 import Svg from '../common/Svg';
 
 const ViewAll = ({ to }) => {
@@ -8,8 +7,7 @@ const ViewAll = ({ to }) => {
     <ViewAllWrap>
       <Link to={to}>
         <span>
-          더 보기
-          {/* 더 보기 <MoreBtn /> */}
+          더 보기 <Svg type="arrowRight" w="23px" h="23px" color="#111" />
         </span>
       </Link>
     </ViewAllWrap>
@@ -25,11 +23,4 @@ export const ViewAllWrap = styled.div`
   span {
     color: ${(props) => props.theme.color[0]};
   }
-`;
-
-const MoreBtn = styled(Svg)`
-  width: 23px;
-  height: 23px;
-  vertical-align: top;
-  fill: ${(props) => props.theme.color[0]};
 `;

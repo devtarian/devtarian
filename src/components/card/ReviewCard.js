@@ -29,7 +29,7 @@ const ReviewCard = ({ cardData, onClickLike }) => {
         </div>
         <p className="contents">{cardData.contents ? cardData.contents : ''}</p>
       </ReviewCardWrap>
-      <Likes likesOfMe={likesOfMe} onClickLike={onClickLike} />
+      <StyledLikes likesOfMe={likesOfMe} onClickLike={onClickLike} />
     </Wrap>
   );
 };
@@ -39,20 +39,19 @@ export default ReviewCard;
 const Wrap = styled.div`
   position: relative;
   cursor: pointer;
+`;
 
-  ${LikesWrap} {
-    z-index: 101;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-  }
+const StyledLikes = styled(Likes)`
+  z-index: 101;
+  position: absolute;
+  top: 10px;
+  right: 10px;
 
-  ${LikesBtn} {
+  svg {
     width: 25px;
     height: 25px;
   }
 `;
-
 export const ReviewCardWrap = styled.div`
   .vegType {
     display: inline-block;

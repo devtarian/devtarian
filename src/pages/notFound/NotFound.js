@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { ReactComponent as notFoundSvg } from '../../images/icons/notFound.svg';
+import Svg from '../../components/common/Svg';
 
 const NotFound = () => {
   return (
     <Wrap>
-      <NotFoundIcon />
+      <NotFoundIcon type="notFound" />
       <p>
         찾을 수 없는 페이지 입니다. <br /> 요청하신 페이지가 사라졌거나, 잘못된 경로를 이용하셨어요 :)
       </p>
@@ -37,7 +37,7 @@ const Wrap = styled.section`
   }
 `;
 
-const NotFoundIcon = styled(notFoundSvg)`
+const NotFoundIcon = styled(Svg)`
   position: absolute;
   top: -150px;
   left: 50%;

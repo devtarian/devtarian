@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { storeActions } from '../../redux/actions';
 import history from '../../history';
 import Stars from '../stars/Stars';
-import FavoriteHeart, { FavoriteWrap, EmptyHeart } from '../../components/favoriteHeart/FavoriteHeart';
+import FavoriteHeart, { FavoriteWrap } from '../../components/favoriteHeart/FavoriteHeart';
 import noImg from '../../images/noImg.jpg';
 import Svg from '../common/Svg';
 import { translate } from '../../utils/helper';
@@ -61,9 +61,6 @@ const Wrap = styled.div`
   ${FavoriteWrap} {
     top: 10px;
     right: 10px;
-  }
-  ${EmptyHeart} {
-    fill: ${(props) => props.theme.color[2]};
   }
 `;
 

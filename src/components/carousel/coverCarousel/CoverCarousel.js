@@ -1,6 +1,5 @@
 import React, { useCallback } from 'react';
 import styled from 'styled-components';
-import history from '../../../history';
 import ImgCard from '../../card/ImgCard';
 import CarouselBtn, { CarouselBtnWrap } from '../CarouselBtn';
 import ViewAll from '../VeiwAll';
@@ -9,7 +8,7 @@ import useCarousel from '../../../hooks/useCarousel';
 import { useDispatch } from 'react-redux';
 import { mainActions } from '../../../redux/actions';
 
-const CoverCarousel = ({ carouselData, mg, isLoggedIn }) => {
+const CoverCarousel = ({ carouselData, mg, isLoggedIn, handleFetchMoreData, fetchMore }) => {
   const dispatch = useDispatch();
   const { value, onCarouselBtnClick } = useCarousel(mg);
   const { refCarouselUl, refCarouselLi } = value;
@@ -37,7 +36,13 @@ const CoverCarousel = ({ carouselData, mg, isLoggedIn }) => {
           />
         ))}
       </CarouselUl>
-      <CarouselBtn value={value} onCarouselBtnClick={onCarouselBtnClick} />
+      <CarouselBtn
+        value={value}
+        dataLength={carouselData.length}
+        fetchMore={fetchMore}
+        onCarouselBtnClick={onCarouselBtnClick}
+        handleFetchMoreData={handleFetchMoreData}
+      />
       <ViewAll to="/vegWiki" />
     </CoverCarouselWrap>
   );
@@ -47,7 +52,6 @@ export default CoverCarousel;
 
 export const CoverCarouselWrap = styled.section`
   position: relative;
-  width: 100%;
   height: 421px;
   margin-top: 40px;
   overflow: hidden;
@@ -63,8 +67,10 @@ export const CoverCarouselWrap = styled.section`
 `;
 
 export const CarouselUl = styled.ul`
-  width: ${(props) => (props.value.liClientWidth + props.value.liSideMargin * 2) * props.value.liLength}px;
   position: absolute;
   left: ${(props) => props.value.leftPosition}px;
   transition: all 0.3s ease;
+  white-space: nowrap;
+  display: flex;
+  flex-wrap: nowrap;
 `;
