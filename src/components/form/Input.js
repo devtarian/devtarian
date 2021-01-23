@@ -3,17 +3,17 @@ import styled from 'styled-components';
 
 const Input = ({ label, name, value, placeholder, onChange, error }) => {
   return (
-    <Wrap className="wrap">
+    <InputWrap className="wrap">
       <label>{label}</label>
       <input name={name} value={value} placeholder={placeholder} onChange={onChange}></input>
       <p className={error ? 'err on' : 'err'}>{error}</p>
-    </Wrap>
+    </InputWrap>
   );
 };
 
 export default Input;
 
-const Wrap = styled.div`
+export const InputWrap = styled.div`
   position: relative;
   input {
     width: 100%;

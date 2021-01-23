@@ -78,9 +78,7 @@ const InputOperateHours = ({ value, setInputs, error, setErrors }) => {
       {value.map((item, idx) => (
         <Card key={idx}>
           {item}
-          <button type="button" className="btn-delete" onClick={() => handleClickDelete(item)}>
-            삭제
-          </button>
+          <button type="button" className="btn-delete" onClick={() => handleClickDelete(item)} />
         </Card>
       ))}
     </Wrap>
@@ -107,14 +105,14 @@ const Wrap = styled.div`
       color: ${(props) => props.theme.background[0]};
     }
     @media (max-width: 767px) {
-      margin: 10px auto 0;
+      margin: 10px auto;
     }
   }
 
   .err {
     display: none;
     position: absolute;
-    top: 90px;
+    bottom: -21px;
     font-size: 11px;
     color: ${(props) => props.theme.brown[1]};
   }
@@ -153,10 +151,12 @@ const Card = styled.div`
   margin-top: 15px;
 
   .btn-delete {
-    margin-left: 10px;
-    background: ${(props) => props.theme.gray[0]};
-    color: white;
-    border-radius: 10%;
-    padding: 5px 10px;
+    margin-left: 20px;
+    background: ${(props) => `url(${props.theme.svg.close})`} center center / contain no-repeat;
+    width: 15px;
+    height: 12px;
+    &:hover {
+      color: ${(props) => props.theme.gray[0]};
+    }
   }
 `;

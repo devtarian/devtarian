@@ -12,6 +12,7 @@ const FeedFormStore = ({ inputs, setInputs, errors, setErrors, onChange }) => {
   const handleChangeAddr = (address) => {
     setInputs({ ...inputs, ...address });
   };
+
   return (
     <>
       <RadioInput name="category" label="카테고리" info={CATEGORIES} category={inputs.category} onChange={onChange} />

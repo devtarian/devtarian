@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-
 import { Input, InputSelect } from '../../../components/form';
+import { InputWrap } from '../../../components/form/Input';
 import useInput from '../../../hooks/useInput';
 import { changeNumberWithComma, translate } from '../../../utils/helper';
 
@@ -33,7 +33,7 @@ const FeedFormMenu = ({ inputs, setInputs, errors, setErrors }) => {
   };
 
   const handleClickDelete = (deleteIdx) => {
-    setMenu({
+    setInputs({
       ...inputs,
       menuList: inputs.menuList.filter((_, idx) => idx !== deleteIdx),
     });
@@ -85,13 +85,11 @@ const FeedFormMenu = ({ inputs, setInputs, errors, setErrors }) => {
         {inputs.menuList.map((item, idx) => (
           <MenuCard key={idx}>
             <div>
-              <h3>
-                {item.menu}
-                <span>{translate(item.vegtype)}</span>
-              </h3>
+              <span className="vegType">{translate(item.vegtype)}</span>
+              <h3 className="menuName">{item.menu}</h3>
             </div>
             <div>
-              {changeNumberWithComma(item.price)} 원
+              <span className="price">{changeNumberWithComma(item.price)} 원</span>
               <button className="btn-delete" type="button" onClick={() => handleClickDelete(idx)} />
             </div>
           </MenuCard>
@@ -104,12 +102,13 @@ const FeedFormMenu = ({ inputs, setInputs, errors, setErrors }) => {
 export default FeedFormMenu;
 
 const Wrap = styled.div`
-  .wrap {
-    margin-top: 2rem;
-  }
   h2 {
     margin: 0px !important;
     padding: 0px !important;
+  }
+
+  ${InputWrap} {
+    margin-top: 0;
   }
 `;
 
@@ -117,29 +116,31 @@ const FormRow = styled.div`
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  position: relative;
 
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
-  margin-bottom: 40px;
 
+  position: relative;
+  margin-bottom: 40px;
   .col {
     flex: 1px;
     margin-right: 10px;
-
     &:last-child {
       margin-right: 0px;
     }
   }
   @media (max-width: 767px) {
     flex-direction: column;
+    .wrap {
+      margin-top: 2rem;
+    }
   }
 `;
 
 const AddMenuBtn = styled.button`
   position: relative;
-  top: 7px;
+  top: 46px;
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -154,6 +155,7 @@ const AddMenuBtn = styled.button`
   }
   @media (max-width: 767px) {
     margin: 25px auto 0;
+    top: 7px;
   }
 `;
 
@@ -191,11 +193,7 @@ const MenuCard = styled.div`
   margin-bottom: 15px;
   font-size: 1rem;
 
-  h3 {
-    margin: 0px 0 5px !important;
-    padding: 0px !important;
-  }
-  span {
+  .vegType {
     display: inline-block;
     background: ${(props) => props.theme.brown[2]};
     font-size: 12px;
@@ -203,11 +201,17 @@ const MenuCard = styled.div`
     color: ${(props) => props.theme.background[0]};
     width: 50px;
     text-align: center;
-    border-radius: 10%;
-    margin-bottom: 5px;
-    margin-left: 10px;
+    border-radius: 4px;
   }
+  .menuName {
+    margin: 0px 0 5px 10px;
+    padding: 0px !important;
+    display: inline-block;
 
+    @media (max-width: 767px) {
+      display: block;
+    }
+  }
   .btn-delete {
     margin-left: 20px;
     background: ${(props) => `url(${props.theme.svg.close})`} center center / contain no-repeat;
@@ -217,7 +221,6 @@ const MenuCard = styled.div`
       color: ${(props) => props.theme.gray[0]};
     }
   }
-
   .err {
     display: none;
     position: absolute;
@@ -227,5 +230,23 @@ const MenuCard = styled.div`
   }
   .err.on {
     display: block;
+  }
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+    -webkit-box-align: flex-start;
+    -ms-flex-align: flex-start;
+    align-items: flex-start;
+    height: auto;
+
+    .menuName {
+      margin: 0;
+      margin-top: 7px;
+    }
+    .btn-delete {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
   }
 `;

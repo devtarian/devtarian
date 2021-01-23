@@ -1,9 +1,7 @@
 export { default as RadioInput } from './RadioInput';
 export { default as Checkbox } from './Checkbox';
 export { default as Input } from './Input';
-
 export { default as Select } from './Select';
-// export { default as VegLevel } from './VegLevel';
 export { default as SelectAll } from './SelectAll';
 export { default as InputSelect } from './InputSelect';
 export { default as InputAddressKakao } from './InputAddressKakao';

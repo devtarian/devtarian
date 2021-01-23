@@ -38,7 +38,6 @@ const useInput = (initInput) => {
 
   const requiredValidate = useCallback(
     (requiredList) => {
-      console.log(requiredList, errors);
       const errorValues = Object.values(errors);
       const isError = (error) => !!error;
       if (errorValues.some(isError)) return;
@@ -46,10 +45,13 @@ const useInput = (initInput) => {
       let requiredErrors = {};
 
       requiredList.forEach((name) => {
-        if (!inputs[name] || errors[name]) {
+        const hasValue = Array.isArray(inputs[name]) ? inputs[name].length : inputs[name];
+
+        if (!hasValue || errors[name]) {
           isValid = false;
         }
-        requiredErrors[name] = !inputs[name] ? '필수 입력값 입니다.' : '';
+
+        requiredErrors[name] = !hasValue ? '필수 입력값 입니다.' : '';
       });
 
       if (!isValid) {
