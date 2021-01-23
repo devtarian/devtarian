@@ -7,7 +7,7 @@ import WikiDetailBox from '../../components/detailBox/wikiDetailBox/WikiDetailBo
 import WikiComment from './WikiComment';
 import EditBtn from '../../components/editBtn/EditBtn';
 import GoBackLink from '../../components/goBackLink/GoBackLink';
-
+import WikiInfo from './wikiInfo/WikiInfo';
 import Loading from '../../components/loading/Loding';
 
 const WikiDetail = ({ match }) => {
@@ -19,14 +19,15 @@ const WikiDetail = ({ match }) => {
   useEffect(() => {
     dispatch(wikiDetailActions.getWikiDetail(wikiId));
   }, [dispatch, wikiId]);
-
   if (isFetching) return <Loading />;
 
   return (
     <Wrap>
       <WikiDetailBox wikiId={wikiId} isLoggedIn={isLoggedIn} />
+      <WikiInfo value={data.info} />
       <div className="comment">
         {userId === data.writer.userId && <EditBtn to={`/wikiForm/${wikiId}`} innerText="편집" />}
+
         <WikiComment wikiId={wikiId} />
       </div>
       <GoBackLink to="/vegwiki" innerText="목록으로" />
