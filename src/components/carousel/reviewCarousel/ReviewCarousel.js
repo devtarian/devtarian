@@ -1,14 +1,14 @@
 import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import WriterProfile from '../../profile/WriterProfile';
-import ReviewCard, { ReviewCardWrap, ItemImg } from '../../card/ReviewCard';
+import ReviewCard, { ReviewCardWrap } from '../../card/ReviewCard';
 import CarouselBtn, { CarouselBtnWrap } from '../CarouselBtn';
 import ViewAll from '../VeiwAll';
 import useCarousel from '../../../hooks/useCarousel';
 import { useDispatch } from 'react-redux';
 import { mainActions } from '../../../redux/actions';
 
-const ReviewCarousel = ({ carouselData, mg, isLoggedIn }) => {
+const ReviewCarousel = ({ carouselData, mg, isLoggedIn, fetchMore, handleFetchMoreData }) => {
   const dispatch = useDispatch();
   const { value, onCarouselBtnClick } = useCarousel(mg);
   const { refCarouselUl, refCarouselLi } = value;
@@ -36,7 +36,13 @@ const ReviewCarousel = ({ carouselData, mg, isLoggedIn }) => {
           </li>
         ))}
       </CarouselUl>
-      <CarouselBtn value={value} onCarouselBtnClick={onCarouselBtnClick} />
+      <CarouselBtn
+        value={value}
+        onCarouselBtnClick={onCarouselBtnClick}
+        dataLength={carouselData.length}
+        fetchMore={fetchMore}
+        handleFetchMoreData={handleFetchMoreData}
+      />
       <ViewAll to="/" />
     </Wrap>
   );
@@ -46,7 +52,7 @@ export default ReviewCarousel;
 
 const Wrap = styled.section`
   position: relative;
-  width: 100%;
+  /* width: 100%; */
   height: 520px;
   margin-top: 40px;
   overflow: hidden;
@@ -68,10 +74,12 @@ const Wrap = styled.section`
 `;
 
 const CarouselUl = styled.ul`
-  width: ${(props) => (props.value.liClientWidth + props.value.liSideMargin * 2) * props.value.liLength}px;
   position: absolute;
   left: ${(props) => props.value.leftPosition}px;
   transition: all 0.3s ease;
+  white-space: nowrap;
+  display: flex;
+  flex-wrap: nowrap;
 
   li {
     float: left;

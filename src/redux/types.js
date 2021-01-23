@@ -2,6 +2,7 @@ export const AUTH_GET_ME = 'auth/AUTH_GET_ME';
 export const AUTH_LOGOUT = 'auth/AUTH_LOGOUT';
 
 export const MAIN_GET_MAIN = 'main/MAIN_GET_MAIN';
+export const MAIN_FETCH_MORE = 'main/MAIN_FETCH_MORE';
 export const MAIN_LIKE_REVIEW = 'main/MAIN_LIKE_REVIEW';
 export const MAIN_UNLIKE_REVIEW = 'main/MAIN_UNLIKE_REVIEW';
 export const MAIN_STORE_FAVORITE = 'search/MAIN_STORE_FAVORITE';

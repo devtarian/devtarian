@@ -1,5 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import styled from 'styled-components';
+import queryString from 'query-string';
+import history from '../../../history';
 import Carousel from '../../../components/carousel/carousel/Carousel';
 import CoverCarousel from '../../../components/carousel/coverCarousel/CoverCarousel';
 import ReviewCarousel from '../../../components/carousel/reviewCarousel/ReviewCarousel';
@@ -9,27 +11,64 @@ import Loading from '../../../components/loading/Loding';
 
 const Section = () => {
   const dispatch = useDispatch();
-  const { isFetching, data } = useSelector((state) => state.main);
+  const query = queryString.parse(history.location.search);
+  const { lat, lng } = query;
+  const { isFetching, store, rated, wiki, review } = useSelector((state) => state.main);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  console.log(data);
+
   const mg = 9;
   useEffect(() => {
-    let lat, lng;
+    if (lat || lng) return;
     window.navigator.geolocation.getCurrentPosition((pos) => {
-      lat = pos.coords.latitude;
-      lng = pos.coords.longitude;
+      const { latitude, longitude } = pos.coords;
+      window.location = `?lat=${latitude}&lng=${longitude}`;
     });
-    dispatch(mainActions.getMain({ lat, lng }));
-  }, [dispatch, isLoggedIn]);
+  }, [lat, lng]);
 
+  useEffect(() => {
+    dispatch(mainActions.getMain({ lat, lng }));
+  }, [dispatch, isLoggedIn, lat, lng]);
+
+  const handleFetchMoreData = useCallback(
+    (type) => {
+      dispatch(mainActions.fetchMore({ ...query, type }));
+    },
+    [dispatch, query]
+  );
   if (isFetching) return <Loading />;
 
   return (
     <Wrap>
-      <Carousel carouselData={data.store} mg={mg} isLoggedIn={isLoggedIn} title="근처의 비건식당" />
-      <Carousel carouselData={data.rated} mg={mg} isLoggedIn={isLoggedIn} title="비건식당 Top 10" />
-      <CoverCarousel carouselData={data.wiki} mg={mg} isLoggedIn={isLoggedIn} />
-      <ReviewCarousel carouselData={data.review} mg={mg} isLoggedIn={isLoggedIn} />
+      <Carousel
+        carouselData={store.data}
+        mg={mg}
+        isLoggedIn={isLoggedIn}
+        title="근처의 비건식당"
+        handleFetchMoreData={() => handleFetchMoreData('store')}
+        fetchMore={store.fetchMore}
+      />
+      <Carousel
+        carouselData={rated.data}
+        mg={mg}
+        isLoggedIn={isLoggedIn}
+        title="비건식당 Top 10"
+        handleFetchMoreData={() => {}}
+        fetchMore={rated.fetchMore}
+      />
+      <CoverCarousel
+        carouselData={wiki.data}
+        mg={mg}
+        isLoggedIn={isLoggedIn}
+        handleFetchMoreData={() => handleFetchMoreData('wiki')}
+        fetchMore={wiki.fetchMore}
+      />
+      <ReviewCarousel
+        carouselData={review.data}
+        mg={mg}
+        isLoggedIn={isLoggedIn}
+        handleFetchMoreData={() => handleFetchMoreData('review')}
+        fetchMore={review.fetchMore}
+      />
     </Wrap>
   );
 };

@@ -15,7 +15,6 @@ const FormLayout = ({ component: Component, ...rest }) => {
       window.location = '/login';
     }
   }
-  console.log({ isFetched, isLoggedIn });
   return (
     <Route
       {...rest}

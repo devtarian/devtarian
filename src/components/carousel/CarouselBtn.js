@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import Svg from '../common/Svg';
 
-const CarouselBtn = ({ value, onCarouselBtnClick }) => {
-  const { currentIndex, leftPosition, liClientWidth, liSideMargin, liLength } = value;
+const CarouselBtn = ({ value, dataLength, onCarouselBtnClick, handleFetchMoreData, fetchMore }) => {
+  const { currentIndex, leftPosition, liClientWidth, liSideMargin } = value;
 
   const HandleCarouselBtnClick = (e) => {
     const liLRMargin = liSideMargin * 2;
@@ -14,8 +14,9 @@ const CarouselBtn = ({ value, onCarouselBtnClick }) => {
     }
 
     if (e.target.classList.contains('next')) {
-      if (currentIndex === liLength) return;
+      if (!fetchMore || currentIndex === dataLength - 4) return;
       onCarouselBtnClick(currentIndex + 1, leftPosition - liLRMargin - liClientWidth);
+      handleFetchMoreData();
     }
   };
 
@@ -28,7 +29,7 @@ const CarouselBtn = ({ value, onCarouselBtnClick }) => {
           </span>
         </button>
       )}
-      {currentIndex !== liLength - 1 && (
+      {fetchMore && currentIndex !== dataLength - 4 && (
         <button className="next" onClick={HandleCarouselBtnClick}>
           <span>
             <Svg type="nextBtn" w="30px" h="30px" radius="50%" />
