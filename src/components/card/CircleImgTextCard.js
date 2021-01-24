@@ -12,7 +12,7 @@ const CircleImgTextCard = forwardRef(({ data, isLoggedIn }, ref) => {
   const dispatch = useDispatch();
   const { id, imgUrl, category, product, ingredient, favorite } = data;
   const refFavorite = useRef(null);
-  const productShorthand = useMoreContent(product, 8);
+  const productShorthand = useMoreContent(product, 7);
   const ingredientShorthand = useMoreContent(ingredient, 10);
 
   const handleCardClick = (e) => {

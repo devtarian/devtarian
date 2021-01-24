@@ -7,7 +7,7 @@ const CATEGORIES = ['restaurant', 'cafe', 'bakery', 'bar', 'etc'];
 const VEG_TYPE = ['vegan', 'vegetarian', 'veganOption'];
 
 const FeedFormStore = ({ inputs, setInputs, errors, setErrors, onChange }) => {
-  const { activedBtn, onCheckboxClick } = useActivedBtn();
+  const { activedBtn, onCheckboxClick } = useActivedBtn(inputs.vegType);
 
   const handleChangeAddr = (address) => {
     setInputs({ ...inputs, ...address });

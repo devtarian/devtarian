@@ -17,8 +17,8 @@ const KakaoMap = ({ className, onChange, defaultCenter, defaultLevel = 3, eventL
   });
   const { lat, lng, keyword, map, marker, recommends, isSearching } = state;
   const eventSearchKeyword = useCallback(() => {
-    const ps = new window.kakao.maps.services.Places();
-    ps.keywordSearch(keyword, (data, status) => {
+    var geocoder = new window.kakao.maps.services.Geocoder();
+    geocoder.addressSearch(keyword, function (data, status) {
       if (status === window.kakao.maps.services.Status.OK) {
         setState((state) => ({
           ...state,
@@ -54,7 +54,6 @@ const KakaoMap = ({ className, onChange, defaultCenter, defaultLevel = 3, eventL
     },
     [onChange]
   );
-  // console.log('?', defaultCenter);
   // Init KakaoMap & Add Event
   useEffect(() => {
     const latlng = new window.kakao.maps.LatLng(defaultCenter.lat, defaultCenter.lng);
