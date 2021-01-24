@@ -51,7 +51,7 @@ const WikiForm = ({ match }) => {
       const infoHTML = draftToHtml(convertToRaw(info.getCurrentContent()));
       const formData = new FormData();
       files.forEach((file) => formData.append('file', file));
-      formData.append('body', JSON.stringify({ ...body, info: infoHTML, info2: info }));
+      formData.append('body', JSON.stringify({ ...body, info: infoHTML }));
 
       if (wikiId) {
         const resData = await apis.wikiApi.editWiki(wikiId, formData);
