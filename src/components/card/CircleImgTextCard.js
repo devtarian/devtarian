@@ -12,7 +12,7 @@ const CircleImgTextCard = forwardRef(({ data, isLoggedIn }, ref) => {
   const dispatch = useDispatch();
   const { id, imgUrl, category, product, ingredient, favorite } = data;
   const refFavorite = useRef(null);
-  const productShorthand = useMoreContent(product, 8);
+  const productShorthand = useMoreContent(product, 7);
   const ingredientShorthand = useMoreContent(ingredient, 10);
 
   const handleCardClick = (e) => {
@@ -63,6 +63,18 @@ const Wrap = styled.div`
   ${FavoriteWrap} {
     top: 10px;
     right: 10px;
+  }
+  @media (max-width: 1091px) {
+    width: 31.3%;
+    margin: 0 1% 20px;
+  }
+  @media (max-width: 991px) {
+    width: 47%;
+    margin: 0 1.5% 20px;
+  }
+  @media (max-width: 719px) {
+    width: 82%;
+    margin: 0 9% 20px;
   }
 `;
 export const CircleCardWrap = styled.div`

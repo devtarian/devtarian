@@ -107,7 +107,7 @@ const Wrap = styled.div`
     padding: 0px !important;
   }
   .wrap {
-    margin-top: 0;
+    margin-top: 0 !important;
   }
 `;
 
@@ -198,7 +198,7 @@ const MenuCard = styled.div`
     font-size: 12px;
     font-weight: normal;
     color: ${(props) => props.theme.background[0]};
-    width: 50px;
+    width: 60px;
     text-align: center;
     border-radius: 4px;
   }

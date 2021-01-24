@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-const useActivedBtn = () => {
-  const [activedBtn, setActivedBtn] = useState('');
+const useActivedBtn = (initValue) => {
+  const [activedBtn, setActivedBtn] = useState(initValue || '');
 
   const onCheckboxClick = (nextActivedBtn) => {
     console.log('nextActivedBtn', nextActivedBtn);

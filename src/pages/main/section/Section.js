@@ -46,6 +46,7 @@ const Section = () => {
         title="근처의 비건식당"
         handleFetchMoreData={() => handleFetchMoreData('store')}
         fetchMore={store.fetchMore}
+        numOfslides={4}
       />
       <Carousel
         carouselData={rated.data}
@@ -54,6 +55,7 @@ const Section = () => {
         title="비건식당 Top 10"
         handleFetchMoreData={() => {}}
         fetchMore={rated.fetchMore}
+        numOfslides={4}
       />
       <CoverCarousel
         carouselData={wiki.data}
@@ -61,6 +63,7 @@ const Section = () => {
         isLoggedIn={isLoggedIn}
         handleFetchMoreData={() => handleFetchMoreData('wiki')}
         fetchMore={wiki.fetchMore}
+        numOfslides={4}
       />
       <ReviewCarousel
         carouselData={review.data}
@@ -68,6 +71,7 @@ const Section = () => {
         isLoggedIn={isLoggedIn}
         handleFetchMoreData={() => handleFetchMoreData('review')}
         fetchMore={review.fetchMore}
+        numOfslides={3}
       />
     </Wrap>
   );

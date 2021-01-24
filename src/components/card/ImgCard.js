@@ -4,11 +4,15 @@ import history from '../../history';
 import FavoriteHeart, { FavoriteWrap } from '../../components/favoriteHeart/FavoriteHeart';
 import noImg from '../../images/noImg.jpg';
 import { translate } from '../../utils/helper';
+import useMoreContent from '../../hooks/useMoreContent';
 
 const ImgCard = forwardRef(({ data, value, onFavoriteClick }, ref) => {
+  const { content } = useMoreContent(data.product, 7);
+
   const handleCardClick = (e) => {
     history.push(`/wikiDetail/${data.id}`);
   };
+
   return (
     <Wrap value={value}>
       <ImgCardWrap ref={ref} onClick={handleCardClick}>
@@ -16,7 +20,7 @@ const ImgCard = forwardRef(({ data, value, onFavoriteClick }, ref) => {
         <div className="cover">
           <div className="itemInfo">
             <span>{translate(data.category)}</span>
-            <h3>{data.product}</h3>
+            <h3>{content}</h3>
           </div>
         </div>
       </ImgCardWrap>

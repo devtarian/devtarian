@@ -11,7 +11,7 @@ import FeedFormInfo from './feedFormInfo/FeedFormInfo';
 import apis from '../../service/apis';
 
 const pageConfig = [
-  { id: 'store', title: '가게 정보', validate: ['category', 'vegType', 'storeName', 'contactNum', 'operatingHours'] },
+  { id: 'store', title: '가게 정보', validate: ['category', 'vegType', 'storeName', 'contactNum'] },
   { id: 'menu', title: '메뉴 정보', validate: ['menuList'] },
   { id: 'info', title: '나의 소개', validate: ['starRating'] },
 ];
@@ -147,10 +147,10 @@ const Wrap = styled.section`
     -webkit-box-shadow: 0 3px 5px ${(props) => props.theme.gray[0]};
     box-shadow: 0 2px 5px ${(props) => props.theme.gray[0]};
     background: rgba(255, 255, 255, 0.85);
-
     * {
-      z-index: 1;
+      z-index: 5;
     }
+
     label,
     h3 {
       display: block;

@@ -7,7 +7,7 @@ import useCarousel from '../../../hooks/useCarousel';
 import { useDispatch } from 'react-redux';
 import { mainActions } from '../../../redux/actions';
 
-const Carousel = ({ carouselData, isLoggedIn, title, mg, handleFetchMoreData, fetchMore }) => {
+const Carousel = ({ carouselData, isLoggedIn, title, mg, handleFetchMoreData, fetchMore, numOfslides }) => {
   const dispatch = useDispatch();
   const { value, onCarouselBtnClick } = useCarousel(mg);
   const { refCarouselUl, refCarouselLi } = value;
@@ -38,6 +38,7 @@ const Carousel = ({ carouselData, isLoggedIn, title, mg, handleFetchMoreData, fe
         fetchMore={fetchMore}
         onCarouselBtnClick={onCarouselBtnClick}
         handleFetchMoreData={handleFetchMoreData}
+        numOfslides={numOfslides}
       />
       <ViewAll to="/" />
     </Wrap>
@@ -48,7 +49,6 @@ export default Carousel;
 
 const Wrap = styled.section`
   position: relative;
-  //width: 100%;
   height: 374px;
   margin-top: 40px;
   overflow: hidden;

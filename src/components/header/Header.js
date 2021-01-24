@@ -6,7 +6,7 @@ const Header = () => {
   return (
     <Wrap>
       <Logo>
-        <Link to="/">Devtarian</Link>
+        <Link to="/">채식한입</Link>
       </Logo>
       <Nav />
     </Wrap>
@@ -30,7 +30,8 @@ const Wrap = styled.header`
 
 const Logo = styled.h1`
   float: left;
-  font-size: 20px;
+  font-size: 18px;
+  margin-top: 5px;
 
   a {
     padding: 17px;
