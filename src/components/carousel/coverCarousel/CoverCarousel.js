@@ -8,7 +8,7 @@ import useCarousel from '../../../hooks/useCarousel';
 import { useDispatch } from 'react-redux';
 import { mainActions } from '../../../redux/actions';
 
-const CoverCarousel = ({ carouselData, mg, isLoggedIn, handleFetchMoreData, fetchMore }) => {
+const CoverCarousel = ({ carouselData, mg, isLoggedIn, handleFetchMoreData, fetchMore, numOfslides }) => {
   const dispatch = useDispatch();
   const { value, onCarouselBtnClick } = useCarousel(mg);
   const { refCarouselUl, refCarouselLi } = value;
@@ -42,6 +42,7 @@ const CoverCarousel = ({ carouselData, mg, isLoggedIn, handleFetchMoreData, fetc
         fetchMore={fetchMore}
         onCarouselBtnClick={onCarouselBtnClick}
         handleFetchMoreData={handleFetchMoreData}
+        numOfslides={numOfslides}
       />
       <ViewAll to="/vegWiki" />
     </CoverCarouselWrap>

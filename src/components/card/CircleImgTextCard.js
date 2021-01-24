@@ -64,6 +64,18 @@ const Wrap = styled.div`
     top: 10px;
     right: 10px;
   }
+  @media (max-width: 1091px) {
+    width: 31.3%;
+    margin: 0 1% 20px;
+  }
+  @media (max-width: 991px) {
+    width: 47%;
+    margin: 0 1.5% 20px;
+  }
+  @media (max-width: 719px) {
+    width: 82%;
+    margin: 0 9% 20px;
+  }
 `;
 export const CircleCardWrap = styled.div`
   cursor: pointer;

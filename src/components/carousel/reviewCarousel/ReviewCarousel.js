@@ -8,7 +8,7 @@ import useCarousel from '../../../hooks/useCarousel';
 import { useDispatch } from 'react-redux';
 import { mainActions } from '../../../redux/actions';
 
-const ReviewCarousel = ({ carouselData, mg, isLoggedIn, fetchMore, handleFetchMoreData }) => {
+const ReviewCarousel = ({ carouselData, mg, isLoggedIn, fetchMore, handleFetchMoreData, numOfslides }) => {
   const dispatch = useDispatch();
   const { value, onCarouselBtnClick } = useCarousel(mg);
   const { refCarouselUl, refCarouselLi } = value;
@@ -42,6 +42,7 @@ const ReviewCarousel = ({ carouselData, mg, isLoggedIn, fetchMore, handleFetchMo
         dataLength={carouselData.length}
         fetchMore={fetchMore}
         handleFetchMoreData={handleFetchMoreData}
+        numOfslides={numOfslides}
       />
       <ViewAll to="/" />
     </Wrap>
