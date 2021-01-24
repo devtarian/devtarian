@@ -108,8 +108,10 @@ const KakaoMap = ({ className, onChange, defaultCenter, defaultLevel = 3, eventL
   };
 
   return (
-    <Wrap className={className}>
-      {eventListenerSearch && <input value={keyword} onChange={handleChange} placeholder="주소를 검색 또는 클릭" />}
+    <KaKaoMapWrap className={className}>
+      {eventListenerSearch && (
+        <input className="addressSearch" value={keyword} onChange={handleChange} placeholder="주소를 검색 또는 클릭" />
+      )}
       {state.isSearching && recommends.length > 0 && (
         <SearchCardList>
           {recommends.map((item, idx) => (
@@ -120,16 +122,16 @@ const KakaoMap = ({ className, onChange, defaultCenter, defaultLevel = 3, eventL
         </SearchCardList>
       )}
       <div id="searchMap" ref={mapRef} />
-    </Wrap>
+    </KaKaoMapWrap>
   );
 };
 
 export default KakaoMap;
 
-const Wrap = styled.div`
+export const KaKaoMapWrap = styled.div`
   width: 100%;
   position: relative;
-  input {
+  .addressSearch {
     position: absolute;
     top: 10px;
     left: 10px;
@@ -155,7 +157,7 @@ const Wrap = styled.div`
 
 const SearchCardList = styled.div`
   position: absolute;
-  top: 55px;
+  top: 53px;
   left: 10px;
   right: 0;
   z-index: 200;
@@ -174,5 +176,10 @@ const SearchCardList = styled.div`
       color: ${(props) => props.theme.green[1]};
       font-weight: bolder;
     }
+  }
+  @media only screen and (max-width: 767px) {
+    left: 0;
+    width: 94%;
+    margin: 0 3%;
   }
 `;
