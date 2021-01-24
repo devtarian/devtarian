@@ -9,6 +9,8 @@ import { changeFileToImgUrl } from '../../utils/helper';
 import EditorForm from '../../components/form/EditorForm';
 import { EditorState, convertToRaw, ContentState, convertFromHTML } from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
+import { useDispatch } from 'react-redux';
+import { WIKI_CREATE_WIKI, WIKI_EDIT_WIKI } from '../../redux/types';
 
 const CATEGORIES = ['processed', 'snack', 'bakery', 'drink', 'etc'];
 const INIT_WIKIPOST = {
@@ -20,6 +22,7 @@ const INIT_WIKIPOST = {
 };
 
 const WikiForm = ({ match }) => {
+  const dispatch = useDispatch();
   const wikiId = match.params.wikiId;
   const { inputs, setInputs, errors, onInputChange, onImageUpload, requiredValidate } = useInput(INIT_WIKIPOST);
   const imgUrls = useMemo(() => changeFileToImgUrl(inputs.files, inputs.imgUrls), [inputs.files, inputs.imgUrls]);
@@ -50,7 +53,19 @@ const WikiForm = ({ match }) => {
       files.forEach((file) => formData.append('file', file));
       formData.append('body', JSON.stringify({ ...body, info: infoHTML, info2: info }));
 
-      wikiId ? await apis.wikiApi.editWiki(wikiId, formData) : await apis.wikiApi.createWiki(formData);
+      if (wikiId) {
+        const resData = await apis.wikiApi.editWiki(wikiId, formData);
+        dispatch({
+          type: WIKI_EDIT_WIKI,
+          payload: resData,
+        });
+      } else {
+        const resData = await apis.wikiApi.createWiki(formData);
+        dispatch({
+          type: WIKI_CREATE_WIKI,
+          payload: resData,
+        });
+      }
       history.push('/vegwiki');
     } catch (err) {
       console.log(err.response ? err.response : err);

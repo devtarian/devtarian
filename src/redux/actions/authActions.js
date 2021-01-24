@@ -1,4 +1,4 @@
-import { AUTH_GET_ME, AUTH_LOGOUT } from '../types';
+import { AUTH_GET_ME, AUTH_LOGIN, AUTH_LOGOUT } from '../types';
 import history from '../../history';
 import { defaultApi } from '../../service/apis/default';
 import apis from '../../service/apis';
@@ -6,7 +6,6 @@ import apis from '../../service/apis';
 const getMe = () => async (dispatch) => {
   try {
     const data = await apis.authApi.getMe();
-
     dispatch({
       type: AUTH_GET_ME,
       payload: data,
@@ -20,15 +19,18 @@ const getMe = () => async (dispatch) => {
 const login = (inputs) => async (dispatch) => {
   try {
     const { email, pw } = inputs;
-    const resToken = await apis.authApi.login({ email, pw });
-    const token = `Bearer ${resToken.token}`;
+    const resData = await apis.authApi.login({ email, pw });
+    const token = `Bearer ${resData.token}`;
     localStorage.setItem('token', token);
     defaultApi.defaults.headers.common['Authorization'] = token;
 
-    dispatch(getMe());
+    dispatch({
+      type: AUTH_LOGIN,
+      payload: resData.user,
+    });
+    history.goBack();
   } catch (err) {
-    console.error(err);
-    console.log(err.response && err.response.data);
+    return { error: err.response.data };
   }
 };
 

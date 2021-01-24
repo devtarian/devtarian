@@ -14,7 +14,6 @@ export const api = {
 
   async editWiki(wikiId, formData) {
     const res = await defaultApi.patch(`/wiki/${wikiId}`, formData);
-    console.log({ res });
     return res.data;
   },
 

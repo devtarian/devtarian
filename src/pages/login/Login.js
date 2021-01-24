@@ -19,20 +19,23 @@ const INIT_USER_VALUES = {
 
 const Login = () => {
   const dispatch = useDispatch();
-  const { inputs, setInputs, errors, onInputChange, requiredValidate } = useInput(INIT_USER_VALUES);
+  const { inputs, setInputs, errors, setErrors, onInputChange, requiredValidate } = useInput(INIT_USER_VALUES);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const requiredList = ['email', 'pw'];
     let isValid = requiredValidate(requiredList);
     if (!isValid) return;
-
-    dispatch(authActions.login(inputs));
+    const error = await dispatch(authActions.login(inputs));
     setInputs(INIT_USER_VALUES);
-    history.goBack();
-  };
 
+    if (error && Object.keys(error).length) {
+      setErrors({
+        ...error,
+      });
+    }
+  };
   return (
     <div className="wrap">
       <form className="signForm" onSubmit={handleSubmit}>

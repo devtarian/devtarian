@@ -57,9 +57,9 @@ export const mainReducers = (state = INIT_STATE, action = {}) => {
     case MAIN_STORE_FAVORITE:
       return {
         ...state,
-        data: {
-          ...state.data,
-          store: state.data.store.map((item) => {
+        store: {
+          ...state.store,
+          data: state.store.data.map((item) => {
             if (item.id === action.payload) {
               return {
                 ...item,
@@ -69,7 +69,11 @@ export const mainReducers = (state = INIT_STATE, action = {}) => {
               return item;
             }
           }),
-          rated: state.data.rated.map((item) => {
+        },
+
+        rated: {
+          ...state.rated,
+          data: state.rated.data.map((item) => {
             if (item.id === action.payload) {
               return {
                 ...item,
@@ -85,9 +89,9 @@ export const mainReducers = (state = INIT_STATE, action = {}) => {
     case MAIN_STORE_UNFAVORITE:
       return {
         ...state,
-        data: {
-          ...state.data,
-          store: state.data.store.map((item) => {
+        store: {
+          ...state.store,
+          data: state.store.data.map((item) => {
             if (item.id === action.payload) {
               return {
                 ...item,
@@ -97,7 +101,10 @@ export const mainReducers = (state = INIT_STATE, action = {}) => {
               return item;
             }
           }),
-          rated: state.data.rated.map((item) => {
+        },
+        rated: {
+          ...state.rated,
+          data: state.rated.data.map((item) => {
             if (item.id === action.payload) {
               return {
                 ...item,
@@ -113,9 +120,9 @@ export const mainReducers = (state = INIT_STATE, action = {}) => {
     case MAIN_WIKI_FAVORITE:
       return {
         ...state,
-        data: {
-          ...state.data,
-          wiki: state.data.wiki.map((item) => {
+        wiki: {
+          ...state.wiki,
+          data: state.wiki.data.map((item) => {
             if (item.id === action.payload) {
               return {
                 ...item,
@@ -131,9 +138,9 @@ export const mainReducers = (state = INIT_STATE, action = {}) => {
     case MAIN_WIKI_UNFAVORITE:
       return {
         ...state,
-        data: {
-          ...state.data,
-          wiki: state.data.wiki.map((item) => {
+        wiki: {
+          ...state.wiki,
+          data: state.wiki.data.map((item) => {
             if (item.id === action.payload) {
               return {
                 ...item,
@@ -149,9 +156,9 @@ export const mainReducers = (state = INIT_STATE, action = {}) => {
     case MAIN_REVIEW_LIKE:
       return {
         ...state,
-        data: {
-          ...state.data,
-          review: state.data.review.map((item) => {
+        review: {
+          ...state.review,
+          data: state.review.data.map((item) => {
             if (item.id === action.payload) {
               return {
                 ...item,
@@ -167,9 +174,9 @@ export const mainReducers = (state = INIT_STATE, action = {}) => {
     case MAIN_REVIEW_UNLIKE:
       return {
         ...state,
-        data: {
-          ...state.data,
-          review: state.data.review.map((item) => {
+        review: {
+          ...state.review,
+          data: state.review.data.map((item) => {
             if (item.id === action.payload) {
               return {
                 ...item,

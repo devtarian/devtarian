@@ -75,7 +75,7 @@ const FeedForm = ({ history }) => {
       }
 
       const { files, step, addr, addrDetail, ...body } = inputs;
-      body.address = addr + addrDetail;
+      body.address = addr + ' ' + addrDetail;
 
       const formData = new FormData();
       files.forEach((file) => formData.append('file', file));

@@ -13,7 +13,7 @@ import Loading from '../../components/loading/Loding';
 const WikiDetail = ({ match }) => {
   const dispatch = useDispatch();
   const wikiId = match.params.wikiId;
-  const { isLoggedIn, userId } = useSelector((state) => state.auth);
+  const { isLoggedIn } = useSelector((state) => state.auth);
   const { isFetching, data } = useSelector((state) => state.wikiDetail);
 
   useEffect(() => {
@@ -26,7 +26,7 @@ const WikiDetail = ({ match }) => {
       <WikiDetailBox wikiId={wikiId} isLoggedIn={isLoggedIn} />
       <WikiInfo value={data.info} />
       <div className="comment">
-        {userId === data.writer.userId && <EditBtn to={`/wikiForm/${wikiId}`} innerText="편집" />}
+        {isLoggedIn && <EditBtn to={`/wikiForm/${wikiId}`} innerText="편집" />}
 
         <WikiComment wikiId={wikiId} />
       </div>

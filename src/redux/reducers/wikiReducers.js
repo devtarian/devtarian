@@ -1,4 +1,11 @@
-import { WIKI_GET_WIKI, WIKI_DELETE_WIKI, WIKI_FAVORITE_WIKI, WIKI_UN_FAVORITE_WIKI } from '../types';
+import {
+  WIKI_GET_WIKI,
+  WIKI_DELETE_WIKI,
+  WIKI_FAVORITE_WIKI,
+  WIKI_UN_FAVORITE_WIKI,
+  WIKI_CREATE_WIKI,
+  WIKI_EDIT_WIKI,
+} from '../types';
 
 const INIT_STATE = {
   data: [],
@@ -19,6 +26,17 @@ export const wikiReducers = (state = INIT_STATE, action = {}) => {
         isFetching: false,
         page: state.page + 1,
         fetchMore: action.payload.data.length < state.size ? false : true,
+      };
+
+    case WIKI_CREATE_WIKI:
+      return {
+        ...state,
+        data: [action.payload, ...state.data],
+      };
+    case WIKI_EDIT_WIKI:
+      return {
+        ...state,
+        data: state.data.map((item) => (item.id === action.payload.id ? action.payload : item)),
       };
     case WIKI_DELETE_WIKI:
       return {
