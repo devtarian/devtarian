@@ -57,7 +57,7 @@ const Wrap = styled.div`
 
     .vegType {
       display: inline-block;
-      width: 70px;
+      width: 85px;
       height: 18px;
       line-height: 18px;
       border-radius: 4px;

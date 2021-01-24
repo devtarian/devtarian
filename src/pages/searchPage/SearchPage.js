@@ -2,7 +2,7 @@ import React, { useEffect, useCallback, useRef } from 'react';
 import styled from 'styled-components';
 import Search, { SearchWrap, InnerWrap } from '../../components/search/Search';
 import SearchFilter from './searchFilter/SearchFilter';
-import ImgTextCard from '../../components/card/ImgTextCard';
+import ImgTextCard, { TitleWrap } from '../../components/card/ImgTextCard';
 import SearchMap from './searchMap/SeacrhMap';
 
 import { useDispatch, useSelector } from 'react-redux';

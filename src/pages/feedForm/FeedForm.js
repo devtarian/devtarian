@@ -11,7 +11,7 @@ import FeedFormInfo from './feedFormInfo/FeedFormInfo';
 import apis from '../../service/apis';
 
 const pageConfig = [
-  { id: 'store', title: '가게 정보', validate: ['category', 'vegType', 'storeName', 'contactNum', 'operatingHours'] },
+  { id: 'store', title: '가게 정보', validate: ['category', 'vegType', 'storeName', 'contactNum'] },
   { id: 'menu', title: '메뉴 정보', validate: ['menuList'] },
   { id: 'info', title: '나의 소개', validate: ['starRating'] },
 ];

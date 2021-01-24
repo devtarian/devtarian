@@ -133,7 +133,7 @@ export const ItemImg = styled.div`
   }
 `;
 
-const TitleWrap = styled.div`
+export const TitleWrap = styled.div`
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

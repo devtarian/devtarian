@@ -17,8 +17,10 @@ export const validate = (name, value, users) => {
     case 'pwCheck':
       return users.pw !== value && '비밀번호와 일치하지 않습니다.';
     case 'image':
-      const extensions = /(\.jpg|\.jpeg|\.png|\.gif|\.bmp)$/i;
-      return value.length !== 0 && !extensions.exec(value) && '이미지 파일(.jpg .jpeg .png .gif .bmp)만 올려주세요.';
+      const extensions = /(\.jpg|\.jpeg|\.png|\.gif|\.bmp|\.jfif)$/i;
+      return (
+        value.length !== 0 && !extensions.exec(value) && '이미지 파일(.jpg .jpeg .png .gif .bmp .jfif)만 올려주세요.'
+      );
     case 'contactNum':
     case 'price':
       const numRegExp = /^[0-9]+$/;
