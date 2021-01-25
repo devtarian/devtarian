@@ -192,8 +192,9 @@ const Wrap = styled.div`
       }
       .openMemo {
         float: right;
-        width: calc(100% - 100px);
-        margin-bottom: 5px;
+        width: calc(100% - 125px);
+        margin: 0 25px 5px 0;
+        white-space: pre-wrap;
       }
     }
 
