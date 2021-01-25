@@ -55,10 +55,6 @@ const Wrap = styled.section`
       font-size: 1rem;
       color: ${(props) => props.theme.color[2]};
     }
-    .product {
-      margin: 0px 0px 10px;
-      font-size: 60px;
-    }
   }
   &:after {
     content: '';

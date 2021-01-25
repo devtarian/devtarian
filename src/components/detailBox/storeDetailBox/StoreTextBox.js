@@ -29,11 +29,9 @@ const StoreTextBox = ({ storeData }) => {
 
   const renderOperatingHours = () => {
     return operatingHours.length === 0 ? (
-      <div className="memo">
-        <span>{operatingHoursMemo}</span>
-      </div>
+      <li className="openMemo">{operatingHoursMemo}</li>
     ) : (
-      <>
+      <ul className="infoContents">
         {HOURSLIST.map((hour, index) => (
           <li key={index} className="open">
             {hour}
@@ -44,7 +42,7 @@ const StoreTextBox = ({ storeData }) => {
             <span>{operatingHoursMemo}</span>
           </div>
         )}
-      </>
+      </ul>
     );
   };
 
@@ -68,19 +66,17 @@ const StoreTextBox = ({ storeData }) => {
         </div>
         <div className="openHours textBox" ref={hours.refMore}>
           <strong className="infoTitle">영업시간</strong>
-          <ul className="infoContents">
-            {renderOperatingHours()}
-            {operatingHours.length > 3 && (
-              <ViewMoreBtn
-                type="add"
-                w="20px"
-                h="20px"
-                ref={hours.refBtn}
-                onMouseOver={hours.handleMoreBtnHover}
-                onMouseOut={hours.handleMoreBtnHover}
-              />
-            )}
-          </ul>
+          {renderOperatingHours()}
+          {operatingHours.length > 3 && (
+            <ViewMoreBtn
+              type="add"
+              w="20px"
+              h="20px"
+              ref={hours.refBtn}
+              onMouseOver={hours.handleMoreBtnHover}
+              onMouseOut={hours.handleMoreBtnHover}
+            />
+          )}
         </div>
         <div className="menu textBox" ref={menu.refMore}>
           <strong className="infoTitle">메뉴</strong>
@@ -153,7 +149,7 @@ const Wrap = styled.div`
       }
     }
     .store {
-      margin: 0px 0px 10px;
+      margin: 0px 30px 10px 0;
       font-size: 60px;
 
       &:after {
@@ -194,6 +190,11 @@ const Wrap = styled.div`
       .memo {
         color: ${(props) => props.theme.brown[2]};
       }
+      .openMemo {
+        float: right;
+        width: calc(100% - 100px);
+        margin-bottom: 5px;
+      }
     }
 
     .menu {
@@ -211,7 +212,7 @@ const Wrap = styled.div`
 
           .vegType {
             float: left;
-            width: 67px;
+            width: 68px;
             padding: 0px 4px;
             margin-top: 2px;
             border-radius: 4px;
@@ -257,10 +258,14 @@ const Wrap = styled.div`
       .textBox {
         width: 100%;
         .infoTitle,
-        .infoContents {
+        .infoContents,
+        .openMemo {
           float: none;
           display: block;
           margin-top: 0.4rem;
+        }
+        .openMemo {
+          width: 100%;
         }
       }
       .hide {

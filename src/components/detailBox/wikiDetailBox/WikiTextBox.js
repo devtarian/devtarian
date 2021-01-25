@@ -41,7 +41,7 @@ const Wrap = styled.div`
     color: ${(props) => props.theme.color[2]};
   }
   .product {
-    margin: 0px 0px 10px;
+    margin: 0px 30px 10px 0;
     font-size: 60px;
 
     &:after {
