@@ -27,6 +27,27 @@ const StoreTextBox = ({ storeData }) => {
   const HOURSLIST = hours.more ? operatingHours : operatingHours.slice(0, 3);
   const MENULIST = menu.more ? menuList : menuList.slice(0, 3);
 
+  const renderOperatingHours = () => {
+    return operatingHours.length === 0 ? (
+      <div className="memo">
+        <span>{operatingHoursMemo}</span>
+      </div>
+    ) : (
+      <>
+        {HOURSLIST.map((hour, index) => (
+          <li key={index} className="open">
+            {hour}
+          </li>
+        ))}
+        {hours.more && (
+          <div className="memo">
+            <span>{operatingHoursMemo}</span>
+          </div>
+        )}
+      </>
+    );
+  };
+
   return (
     <Wrap>
       <div className="innerWrap">
@@ -48,16 +69,7 @@ const StoreTextBox = ({ storeData }) => {
         <div className="openHours textBox" ref={hours.refMore}>
           <strong className="infoTitle">영업시간</strong>
           <ul className="infoContents">
-            {HOURSLIST.map((hour, index) => (
-              <li key={index} className="open">
-                {hour}
-              </li>
-            ))}
-            {hours.more && (
-              <div className="memo">
-                <span>{operatingHoursMemo}</span>
-              </div>
-            )}
+            {renderOperatingHours()}
             {operatingHours.length > 3 && (
               <ViewMoreBtn
                 type="add"
@@ -288,13 +300,7 @@ const ViewMoreBtn = styled(Svg)`
 
 const StyledMap = styled(KakaoMap)`
   z-index: 3;
-  /* position: absolute; */
-  //bottom: -140px;
-  /* left: 0px; */
   width: 100%;
   height: 200px;
   margin-top: 30px;
-  @media (max-width: 767px) {
-    bottom: -165px;
-  }
 `;

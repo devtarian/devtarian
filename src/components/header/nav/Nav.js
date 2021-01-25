@@ -32,8 +32,8 @@ const Nav = () => {
           <UserAuth />
         </FullNav>
         <HBGNav>
-          <div className="navItem" onClick={() => handleShowModal('search')}>
-            <Link className="navLink" to="/">
+          <div className="navItem search" onClick={() => handleShowModal('search')}>
+            <Link className="navLink " to="/">
               <span>
                 <Svg type="search" h="24px" w="24px" color="#777" />
               </span>
@@ -83,6 +83,13 @@ const Wrap = styled.nav`
       &:hover span:after {
         width: 100%;
         left: 0;
+      }
+    }
+  }
+  .search {
+    .navLink {
+      span:after {
+        bottom: -14px;
       }
     }
   }

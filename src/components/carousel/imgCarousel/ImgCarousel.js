@@ -1,6 +1,6 @@
 import React, { useState, useLayoutEffect, useRef } from 'react';
 import styled from 'styled-components';
-import CarouselBtn, { CarouselBtnWrap } from '../CarouselBtn';
+import CarouselBtn, { CarouselBtnWrap } from './CarouselBtn';
 import noImg from '../../../images/noImg.jpg';
 
 const ImgCarousel = ({ carouselData }) => {
@@ -41,7 +41,7 @@ const ImgCarousel = ({ carouselData }) => {
   const onCarouselBtnClick = (newIndex, newLeftPosition) => {
     setCarouselValue((state) => ({ ...state, currentIndex: newIndex, leftPosition: newLeftPosition }));
   };
-
+  console.log(wrapW);
   return (
     <Wrap ref={refWrap}>
       <CarouselUl ref={refCarouselUl} value={carouselValue} wrapw={wrapW}>
@@ -51,7 +51,14 @@ const ImgCarousel = ({ carouselData }) => {
           </li>
         ))}
       </CarouselUl>
-      {wrapW && <CarouselBtn value={carouselValue} onCarouselBtnClick={onCarouselBtnClick} />}
+      {wrapW && (
+        <CarouselBtn
+          value={carouselValue}
+          dataLength={carouselData.length}
+          onCarouselBtnClick={onCarouselBtnClick}
+          numOfslides={0}
+        />
+      )}
     </Wrap>
   );
 };

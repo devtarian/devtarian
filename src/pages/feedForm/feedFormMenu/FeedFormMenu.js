@@ -132,7 +132,7 @@ const FormRow = styled.div`
   @media (max-width: 767px) {
     flex-direction: column;
     .wrap {
-      margin-top: 2rem;
+      margin-top: 2rem !important;
     }
   }
 `;
