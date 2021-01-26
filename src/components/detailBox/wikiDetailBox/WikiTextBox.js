@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { translate } from '../../../utils/helper';
 
 const WikiTextBox = ({ wiki }) => {
   const { category, product, ingredient } = wiki;
@@ -14,7 +15,7 @@ const WikiTextBox = ({ wiki }) => {
   return (
     <Wrap>
       <div className="innerWrap">
-        <h2 className="category hide">{category}</h2>
+        <h2 className="category hide">{translate(category)}</h2>
         <h3 className="product hide">{product}</h3>
         <div className="ingredient textBox">
           <strong className="infoTitle">성분</strong>
