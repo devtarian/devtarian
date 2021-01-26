@@ -43,7 +43,7 @@ https://github.com/daayooung/TIL/tree/master/%EA%B0%9C%EB%B0%9C%EC%9D%BC%EC%A7%8
 ## 👩🏻‍🤝‍🧑🏻 Devtarian 소개
 
 [이다영](https://github.com/daayooung) - FRONT-END     
-[하경윤](https://github.com/kyungyoonha) - FUPP-STACK
+[하경윤](https://github.com/kyungyoonha) - FULL-STACK
 
 <br/>
 
