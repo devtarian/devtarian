@@ -30,7 +30,7 @@ const login = (inputs) => async (dispatch) => {
     });
     history.goBack();
   } catch (err) {
-    return { error: err.response.data };
+    return err.response.data;
   }
 };
 
@@ -48,6 +48,7 @@ const signup = async (inputs) => {
   formData.append('body', JSON.stringify(characterInputs));
 
   const resToken = await apis.authApi.signUp(formData);
+  console.log(resToken);
   const token = `Bearer ${resToken.token}`;
   localStorage.setItem('token', token);
   defaultApi.defaults.headers.common['Authorization'] = token;

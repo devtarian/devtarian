@@ -35,10 +35,10 @@ const Carousel = ({ carouselData, isLoggedIn, title, mg, handleFetchMoreData, fe
       <CarouselBtn
         value={value}
         dataLength={carouselData.length}
+        numOfslides={numOfslides}
         fetchMore={fetchMore}
         onCarouselBtnClick={onCarouselBtnClick}
         handleFetchMoreData={handleFetchMoreData}
-        numOfslides={numOfslides}
       />
       <ViewAll to="/" />
     </Wrap>

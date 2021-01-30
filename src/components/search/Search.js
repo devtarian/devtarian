@@ -4,7 +4,7 @@ import SearchForm from './searchForm/SearchForm';
 import RecentKeyword from './recentKeyword/RecentKeyword';
 import { loadRecentKeywords, saveRecentKeywords } from '../../service/recentKeywordService';
 
-const Search = ({ className }) => {
+const Search = () => {
   const [show, setShow] = useState(false);
   const [value, setValue] = useState('');
   const [recentKeywords, setRecentKeywords] = useState(loadRecentKeywords() || []);
@@ -39,7 +39,7 @@ const Search = ({ className }) => {
   }, []);
 
   return (
-    <SearchWrap className={className}>
+    <SearchWrap>
       <InnerWrap>
         <SearchForm value={value} onInputChange={handleInputChange} onAddRecentKeywords={onAddRecentKeywords} />
         {show && <RecentKeyword recentKeywords={recentKeywords} onCloseRecentKeywords={handleCloseRecentKeyword} />}

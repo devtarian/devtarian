@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Input, InputSelect } from '../../../components/form';
-import { InputWrap } from '../../../components/form/Input';
 import useInput from '../../../hooks/useInput';
 import { changeNumberWithComma, translate } from '../../../utils/helper';
 

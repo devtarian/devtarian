@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import history from '../../history';
 import Stars from '../stars/Stars';
-import Likes, { LikesWrap, LikesBtn } from '../likes/Likes';
+import Likes from '../likes/Likes';
 import noImg from '../../images/noImg.jpg';
 import { translate } from '../../utils/helper';
 

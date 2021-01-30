@@ -2,19 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { authActions } from '../../redux/actions';
-import history from '../../history';
 import useInput from '../../hooks/useInput';
 import SignInput from '../../components/form/SignInput';
 import SubmitBtn from '../../components/form/SubmitBtn';
 import GoBackLink from '../../components/goBackLink/GoBackLink';
 
 const INIT_USER_VALUES = {
-  username: '',
   email: '',
   pw: '',
-  pwCheck: '',
-  avatar: '',
-  files: [],
 };
 
 const Login = () => {
@@ -28,14 +23,10 @@ const Login = () => {
     let isValid = requiredValidate(requiredList);
     if (!isValid) return;
     const error = await dispatch(authActions.login(inputs));
-    setInputs(INIT_USER_VALUES);
 
-    if (error && Object.keys(error).length) {
-      setErrors({
-        ...error,
-      });
-    }
+    error && Object.keys(error).length ? setErrors(error) : setInputs(INIT_USER_VALUES);
   };
+
   return (
     <div className="wrap">
       <form className="signForm" onSubmit={handleSubmit}>

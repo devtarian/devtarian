@@ -20,7 +20,6 @@ export const authReducers = (state = INIT_AUTH, action = {}) => {
       };
 
     case AUTH_LOGIN:
-      console.log(action.payload);
       return {
         ...action.payload,
         isLoggedIn: true,

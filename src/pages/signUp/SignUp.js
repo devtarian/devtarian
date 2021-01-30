@@ -39,7 +39,7 @@ const SignUp = () => {
       const formData = new FormData();
       const body = { username, email, pw };
 
-      files.forEach((file) => formData.append('file', file));
+      formData.append('file', files[0]);
       formData.append('body', JSON.stringify(body));
 
       const resToken = await apis.authApi.signUp(formData);

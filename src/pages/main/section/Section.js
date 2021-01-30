@@ -35,6 +35,7 @@ const Section = () => {
     },
     [dispatch, query]
   );
+
   if (isFetching) return <Loading />;
 
   return (
@@ -42,36 +43,36 @@ const Section = () => {
       <Carousel
         carouselData={store.data}
         mg={mg}
-        isLoggedIn={isLoggedIn}
-        title="근처의 비건식당"
+        numOfslides={4}
         handleFetchMoreData={() => handleFetchMoreData('store')}
         fetchMore={store.fetchMore}
-        numOfslides={4}
+        isLoggedIn={isLoggedIn}
+        title="근처의 비건식당"
       />
       <Carousel
         carouselData={rated.data}
         mg={mg}
-        isLoggedIn={isLoggedIn}
-        title="비건식당 Top 10"
+        numOfslides={4}
         handleFetchMoreData={() => {}}
         fetchMore={rated.fetchMore}
-        numOfslides={4}
+        isLoggedIn={isLoggedIn}
+        title="비건식당 Top 10"
       />
       <CoverCarousel
         carouselData={wiki.data}
         mg={mg}
-        isLoggedIn={isLoggedIn}
+        numOfslides={4}
         handleFetchMoreData={() => handleFetchMoreData('wiki')}
         fetchMore={wiki.fetchMore}
-        numOfslides={4}
+        isLoggedIn={isLoggedIn}
       />
       <ReviewCarousel
         carouselData={review.data}
         mg={mg}
-        isLoggedIn={isLoggedIn}
+        numOfslides={3}
         handleFetchMoreData={() => handleFetchMoreData('review')}
         fetchMore={review.fetchMore}
-        numOfslides={3}
+        isLoggedIn={isLoggedIn}
       />
     </Wrap>
   );
