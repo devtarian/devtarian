@@ -69,7 +69,6 @@ export const storeReducers = (state = INIT_STATE, action = {}) => {
         },
       };
     case STORE_CREATE_COMMENT:
-      console.log(state.data.reviewList);
       return {
         ...state,
         data: {

@@ -31,13 +31,14 @@ export const validate = (name, value, users) => {
 
 export const timeSelect = (startTime) => {
   const result = [];
+
   const startTimeidx = startTime ? startTime.split('시')[0] : 0;
   for (let i = 0; i <= 24; i++) {
     if (i >= startTimeidx) {
       result.push(`${i}시 00분`);
     }
   }
-
+  console.log(startTime, result, startTimeidx);
   return result;
 };
 

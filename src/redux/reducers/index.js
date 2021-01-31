@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import { authReducers } from './authReducers';
 import { mainReducers } from './mainReducers';
 import { storeReducers } from './storeReducers';
-import { searchReducers } from './searchReducer';
+import { searchReducers } from './searchReducers';
 import { wikiReducers } from './wikiReducers';
 import { wikiDetailReducers } from './wikiDetailReducers';
 

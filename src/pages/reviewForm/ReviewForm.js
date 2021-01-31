@@ -18,6 +18,7 @@ const ReviewForm = ({ match }) => {
   const storeId = match.params.storeId;
   const { inputs, setInputs, errors, onInputChange, onImageUpload, requiredValidate } = useInput(INIT_REVIEW);
   const imgUrls = useMemo(() => changeFileToImgUrl(inputs.files), [inputs.files]);
+
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();

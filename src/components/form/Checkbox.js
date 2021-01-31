@@ -10,6 +10,7 @@ const Checkbox = ({ name, setInputs, label, info, activedBtn, onCheckboxClick, e
     }));
     onCheckboxClick(value);
   };
+
   return (
     <CheckboxWrap className="wrap">
       <label>{label}</label>

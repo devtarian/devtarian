@@ -5,14 +5,15 @@ import useInput from '../../../hooks/useInput';
 import { changeNumberWithComma, translate } from '../../../utils/helper';
 
 const initialValue = {
-  menu: '',
   vegtype: 'vegan',
+  menu: '',
   price: '',
 };
+
 const FeedFormMenu = ({ inputs, setInputs, errors, setErrors }) => {
   const {
     inputs: menuList,
-    setInputs: setMenu,
+    setInputs: setMenuList,
     errors: menuErrors,
     onInputChange: onChangeMenu,
     requiredValidate,
@@ -27,7 +28,7 @@ const FeedFormMenu = ({ inputs, setInputs, errors, setErrors }) => {
       ...inputs,
       menuList: [...inputs.menuList, menuList],
     });
-    setMenu(initialValue);
+    setMenuList(initialValue);
     setErrors((state) => ({ ...state, menuList: '' }));
   };
 

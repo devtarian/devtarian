@@ -26,6 +26,7 @@ const WikiForm = ({ match }) => {
   const wikiId = match.params.wikiId;
   const { inputs, setInputs, errors, onInputChange, onImageUpload, requiredValidate } = useInput(INIT_WIKIPOST);
   const imgUrls = useMemo(() => changeFileToImgUrl(inputs.files, inputs.imgUrls), [inputs.files, inputs.imgUrls]);
+
   useEffect(() => {
     if (!wikiId) return;
     apis.wikiApi.getWikiDetail(wikiId).then((res) => {
@@ -100,7 +101,11 @@ const WikiForm = ({ match }) => {
           onChange={onInputChange}
           error={errors.ingredient}
         />
-        <EditorForm name="info" value={inputs.info} onChange={(info) => setInputs((prev) => ({ ...prev, info }))} />
+        <EditorForm
+          name="info"
+          value={inputs.info}
+          onChange={(info) => setInputs((prevState) => ({ ...prevState, info }))}
+        />
         <SubmitBtn value="위키 제출" onSubmit={handleSubmit} />
       </form>
     </Wrap>

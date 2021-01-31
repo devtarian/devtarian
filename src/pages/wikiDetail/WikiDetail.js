@@ -19,6 +19,7 @@ const WikiDetail = ({ match }) => {
   useEffect(() => {
     dispatch(wikiDetailActions.getWikiDetail(wikiId));
   }, [dispatch, wikiId]);
+
   if (isFetching) return <Loading />;
 
   return (
@@ -28,7 +29,7 @@ const WikiDetail = ({ match }) => {
       <div className="comment">
         {isLoggedIn && <EditBtn to={`/wikiForm/${wikiId}`} innerText="편집" />}
 
-        <WikiComment wikiId={wikiId} />
+        <WikiComment wikiId={data.id} commentList={data.commentList} comments={data.comments} />
       </div>
       <GoBackLink to="/vegwiki" innerText="목록으로" />
     </Wrap>

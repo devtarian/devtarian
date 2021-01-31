@@ -5,13 +5,13 @@ import { timeSelect } from '../../utils/helper';
 import { InputSelect } from '.';
 
 const initialValue = {
-  weekDay: '월요일',
+  day: '월요일',
   start: '0시 00분',
   end: '0시 00분',
 };
 const InputOperateHours = ({ value, setInputs, error, setErrors }) => {
   const [time, setTime] = useState(initialValue);
-  const weekDayOptions = useMemo(() => ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'], []);
+  const dayOptions = useMemo(() => ['월요일', '화요일', '수요일', '목요일', '금요일', '토요일', '일요일'], []);
   const startTimeOptions = useMemo(() => timeSelect(), []);
   const endTimeOptions = useMemo(() => timeSelect(time.start), [time.start]);
 
@@ -24,11 +24,11 @@ const InputOperateHours = ({ value, setInputs, error, setErrors }) => {
   };
 
   const handleClick = () => {
-    const { weekDay, start, end } = time;
-    const checkWeekday = value.filter((item) => item.indexOf(weekDay) > -1);
+    const { day, start, end } = time;
+    const checkDay = value.filter((item) => item.indexOf(day) > -1);
 
-    if (value.length <= 6 && checkWeekday.length === 0) {
-      const result = `${weekDay} ${start} - ${end}`;
+    if (value.length <= 6 && checkDay.length === 0) {
+      const result = `${day} ${start} - ${end}`;
       setInputs((state) => ({
         ...state,
         operatingHours: [...state.operatingHours, result],
@@ -38,7 +38,7 @@ const InputOperateHours = ({ value, setInputs, error, setErrors }) => {
 
       setTime({
         ...initialValue,
-        weekDay: weekDayOptions[value.length + 1] ? weekDayOptions[value.length + 1] : '일요일',
+        day: dayOptions[value.length + 1] ? dayOptions[value.length + 1] : '일요일',
       });
     }
   };
@@ -55,16 +55,16 @@ const InputOperateHours = ({ value, setInputs, error, setErrors }) => {
   useEffect(() => {
     setTime({
       ...initialValue,
-      weekDay: weekDayOptions[value.length] ? weekDayOptions[value.length] : '일요일',
+      day: dayOptions[value.length] ? dayOptions[value.length] : '일요일',
     });
-  }, [setTime, value, weekDayOptions]);
+  }, [setTime, value, dayOptions]);
 
   return (
     <Wrap className="wrap">
       <label>운영시간</label>
       <FormRow>
         <div className="col">
-          <InputSelect name="weekDay" value={time.weekDay} onChange={handleChange} options={weekDayOptions} />
+          <InputSelect name="day" value={time.day} onChange={handleChange} options={dayOptions} />
         </div>
         <div className="col">
           <InputSelect name="start" value={time.start} onChange={handleChange} options={startTimeOptions} />
@@ -75,10 +75,10 @@ const InputOperateHours = ({ value, setInputs, error, setErrors }) => {
         <button type="button" className="btn-add" onClick={handleClick} />
       </FormRow>
       <p className={error ? 'err on' : 'err'}>{error}</p>
-      {value.map((item, idx) => (
+      {value.map((operatingHour, idx) => (
         <Card key={idx}>
-          {item}
-          <button type="button" className="btn-delete" onClick={() => handleClickDelete(item)} />
+          {operatingHour}
+          <button type="button" className="btn-delete" onClick={() => handleClickDelete(operatingHour)} />
         </Card>
       ))}
     </Wrap>

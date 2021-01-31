@@ -1,25 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { wikiDetailActions } from '../../redux/actions';
-import Loading from '../../components/loading/Loding';
 import CommentForm, { CommentFormWrap } from '../../components/commentForm/CommentForm';
 import Comment from './Comment';
 
-const WikiComment = () => {
+const WikiComment = ({ wikiId, commentList, comments }) => {
   const dispatch = useDispatch();
-  const { isFetching, data } = useSelector((state) => state.wikiDetail);
-  const { id, comments, commentList } = data;
-
-  if (isFetching) return <Loading />;
 
   const onCreateComment = (contents) => {
-    dispatch(wikiDetailActions.createWikiComment({ wikiId: id, contents }));
+    dispatch(wikiDetailActions.createWikiComment({ wikiId, contents }));
   };
 
   const onDeleteComment = (commentId) => {
-    console.log('here', commentId);
-    dispatch(wikiDetailActions.deleteWikiComment({ wikiId: id, commentId }));
+    dispatch(wikiDetailActions.deleteWikiComment({ wikiId, commentId }));
   };
 
   return (
