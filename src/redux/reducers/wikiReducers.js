@@ -41,7 +41,7 @@ export const wikiReducers = (state = INIT_STATE, action = {}) => {
     case WIKI_DELETE_WIKI:
       return {
         ...state,
-        data: state.data.filter((data) => data.id === action.payload),
+        data: state.data.filter((data) => data.id !== action.payload),
       };
     case WIKI_FAVORITE_WIKI:
       return {

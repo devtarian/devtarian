@@ -2,7 +2,7 @@ import React, { useEffect, useCallback, useRef } from 'react';
 import styled from 'styled-components';
 import Search, { SearchWrap, InnerWrap } from '../../components/search/Search';
 import SearchFilter from './searchFilter/SearchFilter';
-import ImgTextCard, { TitleWrap } from '../../components/card/ImgTextCard';
+import ImgTextCard from '../../components/card/ImgTextCard';
 import SearchMap from './searchMap/SeacrhMap';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,8 +19,9 @@ const SearchPage = () => {
 
   const handleFetchMore = () => {
     if (!fetchMore) return;
-    dispatch(searchActions.getSeach());
+    dispatch(searchActions.getSearch());
   };
+
   const handleMouseOver = useCallback(
     (store) => {
       if (!store) return;
@@ -52,7 +53,8 @@ const SearchPage = () => {
   useEffect(() => {
     const mapElem = mapRef.current;
     if (!mapElem) return;
-    dispatch(searchActions.getSeach(mapElem));
+    dispatch(searchActions.getSearch(mapElem));
+    console.log(mapElem);
   }, [dispatch, mapRef]);
 
   return (

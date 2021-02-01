@@ -4,12 +4,11 @@ import history from '../../history';
 import apis from '../../service/apis';
 import { initMap, makeMarkerImg, makeMarker, makeInfoWindow, drawMap } from '../../utils/mapFunctions';
 
-const getSeach = (mapElem) => async (dispatch, getState) => {
+const getSearch = (mapElem) => async (dispatch, getState) => {
   try {
     let page = getState().search.page;
     let query = queryString.parse(history.location.search);
     let data = await apis.searchApi.getSearch({ ...query, page: page + 1 });
-
     let map = mapElem ? initMap(mapElem, query) : getState().search.map;
 
     let result = [];
@@ -59,5 +58,5 @@ const unFavorite = (storeId) => async (dispatch) => {
   }
 };
 
-const mainActions = { getSeach, favorite, unFavorite };
+const mainActions = { getSearch, favorite, unFavorite };
 export default mainActions;

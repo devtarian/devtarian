@@ -15,12 +15,12 @@ const VegWikiFilter = () => {
     window.location = '/vegwiki' + changeObjectToQuery({ ...query, category });
   };
 
-  const handleChangeUrl = (order) => {
+  const handleChangeSort = (order) => {
     window.location = '/vegwiki' + changeObjectToQuery({ ...queryObj, order });
   };
 
-  const buttonList = ['processed', 'snack', 'bakery', 'drink', 'etc'];
-  const OPTIONS = ['createdAt', 'asc', 'desc'];
+  const WIKI_CATEGORIES = ['processed', 'snack', 'bakery', 'drink', 'etc'];
+  const SORT_OPTIONS = ['createdAt', 'asc', 'desc'];
 
   return (
     <Wrap>
@@ -31,13 +31,13 @@ const VegWikiFilter = () => {
             All
           </Button>
 
-          {buttonList.map((item) => (
+          {WIKI_CATEGORIES.map((item) => (
             <Button key={item} className={category === item && 'active'} onClick={() => handleClickCategory(item)}>
               {translate(item)}
             </Button>
           ))}
         </div>
-        <StyledSelect info={OPTIONS} sort={queryObj.order} onChange={handleChangeUrl} />
+        <StyledSelect info={SORT_OPTIONS} sort={queryObj.order} onChange={handleChangeSort} />
       </ButtonsWrap>
     </Wrap>
   );

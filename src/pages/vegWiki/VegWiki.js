@@ -14,6 +14,7 @@ const VegiWiki = () => {
   const dispatch = useDispatch();
   const { isFetching, totalCount, data, fetchMore } = useSelector((state) => state.wiki);
   const { isLoggedIn } = useSelector((state) => state.auth);
+
   const handleFetchMore = () => {
     if (!fetchMore) return;
 
