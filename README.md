@@ -48,7 +48,7 @@ https://asia-northeast3-project-devtarian.cloudfunctions.net/api/swagger-doc/
 
 ## 📝 개발일지
 
-https://github.com/daayooung/TIL/tree/master/%EA%B0%9C%EB%B0%9C%EC%9D%BC%EC%A7%80/Devtarian
+https://github.com/daayooung/TIL/tree/master/%EA%B0%9C%EB%B0%9C%EB%A1%9C%EA%B7%B8/Devtarian
 
 <br/>
 
