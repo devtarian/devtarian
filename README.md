@@ -31,13 +31,13 @@ Devtarian의 프로젝트를 확인해보고 싶다면 지금 [채식한입](htt
 
 ## ⚙️ 주요 개발 기능
 
-![KakaoTalk_20210124_170245551](https://user-images.githubusercontent.com/65386421/105788801-8ab0bf80-5fc4-11eb-9061-6a99c86f37e7.png)
+![주요 개발 기능](https://user-images.githubusercontent.com/65386421/106703233-36918500-662d-11eb-98f6-d4ed75609cfc.png)
 
 <br/>
 
 ## 🛠️ 기술 스택
 
-![주요 개발 기능](https://user-images.githubusercontent.com/65386421/106703233-36918500-662d-11eb-98f6-d4ed75609cfc.png)
+![105710587-a97a6c00-5f5a-11eb-8203-2f134e74c053](https://user-images.githubusercontent.com/65386421/106703501-af90dc80-662d-11eb-815d-ae9b844631a4.png)
 
 <br/>
 
