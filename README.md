@@ -37,7 +37,7 @@ Devtarian의 프로젝트를 확인해보고 싶다면 지금 [채식한입](htt
 
 ## 🛠️ 기술 스택
 
-![105710587-a97a6c00-5f5a-11eb-8203-2f134e74c053](https://user-images.githubusercontent.com/65386421/105788853-9e5c2600-5fc4-11eb-8b57-f4279a1b958e.png)
+![주요 개발 기능](https://user-images.githubusercontent.com/65386421/106703233-36918500-662d-11eb-98f6-d4ed75609cfc.png)
 
 <br/>
 
