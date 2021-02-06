@@ -48,6 +48,10 @@ https://asia-northeast3-project-devtarian.cloudfunctions.net/api/swagger-doc/
 
 ## 📝 개발일지
 
+개발을 하며 기록해 나간 일지, 개발 이후 정리한 폴더 별 항목을 통해 '채식한입'이 만들어진 과정을 살펴보세요. 🤗
+
+<br/>
+
 https://github.com/daayooung/TIL/tree/master/%EA%B0%9C%EB%B0%9C%EB%A1%9C%EA%B7%B8/Devtarian
 
 <br/>
